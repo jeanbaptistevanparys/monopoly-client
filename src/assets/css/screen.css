@@ -1,53 +1,87 @@
 @font-face {
-	font-family: "W95FA";
-	src: url("../fonts/W95FA/W95FA.otf") format("otf"),
-		url("../fonts/W95FA/w95fa.woff") format("woff"),
-		url("../fonts/W95FA/w95fa.woff2") format("woff2");
+    font-family: "W95FA";
+    src: url("../fonts/W95FA/W95FA.otf") format("otf"),
+        url("../fonts/W95FA/w95fa.woff") format("woff"),
+        url("../fonts/W95FA/w95fa.woff2") format("woff2");
 }
 
 /* ============================== DEFAULT ================================*/
 * {
-	margin: 0;
-	padding: 0;
-	box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
 
 body {
     background-color: var(--dark-gray);
 }
 
-img {
-	display: block;
+main {
+    padding: 2rem
 }
 
-h1,
-h2,
-p,
-a {
-	font-family: "W95FA";
+img {
+    display: block;
+}
+
+h1, h2, p, a, label, input {
+    font-family: 'W95FA';
+    letter-spacing: 0.125rem;
 }
 
 a {
     text-decoration: none;
     color: black;
+    letter-spacing: 0.125rem;
+}
+
+main {
+    width: 100%;
 }
 
 .inner-elem {
     -moz-box-shadow: inset 0.2rem 0.2rem 0 var(--dark-gray-trans),
-        inset -0.2rem -0.2rem 0 white;
+        inset -0.2rem -0.2rem 0 rgba(255, 255, 255, 0.5);
     -webkit-box-shadow: inset 0.2rem 0.2rem 0 var(--dark-gray-trans),
-        inset -0.2rem -0.2rem 0 white;
+        inset -0.2rem -0.2rem 0 rgba(255, 255, 255, 0.5);
     box-shadow: inset 0.2rem 0.2rem 0 var(--dark-gray-trans),
-        inset -0.2rem -0.2rem 0 white;
+        inset -0.2rem -0.2rem 0 rgba(255, 255, 255, 0.5);
 }
 
 .outer-elem {
     -moz-box-shadow: inset -0.2rem -0.2rem 0 var(--dark-gray-trans),
+        inset 0.2rem 0.2rem 0 rgba(255, 255, 255, 0.5);
+    -webkit-box-shadow: inset -0.2rem -0.2rem 0 var(--dark-gray-trans),
+        inset 0.2rem 0.2rem 0 rgba(255, 255, 255, 0.5);
+    box-shadow: inset -0.2rem -0.2rem 0 var(--dark-gray-trans),
+        inset 0.2rem 0.2rem 0 rgba(255, 255, 255, 0.5);
+}
+
+::-webkit-scrollbar {
+    background-color: var(--dark-gray);
+    border: inset 0.125rem black;
+    -moz-box-shadow: inset -0.1rem -0.1rem 0 rgba(128, 128, 128, 0.5),
+        inset 0.1rem 0.1rem 0 white;
+    -webkit-box-shadow: inset -0.1rem -0.1rem 0 rgba(128, 128, 128, 0.5),
+        inset 0.1rem 0.1rem 0 white;
+    box-shadow: inset -0.1rem -0.1rem 0 rgba(128, 128, 128, 0.5),
+        inset 0.1rem 0.1rem 0 white;
+}
+
+::-webkit-scrollbar-thumb {
+    border: inset 0.125rem black;
+    background-color: var(--dark-gray);
+    -moz-box-shadow: inset -0.2rem -0.2rem 0 rgba(128, 128, 128, 0.5),
         inset 0.2rem 0.2rem 0 white;
     -webkit-box-shadow: inset -0.2rem -0.2rem 0 var(--dark-gray-trans),
-        inset 0.2rem 0.2rem 0 white;
+        inset 0.2rem 0.2rem 0 rgba(255, 255, 255, 0.5);
     box-shadow: inset -0.2rem -0.2rem 0 var(--dark-gray-trans),
-        inset 0.2rem 0.2rem 0 white;
+        inset 0.2rem 0.2rem 0 rgba(255, 255, 255, 0.5);
+}
+
+.box-shadow {
+    border: 0.25rem solid #000000;
+    box-shadow: -0.25rem 0.25rem 0rem #000000;
 }
 
 .outer-elem.active {
@@ -64,6 +98,11 @@ a {
     text-transform: uppercase;
 }
 
+.money {
+	color: #c84893;
+	font-size: 1.5rem;
+}
+
 :root {
     --light-gray: #C0C0C0;
     --dark-gray: #808080;
@@ -71,8 +110,9 @@ a {
     --bar-light: #34a0ff;
     --bar-dark: #150079;
     --light-gray-trans: rgba(192, 192, 192, 0.5);
-    --dark-gray-trans: rgba(128, 128, 128, 0.5);
+    --dark-gray-trans: rgba(0, 0, 0, 0.5);
     --bar-title: white;
+    --background-color: #178080;
 }
 
 /* ============================== Header ================================*/
@@ -86,170 +126,228 @@ header {
     justify-content: space-between;
 }
 
+header h2 {
+    color: var(--bar-title);
+    font-size: 1.2rem;
+    margin-left: 0.5rem;
+}
+
 h1 {
-	font-size: 1.5rem;
-	color: var(--bar-title);
-	padding-left: 2rem;
-	background: url(../media/Monopoly-logo.jpg) no-repeat center left;
-	background-size: contain;
+    font-size: 1.5rem;
+    color: var(--bar-title);
+    padding-left: 2rem;
+    background: url(../media/Monopoly-logo.jpg) no-repeat center left;
+    background-size: contain;
 }
 
 .icons {
-	display: inherit;
+    display: inherit;
 }
 
 .icon {
-	height: 1.5rem;
-	aspect-ratio: 1;
-	margin: 0 0.25rem;
-	background-size: cover;
+    height: 1.5rem;
+    aspect-ratio: 1;
+    margin: 0 0.25rem;
+    background-size: cover;
 }
 
 .icon-min {
-	background: url(../media/icon-min.svg) no-repeat center center;
+    background: url(../media/icon-min.svg) no-repeat center center;
 }
 
 .icon-max {
-	background: url(../media/icon-max.svg) no-repeat center center;
+    background: url(../media/icon-max.svg) no-repeat center center;
 }
 
 .icon-close {
-	background: url(../media/icon-close.svg) no-repeat center center;
+    background: url(../media/icon-close.svg) no-repeat center center;
 }
 
 /* ============================== Player Info ================================*/
 
-article {
-	padding-left: 1.5rem;
-	padding-top: 3rem;
-	padding-bottom: 1rem;
+#player-info {
+	padding: 1.5rem 0 1.5rem 1.5rem;
 	display: flex;
 	border: black solid;
-	width: 54rem;
+	width: 47rem;
+    background-color: white;
 }
 
-article h2 {
+#player-info div {
+    width: 15rem;
+}
+
+#player-info h2 {
 	font-size: 4rem;
 	border-bottom: black solid;
 	padding-right: 10rem;
 	margin-right: 2rem;
 }
 
-article em {
+#player-info em {
 	color: #c84893;
 }
 
-article > div > span {
+#player-info > div > span {
 	font-size: 1.5rem;
 }
 
-article .money {
-	margin-top: 2rem;
-	color: #c84893;
-	font-size: 1.5rem;
-}
-
-article > div > h3 {
+#player-info > div > h3 {
 	font-size: 1rem;
 	margin-top: 1rem;
 	margin-bottom: 0.5rem;
 }
+
+#player-info .money {
+    margin-top: 2rem;
+}
+
 section.property {
-	margin-bottom: 1rem;
-	margin-right: 1.2rem;
+    margin-bottom: 1rem;
+    margin-right: 1.2rem;
 }
 
 .flexcontainer {
 	display: flex;
-	flex-basis: 30rem;
+	flex-basis: 29rem;
 	flex-wrap: wrap;
 	overflow-y: scroll;
 	height: 16rem;
 }
 
 .property h3 {
-	text-align: center;
-	padding: 0.5rem;
-	background-color: #d93832;
-	border: black solid;
-	width: 8rem;
+    text-align: center;
+    padding: 0.5rem;
+    background-color: #d93832;
+    border: black solid;
+    width: 8rem;
 }
+
 .property p {
-	text-align: center;
-	padding: 2rem 1rem 0.2rem 1rem;
-	border-bottom: black solid;
-	border-left: black solid;
-	border-right: black solid;
+    text-align: center;
+    padding: 2rem 1rem 0.2rem 1rem;
+    border-bottom: black solid;
+    border-left: black solid;
+    border-right: black solid;
 }
 
 /* ============================== Footer ================================*/
 footer {
-	position: absolute; 
-	left: 0;
-	bottom: 0;
-	width: 100%;
-	height: 5rem;
-	background-color: var(--light-gray);
-	display: flex;
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: 5rem;
+    background-color: var(--light-gray);
+    display: flex;
     align-items: center;
     justify-content: space-between;
 }
+
 footer ul {
-	display: flex;
-	align-items: center;
+    display: flex;
+    align-items: center;
     gap: 1rem;
 }
-footer ul li a {
-	text-decoration-line: none;
-	color: white;
-	width: 3rem;
 
-	background-repeat: no-repeat;
-	background-position: 0.5rem center;
-	background-size: 1.5rem;
-	height: 4rem;
-	padding: 0.5rem;
-	padding-left: 2.3rem;
-	font-size: 1.5rem;
+footer ul li a {
+    text-decoration-line: none;
+    color: white;
+    width: 3rem;
+
+    background-repeat: no-repeat;
+    background-position: 0.5rem center;
+    background-size: 1.5rem;
+    height: 4rem;
+    padding: 0.5rem;
+    padding-left: 2.3rem;
+    font-size: 1.5rem;
 }
+
 #start {
-	background-image: url("/src/assets/media/dice.png");
-	background-repeat: no-repeat;
-	background-position: 0.5rem center;
-	background-size: 2rem;
-	height: 4rem;
-	padding: 1rem;
-	padding-left: 2.8rem;
-	font-size: 2rem;
-	margin-left: 0.5rem;
+    background-image: url("/src/assets/media/dice.png");
+    background-repeat: no-repeat;
+    background-position: 0.5rem center;
+    background-size: 2rem;
+    height: 4rem;
+    padding: 1rem;
+    padding-left: 2.8rem;
+    font-size: 2rem;
+    margin-left: 0.5rem;
 }
+
 #roll {
-	background-image: url("/src/assets/media/dice.png");
+    background-image: url("/src/assets/media/dice.png");
 }
+
 #buy {
-	background-image: url("/src/assets/media/dice.png");
+    background-image: url("/src/assets/media/dice.png");
 }
+
 #build {
-	background-image: url("/src/assets/media/dice.png");
+    background-image: url("/src/assets/media/dice.png");
 }
+
 #sell {
-	background-image: url("/src/assets/media/dice.png");
+    background-image: url("/src/assets/media/dice.png");
 }
+
 #mort {
-	background-image: url("/src/assets/media/dice.png");
+    background-image: url("/src/assets/media/dice.png");
 }
+
 #unmort {
-	background-image: url("/src/assets/media/dice.png");
+    background-image: url("/src/assets/media/dice.png");
 }
+
 #trade {
-	background-image: url("/src/assets/media/dice.png");
+    background-image: url("/src/assets/media/dice.png");
 }
+
 #time {
-	font-size: 2rem;
-	text-align: center;
-	color: white;
+    font-size: 2rem;
+    text-align: center;
+    color: white;
     padding: 1rem;
     margin-right: 1rem;
+}
+
+/* ============================== Players ================================*/
+main aside {
+    display: flex;
+    margin: 0 2rem;
+    justify-content: center;
+    gap: 2rem;
+}
+
+main aside .player {
+    width: 20rem;
+    padding: 1rem;
+    background-color: white;
+}
+
+main aside .player div {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 0.5rem;
+    border-bottom: 0.125rem solid black;
+}
+
+main aside .player h2 {
+    font-size: 2rem;
+}
+
+main aside .player p {
+    font-size: 1.5rem;
+}
+
+main aside .player a {
+    display: block;
+    background-color: var(--dark-gray);
+    padding: 0.5rem;
+    text-align: center;
+    margin: 0 auto 2rem auto;
+    width: 10rem;
 }
 
 /* ============================== Roll Dice ================================*/
@@ -260,15 +358,15 @@ footer ul li a {
     border: 0.25rem solid black;
 }
 
+.roll-dice div {
+    display: flex;
+    justify-content: space-evenly;
+}
+
 .roll-dice h2 {
     font-size: 3rem;
     margin-bottom: 2rem;
     text-align: center;
-}
-
-.roll-dice div {
-    display: flex;
-    justify-content: space-evenly;
 }
 
 .roll-dice img {

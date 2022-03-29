@@ -1,0 +1,103 @@
+/* ============================== START GAME ============================== */
+.blue-bg {
+    height: 100vh;
+    background-color: var(--background-color);
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-around;
+}
+
+/* ============================== Popups ================================*/
+.popup {
+    width: 40%;
+}
+
+/* .hidden {
+    display: none;
+} */
+
+.popup-content {
+    background-color: var(--light-gray);
+    padding: 2rem;
+    border: 0.25rem solid var(--dark-gray);
+    border-top: 0;
+}
+
+.popup-content h2 {
+    font-size: 2rem;
+}
+
+.popup-content,
+.popup-content form {
+    display: flex;
+    flex-direction: column;
+}
+
+.popup-content form>label {
+    padding-top: 1.25rem;
+    padding-bottom: 0.25rem;
+}
+
+.popup-content form input {
+    padding: 0.5rem;
+    border-radius: 0;
+    border: 0;
+    background-color: var(--light-gray);
+}
+
+.popup-content .submit-btns {
+    display: flex;
+    margin: auto;
+}
+
+.popup-content form a {
+    padding: 0.5rem 0;
+    width: 8rem;
+    margin: 1rem;
+    text-align: center;
+    background-color: var(--dark-gray);
+}
+
+#games {
+    padding-right: 1rem;
+    height: 10rem;
+    overflow-y: scroll;
+}
+
+.game {
+    margin: 0.5rem 0;
+}
+
+label {
+    font-size: 1.5rem;
+}
+
+#games label {
+    padding: 0.5rem;
+    display: block;
+    background-color: white;
+}
+
+.popup-content input[type="radio"] {
+    display: none;
+}
+
+#players input[type="radio"]:checked+label,
+#games input[type="radio"]:checked+label {
+    background-color: var(--dark-gray);
+}
+
+
+/* ============================== Players ================================*/
+#players {
+    padding-right: 1rem;
+    height: 10rem;
+    overflow-y: scroll;
+}
+
+#players label {
+    padding: 0.5rem;
+    display: block;
+    background-color: white;
+}
