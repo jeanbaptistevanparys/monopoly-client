@@ -93,9 +93,7 @@ h1 {
 /* ============================== Player Info ================================*/
 
 article{
-    padding-left: 1.5rem;
-    padding-top: 3rem;
-    padding-bottom: 1rem;
+    padding: 3rem 0 1rem 1.5rem;
     display: flex;
     border: black solid;
     width: 54rem;
@@ -150,7 +148,6 @@ section {
 .property p{
     text-align: center;
     padding: 2rem 1rem 0.2rem 1rem;
-    border-bottom: black solid;
-    border-left: black solid;
-    border-right: black solid;
+    border: black solid;
+    border-top: none;
 }
