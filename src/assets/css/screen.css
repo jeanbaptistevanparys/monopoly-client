@@ -21,21 +21,26 @@ h1, h2, p, a {
 }
 
 .inner-elem {
-    -moz-box-shadow: inset 0.2rem 0.2rem 0 rgba(128, 128, 128, 0.5),
+    -moz-box-shadow: inset 0.2rem 0.2rem 0 var(--dark-gray-trans),
         inset -0.2rem -0.2rem 0 white;
-    -webkit-box-shadow: inset 0.2rem 0.2rem 0 rgba(128, 128, 128, 0.5),
+    -webkit-box-shadow: inset 0.2rem 0.2rem 0 var(--dark-gray-trans),
         inset -0.2rem -0.2rem 0 white;
-    box-shadow: inset 0.2rem 0.2rem 0 rgba(128, 128, 128, 0.5),
+    box-shadow: inset 0.2rem 0.2rem 0 var(--dark-gray-trans),
         inset -0.2rem -0.2rem 0 white;
 }
 
 .outer-elem {
-    -moz-box-shadow: inset -0.2rem -0.2rem 0 rgba(128, 128, 128, 0.5),
+    -moz-box-shadow: inset -0.2rem -0.2rem 0 var(--dark-gray-trans),
         inset 0.2rem 0.2rem 0 white;
-    -webkit-box-shadow: inset -0.2rem -0.2rem 0 rgba(128, 128, 128, 0.5),
+    -webkit-box-shadow: inset -0.2rem -0.2rem 0 var(--dark-gray-trans),
         inset 0.2rem 0.2rem 0 white;
-    box-shadow: inset -0.2rem -0.2rem 0 rgba(128, 128, 128, 0.5),
+    box-shadow: inset -0.2rem -0.2rem 0 var(--dark-gray-trans),
         inset 0.2rem 0.2rem 0 white;
+}
+
+.striketrough {
+    text-decoration: line-through;
+    text-transform: uppercase;
 }
 
 :root {
@@ -44,6 +49,7 @@ h1, h2, p, a {
     --bar-title: black; */
     --light-gray: #34a0ff;
     --dark-gray: #150079;
+    --dark-gray-trans: rgba(128, 128, 128, 0.5);
     --bar-title: white;
 }
 
