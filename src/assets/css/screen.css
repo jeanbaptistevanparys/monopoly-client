@@ -284,6 +284,9 @@ footer ul li a {
     padding-left: 1.5rem;
     padding-top: 3rem;
     padding-bottom: 1rem;
+}
+article{
+    padding: 3rem 0 1rem 1.5rem;
     display: flex;
     border: black solid;
     width: 54rem;
