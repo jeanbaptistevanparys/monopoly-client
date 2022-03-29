@@ -92,41 +92,84 @@ h1 {
 
 
 
-/* ============================== FOOTER ================================*/
+/* ============================== Footer ================================*/
 footer{ 
+    border-top: var(--light-gray) solid 0.3rem;
+    border-left: var(--light-gray) solid 0.3rem;
+    border-right: var(--light-gray) solid 0.3rem;
     position: absolute; /* pure design wise */
     left: 0;
     bottom: 0;
     width: 100%;
-    height: 3.5rem;
-    background-color: darkgray;
+    height: 5rem;
+    background-color: var(--dark-gray);
     display: flex;
     align-items: center;
 }
-
 footer ul{
     width: 100vw;
     display: flex;
-    justify-content: space-between;
+    align-items: center;
+    align-content: space-between;
+}
+footer ul div{
+    display: flex;
+    align-items: center;
+    gap: 1rem;
 }
 footer ul li a{
     text-decoration-line: none;
-    color: black;
-    padding-left: 1.5rem;
+    color: white;
     width: 3rem;
+
+    background-repeat: no-repeat;
+    background-position: 0.5rem center;
+    background-size: 1.5rem;
+    height: 4rem;
+    padding: 0.5rem;
+    padding-left: 2.3rem;
+    font-size: 1.5rem;
 }
 #start{
     background-image: url("/src/assets/media/dice.png");
     background-repeat: no-repeat;
-    background-position: 0.2rem center;
-    background-size: 1.8rem;
+    background-position: 0.5rem center;
+    background-size: 2rem;
     height: 4rem;
-    padding: 0.5rem;
-    padding-left: 2.5rem;
-    font-size: 1.5rem;
+    padding: 1rem;
+    padding-left: 2.8rem;
+    font-size: 2rem;
     margin-left: 0.5rem;
-    border-top: lightgray 0.2rem solid;
-    border-left: lightgray 0.2rem solid;
-    border-right: grey 0.2rem solid;
-    border-bottom: grey 0.2rem solid;
+}
+#roll{
+    background-image: url("/src/assets/media/dice.png");
+}
+#buy{
+    background-image: url("/src/assets/media/dice.png");
+}
+#build{
+    background-image: url("/src/assets/media/dice.png");
+}
+#sell{
+    background-image: url("/src/assets/media/dice.png");
+}
+#mort{
+    background-image: url("/src/assets/media/dice.png");
+}
+#unmort{
+    background-image: url("/src/assets/media/dice.png");
+}
+#trade{
+    background-image: url("/src/assets/media/dice.png");
+}
+#time{
+    
+
+    background-size: 2rem;
+    height: 4rem;
+    padding: 1rem;
+    padding-left: 2.8rem;
+    font-size: 2rem;
+    text-align: center;
+    color: white;
 }
