@@ -12,6 +12,10 @@
     box-sizing: border-box;
 }
 
+body {
+    background-color: var(--dark-gray);
+}
+
 img {
     display: block;
 }
@@ -63,6 +67,7 @@ a {
     --bar-title: black;
     --bar-light: #34a0ff;
     --bar-dark: #150079;
+    --light-gray-trans: rgba(192, 192, 192, 0.5);
     --dark-gray-trans: rgba(128, 128, 128, 0.5);
     --bar-title: white;
 }
@@ -112,7 +117,7 @@ h1 {
 
 /* ============================== Roll Dice ================================*/
 .roll-dice {
-    background-color: var(--light-gray);
+    background-color: var(--light-gray-trans);
     width: 25rem;
     padding: 2rem;
     border: 0.25rem solid black;
