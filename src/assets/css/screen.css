@@ -77,3 +77,66 @@ h1 {
 }
 
 /* ============================== Player Info ================================*/
+
+article{
+    padding-left: 1.5rem;
+    padding-top: 3rem;
+    padding-bottom: 1rem;
+    display: flex;
+    border: black solid;
+    width: 54rem;
+}
+
+article h2{
+    font-size: 4rem;
+    border-bottom: black solid;
+    padding-right: 10rem;
+    margin-right: 2rem;
+}
+
+article em{
+    color: #C84893;
+}
+
+article>div>span{
+    font-size: 1.5rem;
+}
+
+article #money{
+    margin-top: 2rem;
+    color: #C84893;
+    font-size: 1.5rem;
+ }
+
+article>div>h3 {
+    font-size: 1rem;
+    margin-top: 1rem;
+    margin-bottom: 0.5rem;
+}
+section {
+    margin-bottom: 1rem;
+    margin-right: 1.2rem;
+}
+
+.flexcontainer{
+    display: flex;
+    flex-basis: 30rem;
+    flex-wrap: wrap;
+    overflow-y: scroll;
+    height: 16rem;
+}
+
+.property h3{
+    text-align: center;
+    padding: 0.5rem;
+    background-color: #D93832;
+    border: black solid;
+    width: 8rem;
+}
+.property p{
+    text-align: center;
+    padding: 2rem 1rem 0.2rem 1rem;
+    border-bottom: black solid;
+    border-left: black solid;
+    border-right: black solid;
+}
