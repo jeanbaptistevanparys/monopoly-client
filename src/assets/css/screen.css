@@ -114,7 +114,6 @@ h1 {
 }
 
 .icon-close {
-<<<<<<< HEAD
 	background: url(../media/icon-close.svg) no-repeat center center;
 }
 
@@ -252,9 +251,6 @@ footer ul li a {
     padding: 1rem;
     margin-right: 1rem;
 }
-=======
-    background: url(../media/icon-close.svg) no-repeat center center;
-}
 
 /* ============================== Roll Dice ================================*/
 .roll-dice {
@@ -287,4 +283,3 @@ footer ul li a {
     width: 5rem;
     text-align: center;
 }
->>>>>>> origin
