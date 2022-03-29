@@ -44,8 +44,12 @@ a {
 }
 
 :root {
-    --light-gray: #C0C0C0;
+    /* --light-gray: #C0C0C0;
     --dark-gray: #808080;
+    --bar-title: black; */
+    --light-gray: #34a0ff;
+    --dark-gray: #150079;
+    --bar-title: white;
 }
 
 
@@ -62,6 +66,7 @@ header {
 
 h1 {
     font-size: 1.5rem;
+    color: var(--bar-title);
     padding-left: 2rem;
     background: url(../media/Monopoly-logo.jpg) no-repeat center left;
     background-size: contain;
