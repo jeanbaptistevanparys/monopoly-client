@@ -13,6 +13,10 @@
     width: 40%;
 }
 
+/* .hidden {
+    display: none;
+} */
+
 .popup-content {
     background-color: var(--light-gray);
     padding: 2rem;
@@ -79,7 +83,8 @@ label {
     display: none;
 }
 
-.game label[selected] {
+#players input[type="radio"]:checked+label,
+#games input[type="radio"]:checked+label {
     background-color: var(--dark-gray);
 }
 
@@ -94,4 +99,5 @@ label {
 #players label {
     padding: 0.5rem;
     display: block;
+    background-color: white;
 }

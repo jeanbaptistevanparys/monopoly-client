@@ -16,7 +16,7 @@ img {
     display: block;
 }
 
-h1, h2, p, a, label {
+h1, h2, p, a, label, input {
     font-family: 'W95FA';
     letter-spacing: 0.125rem;
 }
