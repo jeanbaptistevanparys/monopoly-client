@@ -16,7 +16,7 @@ img {
     display: block;
 }
 
-h1, h2, p, a {
+h1, h2, h3, p, a {
     font-family: 'W95FA';
 }
 
@@ -89,50 +89,79 @@ h1 {
 .icon-close {
     background: url(../media/icon-close.svg) no-repeat center center;
 }
+/* ============================== Player Info ================================*/
+#landing-property{
+    margin: 2rem;
+    width: 10rem;
+}
+#landing-property div:first-of-type{
+    background-color: #D93832;
+    border: black solid;
+    padding: 1.5rem 1rem;
+    
+}
+#landing-property p{
+    text-align: center;
+    font-size: 1.4rem;
+}
+#landing-property div + div {
+    border-bottom: black solid;
+    border-left: black solid;
+    border-right: black solid;
+}
+#landing-property p:first-child{
+    padding-top: 1rem;
+    padding-bottom: 5rem;
+}
+#landing-property p:nth-child(2){
+    padding-bottom: 1rem;
+}
+
 
 /* ============================== Player Info ================================*/
 
-article{
+#player-info{
     padding-left: 1.5rem;
     padding-top: 3rem;
     padding-bottom: 1rem;
     display: flex;
     border: black solid;
     width: 54rem;
+    background-color: white;
 }
 
-article h2{
+#player-info h2{
     font-size: 4rem;
     border-bottom: black solid;
     padding-right: 10rem;
     margin-right: 2rem;
 }
 
-article em{
+#player-info em{
     color: #C84893;
 }
 
-article>div>span{
+#player-info>div>span{
     font-size: 1.5rem;
 }
 
-article .money{
+#player-info .money{
     margin-top: 2rem;
     color: #C84893;
     font-size: 1.5rem;
  }
 
-article>div>h3 {
+#player-info>div>h3 {
     font-size: 1rem;
     margin-top: 1rem;
     margin-bottom: 0.5rem;
 }
-section {
+#player-info .property{
     margin-bottom: 1rem;
     margin-right: 1.2rem;
 }
 
-.flexcontainer{
+#player-info .flexcontainer{
     display: flex;
     flex-basis: 30rem;
     flex-wrap: wrap;
@@ -140,14 +169,14 @@ section {
     height: 16rem;
 }
 
-.property h3{
+#player-info .property h3{
     text-align: center;
     padding: 0.5rem;
     background-color: #D93832;
     border: black solid;
     width: 8rem;
 }
-.property p{
+#player-info .property p{
     text-align: center;
     padding: 2rem 1rem 0.2rem 1rem;
     border-bottom: black solid;
