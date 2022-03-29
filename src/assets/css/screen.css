@@ -38,17 +38,26 @@ h1, h2, p, a {
         inset 0.2rem 0.2rem 0 white;
 }
 
+.outer-elem.active {
+    -moz-box-shadow: inset 0 0 0 var(--dark-gray-trans),
+        0 0 0 white;
+    -webkit-box-shadow: inset 0 0 0 var(--dark-gray-trans),
+        inset 0.2rem 0.2rem 0 white;
+    box-shadow: inset 0 0 0 var(--dark-gray-trans),
+        inset 0 0 0 white;
+}
+
 .striketrough {
     text-decoration: line-through;
     text-transform: uppercase;
 }
 
 :root {
-    /* --light-gray: #C0C0C0;
+    --light-gray: #C0C0C0;
     --dark-gray: #808080;
-    --bar-title: black; */
-    --light-gray: #34a0ff;
-    --dark-gray: #150079;
+    --bar-title: black;
+    --bar-light: #34a0ff;
+    --bar-dark: #150079;
     --dark-gray-trans: rgba(128, 128, 128, 0.5);
     --bar-title: white;
 }
@@ -58,8 +67,8 @@ h1, h2, p, a {
 header {
     width: 100%;
     padding: 0.5rem;
-    background: linear-gradient(90deg, var(--dark-gray) 0%, var(--light-gray) 100%);
-    border: 0.25rem solid var(--dark-gray);
+    background: linear-gradient(90deg, var(--bar-dark) 0%, var(--bar-light) 100%);
+    border: 0.25rem solid var(--bar-dark);
     display: flex;
     align-items: center;
     justify-content: space-between;
