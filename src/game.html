@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Monopoly</title>
+    <link rel="icon" type="image/jpg" sizes="16x16" href="Monopoly-logo.jpg">
+    <link rel="mask-icon" href="safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="msapplication-TileColor" content="#da532c">
+    <meta name="theme-color" content="#ffffff">
+
+
+    <link rel="stylesheet" href="assets/css/reset.css">
+    <link rel="stylesheet" href="assets/css/screen.css">
+    <link rel="stylesheet" href="assets/css/game.css">
+
+    <script src="assets/js/config.js"></script>
+
+    <script src="assets/js/data-connector/error-handler.js"></script>
+    <script src="assets/js/data-connector/api-communication-abstractor.js"></script>
+
+    <script src="assets/js/initialiser.js"></script>
+
+</head>
+
+<body>
+
+    <main class="blue-bg">
+        <section class="popup">
+
+            <header>
+                <h2>Start Game</h2>
+                <div class="icons">
+                    <div class="inner-elem icon icon-min"></div>
+                    <div class="inner-elem icon icon-max"></div>
+                    <div class="inner-elem icon icon-close"></div>
+                </div>
+            </header>
+
+            <section class="popup-content">
+                <h2>Start Game</h2>
+                <form>
+                    <label for="nickname">Nickname:</label>
+                    <input type="text" name="nickname" id="nickname" class="inner-elem">
+                    <label>Games:</label>
+                    <div id="games">
+                        <div class="game"><input type="radio" name="game" id="game1" checked><label for="game1"
+                                class="outer-elem">Game
+                                1</label>
+                        </div>
+                        <div class="game"><input type="radio" name="game" id="game2"><label for="game2"
+                                class="outer-elem">Game
+                                2</label>
+                        </div>
+                        <div class="game"><input type="radio" name="game" id="game3"><label for="game3"
+                                class="outer-elem">Game
+                                3</label>
+                        </div>
+                        <div class="game"><input type="radio" name="game" id="game4"><label for="game4"
+                                class="outer-elem">Game
+                                4</label>
+                        </div>
+                    </div>
+                    <div class="submit-btns">
+                        <a href="#" class="outer-elem">Create Game</a>
+                        <a href="#" class="outer-elem">Join Game</a>
+                    </div>
+                </form>
+            </section>
+        </section>
+
+        <section class="popup hidden">
+            <header>
+                <h2>Game 1</h2>
+                <div class="icons">
+                    <div class="inner-elem icon icon-min"></div>
+                    <div class="inner-elem icon icon-max"></div>
+                    <div class="inner-elem icon icon-close"></div>
+                </div>
+            </header>
+            <section class="popup-content">
+                <h2>Game 1</h2>
+                <form>
+                    <label for="gamename">Change game name:</label>
+                    <input type="text" name="nickname" id="gamename" class="inner-elem">
+                    <label>Players:</label>
+                    <div id="players">
+                        <div class="game"><input type="radio" name="game" id="player1" checked><label for="player1"
+                                class="outer-elem">Player
+                                1</label>
+                        </div>
+                        <div class="game"><input type="radio" name="game" id="player2"><label for="player2"
+                                class="outer-elem">Player
+                                2</label>
+                        </div>
+                        <div class="game"><input type="radio" name="game" id="player3"><label for="player3"
+                                class="outer-elem">Player
+                                3</label>
+                        </div>
+                        <div class="game"><input type="radio" name="game" id="player4"><label for="player4"
+                                class="outer-elem">Player
+                                4</label>
+                        </div>
+                    </div>
+                    <div class="submit-btns">
+                        <a href="#" class="outer-elem">Start Game</a>
+                    </div>
+                </form>
+            </section>
+        </section>
+    </main>
+
+</body>
+
+</html>
