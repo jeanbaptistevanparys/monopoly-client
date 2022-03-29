@@ -1,91 +1,243 @@
 @font-face {
-    font-family: 'W95FA';
-    src: url('../fonts/W95FA/W95FA.otf') format('otf'),
-        url('../fonts/W95FA/w95fa.woff') format('woff'),
-        url('../fonts/W95FA/w95fa.woff2') format('woff2');
+	font-family: "W95FA";
+	src: url("../fonts/W95FA/W95FA.otf") format("otf"),
+		url("../fonts/W95FA/w95fa.woff") format("woff"),
+		url("../fonts/W95FA/w95fa.woff2") format("woff2");
 }
 
 /* ============================== DEFAULT ================================*/
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
 }
 
 img {
-    display: block;
+	display: block;
 }
 
-h1, h2, p, a {
-    font-family: 'W95FA';
+h1,
+h2,
+p,
+a {
+	font-family: "W95FA";
 }
 
 .inner-elem {
-    -moz-box-shadow: inset 0.2rem 0.2rem 0 rgba(128, 128, 128, 0.5),
+    -moz-box-shadow: inset 0.2rem 0.2rem 0 var(--dark-gray-trans),
         inset -0.2rem -0.2rem 0 white;
-    -webkit-box-shadow: inset 0.2rem 0.2rem 0 rgba(128, 128, 128, 0.5),
+    -webkit-box-shadow: inset 0.2rem 0.2rem 0 var(--dark-gray-trans),
         inset -0.2rem -0.2rem 0 white;
-    box-shadow: inset 0.2rem 0.2rem 0 rgba(128, 128, 128, 0.5),
+    box-shadow: inset 0.2rem 0.2rem 0 var(--dark-gray-trans),
         inset -0.2rem -0.2rem 0 white;
 }
 
 .outer-elem {
-    -moz-box-shadow: inset -0.2rem -0.2rem 0 rgba(128, 128, 128, 0.5),
+    -moz-box-shadow: inset -0.2rem -0.2rem 0 var(--dark-gray-trans),
         inset 0.2rem 0.2rem 0 white;
-    -webkit-box-shadow: inset -0.2rem -0.2rem 0 rgba(128, 128, 128, 0.5),
+    -webkit-box-shadow: inset -0.2rem -0.2rem 0 var(--dark-gray-trans),
         inset 0.2rem 0.2rem 0 white;
-    box-shadow: inset -0.2rem -0.2rem 0 rgba(128, 128, 128, 0.5),
+    box-shadow: inset -0.2rem -0.2rem 0 var(--dark-gray-trans),
         inset 0.2rem 0.2rem 0 white;
+}
+
+.outer-elem.active {
+    -moz-box-shadow: inset 0 0 0 var(--dark-gray-trans),
+        0 0 0 white;
+    -webkit-box-shadow: inset 0 0 0 var(--dark-gray-trans),
+        inset 0.2rem 0.2rem 0 white;
+    box-shadow: inset 0 0 0 var(--dark-gray-trans),
+        inset 0 0 0 white;
+}
+
+.striketrough {
+    text-decoration: line-through;
+    text-transform: uppercase;
 }
 
 :root {
-    /* --light-gray: #C0C0C0;
+    --light-gray: #C0C0C0;
     --dark-gray: #808080;
-    --bar-title: black; */
-    --light-gray: #34a0ff;
-    --dark-gray: #150079;
+    --bar-title: black;
+    --bar-light: #34a0ff;
+    --bar-dark: #150079;
+    --dark-gray-trans: rgba(128, 128, 128, 0.5);
     --bar-title: white;
 }
-
 
 /* ============================== Header ================================*/
 header {
     width: 100%;
     padding: 0.5rem;
-    background: linear-gradient(90deg, var(--dark-gray) 0%, var(--light-gray) 100%);
-    border: 0.25rem solid var(--dark-gray);
+    background: linear-gradient(90deg, var(--bar-dark) 0%, var(--bar-light) 100%);
+    border: 0.25rem solid var(--bar-dark);
     display: flex;
     align-items: center;
     justify-content: space-between;
 }
 
 h1 {
-    font-size: 1.5rem;
-    color: var(--bar-title);
-    padding-left: 2rem;
-    background: url(../media/Monopoly-logo.jpg) no-repeat center left;
-    background-size: contain;
+	font-size: 1.5rem;
+	color: var(--bar-title);
+	padding-left: 2rem;
+	background: url(../media/Monopoly-logo.jpg) no-repeat center left;
+	background-size: contain;
 }
 
 .icons {
-    display: inherit;
+	display: inherit;
 }
 
 .icon {
-    height: 1.5rem;
-    aspect-ratio: 1;
-    margin: 0 0.25rem;
-    background-size: cover;
+	height: 1.5rem;
+	aspect-ratio: 1;
+	margin: 0 0.25rem;
+	background-size: cover;
 }
 
 .icon-min {
-    background: url(../media/icon-min.svg) no-repeat center center;
+	background: url(../media/icon-min.svg) no-repeat center center;
 }
 
 .icon-max {
-    background: url(../media/icon-max.svg) no-repeat center center;
+	background: url(../media/icon-max.svg) no-repeat center center;
 }
 
 .icon-close {
-    background: url(../media/icon-close.svg) no-repeat center center;
+	background: url(../media/icon-close.svg) no-repeat center center;
+}
+
+/* ============================== Player Info ================================*/
+
+article {
+	padding-left: 1.5rem;
+	padding-top: 3rem;
+	padding-bottom: 1rem;
+	display: flex;
+	border: black solid;
+	width: 54rem;
+}
+
+article h2 {
+	font-size: 4rem;
+	border-bottom: black solid;
+	padding-right: 10rem;
+	margin-right: 2rem;
+}
+
+article em {
+	color: #c84893;
+}
+
+article > div > span {
+	font-size: 1.5rem;
+}
+
+article .money {
+	margin-top: 2rem;
+	color: #c84893;
+	font-size: 1.5rem;
+}
+
+article > div > h3 {
+	font-size: 1rem;
+	margin-top: 1rem;
+	margin-bottom: 0.5rem;
+}
+section.property {
+	margin-bottom: 1rem;
+	margin-right: 1.2rem;
+}
+
+.flexcontainer {
+	display: flex;
+	flex-basis: 30rem;
+	flex-wrap: wrap;
+	overflow-y: scroll;
+	height: 16rem;
+}
+
+.property h3 {
+	text-align: center;
+	padding: 0.5rem;
+	background-color: #d93832;
+	border: black solid;
+	width: 8rem;
+}
+.property p {
+	text-align: center;
+	padding: 2rem 1rem 0.2rem 1rem;
+	border-bottom: black solid;
+	border-left: black solid;
+	border-right: black solid;
+}
+
+/* ============================== Footer ================================*/
+footer {
+	position: absolute; 
+	left: 0;
+	bottom: 0;
+	width: 100%;
+	height: 5rem;
+	background-color: var(--light-gray);
+	display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+footer ul {
+	display: flex;
+	align-items: center;
+    gap: 1rem;
+}
+footer ul li a {
+	text-decoration-line: none;
+	color: white;
+	width: 3rem;
+
+	background-repeat: no-repeat;
+	background-position: 0.5rem center;
+	background-size: 1.5rem;
+	height: 4rem;
+	padding: 0.5rem;
+	padding-left: 2.3rem;
+	font-size: 1.5rem;
+}
+#start {
+	background-image: url("/src/assets/media/dice.png");
+	background-repeat: no-repeat;
+	background-position: 0.5rem center;
+	background-size: 2rem;
+	height: 4rem;
+	padding: 1rem;
+	padding-left: 2.8rem;
+	font-size: 2rem;
+	margin-left: 0.5rem;
+}
+#roll {
+	background-image: url("/src/assets/media/dice.png");
+}
+#buy {
+	background-image: url("/src/assets/media/dice.png");
+}
+#build {
+	background-image: url("/src/assets/media/dice.png");
+}
+#sell {
+	background-image: url("/src/assets/media/dice.png");
+}
+#mort {
+	background-image: url("/src/assets/media/dice.png");
+}
+#unmort {
+	background-image: url("/src/assets/media/dice.png");
+}
+#trade {
+	background-image: url("/src/assets/media/dice.png");
+}
+#time {
+	font-size: 2rem;
+	text-align: center;
+	color: white;
+    padding: 1rem;
+    margin-right: 1rem;
 }
