@@ -12,6 +12,10 @@
 	box-sizing: border-box;
 }
 
+body {
+    background-color: var(--dark-gray);
+}
+
 img {
 	display: block;
 }
@@ -21,6 +25,11 @@ h2,
 p,
 a {
 	font-family: "W95FA";
+}
+
+a {
+    text-decoration: none;
+    color: black;
 }
 
 .inner-elem {
@@ -61,6 +70,7 @@ a {
     --bar-title: black;
     --bar-light: #34a0ff;
     --bar-dark: #150079;
+    --light-gray-trans: rgba(192, 192, 192, 0.5);
     --dark-gray-trans: rgba(128, 128, 128, 0.5);
     --bar-title: white;
 }
@@ -104,6 +114,7 @@ h1 {
 }
 
 .icon-close {
+<<<<<<< HEAD
 	background: url(../media/icon-close.svg) no-repeat center center;
 }
 
@@ -241,3 +252,39 @@ footer ul li a {
     padding: 1rem;
     margin-right: 1rem;
 }
+=======
+    background: url(../media/icon-close.svg) no-repeat center center;
+}
+
+/* ============================== Roll Dice ================================*/
+.roll-dice {
+    background-color: var(--light-gray-trans);
+    width: 25rem;
+    padding: 2rem;
+    border: 0.25rem solid black;
+}
+
+.roll-dice h2 {
+    font-size: 3rem;
+    margin-bottom: 2rem;
+    text-align: center;
+}
+
+.roll-dice div {
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.roll-dice img {
+    width: 7rem;
+    margin-bottom: 2rem;
+}
+
+.roll-dice a {
+    padding: 1rem;
+    display: block;
+    margin: 0 auto;
+    width: 5rem;
+    text-align: center;
+}
+>>>>>>> origin
