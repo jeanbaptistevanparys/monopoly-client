@@ -16,6 +16,10 @@ body {
     background-color: var(--dark-gray);
 }
 
+main {
+    padding: 2rem
+}
+
 img {
     display: block;
 }
@@ -70,9 +74,14 @@ main {
     -moz-box-shadow: inset -0.2rem -0.2rem 0 rgba(128, 128, 128, 0.5),
         inset 0.2rem 0.2rem 0 white;
     -webkit-box-shadow: inset -0.2rem -0.2rem 0 var(--dark-gray-trans),
-        inset 0.2rem 0.2rem 0 white;
+        inset 0.2rem 0.2rem 0 rgba(255, 255, 255, 0.5);
     box-shadow: inset -0.2rem -0.2rem 0 var(--dark-gray-trans),
-        inset 0.2rem 0.2rem 0 white;
+        inset 0.2rem 0.2rem 0 rgba(255, 255, 255, 0.5);
+}
+
+.box-shadow {
+    border: 0.25rem solid #000000;
+    box-shadow: -0.25rem 0.25rem 0rem #000000;
 }
 
 .outer-elem.active {
@@ -87,6 +96,11 @@ main {
 .striketrough {
     text-decoration: line-through;
     text-transform: uppercase;
+}
+
+.money {
+	color: #c84893;
+	font-size: 1.5rem;
 }
 
 :root {
@@ -151,40 +165,41 @@ h1 {
 
 /* ============================== Player Info ================================*/
 
-article {
-    padding-left: 1.5rem;
-    padding-top: 3rem;
-    padding-bottom: 1rem;
-    display: flex;
-    border: black solid;
-    width: 54rem;
+#player-info {
+	padding: 1.5rem 0 1.5rem 1.5rem;
+	display: flex;
+	border: black solid;
+	width: 47rem;
+    background-color: white;
 }
 
-article h2 {
-    font-size: 4rem;
-    border-bottom: black solid;
-    padding-right: 10rem;
-    margin-right: 2rem;
+#player-info div {
+    width: 15rem;
 }
 
-article em {
-    color: #c84893;
+#player-info h2 {
+	font-size: 4rem;
+	border-bottom: black solid;
+	padding-right: 10rem;
+	margin-right: 2rem;
 }
 
-article>div>span {
-    font-size: 1.5rem;
+#player-info em {
+	color: #c84893;
 }
 
-article .money {
+#player-info > div > span {
+	font-size: 1.5rem;
+}
+
+#player-info > div > h3 {
+	font-size: 1rem;
+	margin-top: 1rem;
+	margin-bottom: 0.5rem;
+}
+
+#player-info .money {
     margin-top: 2rem;
-    color: #c84893;
-    font-size: 1.5rem;
-}
-
-article>div>h3 {
-    font-size: 1rem;
-    margin-top: 1rem;
-    margin-bottom: 0.5rem;
 }
 
 section.property {
@@ -193,11 +208,11 @@ section.property {
 }
 
 .flexcontainer {
-    display: flex;
-    flex-basis: 30rem;
-    flex-wrap: wrap;
-    overflow-y: scroll;
-    height: 16rem;
+	display: flex;
+	flex-basis: 29rem;
+	flex-wrap: wrap;
+	overflow-y: scroll;
+	height: 16rem;
 }
 
 .property h3 {
@@ -297,6 +312,44 @@ footer ul li a {
     margin-right: 1rem;
 }
 
+/* ============================== Players ================================*/
+main aside {
+    display: flex;
+    margin: 0 2rem;
+    justify-content: center;
+    gap: 2rem;
+}
+
+main aside .player {
+    width: 20rem;
+    padding: 1rem;
+    background-color: white;
+}
+
+main aside .player div {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 0.5rem;
+    border-bottom: 0.125rem solid black;
+}
+
+main aside .player h2 {
+    font-size: 2rem;
+}
+
+main aside .player p {
+    font-size: 1.5rem;
+}
+
+main aside .player a {
+    display: block;
+    background-color: var(--dark-gray);
+    padding: 0.5rem;
+    text-align: center;
+    margin: 0 auto 2rem auto;
+    width: 10rem;
+}
+
 /* ============================== Roll Dice ================================*/
 .roll-dice {
     background-color: var(--light-gray-trans);
@@ -305,15 +358,15 @@ footer ul li a {
     border: 0.25rem solid black;
 }
 
+.roll-dice div {
+    display: flex;
+    justify-content: space-evenly;
+}
+
 .roll-dice h2 {
     font-size: 3rem;
     margin-bottom: 2rem;
     text-align: center;
-}
-
-.roll-dice div {
-    display: flex;
-    justify-content: space-evenly;
 }
 
 .roll-dice img {
