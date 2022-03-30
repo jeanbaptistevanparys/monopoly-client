@@ -1,0 +1,37 @@
+/* ============================== Popups ================================*/
+.popup {
+    position: absolute;
+    left: 30vw;
+    width: 40vw;
+    top: 30vh;
+    height: 40vh;
+}
+
+
+.popup-content {
+    background-color: var(--light-gray);
+    padding: 2rem;
+    border: 0.25rem solid var(--bar-dark);
+    border-top: 0;
+}
+
+.popup-content h2 {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+}
+
+
+
+.popup-content form input {
+    padding: 0.5rem;
+    border-radius: 0;
+    border: 0;
+    background-color: var(--dark-gray);
+}
+
+.popup-content .submit-btns {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    margin-top: 2rem;
+}
