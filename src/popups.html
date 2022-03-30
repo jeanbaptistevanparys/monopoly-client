@@ -1,148 +1,158 @@
 <!DOCTYPE html>
-<link rel="stylesheet" href="assets/css/reset.css">
-<link rel="stylesheet" href="assets/css/popups.css">
-<link rel="stylesheet" href="assets/css/screen.css">
 <html lang="en">
 
-<template id="default">
-    <article class="popup">
-        <header>
-            <h2>Game 1</h2>
-            <div class="icons">
-                <div class="inner-elem icon icon-min"></div>
-                <div class="inner-elem icon icon-max"></div>
-                <div class="inner-elem icon icon-close"></div>
-            </div>
-        </header>
-        <section class="popup-content">
-            <h2>Popup</h2>
-            <form>
-                <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Impedit ad, voluptate necessitatibus
-                    voluptates ipsum incidunt sunt, quisquam magnam atque deserunt culpa maxime nemo quo non porro?
-                    Dolor, quaerat. Veritatis, ullam?</p>
-                <div class="submit-btns">
-                    <input type="submit" class="outer-elem" value="Continue">
-                    <input type="submit" class="outer-elem" value="Continue">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="assets/css/reset.css">
+    <link rel="stylesheet" href="assets/css/popups.css">
+    <link rel="stylesheet" href="assets/css/screen.css">
+</head>
+
+<body>
+
+    <template id="default">
+        <article class="popup">
+            <header>
+                <h2>Game 1</h2>
+                <div class="icons">
+                    <div class="inner-elem icon icon-min"></div>
+                    <div class="inner-elem icon icon-max"></div>
+                    <div class="inner-elem icon icon-close"></div>
                 </div>
+            </header>
+            <section class="popup-content">
+                <h2>Popup</h2>
+                <form>
+                    <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Impedit ad, voluptate necessitatibus
+                        voluptates ipsum incidunt sunt, quisquam magnam atque deserunt culpa maxime nemo quo non porro?
+                        Dolor, quaerat. Veritatis, ullam?</p>
+                    <div class="submit-btns">
+                        <input type="submit" class="outer-elem" value="Continue">
+                        <input type="submit" class="outer-elem" value="Continue">
+                    </div>
+                </form>
+            </section>
+        </article>
+    </template>
+
+    <template id="dice">
+        <article class="roll-dice">
+            <h2>Roll your dice!</h2>
+            <section>
+                <img src="assets/media/dice.png" alt="Dice" title="Dice">
+                <img src="assets/media/dice.png" alt="Dice" title="Dice">
+            </section>
+            <form action="#">
+                <input type="submit" class="outer-elem" value="Roll dice">
             </form>
-        </section>
-    </article>
-</template>
+        </article>
+    </template>
 
-<template id="dice">
-    <article class="roll-dice">
-        <h2>Roll your dice!</h2>
-        <section>
-            <img src="assets/media/dice.png" alt="Dice" title="Dice">
-            <img src="assets/media/dice.png" alt="Dice" title="Dice">
-        </section>
-        <form action="#">
-            <input type="submit" class="outer-elem" value="Roll dice">
-        </form>
-    </article>
-</template>
+    <template id="dice">
+        <article class="roll-dice">
+            <h2>You rolled</h2>
+            <section>
+                <img src="assets/media/dice.png" alt="Dice" title="Dice">
+                <img src="assets/media/dice.png" alt="Dice" title="Dice">
+            </section>
+            <form action="#">
+                <p class="inner-elem">12</p>
+            </form>
+        </article>
+    </template>
 
-<template id="dice">
-    <article class="roll-dice">
-        <h2>You rolled</h2>
-        <section>
-            <img src="assets/media/dice.png" alt="Dice" title="Dice">
-            <img src="assets/media/dice.png" alt="Dice" title="Dice">
-        </section>
-        <form action="#">
-            <p class="inner-elem">12</p>
-        </form>
-    </article>
-</template> 
+    <template id="playerinfo">
+        <article class="playerpopup">
+            <header>
+                <h2>Player info</h2>
+                <div class="icons">
+                    <div class="inner-elem icon icon-min"></div>
+                    <div class="inner-elem icon icon-max"></div>
+                    <div class="inner-elem icon icon-close"></div>
+                </div>
+            </header>
+            <section class="playerpopup-content">
+                <h3>Player info of:</h3>
+                <h2>Player Name</h2>
+                <div class="flexcontainer">
+                    <section class="property">
+                        <h3>JavaScript Avenue</h3>
+                        <p><span class="striketrough">M</span> 240</p>
+                    </section>
 
-<template id="playerinfo">
-    <article class="playerpopup">
-        <header>
-            <h2>Player info</h2>
-            <div class="icons">
-                <div class="inner-elem icon icon-min"></div>
-                <div class="inner-elem icon icon-max"></div>
-                <div class="inner-elem icon icon-close"></div>
-            </div>
-        </header>
-        <section class="playerpopup-content">
-            <h3>Player info of:</h3>
-            <h2>Player Name</h2>
-            <div class="flexcontainer">
-                <section class="property">
-                    <h3>JavaScript Avenue</h3>
-                    <p><span class="striketrough">M</span> 240</p>
-                </section>
-    
-                <section class="property">
-                    <h3>JavaScript Avenue</h3>
-                    <p><span class="striketrough">M</span> 240</p>
-                </section>
-    
-                <section class="property">
-                    <h3>JavaScript Avenue</h3>
-                    <p><span class="striketrough">M</span> 240</p>
-                </section>
-    
-                <section class="property">
-                    <h3>JavaScript Avenue</h3>
-                    <p><span class="striketrough">M</span> 240</p>
-                </section>
-    
-                <section class="property">
-                    <h3>JavaScript Avenue</h3>
-                    <p><span class="striketrough">M</span> 240</p>
-                </section>
-    
-                <section class="property">
-                    <h3>JavaScript Avenue</h3>
-                    <p><span class="striketrough">M</span> 240</p>
-                </section>
-                <section class="property">
-                    <h3>JavaScript Avenue</h3>
-                    <p><span class="striketrough">M</span> 240</p>
-                </section>
-                <section class="property">
-                    <h3>JavaScript Avenue</h3>
-                    <p><span class="striketrough">M</span> 240</p>
-                </section>
-                <section class="property">
-                    <h3>JavaScript Avenue</h3>
-                    <p><span class="striketrough">M</span> 240</p>
-                </section>
-                <section class="property">
-                    <h3>JavaScript Avenue</h3>
-                    <p><span class="striketrough">M</span> 240</p>
-                </section>
-            </div>
-        </section>
-    </article>
-</template>
+                    <section class="property">
+                        <h3>JavaScript Avenue</h3>
+                        <p><span class="striketrough">M</span> 240</p>
+                    </section>
+
+                    <section class="property">
+                        <h3>JavaScript Avenue</h3>
+                        <p><span class="striketrough">M</span> 240</p>
+                    </section>
+
+                    <section class="property">
+                        <h3>JavaScript Avenue</h3>
+                        <p><span class="striketrough">M</span> 240</p>
+                    </section>
+
+                    <section class="property">
+                        <h3>JavaScript Avenue</h3>
+                        <p><span class="striketrough">M</span> 240</p>
+                    </section>
+
+                    <section class="property">
+                        <h3>JavaScript Avenue</h3>
+                        <p><span class="striketrough">M</span> 240</p>
+                    </section>
+                    <section class="property">
+                        <h3>JavaScript Avenue</h3>
+                        <p><span class="striketrough">M</span> 240</p>
+                    </section>
+                    <section class="property">
+                        <h3>JavaScript Avenue</h3>
+                        <p><span class="striketrough">M</span> 240</p>
+                    </section>
+                    <section class="property">
+                        <h3>JavaScript Avenue</h3>
+                        <p><span class="striketrough">M</span> 240</p>
+                    </section>
+                    <section class="property">
+                        <h3>JavaScript Avenue</h3>
+                        <p><span class="striketrough">M</span> 240</p>
+                    </section>
+                </div>
+            </section>
+        </article>
+    </template>
 
 
-<template>
-    <article class="titledeed">
-        <header>
-            <h2>Title deed</h2>
-            <div class="icons">
-                <div class="inner-elem icon icon-min"></div>
-                <div class="inner-elem icon icon-max"></div>
-                <div class="inner-elem icon icon-close"></div>
-            </div>
-        </header>
-        <section class="titledeed-content">
-            <h3>Title deed of</h3>
-            <h2>STREET NAME</h2>
-            <section class="values">
+    <template>
+        <article class="titledeed">
+            <header>
+                <h2>Title deed</h2>
+                <div class="icons">
+                    <div class="inner-elem icon icon-min"></div>
+                    <div class="inner-elem icon icon-max"></div>
+                    <div class="inner-elem icon icon-close"></div>
+                </div>
+            </header>
+            <section class="titledeed-content">
+                <h3>Title deed of</h3>
+                <h2>STREET NAME</h2>
+                <section class="values">
                     <p class="left">-Rent</p>
                     <p>1</p>
                     <p class="right"><span class="striketrough">M</span>12 </p>
+                </section>
+
             </section>
-    
-        </section>
-    </article>
-</template>
+        </article>
+    </template>
 
 
+</body>
 
 </html>
