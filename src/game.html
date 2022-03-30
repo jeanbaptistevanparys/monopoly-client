@@ -42,8 +42,10 @@
                 <form>
                     <label for="nickname">Nickname:</label>
                     <input type="text" name="nickname" id="nickname" class="inner-elem">
-                    <label>Games:</label>
-                    <div id="games">
+                    <label>Player Count:</label>
+                    <input type="number" name="player-count" id="player-count" class="inner-elem" min="2" max="6">
+                    <div id="games" class="hidden">
+                        <!-- TODO: Show available games-->
                         <div class="game"><input type="radio" name="game" id="game1" checked><label for="game1"
                                 class="outer-elem">Game
                                 1</label>
