@@ -5,13 +5,14 @@ function fetchFromServer(path, httpVerb, requestBody){
 
     return fetch(`${_config.getAPIUrl()}${path}`, options)
         .then((response) => {
-            if (!response.ok) {
-                generateVisualAPIErrorInConsole();
-                throw response;
-            }
+
             return response.json();
         })
         .then((jsonresponsetoparse) => {
+            if (jsonresponsetoparse.failure){
+                generateVisualAPIErrorInConsole();
+                throw jsonresponsetoparse;
+            }
             return jsonresponsetoparse;
         });
 }
