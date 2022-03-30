@@ -115,7 +115,6 @@ main {
     --background-color: #178080;
     --board-size: 20rem;
     --board-mid-elems: 9;
-    --card-size: var(calc(var(--board-size) / var(--board-mid-elems)));
 }
 
 /* ============================== Header ================================*/
@@ -388,15 +387,15 @@ main aside .player a {
 
 /* ============================== Board ================================*/
 .board {
-    width: var(--board-size);
+    width: calc(12* (var(--board-size) / var(--board-mid-elems)));
+    border: none;
     background-color: var(--background-color);
     display: grid;
     grid-template-columns: repeat(11, 1fr);
 }
 
 .board .middle {
-    background: url(../media/Monopoly-logo.jpg) no-repeat center center,
-        var(--background-color);
+    background: url(../media/Monopoly-logo.jpg) no-repeat center center;
     grid-row-start: 2;
     grid-row-end: 11;
     grid-column-start: 2;
@@ -419,7 +418,7 @@ main aside .player a {
     height: calc((var(--board-size) / var(--board-mid-elems)) * 1.5);
     width: calc(var(--board-size) / var(--board-mid-elems));
     background-color: white;
-    border: 0.125rem solid var(--background-color);
+    border: 0.125rem solid black;
 }
 
 .board .big {
@@ -477,6 +476,29 @@ main aside .player a {
     background-color: blue;
 }
 
+.card.lightblue::after {
+    background-color: lightblue;
+}
+
 .card.brown::after {
     background-color: brown;
+}
+
+.card.chance {
+    background: url(../media/Chance.png) no-repeat center center,
+        white;
+}
+
+.card.lamp {
+    background: url(../media/Lamp.png) no-repeat center center, white;
+}
+
+.card.train {
+    background: url(../media/Train.png) no-repeat center center,
+        white;
+}
+
+.card.chest {
+    background: url(../media/Chest.png) no-repeat center center,
+        white;
 }
