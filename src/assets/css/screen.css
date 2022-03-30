@@ -487,37 +487,40 @@ main aside .player a {
 .card.chance {
     background: url(../media/Chance.png) no-repeat center center,
         white;
+    background-size: calc(var(--board-size) / 14);
 }
 
 .card.lamp {
     background: url(../media/Lamp.png) no-repeat center center, white;
+    background-size: calc(var(--board-size) / 14);
 }
 
 .card.train {
-    background: url(../media/Train.png) no-repeat center center,
-        white;
+    background: url(../media/Train.png) no-repeat center center, white;
+    background-size: calc(var(--board-size) / 14);
 }
 
 .card.chest {
-    background: url(../media/Chest.png) no-repeat center center,
-        white;
+    background: url(../media/Chest.png) no-repeat center center, white;
+    background-size: calc(var(--board-size) / 14);
 }
 
 .big.start {
     background: url(../media/Start.png) no-repeat center center, white;
+    background-size: calc(var(--board-size) / 14);
 }
 
 .big.cop {
-    background: url(../media/Police.png) no-repeat center center,
-        white;
+    background: url(../media/Police.png) no-repeat center center, white;
+    background-size: calc(var(--board-size) / 14);
 }
 
 .big.jail {
-    background: url(../media/Jail.png) no-repeat center center,
-        white;
+    background: url(../media/Jail.png) no-repeat center center, white;
+    background-size: calc(var(--board-size) / 14);
 }
 
 .big.car {
-    background: url(../media/Pause.png) no-repeat center center,
-        white;
+    background: url(../media/Pause.png) no-repeat center center, white;
+    background-size: calc(var(--board-size) / 14);
 }
