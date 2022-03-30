@@ -117,3 +117,43 @@
 .playerpopup-content .property p{
     background-color: white;
 }
+/* ============================== Tiltle deed ================================*/
+.titledeed {
+    position: absolute;
+    left: 35vw;
+    width: 30vw;
+    top: 20vh;
+    height: 60vh;
+}
+
+.titledeed-content {
+    background-color: var(--light-gray-trans);
+    padding: 2rem;
+    border: 0.25rem solid var(--bar-dark);
+    border-top: 0;
+    height: 100%;
+}
+.titledeed-content>h3 {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+    text-align: center;
+}
+
+.titledeed-content h2 {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+    text-align: center;
+}
+.titledeed-content .values {
+    display: grid;
+    grid-template-columns: 5fr 2fr 3fr;
+}
+.titledeed-content .values p{
+    font-size: 1.5rem;
+}
+.titledeed-content .values p.left{
+    text-align: left;
+}
+.titledeed-content .values p.right{
+    text-align: right;
+}
