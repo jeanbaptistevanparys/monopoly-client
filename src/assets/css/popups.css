@@ -1,4 +1,4 @@
-/* ============================== Popups ================================*/
+/* ============================== Popup ================================*/
 .popup {
     position: absolute;
     left: 30vw;
@@ -81,4 +81,39 @@
     margin: 0 auto;
     font-size: 2rem;
     padding-top: 0.5rem;
+}
+/* ============================== Player info ================================*/
+.playerpopup {
+    position: absolute;
+    left: 35vw;
+    width: 30vw;
+    top: 20vh;
+    height: 60vh;
+}
+
+.playerpopup-content {
+    background-color: var(--light-gray-trans);
+    padding: 2rem;
+    border: 0.25rem solid var(--bar-dark);
+    border-top: 0;
+    height: 100%;
+}
+
+.playerpopup-content>h3 {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+    text-align: center;
+}
+
+.playerpopup-content h2 {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+    text-align: center;
+}
+.playerpopup-content .flexcontainer{
+    height: 80%;
+}
+
+.playerpopup-content .property p{
+    background-color: white;
 }
