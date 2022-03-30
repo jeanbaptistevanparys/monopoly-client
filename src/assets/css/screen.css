@@ -350,34 +350,3 @@ main aside .player a {
     width: 10rem;
 }
 
-/* ============================== Roll Dice ================================*/
-.roll-dice {
-    background-color: var(--light-gray-trans);
-    width: 25rem;
-    padding: 2rem;
-    border: 0.25rem solid black;
-}
-
-.roll-dice div {
-    display: flex;
-    justify-content: space-evenly;
-}
-
-.roll-dice h2 {
-    font-size: 3rem;
-    margin-bottom: 2rem;
-    text-align: center;
-}
-
-.roll-dice img {
-    width: 7rem;
-    margin-bottom: 2rem;
-}
-
-.roll-dice a {
-    padding: 1rem;
-    display: block;
-    margin: 0 auto;
-    width: 5rem;
-    text-align: center;
-}

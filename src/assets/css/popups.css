@@ -9,7 +9,7 @@
 
 
 .popup-content {
-    background-color: var(--light-gray);
+    background-color: var(--light-gray-trans);
     padding: 2rem;
     border: 0.25rem solid var(--bar-dark);
     border-top: 0;
@@ -34,4 +34,43 @@
     align-items: center;
     justify-content: space-around;
     margin-top: 2rem;
+}
+
+/* ============================== Roll Dice ================================*/
+.roll-dice {
+    background-color: var(--light-gray-trans);
+    padding: 2rem;
+    border: 0.25rem solid black;
+    left: 35vw;
+    width: 30vw;
+    top: 35vh;
+    height: 35vh;
+    position: absolute;
+}
+
+.roll-dice section {
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.roll-dice h2 {
+    font-size: 3rem;
+    margin-bottom: 2rem;
+    text-align: center;
+}
+
+.roll-dice img {
+    width: 7rem;
+    margin-bottom: 2rem;
+}
+
+.roll-dice input {
+    padding: 0.5rem;
+    border-radius: 0;
+    border: 0;
+    background-color: var(--dark-gray);
+    display: block;
+    width: 7rem;
+    height: 3rem;
+    margin: 0 auto;
 }

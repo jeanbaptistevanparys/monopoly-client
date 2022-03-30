@@ -4,7 +4,8 @@
 <link rel="stylesheet" href="assets/css/popups.css">
 <html lang="en">
 
-    <section class="popup">
+<template id="default">
+    <article class="popup">
         <header>
             <h2>Game 1</h2>
             <div class="icons">
@@ -16,14 +17,30 @@
         <section class="popup-content">
             <h2>Popup</h2>
             <form>
-                <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Impedit ad, voluptate necessitatibus voluptates ipsum incidunt sunt, quisquam magnam atque deserunt culpa maxime nemo quo non porro? Dolor, quaerat. Veritatis, ullam?</p>
-                
+                <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Impedit ad, voluptate necessitatibus
+                    voluptates ipsum incidunt sunt, quisquam magnam atque deserunt culpa maxime nemo quo non porro?
+                    Dolor, quaerat. Veritatis, ullam?</p>
                 <div class="submit-btns">
                     <input type="submit" class="outer-elem" value="Continue">
-
                     <input type="submit" class="outer-elem" value="Continue">
                 </div>
             </form>
         </section>
-    </section>
+    </article>
+</template>
+
+<template>
+    <article class="roll-dice">
+        <h2>Roll your dice!</h2>
+        <section>
+            <img src="assets/media/dice.png" alt="Dice" title="Dice">
+            <img src="assets/media/dice.png" alt="Dice" title="Dice">
+        </section>
+        <form action="#">
+            <input type="submit" class="outer-elem" value="Roll dice">
+        </form>
+    </article>
+</template>
+
+
 </html>
