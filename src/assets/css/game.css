@@ -13,9 +13,9 @@
     width: 40%;
 }
 
-/* .hidden {
+.hidden {
     display: none;
-} */
+}
 
 .popup-content {
     background-color: var(--light-gray);
@@ -79,11 +79,10 @@ label, p {
     display: none;
 }
 
-#players input[type="radio"]:checked+label,
+/* #players input[type="radio"]:checked+label,
 #games input[type="radio"]:checked+label {
     background-color: var(--dark-gray);
-}
-
+} */
 
 /* ============================== Players ================================*/
 #players {

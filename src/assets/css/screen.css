@@ -99,8 +99,8 @@ main {
 }
 
 .money {
-	color: #c84893;
-	font-size: 1.5rem;
+    color: #c84893;
+    font-size: 1.5rem;
 }
 
 :root {
@@ -113,6 +113,8 @@ main {
     --dark-gray-trans: rgba(0, 0, 0, 0.5);
     --bar-title: white;
     --background-color: #178080;
+    --board-size: 20rem;
+    --board-mid-elems: 9;
 }
 
 /* ============================== Header ================================*/
@@ -166,10 +168,10 @@ h1 {
 /* ============================== Player Info ================================*/
 
 #player-info {
-	padding: 1.5rem 0 1.5rem 1.5rem;
-	display: flex;
-	border: black solid;
-	width: 47rem;
+    padding: 1.5rem 0 1.5rem 1.5rem;
+    display: flex;
+    border: black solid;
+    width: 47rem;
     background-color: white;
 }
 
@@ -178,24 +180,24 @@ h1 {
 }
 
 #player-info h2 {
-	font-size: 4rem;
-	border-bottom: black solid;
-	padding-right: 10rem;
-	margin-right: 2rem;
+    font-size: 4rem;
+    border-bottom: black solid;
+    padding-right: 10rem;
+    margin-right: 2rem;
 }
 
 #player-info em {
-	color: #c84893;
+    color: #c84893;
 }
 
-#player-info > div > span {
-	font-size: 1.5rem;
+#player-info>div>span {
+    font-size: 1.5rem;
 }
 
-#player-info > div > h3 {
-	font-size: 1rem;
-	margin-top: 1rem;
-	margin-bottom: 0.5rem;
+#player-info>div>h3 {
+    font-size: 1rem;
+    margin-top: 1rem;
+    margin-bottom: 0.5rem;
 }
 
 #player-info .money {
@@ -208,11 +210,11 @@ section.property {
 }
 
 .flexcontainer {
-	display: flex;
-	flex-basis: 29rem;
-	flex-wrap: wrap;
-	overflow-y: scroll;
-	height: 16rem;
+    display: flex;
+    flex-basis: 29rem;
+    flex-wrap: wrap;
+    overflow-y: scroll;
+    height: 16rem;
 }
 
 .property h3 {
@@ -252,7 +254,7 @@ footer ul {
 
 footer ul li a {
     text-decoration-line: none;
-    color: white;
+    color: black;
     width: 3rem;
 
     background-repeat: no-repeat;
@@ -307,7 +309,7 @@ footer ul li a {
 #time {
     font-size: 2rem;
     text-align: center;
-    color: white;
+    color: black;
     padding: 1rem;
     margin-right: 1rem;
 }
@@ -380,4 +382,145 @@ main aside .player a {
     margin: 0 auto;
     width: 5rem;
     text-align: center;
+}
+
+
+/* ============================== Board ================================*/
+.board {
+    width: calc(12* (var(--board-size) / var(--board-mid-elems)));
+    border: none;
+    background-color: var(--background-color);
+    display: grid;
+    grid-template-columns: repeat(11, 1fr);
+}
+
+.board .middle {
+    background: url(../media/Monopoly-logo.jpg) no-repeat center center;
+    grid-row-start: 2;
+    grid-row-end: 11;
+    grid-column-start: 2;
+    grid-column-end: 11;
+}
+
+.board .card::after {
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 30%;
+    top: 0;
+    background-color: var(--color);
+}
+
+
+.board .card,
+.board .big {
+    position: relative;
+    height: calc((var(--board-size) / var(--board-mid-elems)) * 1.5);
+    width: calc(var(--board-size) / var(--board-mid-elems));
+    background-color: white;
+    border: 0.125rem solid black;
+}
+
+.board .big {
+    width: calc((var(--board-size) / var(--board-mid-elems)) * 1.5);
+    height: calc((var(--board-size) / var(--board-mid-elems)) * 1.5);
+}
+
+.board .side,
+#first-side {
+    width: calc((var(--board-size) / var(--board-mid-elems)) * 1.5);
+    height: calc(var(--board-size) / var(--board-mid-elems));
+}
+
+.board .side::after,
+.board .side.orange.first::after {
+    content: "";
+    position: absolute;
+    right: 0;
+    left: unset;
+    top: 0;
+    height: 100%;
+    width: 30%;
+}
+
+.board .side:nth-of-type(even)::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: 30%;
+}
+
+.card.red::after {
+    background-color: red;
+}
+
+.card.yellow::after {
+    background-color: yellow;
+}
+
+.card.orange::after {
+    background-color: orange;
+}
+
+.card.green::after {
+    background-color: green;
+}
+
+.card.purple::after {
+    background-color: purple;
+}
+
+.card.blue::after {
+    background-color: blue;
+}
+
+.card.lightblue::after {
+    background-color: lightblue;
+}
+
+.card.brown::after {
+    background-color: brown;
+}
+
+.card.chance {
+    background: url(../media/Chance.png) no-repeat center center,
+        white;
+    background-size: calc(var(--board-size) / 14);
+}
+
+.card.lamp {
+    background: url(../media/Lamp.png) no-repeat center center, white;
+    background-size: calc(var(--board-size) / 14);
+}
+
+.card.train {
+    background: url(../media/Train.png) no-repeat center center, white;
+    background-size: calc(var(--board-size) / 14);
+}
+
+.card.chest {
+    background: url(../media/Chest.png) no-repeat center center, white;
+    background-size: calc(var(--board-size) / 14);
+}
+
+.big.start {
+    background: url(../media/Start.png) no-repeat center center, white;
+    background-size: calc(var(--board-size) / 14);
+}
+
+.big.cop {
+    background: url(../media/Police.png) no-repeat center center, white;
+    background-size: calc(var(--board-size) / 14);
+}
+
+.big.jail {
+    background: url(../media/Jail.png) no-repeat center center, white;
+    background-size: calc(var(--board-size) / 14);
+}
+
+.big.car {
+    background: url(../media/Pause.png) no-repeat center center, white;
+    background-size: calc(var(--board-size) / 14);
 }
