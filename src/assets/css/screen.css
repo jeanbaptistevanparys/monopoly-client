@@ -502,3 +502,22 @@ main aside .player a {
     background: url(../media/Chest.png) no-repeat center center,
         white;
 }
+
+.big.start {
+    background: url(../media/Start.png) no-repeat center center, white;
+}
+
+.big.cop {
+    background: url(../media/Police.png) no-repeat center center,
+        white;
+}
+
+.big.jail {
+    background: url(../media/Jail.png) no-repeat center center,
+        white;
+}
+
+.big.car {
+    background: url(../media/Pause.png) no-repeat center center,
+        white;
+}
