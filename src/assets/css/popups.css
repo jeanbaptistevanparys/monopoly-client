@@ -227,5 +227,14 @@
 .trade-content form div.submit input{
     width: 4rem;
     height: 2rem;
-    background-color: var(--dark-gray);
+    padding: 0.5rem;
+    background-color: var(--light-gray);
+}
+.trade-content form div.submit input[type="submit"]{
+    width: 8rem;
+    margin-top: 1rem;
+}
+.trade-content form div.submit div{
+    align-items: center;
+    width: fit-content;
 }
