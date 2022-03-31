@@ -12,195 +12,46 @@
 
     <link rel="stylesheet" href="assets/css/reset.css">
     <link rel="stylesheet" href="assets/css/screen.css">
+    <link rel="stylesheet" href="assets/css/game.css">
 
     <script src="assets/js/config.js"></script>
 
     <script src="assets/js/data-connector/error-handler.js"></script>
     <script src="assets/js/data-connector/api-communication-abstractor.js"></script>
+    <script src="assets/js/data-connector/local-storage-abstractor.js"></script>
 
-    <script src="assets/js/initialiser.js"></script>
+    <script src="assets/js/game-matcher/game-matcher.js"></script>
 
+    <script src="assets/js/game-initialiser.js"></script>
 </head>
 
 <body>
 
-    <header>
-        <h1>Monopoly</h1>
-        <div class="icons">
-            <div class="inner-elem icon icon-min"></div>
-            <div class="inner-elem icon icon-max"></div>
-            <div class="inner-elem icon icon-close"></div>
-        </div>
-    </header>
+    <main class="blue-bg">
+        <section class="popup">
 
-    <main>
-        <div class="board box-shadow">
-            <div class="big car"></div>
-            <div class="card red"></div>
-            <div class="card chance"></div>
-            <div class="card red"></div>
-            <div class="card red"></div>
-            <div class="card train"></div>
-            <div class="card yellow"></div>
-            <div class="card yellow"></div>
-            <div class="card tap"></div>
-            <div class="card yellow"></div>
-            <div class="big cop"></div>
-            <div class="card side orange first"></div>
-
-            <div class="middle"></div>
-
-            <div class="card side green"></div>
-            <div class="card side orange"></div>
-            <div class="card side green"></div>
-            <div class="card side chest"></div>
-            <div class="card side chest"></div>
-            <div class="card side orange"></div>
-            <div class="card side green"></div>
-            <div class="card side train"></div>
-            <div class="card side train"></div>
-            <div class="card side purple"></div>
-            <div class="card side chance"></div>
-            <div class="card side purple"></div>
-            <div class="card side blue"></div>
-            <div class="card side lamp"></div>
-            <div class="card side ring"></div>
-            <div class="card side purple"></div>
-            <div class="card side blue"></div>
-
-            <div class="big jail"></div>
-            <div class="card lightblue"></div>
-            <div class="card lightblue"></div>
-            <div class="card chance"></div>
-            <div class="card lightblue"></div>
-            <div class="card train"></div>
-            <div class="card tax"></div>
-            <div class="card brown"></div>
-            <div class="card chest"></div>
-            <div class="card brown"></div>
-            <div class="big start"></div>
-
-        </div>
-        <article id="player-info">
-            <div>
-                <h2>Jarne</h2>
-                <h3>Houses built:</h3>
-                <p><em>6</em></p>
-                <h3>Total number of properties</h3>
-                <p><em>7</em></p>
-                <p class="money"><span class="striketrough">M</span> 1050</p>
-            </div>
-            <div class="flexcontainer">
-                <section class="property">
-                    <h3>JavaScript Avenue</h3>
-                    <p><span class="striketrough">M</span> 240</p>
-                </section>
-
-                <section class="property">
-                    <h3>JavaScript Avenue</h3>
-                    <p><span class="striketrough">M</span> 240</p>
-                </section>
-
-                <section class="property">
-                    <h3>JavaScript Avenue</h3>
-                    <p><span class="striketrough">M</span> 240</p>
-                </section>
-
-                <section class="property">
-                    <h3>JavaScript Avenue</h3>
-                    <p><span class="striketrough">M</span> 240</p>
-                </section>
-
-                <section class="property">
-                    <h3>JavaScript Avenue</h3>
-                    <p><span class="striketrough">M</span> 240</p>
-                </section>
-
-                <section class="property">
-                    <h3>JavaScript Avenue</h3>
-                    <p><span class="striketrough">M</span> 240</p>
-                </section>
-                <section class="property">
-                    <h3>JavaScript Avenue</h3>
-                    <p><span class="striketrough">M</span> 240</p>
-                </section>
-                <section class="property">
-                    <h3>JavaScript Avenue</h3>
-                    <p><span class="striketrough">M</span> 240</p>
-                </section>
-                <section class="property">
-                    <h3>JavaScript Avenue</h3>
-                    <p><span class="striketrough">M</span> 240</p>
-                </section>
-                <section class="property">
-                    <h3>JavaScript Avenue</h3>
-                    <p><span class="striketrough">M</span> 240</p>
-                </section>
-            </div>
-        </article>
-        <aside>
-            <article class="player box-shadow">
-                <div>
-                    <h2>Bart</h2>
-                    <p class="money"><span class="striketrough">M</span> 1755</p>
+            <header>
+                <h2>Start Game</h2>
+                <div class="icons">
+                    <div class="inner-elem icon icon-min"></div>
+                    <div class="inner-elem icon icon-max"></div>
+                    <div class="inner-elem icon icon-close"></div>
                 </div>
-                <a href="#" class="outer-elem">Show player info</a>
-            </article>
-            <article class="player box-shadow active-player">
-                <div>
-                    <h2>Jari</h2>
-                    <p class="money"><span class="striketrough">M</span> 1755</p>
-                </div>
-                <a href="#" class="outer-elem">Show player info</a>
-            </article>
-            <article class="player box-shadow">
-                <div>
-                    <h2>Jarne</h2>
-                    <p class="money"><span class="striketrough">M</span> 1755</p>
-                </div>
-                <a href="#" class="outer-elem">Show player info</a>
-            </article>
-            <article class="player box-shadow">
-                <div>
-                    <h2>Jean-Baptiste</h2>
-                    <p class="money"><span class="striketrough">M</span> 1755</p>
-                </div>
-                <a href="#" class="outer-elem">Show player info</a>
-            </article>
-        </aside>
+            </header>
+
+            <section class="popup-content">
+                <h2>Start Game</h2>
+                <form>
+                    <label for="name">Nickname:</label>
+                    <input type="text" name="name" id="name" class="inner-elem">
+                    <label for="amount">Amount:</label>
+                    <input type="number" name="amount" id="amount" class="inner-elem">
+                    <input type="submit" value="Connect" class="outer-elem">
+                </form>
+            </section>
+        </section>
     </main>
 
-    <div class="errormessages">
-        <p></p>
-    </div>
-    
-
-    <template>
-        <div class="roll-dice">
-            <h2>Roll your dice!</h2>
-            <div>
-                <img src="assets/media/dice.png" alt="Dice" title="Dice">
-                <img src="assets/media/dice.png" alt="Dice" title="Dice">
-            </div>
-            <a href="#" class="outer-elem">Roll</a>
-        </div>
-    </template>
-
-    <footer>
-        <ul>
-            <li><a class="outer-elem" id="start" href="#">Start</a></li>
-            <li><a class="outer-elem" id="roll" href="#">Roll</a></li>
-            <li><a class="outer-elem" id="buy" href="#">Buy</a></li>
-            <li><a class="outer-elem" id="build" href="#">Build</a></li>
-            <li><a class="outer-elem" id="sell" href="#">Sell</a></li>
-            <li><a class="outer-elem" id="mort" href="#">Mort</a></li>
-            <li><a class="outer-elem" id="unmort" href="#">Unmort</a></li>
-            <li><a class="outer-elem" id="trade" href="#">Trade</a></li>
-        </ul>
-        <section class="inner-elem" id="time">
-            <h2>4:20</h2>
-        </section>
-    </footer>
 </body>
 
 </html>
