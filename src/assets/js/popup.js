@@ -30,19 +30,19 @@ function showRolledDicePopup(number, funct) {
     _body.insertAdjacentElement("beforeend", $template);
 }
 
-function showPlayerInfoPopup(playername,properties=[{name: 'Mediterranean', position: 1, cost: 60, mortgage: 30, rent: 2}]) {
+function showPlayerInfoPopup(playername,properties=[{name: 'Mediterranean', position: 1, cost: 60, mortgage: 30, rent: 2,color:"PURPLE"}]) {
     const $template = document.querySelector("#playerinfo").content.firstElementChild.cloneNode(true);
     $template.querySelector(".playerpopup header h2").innerText = playername;
-    $template.querySelector(".playerpopup header h2").innerText = playername;
+    $template.querySelector(".playerpopup-content h2").innerText = playername;
     $template.querySelector(".playerpopup .icons div").addEventListener("click", closePopup);
     const $prop = $template.querySelector(".playerpopup .properties section").cloneNode(true);
     $template.querySelector(".playerpopup .properties section").remove()
     properties.forEach(propertie => {
         let $propcopy = $prop.cloneNode(true);
-        console.log(propertie);
+        console.log($propcopy);
         $propcopy.querySelector("h3").innerText = propertie.name;
-        $propcopy.querySelector("p").innerhtml = `<span class="striketrough">M</span> ${propertie.cost}`;
-        $propcopy.addEventListener("click", propertie.function);
+        $propcopy.querySelector("h3").style.backgroundColor = propertie.color; 
+        $propcopy.querySelector("p").innerHTML = `<span class="striketrough">M</span> ${propertie.cost}`;
         $template.querySelector(".playerpopup .properties").insertAdjacentElement("beforeend", $propcopy);
     });
     _body.insertAdjacentElement("beforeend", $template);
