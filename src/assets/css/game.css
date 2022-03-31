@@ -13,14 +13,14 @@
     width: 40%;
 }
 
-/* .hidden {
+.hidden {
     display: none;
-} */
+}
 
 .popup-content {
     background-color: var(--light-gray);
     padding: 2rem;
-    border: 0.25rem solid var(--dark-gray);
+    border: 0.25rem solid var(--bar-dark);
     border-top: 0;
 }
 
@@ -34,7 +34,7 @@
     flex-direction: column;
 }
 
-.popup-content form>label {
+.popup-content form>label, .popup-content form p {
     padding-top: 1.25rem;
     padding-bottom: 0.25rem;
 }
@@ -46,17 +46,13 @@
     background-color: var(--light-gray);
 }
 
-.popup-content .submit-btns {
-    display: flex;
-    margin: auto;
-}
-
-.popup-content form a {
+.popup-content form input[type='submit'] {
     padding: 0.5rem 0;
     width: 8rem;
-    margin: 1rem;
+    margin: 1rem auto 1rem auto;
     text-align: center;
     background-color: var(--dark-gray);
+    cursor: pointer;
 }
 
 #games {
@@ -69,7 +65,7 @@
     margin: 0.5rem 0;
 }
 
-label {
+label, p {
     font-size: 1.5rem;
 }
 
@@ -83,11 +79,10 @@ label {
     display: none;
 }
 
-#players input[type="radio"]:checked+label,
+/* #players input[type="radio"]:checked+label,
 #games input[type="radio"]:checked+label {
     background-color: var(--dark-gray);
-}
-
+} */
 
 /* ============================== Players ================================*/
 #players {

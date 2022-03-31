@@ -50,11 +50,11 @@ main {
 
 .outer-elem {
     -moz-box-shadow: inset -0.2rem -0.2rem 0 var(--dark-gray-trans),
-        inset 0.2rem 0.2rem 0 rgba(255, 255, 255, 0.5);
+        inset 0.2rem 0.2rem 0 rgba(255, 255, 255, 0.6);
     -webkit-box-shadow: inset -0.2rem -0.2rem 0 var(--dark-gray-trans),
-        inset 0.2rem 0.2rem 0 rgba(255, 255, 255, 0.5);
+        inset 0.2rem 0.2rem 0 rgba(255, 255, 255, 0.6);
     box-shadow: inset -0.2rem -0.2rem 0 var(--dark-gray-trans),
-        inset 0.2rem 0.2rem 0 rgba(255, 255, 255, 0.5);
+        inset 0.2rem 0.2rem 0 rgba(255, 255, 255, 0.6);
 }
 
 ::-webkit-scrollbar {
@@ -99,8 +99,8 @@ main {
 }
 
 .money {
-	color: #c84893;
-	font-size: 1.5rem;
+    color: #c84893;
+    font-size: 1.5rem;
 }
 
 :root {
@@ -113,6 +113,8 @@ main {
     --dark-gray-trans: rgba(0, 0, 0, 0.5);
     --bar-title: white;
     --background-color: #178080;
+    --board-size: 20rem;
+    --board-mid-elems: 9;
 }
 
 /* ============================== Header ================================*/
@@ -166,10 +168,10 @@ h1 {
 /* ============================== Player Info ================================*/
 
 #player-info {
-	padding: 1.5rem 0 1.5rem 1.5rem;
-	display: flex;
-	border: black solid;
-	width: 47rem;
+    padding: 1.5rem 0 1.5rem 1.5rem;
+    display: flex;
+    border: black solid;
+    width: 47rem;
     background-color: white;
 }
 
@@ -178,24 +180,24 @@ h1 {
 }
 
 #player-info h2 {
-	font-size: 4rem;
-	border-bottom: black solid;
-	padding-right: 10rem;
-	margin-right: 2rem;
+    font-size: 4rem;
+    border-bottom: black solid;
+    padding-right: 10rem;
+    margin-right: 2rem;
 }
 
 #player-info em {
-	color: #c84893;
+    color: #c84893;
 }
 
-#player-info > div > span {
-	font-size: 1.5rem;
+#player-info>div>span {
+    font-size: 1.5rem;
 }
 
-#player-info > div > h3 {
-	font-size: 1rem;
-	margin-top: 1rem;
-	margin-bottom: 0.5rem;
+#player-info>div>h3 {
+    font-size: 1rem;
+    margin-top: 1rem;
+    margin-bottom: 0.5rem;
 }
 
 #player-info .money {
@@ -208,11 +210,11 @@ section.property {
 }
 
 .flexcontainer {
-	display: flex;
-	flex-basis: 29rem;
-	flex-wrap: wrap;
-	overflow-y: scroll;
-	height: 16rem;
+    display: flex;
+    flex-basis: 29rem;
+    flex-wrap: wrap;
+    overflow-y: scroll;
+    height: 16rem;
 }
 
 .property h3 {
@@ -252,7 +254,7 @@ footer ul {
 
 footer ul li a {
     text-decoration-line: none;
-    color: white;
+    color: black;
     width: 3rem;
 
     background-repeat: no-repeat;
@@ -307,7 +309,7 @@ footer ul li a {
 #time {
     font-size: 2rem;
     text-align: center;
-    color: white;
+    color: black;
     padding: 1rem;
     margin-right: 1rem;
 }
