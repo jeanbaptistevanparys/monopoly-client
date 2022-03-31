@@ -21,11 +21,26 @@ function showDicePopup(funct) {
     _body.insertAdjacentElement("beforeend", $template);
 }
 
-function showRolledDicePopup(number, fucnt) {
+function showRolledDicePopup(number, funct) {
     const $template = document.querySelector("#roll-dice").content.firstElementChild.cloneNode(true);
     $template.querySelector(".roll-dice form p").innerText = number;
-    console.log($template.querySelector(".roll-dice form input"));
-    $template.querySelector(".roll-dice form input").addEventListener("click", closePopup);
+    $template.querySelector(".roll-dice form input").addEventListener("click", funct);
+    _body.insertAdjacentElement("beforeend", $template);
+}
+
+function showPlayerInfo(playername,properties=[{name: 'Mediterranean', position: 1, cost: 60, mortgage: 30, rent: 2}]) {
+    const $template = document.querySelector("#playerinfo").content.firstElementChild.cloneNode(true);
+    $template.querySelector(".playerpopup header h2").innerText = playername;
+    $template.querySelector(".playerpopup header h2").innerText = playername;
+    $template.querySelector(".playerpopup .icons div").addEventListener("click", closePopup);
+    const $prop = $template.querySelector(".playerpopup .flexcontainer section").cloneNode(true);
+    $template.querySelector(".playerpopup .flexcontainer section").remove()
+    properties.forEach(propertie => {
+        $prop.querySelector("h3").innerText = propertie.name;
+        $prop.querySelector("p").innerhtml = `<span class="striketrough">M</span> ${propertie.cost}`;
+        $prop.addEventListener("click", propertie.function);
+        $template.querySelector(".playerpopup .flexcontainer").insertAdjacentElement("beforeend", $prop);
+    });
     _body.insertAdjacentElement("beforeend", $template);
 }
 

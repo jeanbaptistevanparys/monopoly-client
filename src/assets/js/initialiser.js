@@ -7,6 +7,7 @@ document.addEventListener('DOMContentLoaded',init);
 function init(){
     _body = document.querySelector("body");
     testConnection();
+    showPlayerInfo();
 }
 
 function testConnection(){
