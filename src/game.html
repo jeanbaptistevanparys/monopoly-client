@@ -12,6 +12,7 @@
 
     <link rel="stylesheet" href="assets/css/reset.css">
     <link rel="stylesheet" href="assets/css/screen.css">
+    <link rel="stylesheet" href="assets/css/popups.css">
 
     <script src="assets/js/config.js"></script>
 
@@ -19,6 +20,9 @@
     <script src="assets/js/data-connector/api-communication-abstractor.js"></script>
 
     <script src="assets/js/initialiser.js"></script>
+
+    <script src="assets/js/popup.js"></script>
+
 
 </head>
 
@@ -173,7 +177,7 @@
     <div class="errormessages">
         <p></p>
     </div>
-    
+
 
     <template>
         <div class="roll-dice">
@@ -201,6 +205,190 @@
             <h2>4:20</h2>
         </section>
     </footer>
+    <template id="default">
+        <article class="popup">
+            <header>
+                <h2>Game 1</h2>
+                <div class="icons">
+                    <div class="inner-elem icon icon-min"></div>
+                    <div class="inner-elem icon icon-max"></div>
+                    <div class="inner-elem icon icon-close"></div>
+                </div>
+            </header>
+            <section class="popup-content">
+                <h2>Popup</h2>
+                <form>
+                    <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Impedit ad, voluptate necessitatibus
+                        voluptates ipsum incidunt sunt, quisquam magnam atque deserunt culpa maxime nemo quo non porro?
+                        Dolor, quaerat. Veritatis, ullam?</p>
+                    <div class="submit-btns">
+                        <input type="submit" class="outer-elem" value="Continue">
+                    </div>
+                </form>
+            </section>
+        </article>
+    </template>
+
+    <template id="dice">
+        <article class="roll-dice">
+            <h2>Roll your dice!</h2>
+            <section>
+                <img src="assets/media/dice.png" alt="Dice" title="Dice">
+                <img src="assets/media/dice.png" alt="Dice" title="Dice">
+            </section>
+            <form action="#">
+                <input type="submit" class="outer-elem" value="Roll dice">
+            </form>
+        </article>
+    </template>
+
+    <template id="roll-dice">
+        <article class="roll-dice">
+            <h2>You rolled</h2>
+            <section>
+                <img src="assets/media/dice.png" alt="Dice" title="Dice">
+                <img src="assets/media/dice.png" alt="Dice" title="Dice">
+            </section>
+            <form action="#">
+                <p class="inner-elem">12</p>
+            </form>
+        </article>
+    </template>
+
+    <template id="playerinfo">
+        <article class="playerpopup">
+            <header>
+                <h2>Player info</h2>
+                <div class="icons">
+                    <div class="inner-elem icon icon-min"></div>
+                    <div class="inner-elem icon icon-max"></div>
+                    <div class="inner-elem icon icon-close"></div>
+                </div>
+            </header>
+            <section class="playerpopup-content">
+                <h3>Player info of:</h3>
+                <h2>Player Name</h2>
+                <div class="flexcontainer">
+                    <section class="property">
+                        <h3>JavaScript Avenue</h3>
+                        <p><span class="striketrough">M</span> 240</p>
+                    </section>
+
+                    <section class="property">
+                        <h3>JavaScript Avenue</h3>
+                        <p><span class="striketrough">M</span> 240</p>
+                    </section>
+
+                    <section class="property">
+                        <h3>JavaScript Avenue</h3>
+                        <p><span class="striketrough">M</span> 240</p>
+                    </section>
+
+                    <section class="property">
+                        <h3>JavaScript Avenue</h3>
+                        <p><span class="striketrough">M</span> 240</p>
+                    </section>
+
+                    <section class="property">
+                        <h3>JavaScript Avenue</h3>
+                        <p><span class="striketrough">M</span> 240</p>
+                    </section>
+
+                    <section class="property">
+                        <h3>JavaScript Avenue</h3>
+                        <p><span class="striketrough">M</span> 240</p>
+                    </section>
+                    <section class="property">
+                        <h3>JavaScript Avenue</h3>
+                        <p><span class="striketrough">M</span> 240</p>
+                    </section>
+                    <section class="property">
+                        <h3>JavaScript Avenue</h3>
+                        <p><span class="striketrough">M</span> 240</p>
+                    </section>
+                    <section class="property">
+                        <h3>JavaScript Avenue</h3>
+                        <p><span class="striketrough">M</span> 240</p>
+                    </section>
+                    <section class="property">
+                        <h3>JavaScript Avenue</h3>
+                        <p><span class="striketrough">M</span> 240</p>
+                    </section>
+                </div>
+            </section>
+        </article>
+    </template>
+
+    <template id="titledeed">
+        <article class="titledeed">
+            <header>
+                <h2>Title deed</h2>
+                <div class="icons">
+                    <div class="inner-elem icon icon-min"></div>
+                    <div class="inner-elem icon icon-max"></div>
+                    <div class="inner-elem icon icon-close"></div>
+                </div>
+            </header>
+            <section class="titledeed-content">
+                <h3>Title deed of</h3>
+                <h2>STREET NAME</h2>
+                <section class="values">
+                    <p class="left">-Rent</p>
+                    <p>1</p>
+                    <p class="right"><span class="striketrough">M</span>12 </p>
+                </section>
+            </section>
+        </article>
+    </template>
+
+    <template>
+        <article class="trade">
+            <header>
+                <h2>Trade</h2>
+                <div class="icons">
+                    <div class="inner-elem icon icon-min"></div>
+                    <div class="inner-elem icon icon-max"></div>
+                    <div class="inner-elem icon icon-close"></div>
+                </div>
+            </header>
+            <section class="trade-content">
+                <h3>Trade</h3>
+                <div class="trade-names">
+                    <h2>Name player 1</h2>
+                    <img src="/src/assets/media/tradearrow.png" alt="trade-arrow">
+                    <select class="outer-elem">
+                        <option selected value="Player Name" class="outer-elem">Player name</option>
+                    </select>
+                </div>
+                <div class="tradables">
+                    <form action="#">
+                        <div>
+                            <ul class="flex">
+                                <li><input type="checkbox" id="easy-street" class="inner-elem"><label
+                                        for="easy-street">Easy
+                                        Street</label></li>
+                            </ul>
+                            <ul class="flex">
+                                <li><input type="checkbox" id="easy-street3" class="inner-elem"><label
+                                        for="easy-street3">Easy Street</label></li>
+                            </ul>
+                        </div>
+                        <div class="submit">
+                            <div>
+                                <input type="number" min="0" id="price" value="0" class="inner-elem">
+                                <label for="price"><span class="striketrough">M</span></label>
+                            </div>
+                            <input type="submit" value="Offer Trade">
+                            <div>
+                                <input type="number" min="0" id="price2" value="0" class="inner-elem">
+                                <label for="price2"><span class="striketrough">M</span></label>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </section>
+        </article>
+    </template>
 </body>
 
 </html>
