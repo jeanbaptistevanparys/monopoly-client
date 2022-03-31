@@ -14,10 +14,9 @@
 
 body {
     background-color: var(--dark-gray);
-}
-
-main {
-    padding: 2rem
+    position: relative;
+    height: 100%;
+    min-height: 100vh;
 }
 
 img {
@@ -37,6 +36,7 @@ a {
 
 main {
     width: 100%;
+    height: 100%;
 }
 
 .inner-elem {
@@ -113,7 +113,7 @@ main {
     --dark-gray-trans: rgba(0, 0, 0, 0.5);
     --bar-title: white;
     --background-color: #178080;
-    --board-size: 20rem;
+    --board-size: 16.5rem;
     --board-mid-elems: 9;
 }
 
@@ -168,15 +168,25 @@ h1 {
 /* ============================== Player Info ================================*/
 
 #player-info {
-    padding: 1.5rem 0 1.5rem 1.5rem;
     display: flex;
+    justify-content: space-between;
+    width: 100%;
+    height: 22rem;
+    padding: 1.5rem;
     border: black solid;
-    width: 47rem;
     background-color: white;
 }
 
-#player-info div {
-    width: 15rem;
+#player-info .info {
+    width: 40%;
+}
+.properties {
+    display: grid;
+    padding-right: 1.5rem;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+    height: 18rem;
+    overflow-y: scroll;
 }
 
 #player-info h2 {
@@ -204,33 +214,27 @@ h1 {
     margin-top: 2rem;
 }
 
-section.property {
-    margin-bottom: 1rem;
-    margin-right: 1.2rem;
-}
-
-.flexcontainer {
+.property {
     display: flex;
-    flex-basis: 29rem;
-    flex-wrap: wrap;
-    overflow-y: scroll;
-    height: 16rem;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 12rem;
+    width: 8rem;
+    border: solid black;
+    background-color: white;
+    padding-bottom: 0.5rem;
 }
-
 .property h3 {
     text-align: center;
-    padding: 0.5rem;
+    width: 100%;
+    padding: 0.5rem 0;
+    height: 3rem;
     background-color: #d93832;
-    border: black solid;
-    width: 8rem;
+    border-bottom: black solid;
 }
 
 .property p {
     text-align: center;
-    padding: 2rem 1rem 0.2rem 1rem;
-    border-bottom: black solid;
-    border-left: black solid;
-    border-right: black solid;
 }
 
 /* ============================== Footer ================================*/
@@ -353,15 +357,17 @@ main aside .player a {
 }
 /* ============================== Board ================================*/
 .board {
-    width: calc(12* (var(--board-size) / var(--board-mid-elems)));
+    width: var(--board-size);
+    height: var(--board-size);
+    margin-right: calc(var(--board-size) / 3);
     border: none;
-    background-color: var(--background-color);
     display: grid;
     grid-template-columns: repeat(11, 1fr);
 }
 
 .board .middle {
-    background: url(../media/Monopoly-logo.jpg) no-repeat center center;
+    background: url(../media/Monopoly-logo.jpg) no-repeat center center,
+                var(--background-color);
     grid-row-start: 2;
     grid-row-end: 11;
     grid-column-start: 2;
@@ -492,3 +498,67 @@ main aside .player a {
 }
 
 
+/* ============================== LAYOUT ================================*/
+main {
+    display: grid;
+    width: 100%;
+    height: calc(100vh - 48px);
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-areas: 
+    "property board info info"
+    "nextTwelve nextTwelve nextTwelve nextTwelve"
+    "players players players players";
+    gap: 1%;
+    padding: 2rem;
+    padding-bottom: 0;
+}
+
+.property-card {
+    width: 100%;
+    grid-area: property;
+}
+.property-card .property {
+    height: 22rem;
+    width: 14rem;
+}
+.property-card .property h3 {
+    font-size: 2rem;
+    height: 6rem
+}
+.property-card .property p {
+    font-size: 2rem;
+}
+.board {
+    grid-area: board;
+}
+#player-info {
+    grid-area: info;
+}
+
+.nextTwelve {
+    width: 100%;
+    grid-area: nextTwelve;
+    display: flex;
+    flex-direction: row;
+    gap: 1%;
+}
+.nextTwelve .property {
+    width: 8%;
+}
+.nextTwelve .property .player {
+    padding: 10%;
+    margin: auto auto;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0.5rem;
+}
+.nextTwelve .player img {
+    width: 100%;
+}
+
+
+aside {
+    grid-area: players;
+    display: flex;
+    
+}
