@@ -2,13 +2,14 @@
 let _token = null;
 let _body;
 
-document.addEventListener('DOMContentLoaded',init);
+document.addEventListener('DOMContentLoaded', init);
 
-function init(){
+function init() {
     _body = document.querySelector("body");
     testConnection();
+    importProperties();
 }
 
-function testConnection(){
-    fetchFromServer('/tiles','GET').then(tiles => console.log(tiles)).catch(errorHandler);
+function testConnection() {
+    fetchFromServer('/tiles', 'GET').then(tiles => console.log(tiles)).catch(errorHandler);
 }
