@@ -232,6 +232,7 @@ h1 {
     height: 3rem;
     background-color: #d93832;
     border-bottom: black solid;
+    color: white;
 }
 
 .property p {
@@ -524,7 +525,8 @@ main {
 }
 .property-card .property h3 {
     font-size: 2rem;
-    height: 6rem
+    height: 6rem;
+    filter: invert(1) grayscale(1) contrast(9);
 }
 .property-card .property p {
     font-size: 2rem;
@@ -544,7 +546,7 @@ main {
     justify-content: space-between;
 }
 .nextTwelve .property {
-    min-width: 6%;
+    width: 6%;
 }
 .nextTwelve .property .player {
     padding: 10%;
