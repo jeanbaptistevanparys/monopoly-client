@@ -16,7 +16,5 @@ function testConnection(){
 function checkIfPLayerIsLoggedIn() {
     if (_token !== null || loadFromStorage(_config.localStorageToken)) {
         bootGameBoardUi();
-    } else {
-        console.log('startscherm tonen')
     }
 }
