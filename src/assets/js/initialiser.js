@@ -6,7 +6,6 @@ document.addEventListener('DOMContentLoaded', init);
 
 function init() {
     testConnection();
-    importProperties();
 }
 
 function testConnection() {
