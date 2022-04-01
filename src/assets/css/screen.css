@@ -468,6 +468,9 @@ main aside .player a {
 .card.pink::after {
     background-color: violet;
 }
+.card.black::after {
+    background-color: black;
+}
 
 .chance {
     background-image: url(../media/Chance.png);
@@ -477,7 +480,7 @@ main aside .player a {
     background-image: url(../media/Lamp.png);
 }
 
-.train {
+.railroad {
     background-image: url(../media/Train.png);
 }
 
@@ -488,7 +491,6 @@ main aside .player a {
     position: relative;
     background-image: url(../media/TaxIncome.png);
 }
-
 
 .go {
     background-image: url(../media/Start.png);
@@ -590,5 +592,4 @@ main {
 aside {
     grid-area: players;
     display: flex;
-    
 }
