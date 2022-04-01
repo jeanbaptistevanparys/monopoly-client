@@ -1,14 +1,14 @@
 "use strict";
 let _token = null;
 
-document.addEventListener('DOMContentLoaded',init);
+document.addEventListener('DOMContentLoaded', init);
 
-function init(){
+function init() {
     testConnection();
     document.querySelector('form').addEventListener('submit', processConnectionForm)
 }
 
 
-function testConnection(){
-    fetchFromServer('/tiles','GET').then(tiles => console.log(tiles)).catch(errorHandler);
+function testConnection() {
+    fetchFromServer('/tiles', 'GET').then(tiles => console.log(tiles)).catch(errorHandler);
 }
