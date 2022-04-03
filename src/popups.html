@@ -59,7 +59,8 @@
                 <img src="assets/media/dice.png" alt="Dice" title="Dice">
             </section>
             <form action="#">
-                <p class="inner-elem">12</p>
+                <p class="outer-elem">12</p>
+                <input type="submit" class="outer-elem" value="Continue">
             </form>
         </article>
     </template>
@@ -173,7 +174,8 @@
                     <form action="#">
                         <div>
                             <ul class="flex">
-                                <li><input type="checkbox" id="easy-street" class="inner-elem"><label for="easy-street">Easy
+                                <li><input type="checkbox" id="easy-street" class="inner-elem"><label
+                                        for="easy-street">Easy
                                         Street</label></li>
                             </ul>
                             <ul class="flex">
@@ -181,17 +183,17 @@
                                         for="easy-street3">Easy Street</label></li>
                             </ul>
                         </div>
-                    <div class="submit">
-                        <div>
-                            <input type="number" min="0" id="price" value="0"   class="inner-elem">
-                            <label for="price"><span class="striketrough">M</span></label>
+                        <div class="submit">
+                            <div>
+                                <input type="number" min="0" id="price" value="0" class="inner-elem">
+                                <label for="price"><span class="striketrough">M</span></label>
+                            </div>
+                            <input type="submit" value="Offer Trade">
+                            <div>
+                                <input type="number" min="0" id="price2" value="0" class="inner-elem">
+                                <label for="price2"><span class="striketrough">M</span></label>
+                            </div>
                         </div>
-                        <input type="submit" value="Offer Trade">
-                        <div>
-                            <input type="number" min="0"  id="price2" value="0" class="inner-elem">
-                            <label for="price2"><span class="striketrough">M</span></label>
-                        </div>
-                    </div>
                     </form>
                 </div>
             </section>
