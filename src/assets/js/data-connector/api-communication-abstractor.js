@@ -9,7 +9,7 @@ function fetchFromServer(path, httpVerb, requestBody){
             return response.json();
         })
         .then((jsonresponsetoparse) => {
-            if (jsonresponsetoparse.failure){
+            if (jsonresponsetoparse.failure) {
                 generateVisualAPIErrorInConsole();
                 throw jsonresponsetoparse;
             }

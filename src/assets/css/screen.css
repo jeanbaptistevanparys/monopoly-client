@@ -19,6 +19,12 @@ body {
     min-height: 100vh;
 }
 
+@media screen and (max-height: 860px) {
+    body {
+        height: 105vh;
+    }
+}
+
 img {
     display: block;
 }
@@ -36,7 +42,11 @@ a {
 
 main {
     width: 100%;
+    min-width: 1030px;
+    max-width: 2000px;
     height: 100%;
+    margin: auto auto;
+    overflow: hidden;
 }
 
 .inner-elem {
@@ -120,6 +130,7 @@ main {
 /* ============================== Header ================================*/
 header {
     width: 100%;
+    min-width: 1030px;
     padding: 0.5rem;
     background: linear-gradient(90deg, var(--bar-dark) 0%, var(--bar-light) 100%);
     border: 0.25rem solid var(--bar-dark);
@@ -170,7 +181,7 @@ h1 {
 #player-info {
     display: flex;
     justify-content: space-between;
-    width: 100%;
+    width: 50%;
     height: 22rem;
     padding: 1.5rem;
     border: black solid;
@@ -182,11 +193,14 @@ h1 {
 }
 .properties {
     display: grid;
-    padding-right: 1.5rem;
+    padding-right: 1%;
     grid-template-columns: repeat(3, 1fr);
-    gap: 1rem;
-    height: 18rem;
+    gap: 3%;
+    height: 100%;
     overflow-y: scroll;
+}
+.properties .property {
+    aspect-ratio: 4/5;
 }
 
 #player-info h2 {
@@ -218,8 +232,7 @@ h1 {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    height: 12rem;
-    width: 8rem;
+    min-width: 5rem;
     border: solid black;
     background-color: white;
     padding-bottom: 0.5rem;
@@ -229,8 +242,8 @@ h1 {
     width: 100%;
     padding: 0.5rem 0;
     height: 3rem;
-    background-color: #d93832;
     border-bottom: black solid;
+    color: white;
 }
 
 .property p {
@@ -359,7 +372,7 @@ main aside .player a {
 .board {
     width: var(--board-size);
     height: var(--board-size);
-    margin-right: calc(var(--board-size) / 3);
+    margin-right: calc((var(--board-size) / 3) + 10%);
     border: none;
     display: grid;
     grid-template-columns: repeat(11, 1fr);
@@ -452,65 +465,78 @@ main aside .player a {
     background-color: lightblue;
 }
 
-.card.brown::after {
-    background-color: brown;
+.card.pink::after {
+    background-color: violet;
+}
+.card.black::after {
+    background-color: black;
 }
 
-.card.chance {
-    background: url(../media/Chance.png) no-repeat center center,
-        white;
+.chance {
+    background-image: url(../media/Chance.png);
+}
+
+.lamp {
+    background-image: url(../media/Lamp.png);
+}
+
+.railroad {
+    background-image: url(../media/Train.png);
+}
+
+.communitychest {
+    background-image: url(../media/Chest.png);
+}
+.taxincome {
+    position: relative;
+    background-image: url(../media/TaxIncome.png);
+}
+
+.go {
+    background-image: url(../media/Start.png);
+}
+
+.cop {
+    background-image: url(../media/Police.png);
+}
+
+.jail {
+    background-image: url(../media/Jail.png);
+}
+
+.freeparking {
+    background-image: url(../media/Pause.png);
+}
+
+.big,
+.card,
+.player {
     background-size: calc(var(--board-size) / 14);
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-color: white;
 }
-
-.card.lamp {
-    background: url(../media/Lamp.png) no-repeat center center, white;
-    background-size: calc(var(--board-size) / 14);
-}
-
-.card.train {
-    background: url(../media/Train.png) no-repeat center center, white;
-    background-size: calc(var(--board-size) / 14);
-}
-
-.card.chest {
-    background: url(../media/Chest.png) no-repeat center center, white;
-    background-size: calc(var(--board-size) / 14);
-}
-
-.big.start {
-    background: url(../media/Start.png) no-repeat center center, white;
-    background-size: calc(var(--board-size) / 14);
-}
-
-.big.cop {
-    background: url(../media/Police.png) no-repeat center center, white;
-    background-size: calc(var(--board-size) / 14);
-}
-
-.big.jail {
-    background: url(../media/Jail.png) no-repeat center center, white;
-    background-size: calc(var(--board-size) / 14);
-}
-
-.big.car {
-    background: url(../media/Pause.png) no-repeat center center, white;
-    background-size: calc(var(--board-size) / 14);
-}
-
 
 /* ============================== LAYOUT ================================*/
 main {
-    display: grid;
     width: 100%;
-    height: calc(100vh - 48px);
-    grid-template-columns: repeat(4, 1fr);
-    grid-template-areas: 
-    "property board info info"
-    "nextTwelve nextTwelve nextTwelve nextTwelve"
-    "players players players players";
-    gap: 1%;
+    height: calc(100vh - 6rem);
     padding: 2rem;
     padding-bottom: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+}
+.main-top {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+.main-top-left {
+    width: 50%;
+    padding-right: 5%;
+    display: flex;
+    flex-direction: row;
 }
 
 .property-card {
@@ -523,27 +549,24 @@ main {
 }
 .property-card .property h3 {
     font-size: 2rem;
-    height: 6rem
+    height: 6rem;
 }
 .property-card .property p {
     font-size: 2rem;
 }
-.board {
-    grid-area: board;
-}
-#player-info {
-    grid-area: info;
-}
 
 .nextTwelve {
     width: 100%;
+    min-height: 10rem;
+    height: 14rem;
     grid-area: nextTwelve;
     display: flex;
     flex-direction: row;
-    gap: 1%;
+    justify-content: space-between;
 }
 .nextTwelve .property {
     width: 8%;
+    height: 100%;
 }
 .nextTwelve .property .player {
     padding: 10%;
@@ -551,6 +574,15 @@ main {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 0.5rem;
+    background-size: contain;
+}
+.nextTwelve .property.special h3 {
+    padding: 1rem;
+    border: none;
+}
+.nextTwelve .property.special .player {
+    padding: 30%;
+    height: 100%;
 }
 .nextTwelve .player img {
     width: 100%;
@@ -560,5 +592,4 @@ main {
 aside {
     grid-area: players;
     display: flex;
-    
 }
