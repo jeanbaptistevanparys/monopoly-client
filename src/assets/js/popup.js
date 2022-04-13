@@ -68,7 +68,7 @@ function showTitledeedPopup(streetname, properties) {
     _body.insertAdjacentElement("beforeend", $template);
 }
 
-function showTradePopup(playername = "David", gamestate) {
+function showTradePopup(playername, gamestate) {
     const $template = document.querySelector("#trade").content.firstElementChild.cloneNode(true);
     $template.querySelector(".trade-content .trade-names h2").innerText = playername;
     $template.querySelectorAll(".trade .icons div").forEach(e => e.addEventListener("click", closePopup));
