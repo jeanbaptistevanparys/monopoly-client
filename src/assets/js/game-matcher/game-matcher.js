@@ -56,5 +56,3 @@ function joinGame(gameId, playerName) {
 function bootGameBoardUi() {
     window.location.href = 'game.html';
 }
-
-
