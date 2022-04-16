@@ -15,13 +15,6 @@ body {
 	background-color: var(--dark-gray);
 	position: relative;
 	height: 100%;
-	min-height: 100vh;
-}
-
-@media screen and (max-height: 860px) {
-	body {
-		height: 105vh;
-	}
 }
 
 img {
@@ -48,11 +41,17 @@ a {
 
 main {
 	width: 100%;
-	min-width: 1030px;
-	max-width: 2000px;
-	height: 100%;
+	height: 100vh;
+	min-width: 77rem;
+	min-height: 50rem;
 	margin: auto auto;
+	padding: 2rem;
+	padding-bottom: 3rem;
 	overflow: hidden;
+	row-gap: 0.5rem;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
 }
 
 .inner-elem {
@@ -129,7 +128,7 @@ header {
 	justify-content: space-between;
 }
 body > header {
-	min-width: 1030px;
+	min-width: 77rem;
 }
 
 header h2 {
@@ -245,7 +244,7 @@ h1 {
 
 /* ============================== Footer ================================*/
 footer {
-	position: absolute;
+	position: fixed;
 	left: 0;
 	bottom: 0;
 	width: 100%;
@@ -351,6 +350,7 @@ main aside .player h2 {
 
 main aside .player p {
 	font-size: 1.5rem;
+	min-width: fit-content;
 }
 
 main aside .player a {
@@ -467,7 +467,7 @@ main aside .player a {
 	background-image: url(../media/Chance.png);
 }
 
-.lamp {
+.utility {
 	background-image: url(../media/Lamp.png);
 }
 
@@ -509,15 +509,6 @@ main aside .player a {
 }
 
 /* ============================== LAYOUT ================================*/
-main {
-	width: 100%;
-	height: calc(100vh - 6rem);
-	padding: 2rem;
-	padding-bottom: 0;
-	display: flex;
-	flex-direction: column;
-	justify-content: space-around;
-}
 .main-top {
 	display: flex;
 	flex-direction: row;
@@ -545,6 +536,10 @@ main {
 .property-card .property p {
 	font-size: 2rem;
 }
+.property-card .property.special .player {
+	height: 100%;
+	background-size: 50%;
+}
 
 .nextTwelve {
 	width: 100%;
@@ -558,6 +553,7 @@ main {
 .nextTwelve .property {
 	width: 8%;
 	height: 100%;
+	max-height: 12.5rem;
 }
 .nextTwelve .property .player {
 	padding: 10%;
@@ -568,6 +564,7 @@ main {
 	background-size: contain;
 }
 .nextTwelve .property.special h3 {
+	text-transform: uppercase;
 	padding: 1rem;
 	border: none;
 }
