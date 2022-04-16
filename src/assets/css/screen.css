@@ -1,595 +1,585 @@
 @font-face {
-    font-family: "W95FA";
-    src: url("../fonts/W95FA/W95FA.otf") format("otf"),
-        url("../fonts/W95FA/w95fa.woff") format("woff"),
-        url("../fonts/W95FA/w95fa.woff2") format("woff2");
+	font-family: "W95FA";
+	src: url("../fonts/W95FA/W95FA.otf") format("otf"), url("../fonts/W95FA/w95fa.woff") format("woff"),
+		url("../fonts/W95FA/w95fa.woff2") format("woff2");
 }
 
 /* ============================== DEFAULT ================================*/
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
 }
 
 body {
-    background-color: var(--dark-gray);
-    position: relative;
-    height: 100%;
-    min-height: 100vh;
+	background-color: var(--dark-gray);
+	position: relative;
+	height: 100%;
+	min-height: 100vh;
 }
 
 @media screen and (max-height: 860px) {
-    body {
-        height: 105vh;
-    }
+	body {
+		height: 105vh;
+	}
 }
 
 img {
-    display: block;
+	display: block;
 }
 
-h1, h2, h3, p, a, label, input, select {
-    font-family: 'W95FA';
-    letter-spacing: 0.125rem;
+h1,
+h2,
+h3,
+p,
+a,
+label,
+input,
+select {
+	font-family: 'W95FA';
+	letter-spacing: 0.125rem;
 }
 
 a {
-    text-decoration: none;
-    color: black;
-    letter-spacing: 0.125rem;
+	text-decoration: none;
+	color: black;
+	letter-spacing: 0.125rem;
 }
 
 main {
-    width: 100%;
-    min-width: 1030px;
-    max-width: 2000px;
-    height: 100%;
-    margin: auto auto;
-    overflow: hidden;
+	width: 100%;
+	min-width: 1030px;
+	max-width: 2000px;
+	height: 100%;
+	margin: auto auto;
+	overflow: hidden;
 }
 
 .inner-elem {
-    -moz-box-shadow: inset 0.2rem 0.2rem 0 var(--dark-gray-trans),
-        inset -0.2rem -0.2rem 0 rgba(255, 255, 255, 0.5);
-    -webkit-box-shadow: inset 0.2rem 0.2rem 0 var(--dark-gray-trans),
-        inset -0.2rem -0.2rem 0 rgba(255, 255, 255, 0.5);
-    box-shadow: inset 0.2rem 0.2rem 0 var(--dark-gray-trans),
-        inset -0.2rem -0.2rem 0 rgba(255, 255, 255, 0.5);
+	-moz-box-shadow: inset 0.2rem 0.2rem 0 var(--dark-gray-trans), inset -0.2rem -0.2rem 0 rgba(255, 255, 255, 0.5);
+	-webkit-box-shadow: inset 0.2rem 0.2rem 0 var(--dark-gray-trans), inset -0.2rem -0.2rem 0 rgba(255, 255, 255, 0.5);
+	box-shadow: inset 0.2rem 0.2rem 0 var(--dark-gray-trans), inset -0.2rem -0.2rem 0 rgba(255, 255, 255, 0.5);
 }
 
 .outer-elem {
-    -moz-box-shadow: inset -0.2rem -0.2rem 0 var(--dark-gray-trans),
-        inset 0.2rem 0.2rem 0 rgba(255, 255, 255, 0.6);
-    -webkit-box-shadow: inset -0.2rem -0.2rem 0 var(--dark-gray-trans),
-        inset 0.2rem 0.2rem 0 rgba(255, 255, 255, 0.6);
-    box-shadow: inset -0.2rem -0.2rem 0 var(--dark-gray-trans),
-        inset 0.2rem 0.2rem 0 rgba(255, 255, 255, 0.6);
+	-moz-box-shadow: inset -0.2rem -0.2rem 0 var(--dark-gray-trans), inset 0.2rem 0.2rem 0 rgba(255, 255, 255, 0.6);
+	-webkit-box-shadow: inset -0.2rem -0.2rem 0 var(--dark-gray-trans), inset 0.2rem 0.2rem 0 rgba(255, 255, 255, 0.6);
+	box-shadow: inset -0.2rem -0.2rem 0 var(--dark-gray-trans), inset 0.2rem 0.2rem 0 rgba(255, 255, 255, 0.6);
 }
 
 ::-webkit-scrollbar {
-    background-color: var(--dark-gray);
-    border: inset 0.125rem black;
-    -moz-box-shadow: inset -0.1rem -0.1rem 0 rgba(128, 128, 128, 0.5),
-        inset 0.1rem 0.1rem 0 white;
-    -webkit-box-shadow: inset -0.1rem -0.1rem 0 rgba(128, 128, 128, 0.5),
-        inset 0.1rem 0.1rem 0 white;
-    box-shadow: inset -0.1rem -0.1rem 0 rgba(128, 128, 128, 0.5),
-        inset 0.1rem 0.1rem 0 white;
+	background-color: var(--dark-gray);
+	border: inset 0.125rem black;
+	-moz-box-shadow: inset -0.1rem -0.1rem 0 rgba(128, 128, 128, 0.5), inset 0.1rem 0.1rem 0 white;
+	-webkit-box-shadow: inset -0.1rem -0.1rem 0 rgba(128, 128, 128, 0.5), inset 0.1rem 0.1rem 0 white;
+	box-shadow: inset -0.1rem -0.1rem 0 rgba(128, 128, 128, 0.5), inset 0.1rem 0.1rem 0 white;
 }
 
 ::-webkit-scrollbar-thumb {
-    border: inset 0.125rem black;
-    background-color: var(--dark-gray);
-    -moz-box-shadow: inset -0.2rem -0.2rem 0 rgba(128, 128, 128, 0.5),
-        inset 0.2rem 0.2rem 0 white;
-    -webkit-box-shadow: inset -0.2rem -0.2rem 0 var(--dark-gray-trans),
-        inset 0.2rem 0.2rem 0 rgba(255, 255, 255, 0.5);
-    box-shadow: inset -0.2rem -0.2rem 0 var(--dark-gray-trans),
-        inset 0.2rem 0.2rem 0 rgba(255, 255, 255, 0.5);
+	border: inset 0.125rem black;
+	background-color: var(--dark-gray);
+	-moz-box-shadow: inset -0.2rem -0.2rem 0 rgba(128, 128, 128, 0.5), inset 0.2rem 0.2rem 0 white;
+	-webkit-box-shadow: inset -0.2rem -0.2rem 0 var(--dark-gray-trans), inset 0.2rem 0.2rem 0 rgba(255, 255, 255, 0.5);
+	box-shadow: inset -0.2rem -0.2rem 0 var(--dark-gray-trans), inset 0.2rem 0.2rem 0 rgba(255, 255, 255, 0.5);
 }
 
 .box-shadow {
-    border: 0.25rem solid #000000;
-    box-shadow: -0.25rem 0.25rem 0rem #000000;
+	border: 0.25rem solid #000000;
+	box-shadow: -0.25rem 0.25rem 0rem #000000;
 }
 
 .outer-elem.active {
-    -moz-box-shadow: inset 0 0 0 var(--dark-gray-trans),
-        0 0 0 white;
-    -webkit-box-shadow: inset 0 0 0 var(--dark-gray-trans),
-        inset 0.2rem 0.2rem 0 white;
-    box-shadow: inset 0 0 0 var(--dark-gray-trans),
-        inset 0 0 0 white;
+	-moz-box-shadow: inset 0 0 0 var(--dark-gray-trans), 0 0 0 white;
+	-webkit-box-shadow: inset 0 0 0 var(--dark-gray-trans), inset 0.2rem 0.2rem 0 white;
+	box-shadow: inset 0 0 0 var(--dark-gray-trans), inset 0 0 0 white;
 }
 
 .striketrough {
-    text-decoration: line-through;
-    text-transform: uppercase;
+	text-decoration: line-through;
+	text-transform: uppercase;
 }
 
 .money {
-    color: #c84893;
-    font-size: 1.5rem;
+	color: #c84893;
+	font-size: 1.5rem;
 }
 
 :root {
-    --light-gray: #C0C0C0;
-    --dark-gray: #808080;
-    --bar-title: black;
-    --bar-light: #34a0ff;
-    --bar-dark: #150079;
-    --light-gray-trans: rgba(192, 192, 192, 0.5);
-    --dark-gray-trans: rgba(0, 0, 0, 0.5);
-    --bar-title: white;
-    --background-color: #178080;
-    --board-size: 16.5rem;
-    --board-mid-elems: 9;
+	--light-gray: #c0c0c0;
+	--dark-gray: #808080;
+	--bar-title: black;
+	--bar-light: #34a0ff;
+	--bar-dark: #150079;
+	--light-gray-trans: rgba(192, 192, 192, 0.5);
+	--dark-gray-trans: rgba(0, 0, 0, 0.5);
+	--bar-title: white;
+	--background-color: #178080;
+	--board-size: 16.5rem;
+	--board-mid-elems: 9;
 }
 
 /* ============================== Header ================================*/
 header {
-    width: 100%;
-    min-width: 1030px;
-    padding: 0.5rem;
-    background: linear-gradient(90deg, var(--bar-dark) 0%, var(--bar-light) 100%);
-    border: 0.25rem solid var(--bar-dark);
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
+	width: 100%;
+	padding: 0.5rem;
+	background: linear-gradient(90deg, var(--bar-dark) 0%, var(--bar-light) 100%);
+	border: 0.25rem solid var(--bar-dark);
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+}
+body > header {
+	min-width: 1030px;
 }
 
 header h2 {
-    color: var(--bar-title);
-    font-size: 1.2rem;
-    margin-left: 0.5rem;
+	color: var(--bar-title);
+	font-size: 1.2rem;
+	margin-left: 0.5rem;
 }
 
 h1 {
-    font-size: 1.5rem;
-    color: var(--bar-title);
-    padding-left: 2rem;
-    background: url(../media/Monopoly-logo.jpg) no-repeat center left;
-    background-size: contain;
+	font-size: 1.5rem;
+	color: var(--bar-title);
+	padding-left: 2rem;
+	background: url(../media/Monopoly-logo.jpg) no-repeat center left;
+	background-size: contain;
 }
 
 .icons {
-    display: inherit;
+	display: inherit;
 }
 
 .icon {
-    height: 1.5rem;
-    aspect-ratio: 1;
-    margin: 0 0.25rem;
-    background-size: cover;
+	height: 1.5rem;
+	aspect-ratio: 1;
+	margin: 0 0.25rem;
+	background-size: cover;
 }
 
 .icon-min {
-    background: url(../media/icon-min.svg) no-repeat center center;
+	background: url(../media/icon-min.svg) no-repeat center center;
 }
 
 .icon-max {
-    background: url(../media/icon-max.svg) no-repeat center center;
+	background: url(../media/icon-max.svg) no-repeat center center;
 }
 
 .icon-close {
-    background: url(../media/icon-close.svg) no-repeat center center;
+	background: url(../media/icon-close.svg) no-repeat center center;
 }
 
 /* ============================== Player Info ================================*/
 
 #player-info {
-    display: flex;
-    justify-content: space-between;
-    width: 50%;
-    height: 22rem;
-    padding: 1.5rem;
-    border: black solid;
-    background-color: white;
+	display: flex;
+	justify-content: space-between;
+	width: 50%;
+	height: 22rem;
+	padding: 1.5rem;
+	border: black solid;
+	background-color: white;
 }
 
 #player-info .info {
-    width: 40%;
+	width: 40%;
 }
 .properties {
-    display: grid;
-    padding-right: 1%;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 3%;
-    height: 100%;
-    overflow-y: scroll;
+	display: grid;
+	padding-right: 1%;
+	grid-template-columns: repeat(3, 1fr);
+	gap: 3%;
+	height: 100%;
+	overflow-y: scroll;
 }
 .properties .property {
-    aspect-ratio: 4/5;
+	aspect-ratio: 4/5;
 }
 
 #player-info h2 {
-    font-size: 4rem;
-    border-bottom: black solid;
-    padding-right: 10rem;
-    margin-right: 2rem;
+	font-size: 4rem;
+	border-bottom: black solid;
+	padding-right: 10rem;
+	margin-right: 2rem;
 }
 
 #player-info em {
-    color: #c84893;
+	color: #c84893;
 }
 
-#player-info>div>span {
-    font-size: 1.5rem;
+#player-info > div > span {
+	font-size: 1.5rem;
 }
 
-#player-info>div>h3 {
-    font-size: 1rem;
-    margin-top: 1rem;
-    margin-bottom: 0.5rem;
+#player-info > div > h3 {
+	font-size: 1rem;
+	margin-top: 1rem;
+	margin-bottom: 0.5rem;
 }
 
 #player-info .money {
-    margin-top: 2rem;
+	margin-top: 2rem;
 }
 
 .property {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    min-width: 5rem;
-    border: solid black;
-    background-color: white;
-    padding-bottom: 0.5rem;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	min-width: 5rem;
+	border: solid black;
+	background-color: white;
+	padding-bottom: 0.5rem;
 }
 .property h3 {
-    text-align: center;
-    width: 100%;
-    padding: 0.5rem 0;
-    height: 3rem;
-    border-bottom: black solid;
-    color: white;
+	text-align: center;
+	width: 100%;
+	padding: 0.5rem 0;
+	height: 3rem;
+	border-bottom: black solid;
+	color: white;
 }
 
 .property p {
-    text-align: center;
+	text-align: center;
 }
 
 /* ============================== Footer ================================*/
 footer {
-    position: absolute;
-    left: 0;
-    bottom: 0;
-    width: 100%;
-    height: 5rem;
-    background-color: var(--light-gray);
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
+	position: absolute;
+	left: 0;
+	bottom: 0;
+	width: 100%;
+	height: 5rem;
+	background-color: var(--light-gray);
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
 }
 
 footer ul {
-    display: flex;
-    align-items: center;
-    gap: 1rem;
+	display: flex;
+	align-items: center;
+	gap: 1rem;
 }
 
 footer ul li a {
-    text-decoration-line: none;
-    color: black;
-    width: 3rem;
+	text-decoration-line: none;
+	color: black;
+	width: 3rem;
 
-    background-repeat: no-repeat;
-    background-position: 0.5rem center;
-    background-size: 1.5rem;
-    height: 4rem;
-    padding: 0.5rem;
-    padding-left: 2.3rem;
-    font-size: 1.5rem;
+	background-repeat: no-repeat;
+	background-position: 0.5rem center;
+	background-size: 1.5rem;
+	height: 4rem;
+	padding: 0.5rem;
+	padding-left: 2.3rem;
+	font-size: 1.5rem;
 }
 
 #start {
-    background-image: url("/src/assets/media/dice.png");
-    background-repeat: no-repeat;
-    background-position: 0.5rem center;
-    background-size: 2rem;
-    height: 4rem;
-    padding: 1rem;
-    padding-left: 2.8rem;
-    font-size: 2rem;
-    margin-left: 0.5rem;
+	background-image: url("/src/assets/media/dice.png");
+	background-repeat: no-repeat;
+	background-position: 0.5rem center;
+	background-size: 2rem;
+	height: 4rem;
+	padding: 1rem;
+	padding-left: 2.8rem;
+	font-size: 2rem;
+	margin-left: 0.5rem;
 }
 
 #roll {
-    background-image: url("/src/assets/media/dice.png");
+	background-image: url("/src/assets/media/dice.png");
 }
 
 #buy {
-    background-image: url("/src/assets/media/dice.png");
+	background-image: url("/src/assets/media/dice.png");
 }
 
 #build {
-    background-image: url("/src/assets/media/dice.png");
+	background-image: url("/src/assets/media/dice.png");
 }
 
 #sell {
-    background-image: url("/src/assets/media/dice.png");
+	background-image: url("/src/assets/media/dice.png");
 }
 
 #mort {
-    background-image: url("/src/assets/media/dice.png");
+	background-image: url("/src/assets/media/dice.png");
 }
 
 #unmort {
-    background-image: url("/src/assets/media/dice.png");
+	background-image: url("/src/assets/media/dice.png");
 }
 
 #trade {
-    background-image: url("/src/assets/media/dice.png");
+	background-image: url("/src/assets/media/dice.png");
 }
 
 #time {
-    font-size: 2rem;
-    text-align: center;
-    color: black;
-    padding: 1rem;
-    margin-right: 1rem;
+	font-size: 2rem;
+	text-align: center;
+	color: black;
+	padding: 1rem;
+	margin-right: 1rem;
 }
 
 /* ============================== Players ================================*/
 main aside {
-    display: flex;
-    margin: 0 2rem;
-    justify-content: center;
-    gap: 2rem;
+	display: flex;
+	margin: 0 2rem;
+	justify-content: center;
+	gap: 2rem;
 }
 
 main aside .player {
-    width: 20rem;
-    padding: 1rem;
-    background-color: white;
+	width: 20rem;
+	padding: 1rem;
+	background-color: white;
 }
 
 main aside .player div {
-    display: flex;
-    justify-content: space-between;
-    margin-bottom: 0.5rem;
-    border-bottom: 0.125rem solid black;
+	display: flex;
+	justify-content: space-between;
+	margin-bottom: 0.5rem;
+	border-bottom: 0.125rem solid black;
 }
 
 main aside .player h2 {
-    font-size: 2rem;
+	font-size: 2rem;
 }
 
 main aside .player p {
-    font-size: 1.5rem;
+	font-size: 1.5rem;
 }
 
 main aside .player a {
-    display: block;
-    background-color: var(--dark-gray);
-    padding: 0.5rem;
-    text-align: center;
-    margin: 0 auto 2rem auto;
-    width: 10rem;
+	display: block;
+	background-color: var(--dark-gray);
+	padding: 0.5rem;
+	text-align: center;
+	margin: 0 auto 2rem auto;
+	width: 10rem;
 }
 /* ============================== Board ================================*/
 .board {
-    width: var(--board-size);
-    height: var(--board-size);
-    margin-right: calc((var(--board-size) / 3) + 10%);
-    border: none;
-    display: grid;
-    grid-template-columns: repeat(11, 1fr);
+	width: var(--board-size);
+	height: var(--board-size);
+	margin-right: calc((var(--board-size) / 3) + 10%);
+	border: none;
+	display: grid;
+	grid-template-columns: repeat(11, 1fr);
 }
 
 .board .middle {
-    background: url(../media/Monopoly-logo.jpg) no-repeat center center,
-                var(--background-color);
-    grid-row-start: 2;
-    grid-row-end: 11;
-    grid-column-start: 2;
-    grid-column-end: 11;
+	background: url(../media/Monopoly-logo.jpg) no-repeat center center, var(--background-color);
+	grid-row-start: 2;
+	grid-row-end: 11;
+	grid-column-start: 2;
+	grid-column-end: 11;
 }
 
 .board .card::after {
-    content: "";
-    position: absolute;
-    width: 100%;
-    height: 30%;
-    top: 0;
-    background-color: var(--color);
+	content: "";
+	position: absolute;
+	width: 100%;
+	height: 30%;
+	top: 0;
+	background-color: var(--color);
 }
-
 
 .board .card,
 .board .big {
-    position: relative;
-    height: calc((var(--board-size) / var(--board-mid-elems)) * 1.5);
-    width: calc(var(--board-size) / var(--board-mid-elems));
-    background-color: white;
-    border: 0.125rem solid black;
+	position: relative;
+	height: calc((var(--board-size) / var(--board-mid-elems)) * 1.5);
+	width: calc(var(--board-size) / var(--board-mid-elems));
+	background-color: white;
+	border: 0.125rem solid black;
 }
 
 .board .big {
-    width: calc((var(--board-size) / var(--board-mid-elems)) * 1.5);
-    height: calc((var(--board-size) / var(--board-mid-elems)) * 1.5);
+	width: calc((var(--board-size) / var(--board-mid-elems)) * 1.5);
+	height: calc((var(--board-size) / var(--board-mid-elems)) * 1.5);
 }
 
 .board .side,
 #first-side {
-    width: calc((var(--board-size) / var(--board-mid-elems)) * 1.5);
-    height: calc(var(--board-size) / var(--board-mid-elems));
+	width: calc((var(--board-size) / var(--board-mid-elems)) * 1.5);
+	height: calc(var(--board-size) / var(--board-mid-elems));
 }
 
 .board .side::after,
 .board .side.orange.first::after {
-    content: "";
-    position: absolute;
-    right: 0;
-    left: unset;
-    top: 0;
-    height: 100%;
-    width: 30%;
+	content: "";
+	position: absolute;
+	right: 0;
+	left: unset;
+	top: 0;
+	height: 100%;
+	width: 30%;
 }
 
 .board .side:nth-of-type(even)::after {
-    content: "";
-    position: absolute;
-    left: 0;
-    top: 0;
-    height: 100%;
-    width: 30%;
+	content: "";
+	position: absolute;
+	left: 0;
+	top: 0;
+	height: 100%;
+	width: 30%;
 }
 
 .card.red::after {
-    background-color: red;
+	background-color: red;
 }
 
 .card.yellow::after {
-    background-color: yellow;
+	background-color: yellow;
 }
 
 .card.orange::after {
-    background-color: orange;
+	background-color: orange;
 }
 
 .card.green::after {
-    background-color: green;
+	background-color: green;
 }
 
 .card.purple::after {
-    background-color: purple;
+	background-color: purple;
 }
 
 .card.blue::after {
-    background-color: blue;
+	background-color: blue;
 }
 
 .card.lightblue::after {
-    background-color: lightblue;
+	background-color: lightblue;
 }
 
 .card.pink::after {
-    background-color: violet;
+	background-color: violet;
 }
 .card.black::after {
-    background-color: black;
+	background-color: black;
 }
 
 .chance {
-    background-image: url(../media/Chance.png);
+	background-image: url(../media/Chance.png);
 }
 
 .lamp {
-    background-image: url(../media/Lamp.png);
+	background-image: url(../media/Lamp.png);
 }
 
 .railroad {
-    background-image: url(../media/Train.png);
+	background-image: url(../media/Train.png);
 }
 
 .communitychest {
-    background-image: url(../media/Chest.png);
+	background-image: url(../media/Chest.png);
 }
 .taxincome {
-    position: relative;
-    background-image: url(../media/TaxIncome.png);
+	position: relative;
+	background-image: url(../media/TaxIncome.png);
 }
 
 .go {
-    background-image: url(../media/Start.png);
+	background-image: url(../media/Start.png);
 }
 
 .cop {
-    background-image: url(../media/Police.png);
+	background-image: url(../media/Police.png);
 }
 
 .jail {
-    background-image: url(../media/Jail.png);
+	background-image: url(../media/Jail.png);
 }
 
 .freeparking {
-    background-image: url(../media/Pause.png);
+	background-image: url(../media/Pause.png);
 }
 
 .big,
 .card,
 .player {
-    background-size: calc(var(--board-size) / 14);
-    background-repeat: no-repeat;
-    background-position: center center;
-    background-color: white;
+	background-size: calc(var(--board-size) / 14);
+	background-repeat: no-repeat;
+	background-position: center center;
+	background-color: white;
 }
 
 /* ============================== LAYOUT ================================*/
 main {
-    width: 100%;
-    height: calc(100vh - 6rem);
-    padding: 2rem;
-    padding-bottom: 0;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-around;
+	width: 100%;
+	height: calc(100vh - 6rem);
+	padding: 2rem;
+	padding-bottom: 0;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-around;
 }
 .main-top {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
 }
 .main-top-left {
-    width: 50%;
-    padding-right: 5%;
-    display: flex;
-    flex-direction: row;
+	width: 50%;
+	padding-right: 5%;
+	display: flex;
+	flex-direction: row;
 }
 
 .property-card {
-    width: 100%;
-    grid-area: property;
+	width: 100%;
+	grid-area: property;
 }
 .property-card .property {
-    height: 22rem;
-    width: 14rem;
+	height: 22rem;
+	width: 14rem;
 }
 .property-card .property h3 {
-    font-size: 2rem;
-    height: 6rem;
+	font-size: 2rem;
+	height: 6rem;
 }
 .property-card .property p {
-    font-size: 2rem;
+	font-size: 2rem;
 }
 
 .nextTwelve {
-    width: 100%;
-    min-height: 10rem;
-    height: 14rem;
-    grid-area: nextTwelve;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
+	width: 100%;
+	min-height: 10rem;
+	height: 14rem;
+	grid-area: nextTwelve;
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
 }
 .nextTwelve .property {
-    width: 8%;
-    height: 100%;
+	width: 8%;
+	height: 100%;
 }
 .nextTwelve .property .player {
-    padding: 10%;
-    margin: auto auto;
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 0.5rem;
-    background-size: contain;
+	padding: 10%;
+	margin: auto auto;
+	display: grid;
+	grid-template-columns: repeat(3, 1fr);
+	gap: 0.5rem;
+	background-size: contain;
 }
 .nextTwelve .property.special h3 {
-    padding: 1rem;
-    border: none;
+	padding: 1rem;
+	border: none;
 }
 .nextTwelve .property.special .player {
-    padding: 30%;
-    height: 100%;
+	padding: 30%;
+	height: 100%;
 }
 .nextTwelve .player img {
-    width: 100%;
+	width: 100%;
 }
 
-
 aside {
-    grid-area: players;
-    display: flex;
+	grid-area: players;
+	display: flex;
 }
