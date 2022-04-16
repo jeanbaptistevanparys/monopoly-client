@@ -516,7 +516,8 @@ main aside .player a {
 }
 .main-top-left {
 	width: 50%;
-	padding-right: 5%;
+	padding-right: 4%;
+	gap: 0.25rem;
 	display: flex;
 	flex-direction: row;
 }
