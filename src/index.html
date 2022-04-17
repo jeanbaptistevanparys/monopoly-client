@@ -19,8 +19,10 @@
     <script src="assets/js/data-connector/error-handler.js"></script>
     <script src="assets/js/data-connector/api-communication-abstractor.js"></script>
     <script src="assets/js/data-connector/local-storage-abstractor.js"></script>
+    <script src="assets/js/helpers.js"></script>
 
     <script src="assets/js/game-matcher/game-matcher.js"></script>
+    <script src="assets/js/actions.js"></script>
 
     <script src="assets/js/game-initialiser.js"></script>
 </head>
@@ -45,7 +47,7 @@
                     <label for="name">Nickname:</label>
                     <input type="text" name="name" id="name" class="inner-elem">
                     <label for="amount">Amount:</label>
-                    <input type="number" name="amount" id="amount" class="inner-elem">
+                    <input type="number" name="amount" min="2" max="8" id="amount" class="inner-elem">
                     <input type="submit" value="Connect" class="outer-elem">
                 </form>
             </section>
