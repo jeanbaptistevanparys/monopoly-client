@@ -5,7 +5,9 @@ let gameId = null;
 let started = false;
 let playerName = null;
 let allTiles = null;
+let currentGameState = null;
 let gameStartedChecker;
+let myTurnChecker;
 let _body;
 
 document.addEventListener('DOMContentLoaded', init);
@@ -16,8 +18,10 @@ function init() {
 	_token = loadFromStorage(_config.localStorageToken);
 	gameId = loadFromStorage(_config.localStorageGameId);
 	playerName = loadFromStorage(_config.localStoragePlayer);
+	_body = document.querySelector('body');
 
-	gameStartedChecker = setInterval(getCurrentGameState, _config.delay);
+	checkIfInGame();
+
 	getTiles()
 		.then(tiles => {
 			allTiles = tiles;

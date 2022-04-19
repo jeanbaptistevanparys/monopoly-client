@@ -41,7 +41,7 @@ a {
 
 main {
 	width: 100%;
-	height: 100vh;
+	height: calc(100vh - var(--footer-height));
 	min-width: 77rem;
 	min-height: 50rem;
 	margin: auto auto;
@@ -109,12 +109,13 @@ main {
 	--bar-title: black;
 	--bar-light: #34a0ff;
 	--bar-dark: #150079;
-	--light-gray-trans: rgba(192, 192, 192, 0.5);
+	--light-gray-trans: rgba(192, 192, 192, 0.9);
 	--dark-gray-trans: rgba(0, 0, 0, 0.5);
 	--bar-title: white;
 	--background-color: #178080;
 	--board-size: 16.5rem;
 	--board-mid-elems: 9;
+	--footer-height: 5rem;
 }
 
 /* ============================== Header ================================*/
@@ -248,7 +249,7 @@ footer {
 	left: 0;
 	bottom: 0;
 	width: 100%;
-	height: 5rem;
+	height: var(--footer-height);
 	background-color: var(--light-gray);
 	display: flex;
 	align-items: center;
@@ -325,6 +326,7 @@ footer ul li a {
 
 /* ============================== Players ================================*/
 main aside {
+	transform: translateY(10%);
 	display: flex;
 	margin: 0 2rem;
 	justify-content: center;
