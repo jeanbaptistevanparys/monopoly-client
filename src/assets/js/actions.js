@@ -55,6 +55,7 @@ function makePlayerCard(player) {
 	const $template = document.querySelector('#player-template').content.firstElementChild.cloneNode(true);
 	$template.querySelector('h2').innerText = player.name;
 	$template.querySelector('p').insertAdjacentHTML('beforeend', player.money);
+	$template.querySelector('a').addEventListener('click', () => showPlayerInfoPopup(player.name, player.properties));
 	return $template;
 }
 
