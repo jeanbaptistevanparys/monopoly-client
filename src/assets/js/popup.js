@@ -23,9 +23,11 @@ function showDicePopup(funct) {
 	_body.insertAdjacentElement('beforeend', $template);
 }
 
-function showRolledDicePopup(number, funct) {
+function showRolledDicePopup(numbers, funct) {
 	const $template = document.querySelector('#roll-dice').content.firstElementChild.cloneNode(true);
-	$template.querySelector('.roll-dice form p').innerText = number;
+	$template.querySelector('.roll-dice form p').innerText = (numbers[0] + numbers[1]);
+	$template.querySelector('.roll-dice section img').src = `assets/media/dice/${numbers[0]}.png`;
+	$template.querySelector('.roll-dice section img + img').src = `assets/media/dice/${numbers[1]}.png`;
 	$template.querySelector('.roll-dice form input').addEventListener('click', funct);
 	_body.insertAdjacentElement('beforeend', $template);
 }
