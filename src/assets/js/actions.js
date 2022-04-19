@@ -21,6 +21,7 @@ function defaultActions(gameState) {
 
 	importCurrentTile(playerCurrentTileIndex);
 	importNextTwelveTiles(playerCurrentTileIndex);
+	importPlayers();
 	checkIfCanPurchase();
 	checkIfRollDice();
 }
@@ -33,12 +34,28 @@ function importCurrentTile(currentTileIndex) {
 
 function importNextTwelveTiles(currentTileIndex) {
 	document.querySelector('.nextTwelve').innerHTML = '';
-	let start = currentTileIndex + 1;
-	let end = currentTileIndex + 13;
+	const start = currentTileIndex + 1;
+	const end = currentTileIndex + 13;
 	for (let i = start; i < end; i++) {
 		let propertyCard = makePropertyCard(i % 40);
 		document.querySelector('.nextTwelve').insertAdjacentElement('beforeend', propertyCard);
 	}
+}
+
+function importPlayers() {
+	document.querySelector('aside').innerHTML = '';
+	const players = currentGameState.players;
+	players.forEach(player => {
+		const playerCard = makePlayerCard(player);
+		document.querySelector('aside').insertAdjacentElement('beforeend', playerCard);
+	});
+}
+
+function makePlayerCard(player) {
+	const $template = document.querySelector('#player-template').content.firstElementChild.cloneNode(true);
+	$template.querySelector('h2').innerText = player.name;
+	$template.querySelector('p').insertAdjacentHTML('beforeend', player.money);
+	return $template;
 }
 
 function makePropertyCard(tileIndex) {
