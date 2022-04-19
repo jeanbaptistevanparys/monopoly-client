@@ -5,7 +5,6 @@ let gameId = null;
 let started = false;
 let playerName = null;
 let allTiles = null;
-let currentGameState = null;
 let gameStartedChecker;
 let myTurnChecker;
 let _body;
@@ -28,16 +27,4 @@ function init() {
 			getCurrentGameState();
 		})
 		.catch(errorHandler);
-}
-
-function getCurrentGameState() {
-	let currentGameState = getGame(gameId);
-
-	currentGameState.then(state => {
-		if (state.started) {
-			started = true;
-			clearInterval(gameStartedChecker);
-			defaultActions(state);
-		}
-	});
 }

@@ -1,5 +1,7 @@
 'use strict';
 
+let currentGameState = null;
+
 function testConnection() {
 	fetchFromServer('/tiles', 'GET').then(_ => console.log('Status OK!')).catch(errorHandler);
 	fetchFromServer('/', 'GET').then(info => console.log(info)).catch(errorHandler);
@@ -72,9 +74,10 @@ function handleRollDice(e) {
 		console.log(state);
 		defaultActions(state);
 		closePopup(e);
+		console.log(state.lastDiceRoll[0], state.lastDiceRoll[1]);
 		let rolledNumber = state.lastDiceRoll[0] + state.lastDiceRoll[1];
 		showRolledDicePopup(rolledNumber, closePopup);
-		getGameStateLoop();
+		myTurnChecker = setInterval(getCurrentGameState, _config.delay);
 	});
 }
 
@@ -96,12 +99,13 @@ function handleBuyProperty() {
 	}
 }
 
-function getGameStateLoop() {
-	myTurnChecker = setInterval(() => {
-		getGame(gameId).then(gameState => {
+function getCurrentGameState() {
+	getGame(gameId).then(gameState => {
+		if (gameState.started) {
+			started = true;
 			currentGameState = gameState;
-			checkIfCanPurchase();
-			checkIfRollDice();
-		});
-	}, _config.delay);
+			defaultActions(currentGameState);
+			clearInterval(gameStartedChecker);
+		}
+	});
 }
