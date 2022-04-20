@@ -96,3 +96,7 @@ label, p {
     display: block;
     background-color: white;
 }
+
+#player-info  {
+    background-color: red;
+}

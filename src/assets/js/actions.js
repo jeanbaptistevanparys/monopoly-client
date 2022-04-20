@@ -21,6 +21,7 @@ function defaultActions(gameState) {
 
 	importCurrentTile(playerCurrentTileIndex);
 	importNextTwelveTiles(playerCurrentTileIndex);
+	importPLayerInfo();
 	checkIfCanPurchase();
 	checkIfRollDice();
 }

@@ -20,7 +20,7 @@ function init() {
 	_body = document.querySelector('body');
 
 	checkIfInGame();
-
+	
 	getTiles()
 		.then(tiles => {
 			allTiles = tiles;

@@ -583,3 +583,7 @@ aside {
 	grid-area: players;
 	display: flex;
 }
+
+#player-info .property {
+	background-color: #34a0ff;
+}
