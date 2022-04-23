@@ -103,6 +103,10 @@ main {
 	font-size: 1.5rem;
 }
 
+.action a.enabled {
+	background-color: var(--bar-light);
+}
+
 :root {
 	--light-gray: #c0c0c0;
 	--dark-gray: #808080;
@@ -518,19 +522,36 @@ main aside .player a {
 }
 .main-top-left {
 	width: 50%;
+	gap: 0.5rem;
 	padding-right: 4%;
-	gap: 0.25rem;
 	display: flex;
 	flex-direction: row;
+	justify-content: space-between;
 }
 
 .property-card {
-	width: 100%;
-	grid-area: property;
+	height: 22rem;
+	min-width: 12rem;
+	width: 14rem;
+	border: 0.25rem solid rgb(3, 213, 3);
+	animation: active 1s 0.5s linear infinite;
+	display: grid;
+	place-items: center;
+}
+
+@keyframes active {
+	0% {
+		border: 0.25rem solid rgb(3, 213, 3);
+		padding: 0rem;
+	}
+	100% {
+		border: 0rem solid rgb(3, 213, 3);
+		padding: 0.25rem;
+	}
 }
 .property-card .property {
-	height: 22rem;
-	width: 14rem;
+	height: calc(100% - 0.25rem);
+	width: calc(100% - 0.25rem);
 }
 .property-card .property h3 {
 	font-size: 2rem;
@@ -559,10 +580,10 @@ main aside .player a {
 	max-height: 12.5rem;
 }
 .nextTwelve .property .player {
-	padding: 10%;
+	padding: 7% 5%;
 	margin: auto auto;
 	display: grid;
-	grid-template-columns: repeat(3, 1fr);
+	grid-template-columns: repeat(2, 1fr);
 	gap: 0.5rem;
 	background-size: contain;
 }
