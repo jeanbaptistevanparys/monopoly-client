@@ -52,7 +52,7 @@ function showPlayerInfoPopup(playername, properties) {
 function showTitledeedPopup(streetname, properties) {
 	const $template = document.querySelector('#titledeed').content.firstElementChild.cloneNode(true);
 	$template.querySelector('.titledeed header h2').innerText = 'Titledeed';
-	$template.querySelector('.titledeed-content h2').innerText = 'STREETNAME';
+	$template.querySelector('.titledeed-content h2').innerText = streetname;
 	$template.querySelectorAll('.titledeed .icons div').forEach(e => e.addEventListener('click', closePopup));
 	const $prop = $template.querySelectorAll('.titledeed-content .values p');
 	$template.querySelectorAll('.titledeed-content .values p').forEach(e => e.remove());
