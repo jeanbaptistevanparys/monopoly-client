@@ -14,22 +14,22 @@ function showDefaultPopup(headertitle, title, message, buttons = [ { text: 'cont
 		$btn.addEventListener('click', btn.function);
 		$template.querySelector('.submit-btns').insertAdjacentElement('beforeend', $btn);
 	});
-	_body.insertAdjacentElement('beforeend', $template);
+	_popupContainer.insertAdjacentElement('beforeend', $template);
 }
 
 function showDicePopup(funct) {
 	const $template = document.querySelector('#dice').content.firstElementChild.cloneNode(true);
 	$template.querySelector("input[type='submit']").addEventListener('click', funct);
-	_body.insertAdjacentElement('beforeend', $template);
+	_popupContainer.insertAdjacentElement('beforeend', $template);
 }
 
 function showRolledDicePopup(numbers, funct) {
 	const $template = document.querySelector('#roll-dice').content.firstElementChild.cloneNode(true);
-	$template.querySelector('.roll-dice form p').innerText = (numbers[0] + numbers[1]);
+	$template.querySelector('.roll-dice form p').innerText = numbers[0] + numbers[1];
 	$template.querySelector('.roll-dice section img').src = `assets/media/dice/${numbers[0]}.png`;
 	$template.querySelector('.roll-dice section img + img').src = `assets/media/dice/${numbers[1]}.png`;
 	$template.querySelector('.roll-dice form input').addEventListener('click', funct);
-	_body.insertAdjacentElement('beforeend', $template);
+	_popupContainer.insertAdjacentElement('beforeend', $template);
 }
 
 function showPlayerInfoPopup(playername, properties) {
@@ -46,7 +46,7 @@ function showPlayerInfoPopup(playername, properties) {
 		$propcopy.querySelector('p').insertAdjacentHTML('beforeend', '');
 		$template.querySelector('.playerpopup .properties').insertAdjacentElement('beforeend', $propcopy);
 	});
-	_body.insertAdjacentElement('beforeend', $template);
+	_popupContainer.insertAdjacentElement('beforeend', $template);
 }
 
 function showTitledeedPopup(streetname, properties) {
@@ -74,7 +74,7 @@ function showTitledeedPopup(streetname, properties) {
 			$template.querySelector('.titledeed-content .values').insertAdjacentElement('beforeend', p2);
 		}
 	});
-	_body.insertAdjacentElement('beforeend', $template);
+	_popupContainer.insertAdjacentElement('beforeend', $template);
 }
 
 function showTradePopup(playername, gamestate) {
@@ -104,7 +104,7 @@ function showTradePopup(playername, gamestate) {
 			$template.querySelector('.trade-names select').value
 		);
 	});
-	_body.insertAdjacentElement('beforeend', $template);
+	_popupContainer.insertAdjacentElement('beforeend', $template);
 }
 
 function loadOptions($container, gameState, playerName) {
