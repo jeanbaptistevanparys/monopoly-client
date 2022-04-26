@@ -1,3 +1,16 @@
+.popup-container {
+	position: fixed;
+	inset: 0;
+	background-color: var(--dark-gray-trans);
+	pointer-events: all;
+}
+.popup-container:empty {
+	position: fixed;
+	inset: 0;
+	background-color: transparent;
+	pointer-events: none;
+}
+
 /* ============================== Popup ================================*/
 .popup {
 	position: absolute;
@@ -31,6 +44,10 @@
 	align-items: center;
 	justify-content: space-around;
 	margin-top: 2rem;
+}
+
+.playerpopup-content .properties {
+	height: 70%;
 }
 
 /* ============================== Roll Dice ================================*/
