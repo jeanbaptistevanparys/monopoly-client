@@ -2,11 +2,11 @@
 
 let _token = null;
 let _gameId = null;
-let playerName = null;
+let _playerName = null;
 let _allTiles = null;
-let currentGameState = null;
-let gameStartedChecker;
-let myTurnChecker;
+let _currentGamestate = null;
+let _gameStartedChecker;
+let _myTurnChecker;
 let _body;
 
 document.addEventListener('DOMContentLoaded', init);
@@ -16,7 +16,7 @@ function init() {
 
 	_token = loadFromStorage(_config.localStorageToken);
 	_gameId = loadFromStorage(_config.localStorageGameId);
-	playerName = loadFromStorage(_config.localStoragePlayer);
+	_playerName = loadFromStorage(_config.localStoragePlayer);
 	_body = document.querySelector('body');
 
 	checkIfInGame();
@@ -28,5 +28,5 @@ function init() {
 		})
 		.catch(errorHandler);
 
-	myTurnChecker = setInterval(getCurrentGameState, _config.delay);
+	_myTurnChecker = setInterval(getCurrentGameState, _config.delay);
 }
