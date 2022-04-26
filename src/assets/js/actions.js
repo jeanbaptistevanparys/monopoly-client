@@ -82,7 +82,7 @@ function makePlayerCard(player) {
 	return $template;
 }
 
-function makePropertyCard(tileIndex) {
+function makePropertyCard(tileIndex, players = null) {
 	const tile = _allTiles[tileIndex];
 	const $template = document
 		.querySelector('#property-template')
@@ -174,7 +174,8 @@ function handleRent(currentTileIndex) {
 		});
 	});
 	if (prop != null && debtorName != null) {
-		collectDebt(_gameId, _playerName, prop, debtorName);
+		collectDebt(_gameId, debtorName, prop.property, _playerName);
+		console.log(prop, debtorName);
 	}
 }
 

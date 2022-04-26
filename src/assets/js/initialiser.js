@@ -7,7 +7,7 @@ let _allTiles = null;
 let _currentGamestate = null;
 let _gameStartedChecker;
 let _myTurnChecker;
-let _body;
+let _popupContainer;
 
 document.addEventListener('DOMContentLoaded', init);
 
@@ -17,7 +17,7 @@ function init() {
 	_token = loadFromStorage(_config.localStorageToken);
 	_gameId = loadFromStorage(_config.localStorageGameId);
 	_playerName = loadFromStorage(_config.localStoragePlayer);
-	_body = document.querySelector('body');
+	_popupContainer = document.querySelector('body');
 
 	checkIfInGame();
 
