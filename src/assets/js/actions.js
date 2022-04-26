@@ -19,6 +19,7 @@ function defaultActions(gameState) {
 
 	importCurrentTile(playerCurrentTileIndex);
 	importNextTwelveTiles(playerCurrentTileIndex);
+	importPlayers();
 	checkIfCanPurchase();
 	checkIfRollDice();
 }
@@ -45,7 +46,24 @@ function importNextTwelveTiles(currentTileIndex) {
 	}
 }
 
-function makePropertyCard(tileIndex, players) {
+function importPlayers() {
+	document.querySelector('aside').innerHTML = '';
+	const players = currentGameState.players;
+	players.forEach(player => {
+		const playerCard = makePlayerCard(player);
+		document.querySelector('aside').insertAdjacentElement('beforeend', playerCard);
+	});
+}
+
+function makePlayerCard(player) {
+	const $template = document.querySelector('#player-template').content.firstElementChild.cloneNode(true);
+	$template.querySelector('h2').innerText = player.name;
+	$template.querySelector('p').insertAdjacentHTML('beforeend', player.money);
+	$template.querySelector('a').addEventListener('click', () => showPlayerInfoPopup(player.name, player.properties));
+	return $template;
+}
+
+function makePropertyCard(tileIndex) {
 	const tile = _allTiles[tileIndex];
 	const $template = document.querySelector('#property-template').content.firstElementChild.cloneNode(true);
 	const textColorBlack = !tile.color || tile.color == 'WHITE' || tile.color == 'YELLOW' || tile.type == 'railroad';
