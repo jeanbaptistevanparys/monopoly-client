@@ -96,7 +96,9 @@ function checkIfCanPurchase() {
 function handleBuyProperty() {
 	let propertyName = currentGameState.directSale;
 	if (propertyName != null) {
-		buyProperty(gameId, playerName, propertyName).then(res => console.log(res));
+		buyProperty(gameId, playerName, propertyName).then(res => {
+			console.log(res);
+		});
 	}
 }
 
