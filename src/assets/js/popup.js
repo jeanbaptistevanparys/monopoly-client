@@ -25,7 +25,7 @@ function showDicePopup(funct) {
 
 function showRolledDicePopup(numbers, funct) {
 	const $template = document.querySelector('#roll-dice').content.firstElementChild.cloneNode(true);
-	$template.querySelector('.roll-dice form p').innerText = (numbers[0] + numbers[1]);
+	$template.querySelector('.roll-dice form p').innerText = numbers[0] + numbers[1];
 	$template.querySelector('.roll-dice section img').src = `assets/media/dice/${numbers[0]}.png`;
 	$template.querySelector('.roll-dice section img + img').src = `assets/media/dice/${numbers[1]}.png`;
 	$template.querySelector('.roll-dice form input').addEventListener('click', funct);
@@ -126,5 +126,8 @@ function loadOptions($container, gameState, playerName) {
 
 function closePopup(e) {
 	e.preventDefault();
-	e.target.closest('article').remove();
+	const popupClass = e.target.closest('article').classList[0];
+	qsa(`.${popupClass}`).forEach(popup => {
+		_body.removeChild(popup);
+	});
 }

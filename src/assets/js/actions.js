@@ -63,7 +63,7 @@ function makePlayerCard(player) {
 	return $template;
 }
 
-function makePropertyCard(tileIndex) {
+function makePropertyCard(tileIndex, players = null) {
 	const tile = _allTiles[tileIndex];
 	const $template = document.querySelector('#property-template').content.firstElementChild.cloneNode(true);
 	const textColorBlack = !tile.color || tile.color == 'WHITE' || tile.color == 'YELLOW' || tile.type == 'railroad';
