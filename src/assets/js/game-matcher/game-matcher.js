@@ -32,20 +32,20 @@ function createGame(name, amount) {
 	});
 }
 
-function joinGame(gameId, name) {
+function joinGame(_gameId, name) {
 	const requestBody = {
 		playerName : name
 	};
-	fetchFromServer(`/games/${gameId}/players`, 'POST', requestBody).then(tokenFromServer => {
+	fetchFromServer(`/games/${_gameId}/players`, 'POST', requestBody).then(tokenFromServer => {
 		_token = tokenFromServer;
 		saveToStorage(_config.localStorageToken, _token);
-		saveToStorage(_config.localStorageGameId, gameId);
+		saveToStorage(_config.localStorageGameId, _gameId);
 		saveToStorage(_config.localStoragePlayer, name);
 		checkGameStarted();
 	});
 
 	function checkGameStarted() {
-		fetchFromServer(`/games/${gameId}`, 'GET').then(gameState => {
+		fetchFromServer(`/games/${_gameId}`, 'GET').then(gameState => {
 			if (gameState.started) {
 				bootGameBoardUi();
 			} else {

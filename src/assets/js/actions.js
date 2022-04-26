@@ -1,7 +1,5 @@
 'use strict';
 
-let currentGameState = null;
-
 function testConnection() {
 	fetchFromServer('/tiles', 'GET').then(_ => console.log('Status OK!')).catch(errorHandler);
 	fetchFromServer('/', 'GET').then(info => console.log(info)).catch(errorHandler);
@@ -16,11 +14,12 @@ function checkIfInGame() {
 function defaultActions(gameState) {
 	currentGameState = gameState;
 
-	let playerInfo = gameState.players.filter(player => player.name == playerName)[0];
+	let playerInfo = gameState.players.find(player => player.name == playerName);
 	let playerCurrentTileIndex = getIndexOfTileByName(playerInfo.currentTile);
 
 	importCurrentTile(playerCurrentTileIndex);
 	importNextTwelveTiles(playerCurrentTileIndex);
+	importPlayers();
 	checkIfCanPurchase();
 	checkIfRollDice();
 }
@@ -33,18 +32,41 @@ function importCurrentTile(currentTileIndex) {
 
 function importNextTwelveTiles(currentTileIndex) {
 	document.querySelector('.nextTwelve').innerHTML = '';
-	let start = currentTileIndex + 1;
-	let end = currentTileIndex + 13;
+	const start = currentTileIndex + 1;
+	const end = currentTileIndex + 13;
+	const playerPositions = getPlayersPos(currentGameState.players);
+
 	for (let i = start; i < end; i++) {
-		let propertyCard = makePropertyCard(i % 40);
+		let players = null;
+		if (playerPositions[i]) {
+			players = playerPositions[i];
+		}
+		let propertyCard = makePropertyCard(i % 40, players);
 		document.querySelector('.nextTwelve').insertAdjacentElement('beforeend', propertyCard);
 	}
 }
 
+function importPlayers() {
+	document.querySelector('aside').innerHTML = '';
+	const players = currentGameState.players;
+	players.forEach(player => {
+		const playerCard = makePlayerCard(player);
+		document.querySelector('aside').insertAdjacentElement('beforeend', playerCard);
+	});
+}
+
+function makePlayerCard(player) {
+	const $template = document.querySelector('#player-template').content.firstElementChild.cloneNode(true);
+	$template.querySelector('h2').innerText = player.name;
+	$template.querySelector('p').insertAdjacentHTML('beforeend', player.money);
+	$template.querySelector('a').addEventListener('click', () => showPlayerInfoPopup(player.name, player.properties));
+	return $template;
+}
+
 function makePropertyCard(tileIndex) {
-	let tile = allTiles[tileIndex];
+	const tile = _allTiles[tileIndex];
 	const $template = document.querySelector('#property-template').content.firstElementChild.cloneNode(true);
-	let textColorBlack = !tile.color || tile.color == 'WHITE' || tile.color == 'YELLOW' || tile.type == 'railroad';
+	const textColorBlack = !tile.color || tile.color == 'WHITE' || tile.color == 'YELLOW' || tile.type == 'railroad';
 	if (textColorBlack) {
 		$template.querySelector('h3').style.color = 'BLACK';
 	}
@@ -57,6 +79,15 @@ function makePropertyCard(tileIndex) {
 		$template.classList.add('special');
 		$template.querySelector('h3').innerText = tile.type;
 	}
+
+	if (players != null) {
+		players.forEach(player => {
+			const playerIndex = getIndexOfPlayer(player);
+			const playerImg = `<img src="./assets/media/pawns/pawn-${playerIndex}.png" alt="${player}">`;
+			$template.querySelector('.player').insertAdjacentHTML('beforeend', playerImg);
+		});
+	}
+
 	return $template;
 }
 
@@ -70,39 +101,33 @@ function checkIfRollDice() {
 function handleRollDice(e) {
 	e.preventDefault();
 
-	rollDice(gameId, playerName).then(state => {
+	rollDice(_gameId, playerName).then(state => {
 		console.log(state);
 		defaultActions(state);
 		closePopup(e);
-		console.log(state.lastDiceRoll[0], state.lastDiceRoll[1]);
-		let rolledNumber = state.lastDiceRoll[0] + state.lastDiceRoll[1];
-		showRolledDicePopup(rolledNumber, closePopup);
+		showRolledDicePopup(state.lastDiceRoll, closePopup);
 		myTurnChecker = setInterval(getCurrentGameState, _config.delay);
 	});
 }
 
 function checkIfCanPurchase() {
-	let buyBtn = document.querySelector('#buy');
+	const $buyBtn = document.querySelector('#buy');
 	let canPurchase = currentGameState.directSale ? true : false;
-	buyBtn.classList.toggle('enabled', canPurchase);
-	if (canPurchase) {
-		buyBtn.addEventListener('click', handleBuyProperty);
-	} else {
-		buyBtn.removeEventListener('click', handleBuyProperty);
-	}
+	$buyBtn.classList.toggle('enabled', canPurchase);
+	$buyBtn.removeEventListener('click', handleBuyProperty);
+	$buyBtn.addEventListener('click', handleBuyProperty);
 }
 
 function handleBuyProperty() {
 	let propertyName = currentGameState.directSale;
 	if (propertyName != null) {
-		buyProperty(gameId, playerName, propertyName).then(res => console.log(res));
+		buyProperty(_gameId, playerName, propertyName).then(res => console.log(res));
 	}
 }
 
 function getCurrentGameState() {
-	getGame(gameId).then(gameState => {
+	getGame(_gameId).then(gameState => {
 		if (gameState.started) {
-			started = true;
 			currentGameState = gameState;
 			defaultActions(currentGameState);
 			clearInterval(gameStartedChecker);

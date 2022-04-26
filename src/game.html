@@ -163,34 +163,6 @@
         </div>
 
         <aside>
-            <article class="player box-shadow">
-                <div>
-                    <h2>Bart</h2>
-                    <p class="money"><span class="striketrough">M</span> 1755</p>
-                </div>
-                <a href="#" class="outer-elem">Show player info</a>
-            </article>
-            <article class="player box-shadow active-player">
-                <div>
-                    <h2>Jari</h2>
-                    <p class="money"><span class="striketrough">M</span> 1755</p>
-                </div>
-                <a href="#" class="outer-elem">Show player info</a>
-            </article>
-            <article class="player box-shadow">
-                <div>
-                    <h2>Jarne</h2>
-                    <p class="money"><span class="striketrough">M</span> 1755</p>
-                </div>
-                <a href="#" class="outer-elem">Show player info</a>
-            </article>
-            <article class="player box-shadow">
-                <div>
-                    <h2>Jean-Baptiste</h2>
-                    <p class="money"><span class="striketrough">M</span> 1755</p>
-                </div>
-                <a href="#" class="outer-elem">Show player info</a>
-            </article>
         </aside>
     </main>
 
@@ -198,6 +170,15 @@
         <p></p>
     </div>
 
+    <template id="player-template">
+        <article class="player box-shadow">
+            <div>
+                <h2></h2>
+                <p class="money"><span class="striketrough">M</span></p>
+            </div>
+            <a href="#" class="outer-elem">Show player info</a>
+        </article> 
+    </template>
 
     <template>
         <div class="roll-dice">
@@ -291,7 +272,7 @@
                 <div class="properties">
                     <section class="property">
                         <h3>JavaScript Avenue</h3>
-                        <p><span class="striketrough">M</span> 240</p>
+                        <p><span class="striketrough">M</span></p>
                     </section>
                 </div>
             </section>

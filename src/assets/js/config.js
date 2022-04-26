@@ -5,7 +5,7 @@ const _config = {
 	groupnumber          : '00',
 	gamePrefix           : 'group12',
 	localStorageToken    : 'playerToken',
-	localStorageGameId   : 'gameId',
+	localStorageGameId   : '_gameId',
 	localStoragePlayer   : 'player',
 	errorHandlerSelector : '.errormessages p',
 	getAPIUrl            : function() {

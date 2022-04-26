@@ -39,11 +39,11 @@ function showPlayerInfoPopup(playername, properties) {
 	$template.querySelectorAll('.playerpopup .icons div').forEach(e => e.addEventListener('click', closePopup));
 	const $prop = $template.querySelector('.playerpopup .properties section').cloneNode(true);
 	$template.querySelector('.playerpopup .properties section').remove();
-	properties.forEach(propertie => {
+	properties.forEach(property => {
 		let $propcopy = $prop.cloneNode(true);
-		$propcopy.querySelector('h3').innerText = propertie.name;
-		$propcopy.querySelector('h3').style.backgroundColor = propertie.color;
-		$propcopy.querySelector('p').innerHTML = `<span class="striketrough">M</span> ${propertie.cost}`;
+		$propcopy.querySelector('h3').innerText = property.property;
+		$propcopy.querySelector('h3').style.color = 'black';
+		$propcopy.querySelector('p').insertAdjacentHTML('beforeend', '');
 		$template.querySelector('.playerpopup .properties').insertAdjacentElement('beforeend', $propcopy);
 	});
 	_body.insertAdjacentElement('beforeend', $template);
