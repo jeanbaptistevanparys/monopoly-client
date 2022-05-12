@@ -14,20 +14,22 @@ function showDefaultPopup(headertitle, title, message, buttons = [ { text: 'cont
 		$btn.addEventListener('click', btn.function);
 		$template.querySelector('.submit-btns').insertAdjacentElement('beforeend', $btn);
 	});
-	_body.insertAdjacentElement('beforeend', $template);
+	_popupContainer.insertAdjacentElement('beforeend', $template);
 }
 
 function showDicePopup(funct) {
 	const $template = document.querySelector('#dice').content.firstElementChild.cloneNode(true);
 	$template.querySelector("input[type='submit']").addEventListener('click', funct);
-	_body.insertAdjacentElement('beforeend', $template);
+	_popupContainer.insertAdjacentElement('beforeend', $template);
 }
 
-function showRolledDicePopup(number, funct) {
+function showRolledDicePopup(numbers, funct) {
 	const $template = document.querySelector('#roll-dice').content.firstElementChild.cloneNode(true);
-	$template.querySelector('.roll-dice form p').innerText = number;
+	$template.querySelector('.roll-dice form p').innerText = numbers[0] + numbers[1];
+	$template.querySelector('.roll-dice section img').src = `assets/media/dice/${numbers[0]}.png`;
+	$template.querySelector('.roll-dice section img + img').src = `assets/media/dice/${numbers[1]}.png`;
 	$template.querySelector('.roll-dice form input').addEventListener('click', funct);
-	_body.insertAdjacentElement('beforeend', $template);
+	_popupContainer.insertAdjacentElement('beforeend', $template);
 }
 
 function showPlayerInfoPopup(playername, properties) {
@@ -37,20 +39,20 @@ function showPlayerInfoPopup(playername, properties) {
 	$template.querySelectorAll('.playerpopup .icons div').forEach(e => e.addEventListener('click', closePopup));
 	const $prop = $template.querySelector('.playerpopup .properties section').cloneNode(true);
 	$template.querySelector('.playerpopup .properties section').remove();
-	properties.forEach(propertie => {
+	properties.forEach(property => {
 		let $propcopy = $prop.cloneNode(true);
-		$propcopy.querySelector('h3').innerText = propertie.name;
-		$propcopy.querySelector('h3').style.backgroundColor = propertie.color;
-		$propcopy.querySelector('p').innerHTML = `<span class="striketrough">M</span> ${propertie.cost}`;
+		$propcopy.querySelector('h3').innerText = property.property;
+		$propcopy.querySelector('h3').style.color = 'black';
+		$propcopy.querySelector('p').insertAdjacentHTML('beforeend', '');
 		$template.querySelector('.playerpopup .properties').insertAdjacentElement('beforeend', $propcopy);
 	});
-	_body.insertAdjacentElement('beforeend', $template);
+	_popupContainer.insertAdjacentElement('beforeend', $template);
 }
 
 function showTitledeedPopup(streetname, properties) {
 	const $template = document.querySelector('#titledeed').content.firstElementChild.cloneNode(true);
 	$template.querySelector('.titledeed header h2').innerText = 'Titledeed';
-	$template.querySelector('.titledeed-content h2').innerText = 'STREETNAME';
+	$template.querySelector('.titledeed-content h2').innerText = streetname;
 	$template.querySelectorAll('.titledeed .icons div').forEach(e => e.addEventListener('click', closePopup));
 	const $prop = $template.querySelectorAll('.titledeed-content .values p');
 	$template.querySelectorAll('.titledeed-content .values p').forEach(e => e.remove());
@@ -72,7 +74,7 @@ function showTitledeedPopup(streetname, properties) {
 			$template.querySelector('.titledeed-content .values').insertAdjacentElement('beforeend', p2);
 		}
 	});
-	_body.insertAdjacentElement('beforeend', $template);
+	_popupContainer.insertAdjacentElement('beforeend', $template);
 }
 
 function showTradePopup(playername, gamestate) {
@@ -102,7 +104,7 @@ function showTradePopup(playername, gamestate) {
 			$template.querySelector('.trade-names select').value
 		);
 	});
-	_body.insertAdjacentElement('beforeend', $template);
+	_popupContainer.insertAdjacentElement('beforeend', $template);
 }
 
 function loadOptions($container, gameState, playerName) {

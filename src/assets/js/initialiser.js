@@ -1,13 +1,13 @@
 'use strict';
 
 let _token = null;
-let gameId = null;
-let started = false;
+let _gameId = null;
 let playerName = null;
-let allTiles = null;
+let _allTiles = null;
+let currentGameState = null;
 let gameStartedChecker;
 let myTurnChecker;
-let _body;
+let _popupContainer;
 
 document.addEventListener('DOMContentLoaded', init);
 
@@ -15,16 +15,18 @@ function init() {
 	testConnection();
 
 	_token = loadFromStorage(_config.localStorageToken);
-	gameId = loadFromStorage(_config.localStorageGameId);
+	_gameId = loadFromStorage(_config.localStorageGameId);
 	playerName = loadFromStorage(_config.localStoragePlayer);
-	_body = document.querySelector('body');
+	_popupContainer = document.querySelector('.popup-container');
 
 	checkIfInGame();
 	
 	getTiles()
 		.then(tiles => {
-			allTiles = tiles;
+			_allTiles = tiles;
 			getCurrentGameState();
 		})
 		.catch(errorHandler);
+
+	myTurnChecker = setInterval(getCurrentGameState, _config.delay);
 }
