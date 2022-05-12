@@ -4,6 +4,7 @@ function importPLayerInfo() {
     const thisPlayer = getThisPlayer();
     const properties = thisPlayer.properties;
     displayName();
+    displayMoney(thisPlayer);
     displayerNumberOfHousesAndHotels(properties);
     displayNumberOfProperties(properties);
     displayProperties(properties);
@@ -50,12 +51,10 @@ function displayMoney(thisPlayer) {
 
 function displayProperties(properties) {
     qs('#player-info .properties').innerHTML = '';
-    console.log(properties);
     for (const propertyIndex in properties) {
         const $template = qs('#player-property').content.firstElementChild.cloneNode(true);
         getTile(properties[propertyIndex].property).then(res => {
             const tile = res;
-            console.log(tile);
             $template.querySelector('h3').innerText = tile.name;
             $template.querySelector('p').innerHTML = `<span class="striketrough">M</span> ${tile.cost}`;
             $template.style.backgroundColor = 'WHITE';
