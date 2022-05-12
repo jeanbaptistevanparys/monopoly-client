@@ -20,7 +20,7 @@ function init() {
 	_popupContainer = document.querySelector('.popup-container');
 
 	checkIfInGame();
-
+	
 	getTiles()
 		.then(tiles => {
 			_allTiles = tiles;
