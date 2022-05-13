@@ -12,16 +12,19 @@ function checkIfInGame() {
 }
 
 function defaultActions(gameState) {
-	currentGameState = gameState;
+	if (!_myTurn) {
+		_currentGameState = gameState;
+		console.log(_currentGameState);
 
-	let playerInfo = gameState.players.find(player => player.name == playerName);
-	let playerCurrentTileIndex = getIndexOfTileByName(playerInfo.currentTile);
+		let playerInfo = gameState.players.find(player => player.name == playerName);
+		let playerCurrentTileIndex = getIndexOfTileByName(playerInfo.currentTile);
 
-	importCurrentTile(playerCurrentTileIndex);
-	importNextTwelveTiles(playerCurrentTileIndex);
-	importPlayers();
-	checkIfCanPurchase();
-	checkIfRollDice();
+		importCurrentTile(playerCurrentTileIndex);
+		importNextTwelveTiles(playerCurrentTileIndex);
+		importPlayers();
+		checkIfCanPurchase();
+		checkIfRollDice();
+	}
 }
 
 function importCurrentTile(currentTileIndex) {
@@ -34,7 +37,7 @@ function importNextTwelveTiles(currentTileIndex) {
 	document.querySelector('.nextTwelve').innerHTML = '';
 	const start = currentTileIndex + 1;
 	const end = currentTileIndex + 13;
-	const playerPositions = getPlayersPos(currentGameState.players);
+	const playerPositions = getPlayersPos(_currentGameState.players);
 
 	for (let i = start; i < end; i++) {
 		let players = null;
@@ -48,7 +51,7 @@ function importNextTwelveTiles(currentTileIndex) {
 
 function importPlayers() {
 	document.querySelector('aside').innerHTML = '';
-	const players = currentGameState.players;
+	const players = _currentGameState.players;
 	players.forEach(player => {
 		const playerCard = makePlayerCard(player);
 		document.querySelector('aside').insertAdjacentElement('beforeend', playerCard);
@@ -92,9 +95,9 @@ function makePropertyCard(tileIndex, players = null) {
 }
 
 function checkIfRollDice() {
-	if (currentGameState.currentPlayer == playerName && currentGameState.canRoll) {
+	if (_currentGameState.currentPlayer == playerName && _currentGameState.canRoll) {
 		showDicePopup(handleRollDice);
-		clearInterval(myTurnChecker);
+		stopMyTurnChecker();
 	}
 }
 
@@ -103,23 +106,42 @@ function handleRollDice(e) {
 
 	rollDice(_gameId, playerName).then(state => {
 		console.log(state);
-		defaultActions(state);
 		closePopup(e);
-		showRolledDicePopup(state.lastDiceRoll, closePopup);
-		myTurnChecker = setInterval(getCurrentGameState, _config.delay);
+		showRolledDicePopup(state.lastDiceRoll, e => {
+			closePopup(e);
+			startMyTurnChecker();
+		});
 	});
 }
 
 function checkIfCanPurchase() {
 	const $buyBtn = document.querySelector('#buy');
-	let canPurchase = currentGameState.directSale ? true : false;
-	$buyBtn.classList.toggle('enabled', canPurchase);
+	let canPurchase = _currentGameState.directSale ? true : false;
+	console.log('Check if you can purchase', canPurchase);
 	$buyBtn.removeEventListener('click', handleBuyProperty);
-	$buyBtn.addEventListener('click', handleBuyProperty);
+	removePopupByClass('.popup');
+	if (canPurchase) {
+		showDefaultPopup('Purchase', 'Purchase', 'Do you want to purchase this property?', [
+			{
+				text     : 'Buy',
+				function : e => {
+					handleBuyProperty(e);
+					closePopup(e);
+					startMyTurnChecker();
+					console.log(e);
+				}
+			}
+		]);
+		$buyBtn.addEventListener('click', handleBuyProperty);
+	} else {
+		removePopupByClass('.popup');
+		startMyTurnChecker();
+	}
 }
 
-function handleBuyProperty() {
-	let propertyName = currentGameState.directSale;
+function handleBuyProperty(e) {
+	e.preventDefault();
+	let propertyName = _currentGameState.directSale;
 	if (propertyName != null) {
 		buyProperty(_gameId, playerName, propertyName).then(res => console.log(res));
 	}
@@ -128,9 +150,8 @@ function handleBuyProperty() {
 function getCurrentGameState() {
 	getGame(_gameId).then(gameState => {
 		if (gameState.started) {
-			currentGameState = gameState;
-			defaultActions(currentGameState);
-			clearInterval(gameStartedChecker);
+			_currentGameState = gameState;
+			defaultActions(_currentGameState);
 		}
 	});
 }

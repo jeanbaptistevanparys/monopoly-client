@@ -128,3 +128,7 @@ function closePopup(e) {
 	e.preventDefault();
 	e.target.closest('article').remove();
 }
+
+function removePopupByClass(selector) {
+	if (_popupContainer.querySelector(selector)) qs(selector, _popupContainer).remove();
+}
