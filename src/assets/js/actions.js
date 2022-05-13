@@ -107,8 +107,8 @@ function handleRollDice(e) {
 	rollDice(_gameId, playerName).then(state => {
 		console.log(state);
 		closePopup(e);
-		showRolledDicePopup(state.lastDiceRoll, e => {
-			closePopup(e);
+		showRolledDicePopup(state.lastDiceRoll, event => {
+			closePopup(event);
 			startMyTurnChecker();
 		});
 	});
