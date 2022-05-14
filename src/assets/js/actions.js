@@ -115,10 +115,9 @@ function handleRollDice(e) {
 }
 
 function checkIfCanPurchase() {
-	const $buyBtn = document.querySelector('#buy');
 	let canPurchase = _currentGameState.directSale ? true : false;
-	console.log('Check if you can purchase', canPurchase);
-	$buyBtn.removeEventListener('click', handleBuyProperty);
+	console.log('Can purchase: ', canPurchase);
+	stopMyTurnChecker();
 	removePopupByClass('.popup');
 	if (canPurchase) {
 		showDefaultPopup('Purchase', 'Purchase', 'Do you want to purchase this property?', [
@@ -127,12 +126,10 @@ function checkIfCanPurchase() {
 				function : e => {
 					handleBuyProperty(e);
 					closePopup(e);
-					startMyTurnChecker();
 					console.log(e);
 				}
 			}
 		]);
-		$buyBtn.addEventListener('click', handleBuyProperty);
 	} else {
 		removePopupByClass('.popup');
 		startMyTurnChecker();
@@ -141,9 +138,25 @@ function checkIfCanPurchase() {
 
 function handleBuyProperty(e) {
 	e.preventDefault();
+
 	let propertyName = _currentGameState.directSale;
 	if (propertyName != null) {
-		buyProperty(_gameId, playerName, propertyName).then(res => console.log(res));
+		buyProperty(_gameId, playerName, propertyName).then(res => {
+			showDefaultPopup(
+				'Purchased!',
+				`Purchased ${res.property} !`,
+				`Congratulations! You just bought: ${res.property} !`,
+				[
+					{
+						text     : 'Continue',
+						function : event => {
+							closePopup(event);
+							startMyTurnChecker();
+						}
+					}
+				]
+			);
+		});
 	}
 }
 

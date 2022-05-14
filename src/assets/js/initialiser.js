@@ -19,7 +19,7 @@ function init() {
 	_popupContainer = qs('.popup-container');
 
 	checkIfInGame();
-	
+
 	getTiles()
 		.then(tiles => {
 			_allTiles = tiles;
@@ -36,4 +36,5 @@ function stopMyTurnChecker() {
 
 function startMyTurnChecker() {
 	_myTurn = false;
+	console.debug();
 }
