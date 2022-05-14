@@ -1,5 +1,7 @@
 'use strict';
 
+let rentCollected = false;
+
 function testConnection() {
 	fetchFromServer('/tiles', 'GET')
 		.then((_) => console.log('Status OK!'))
@@ -17,19 +19,18 @@ function checkIfInGame() {
 
 function defaultActions(gameState) {
 	_currentGamestate = gameState;
-	
+
 	const playerInfo = gameState.players.find(
 		(player) => player.name == _playerName
 	);
 	const playerCurrentTileIndex = getIndexOfTileByName(playerInfo.currentTile);
 
-	let rentCollected;
 	importCurrentTile(playerCurrentTileIndex);
 	importNextTwelveTiles(playerCurrentTileIndex);
 	importPlayers();
 	checkIfCanPurchase();
 	checkIfRollDice();
-	if(!rentCollected)handleRent(playerCurrentTileIndex);
+	if (!rentCollected) handleRent(playerCurrentTileIndex);
 }
 
 function importCurrentTile(currentTileIndex) {
@@ -128,7 +129,6 @@ function checkIfRollDice() {
 		_currentGamestate.currentPlayer == _playerName &&
 		_currentGamestate.canRoll
 	) {
-		rentCollected = false;
 		showDicePopup(handleRollDice);
 		clearInterval(_myTurnChecker);
 	}
@@ -165,21 +165,15 @@ function handleBuyProperty() {
 
 function handleRent(currentTileIndex) {
 	const tile = getTile(currentTileIndex);
-	let prop;
-	let debtorName;
 	_currentGamestate.players.forEach((player) => {
 		player.properties.forEach((property) => {
-			if (property.name === tile.name && player != _playerName) {
-				prop = property;
-				debtorName = player.name;
+			if (property.name === tile.name && player.name != _playerName) {
+				collectDebt(_gameId, _playerName, property.property, player.name);
+				showDefaultPopup('Rent', 'you payed rent', ' to ' + debtorName);
+				rentCollected = true;
 			}
 		});
 	});
-	if (prop != null && debtorName != null) {
-		collectDebt(_gameId, _playerName, prop.property, debtorNameg);
-		showDefaultPopup("Rent","you payed rent"," to "+ debtorName)
-		rentCollected = true;
-	}
 }
 
 function getCurrentGameState() {
