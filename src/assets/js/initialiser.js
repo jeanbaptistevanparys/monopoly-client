@@ -2,7 +2,7 @@
 
 let _token = null;
 let _gameId = null;
-let playerName = null;
+let _playerName = null;
 let _allTiles = null;
 let _currentGameState = null;
 let _myTurn = false;
@@ -15,7 +15,7 @@ function init() {
 
 	_token = loadFromStorage(_config.localStorageToken);
 	_gameId = loadFromStorage(_config.localStorageGameId);
-	playerName = loadFromStorage(_config.localStoragePlayer);
+	_playerName = loadFromStorage(_config.localStoragePlayer);
 	_popupContainer = qs('.popup-container');
 
 	checkIfInGame();
@@ -36,5 +36,4 @@ function stopMyTurnChecker() {
 
 function startMyTurnChecker() {
 	_myTurn = false;
-	console.debug();
 }

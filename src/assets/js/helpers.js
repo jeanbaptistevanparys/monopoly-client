@@ -42,3 +42,7 @@ function getIndexOfPlayer(playerObj) {
 	}
 	return index;
 }
+
+function isMyTurn() {
+	return _currentGameState.currentPlayer == _playerName;
+}

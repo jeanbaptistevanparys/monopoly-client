@@ -16,7 +16,7 @@ function defaultActions(gameState) {
 		_currentGameState = gameState;
 		console.log(_currentGameState);
 
-		let playerInfo = gameState.players.find(player => player.name == playerName);
+		let playerInfo = gameState.players.find(player => player.name == _playerName);
 		let playerCurrentTileIndex = getIndexOfTileByName(playerInfo.currentTile);
 
 		importCurrentTile(playerCurrentTileIndex);
@@ -95,7 +95,7 @@ function makePropertyCard(tileIndex, players = null) {
 }
 
 function checkIfRollDice() {
-	if (_currentGameState.currentPlayer == playerName && _currentGameState.canRoll) {
+	if (isMyTurn() && _currentGameState.canRoll) {
 		showDicePopup(handleRollDice);
 		stopMyTurnChecker();
 	}
@@ -104,29 +104,37 @@ function checkIfRollDice() {
 function handleRollDice(e) {
 	e.preventDefault();
 
-	rollDice(_gameId, playerName).then(state => {
-		console.log(state);
-		closePopup(e);
-		showRolledDicePopup(state.lastDiceRoll, event => {
-			closePopup(event);
-			startMyTurnChecker();
-		});
-	});
+	rollDice(_gameId, _playerName)
+		.then(state => {
+			console.log(state);
+			closePopup(e);
+			showRolledDicePopup(state.lastDiceRoll, event => {
+				closePopup(event);
+				startMyTurnChecker();
+			});
+		})
+		.catch(error => errorHandler(error));
 }
 
 function checkIfCanPurchase() {
-	let canPurchase = _currentGameState.directSale ? true : false;
+	let canPurchase = _currentGameState.directSale && isMyTurn();
 	console.log('Can purchase: ', canPurchase);
 	stopMyTurnChecker();
 	removePopupByClass('.popup');
 	if (canPurchase) {
-		showDefaultPopup('Purchase', 'Purchase', 'Do you want to purchase this property?', [
+		showDefaultPopup('Purchase', 'Purchase', 'Do you want to buy this property?', [
 			{
-				text     : 'Buy',
+				text     : 'Ignore property',
+				function : e => {
+					closePopup(e);
+					checkIfSkipProperty(e);
+				}
+			},
+			{
+				text     : 'Buy property',
 				function : e => {
 					handleBuyProperty(e);
 					closePopup(e);
-					console.log(e);
 				}
 			}
 		]);
@@ -141,23 +149,54 @@ function handleBuyProperty(e) {
 
 	let propertyName = _currentGameState.directSale;
 	if (propertyName != null) {
-		buyProperty(_gameId, playerName, propertyName).then(res => {
-			showDefaultPopup(
-				'Purchased!',
-				`Purchased ${res.property} !`,
-				`Congratulations! You just bought: ${res.property} !`,
-				[
-					{
-						text     : 'Continue',
-						function : event => {
-							closePopup(event);
-							startMyTurnChecker();
+		buyProperty(_gameId, _playerName, propertyName)
+			.then(res => {
+				showDefaultPopup(
+					'Purchased!',
+					`Purchased ${res.property} !`,
+					`Congratulations! You just bought:\n\n${res.property} !`,
+					[
+						{
+							text     : 'Continue',
+							function : event => {
+								closePopup(event);
+								startMyTurnChecker();
+							}
 						}
-					}
-				]
-			);
-		});
+					]
+				);
+			})
+			.catch(error => errorHandler(error));
 	}
+}
+
+function checkIfSkipProperty(e) {
+	e.preventDefault();
+
+	showDefaultPopup('Skip buy property', 'Skip buy property', 'Do you really want to skip this property?', [
+		{
+			text     : 'Cancel',
+			function : event => {
+				checkIfCanPurchase();
+				closePopup(event);
+			}
+		},
+		{
+			text     : 'Yes! Skip property',
+			function : event => {
+				closePopup(event);
+				handleSkipProperty(event);
+				startMyTurnChecker();
+			}
+		}
+	]);
+}
+
+function handleSkipProperty(e) {
+	e.preventDefault();
+
+	let propertyName = _currentGameState.directSale;
+	skipProperty(_gameId, _playerName, propertyName).catch(error => errorHandler(error));
 }
 
 function getCurrentGameState() {
