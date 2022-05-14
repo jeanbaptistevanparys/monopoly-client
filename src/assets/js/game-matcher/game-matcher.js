@@ -56,13 +56,13 @@ function joinGame(_gameId, name) {
 }
 
 function showAvailableGames(games, name) {
-	const $popupHeader = qs('.popup header');
-	const $popupContent = qs('.popup .popup-content');
-	const $popupForm = qs('form', $popupContent);
+	const $createGameForm = qs('.popup');
+	qs('main').removeChild($createGameForm);
 
-	qs('h2', $popupHeader).innerHtml = 'Choose game';
-	qs('h2', $popupContent).innerHtml = 'Available games';
-	$popupContent.removeChild();
+	// games.forEach(game => {
+	// 	const $game = `
+	// 	`;
+	// }
 	// joinGame(chosenGame.id, name);
 }
 
