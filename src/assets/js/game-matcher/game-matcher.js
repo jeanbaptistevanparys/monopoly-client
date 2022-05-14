@@ -16,8 +16,7 @@ function gameExistChecker(amount, name) {
 			console.log('new game');
 			createGame(name, amount);
 		} else {
-			const firstGame = games[0];
-			joinGame(firstGame.id, name);
+			showAvailableGames(games, name);
 		}
 	});
 }
@@ -54,6 +53,17 @@ function joinGame(_gameId, name) {
 			}
 		});
 	}
+}
+
+function showAvailableGames(games, name) {
+	const $popupHeader = qs('.popup header');
+	const $popupContent = qs('.popup .popup-content');
+	const $popupForm = qs('form', $popupContent);
+
+	qs('h2', $popupHeader).innerHtml = 'Choose game';
+	qs('h2', $popupContent).innerHtml = 'Available games';
+	$popupContent.removeChild();
+	// joinGame(chosenGame.id, name);
 }
 
 function bootGameBoardUi() {
