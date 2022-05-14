@@ -35,10 +35,14 @@ function getPlayersPos(players) {
 
 function getIndexOfPlayer(playerObj) {
 	let index;
-	for (let i = 0; i < currentGameState.players.length; i++) {
-		if (currentGameState.players[i].name == playerObj.name) {
+	for (let i = 0; i < _currentGameState.players.length; i++) {
+		if (_currentGameState.players[i].name == playerObj.name) {
 			index = i;
 		}
 	}
 	return index;
+}
+
+function isMyTurn() {
+	return _currentGameState.currentPlayer == _playerName;
 }
