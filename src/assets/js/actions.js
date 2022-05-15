@@ -3,8 +3,8 @@
 let rentCollected = false;
 
 function testConnection() {
-    fetchFromServer('/tiles', 'GET').then(_ => console.log('Status OK!')).catch(errorHandler);
-    fetchFromServer('/', 'GET').then(info => console.log(info)).catch(errorHandler);
+	getTilesFetch().then(_ => console.log('Status OK!')).catch(errorHandler);
+	getInfoFetch().then(info => console.log(info)).catch(errorHandler);
 }
 
 function checkIfInGame() {
@@ -16,17 +16,17 @@ function checkIfInGame() {
 }
 
 function defaultActions(gameState) {
-    currentGameState = gameState;
+	currentGameState = gameState;
 
-    let playerInfo = gameState.players.find(player => player.name == playerName);
-    let playerCurrentTileIndex = getIndexOfTileByName(playerInfo.currentTile);
+	let playerInfo = gameState.players.find(player => player.name == playerName);
+	let playerCurrentTileIndex = getIndexOfTileByName(playerInfo.currentTile);
 
-    importCurrentTile(playerCurrentTileIndex);
-    importNextTwelveTiles(playerCurrentTileIndex);
-    importPLayerInfo();
-    importPlayers();
-    checkIfCanPurchase();
-    checkIfRollDice();
+	importCurrentTile(playerCurrentTileIndex);
+	importNextTwelveTiles(playerCurrentTileIndex);
+	importPLayerInfo();
+	importPlayers();
+	checkIfCanPurchase();
+	checkIfRollDice();
 	if (!_myTurn) {
 		_currentGameState = gameState;
 		console.log(_currentGameState);
@@ -186,18 +186,18 @@ function handleBuyProperty(e) {
 }
 
 function handleBuyProperty() {
-    let propertyName = currentGameState.directSale;
-    if (propertyName != null) {
-        buyProperty(_gameId, playerName, propertyName).then(res => {
-            console.log(res);
-        });
-    }
+	let propertyName = currentGameState.directSale;
+	if (propertyName != null) {
+		buyProperty(_gameId, playerName, propertyName).then(res => {
+			console.log(res);
+		});
+	}
 }
 
 function handleRent(currentTileIndex) {
 	const tile = getTile(currentTileIndex);
-	_currentGamestate.players.forEach((player) => {
-		player.properties.forEach((property) => {
+	_currentGamestate.players.forEach(player => {
+		player.properties.forEach(property => {
 			if (property.name === tile.name && player.name != _playerName) {
 				collectDebt(_gameId, _playerName, property.property, player.name);
 				showDefaultPopup('Rent', 'you payed rent', ' to ' + debtorName);
@@ -208,7 +208,7 @@ function handleRent(currentTileIndex) {
 }
 
 function getCurrentGameState() {
-	getGame(_gameId).then((gameState) => {
+	getGame(_gameId).then(gameState => {
 		if (gameState.started) {
 			_currentGamestate = gameState;
 			defaultActions(_currentGamestate);
