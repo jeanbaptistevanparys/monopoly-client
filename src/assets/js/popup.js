@@ -1,6 +1,12 @@
 'use strict';
 
-function showDefaultPopup(headertitle, title, message, buttons = [ { text: 'continue', function: closePopup } ]) {
+function showDefaultPopup(
+	headertitle,
+	title,
+	message,
+	buttons = [ { text: 'continue', function: closePopup } ],
+	error = false
+) {
 	const $template = document.querySelector('#default').content.firstElementChild.cloneNode(true);
 	$template.querySelector('header h2').innerText = headertitle;
 	$template.querySelector('.popup-content h2').innerText = title;
@@ -14,6 +20,7 @@ function showDefaultPopup(headertitle, title, message, buttons = [ { text: 'cont
 		$btn.addEventListener('click', btn.function);
 		$template.querySelector('.submit-btns').insertAdjacentElement('beforeend', $btn);
 	});
+	if (error) $template.classList.add('error');
 	_popupContainer.insertAdjacentElement('beforeend', $template);
 }
 
@@ -127,4 +134,8 @@ function loadOptions($container, gameState, playerName) {
 function closePopup(e) {
 	e.preventDefault();
 	e.target.closest('article').remove();
+}
+
+function removePopupByClass(selector) {
+	if (_popupContainer.querySelector(selector)) qs(selector, _popupContainer).remove();
 }

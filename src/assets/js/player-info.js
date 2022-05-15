@@ -13,7 +13,7 @@ function importPLayerInfo() {
 function getThisPlayer() {
 	let thisPlayer;
 	for (const playerIndex in currentGameState.players) {
-		if (currentGameState.players[playerIndex].name == playerName) {
+		if (currentGameState.players[playerIndex].name == _playerName) {
 			thisPlayer = currentGameState.players[playerIndex];
 		}
 	}
@@ -21,7 +21,7 @@ function getThisPlayer() {
 }
 
 function displayName() {
-	qs('#player-info h2').innerText = playerName;
+	qs('#player-info h2').innerText = _playerName;
 }
 
 function displayerNumberOfHousesAndHotels(properties) {

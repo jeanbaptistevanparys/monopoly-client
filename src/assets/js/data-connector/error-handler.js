@@ -1,10 +1,25 @@
-"use strict";
+'use strict';
 
-function generateVisualAPIErrorInConsole(){
-    console.error('%c%s','background-color: red;color: white','! An error occurred while calling the API');
+function generateVisualAPIErrorInConsole() {
+	console.error('%c%s', 'background-color: red;color: white', '! An error occurred while calling the API');
 }
 
-function errorHandler(error){
-    console.error(error);
-    document.querySelector(_config.errorHandlerSelector).innerText = 'Something went wrong :('
+function errorHandler(error) {
+	console.error(error);
+	stopMyTurnChecker();
+	showDefaultPopup(
+		`Error ${error.failure}`,
+		'Error #45212 ! \n (although nobody knows what this means)',
+		`An error has occurred:\n\n${error.cause}`,
+		[
+			{
+				text     : 'OK',
+				function : e => {
+					closePopup(e);
+					startMyTurnChecker();
+				}
+			}
+		],
+		'error'
+	);
 }

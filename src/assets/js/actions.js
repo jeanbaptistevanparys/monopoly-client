@@ -6,7 +6,7 @@ function testConnection() {
 }
 
 function checkIfInGame() {
-	if (!_token) {
+	if (!loadFromStorage(_config.localStorageToken)) {
 		window.location.href = 'index.html';
 	}
 	startLoadingScreen();
@@ -14,17 +14,19 @@ function checkIfInGame() {
 }
 
 function defaultActions(gameState) {
-	currentGameState = gameState;
+	if (!_myTurn) {
+		_currentGameState = gameState;
+		console.log(_currentGameState);
 
-	let playerInfo = gameState.players.find(player => player.name == playerName);
-	let playerCurrentTileIndex = getIndexOfTileByName(playerInfo.currentTile);
+		let playerInfo = gameState.players.find(player => player.name == _playerName);
+		let playerCurrentTileIndex = getIndexOfTileByName(playerInfo.currentTile);
 
-	importCurrentTile(playerCurrentTileIndex);
-	importNextTwelveTiles(playerCurrentTileIndex);
-	importPLayerInfo();
-	importPlayers();
-	checkIfCanPurchase();
-	checkIfRollDice();
+		importCurrentTile(playerCurrentTileIndex);
+		importNextTwelveTiles(playerCurrentTileIndex);
+		importPlayers();
+		checkIfCanPurchase();
+		checkIfRollDice();
+	}
 }
 
 function importCurrentTile(currentTileIndex) {
@@ -37,7 +39,7 @@ function importNextTwelveTiles(currentTileIndex) {
 	document.querySelector('.nextTwelve').innerHTML = '';
 	const start = currentTileIndex + 1;
 	const end = currentTileIndex + 13;
-	const playerPositions = getPlayersPos(currentGameState.players);
+	const playerPositions = getPlayersPos(_currentGameState.players);
 
 	for (let i = start; i < end; i++) {
 		let players = null;
@@ -51,7 +53,7 @@ function importNextTwelveTiles(currentTileIndex) {
 
 function importPlayers() {
 	document.querySelector('aside').innerHTML = '';
-	const players = currentGameState.players;
+	const players = _currentGameState.players;
 	players.forEach(player => {
 		const playerCard = makePlayerCard(player);
 		document.querySelector('aside').insertAdjacentElement('beforeend', playerCard);
@@ -95,47 +97,115 @@ function makePropertyCard(tileIndex, players = null) {
 }
 
 function checkIfRollDice() {
-	if (currentGameState.currentPlayer == playerName && currentGameState.canRoll) {
+	if (isMyTurn() && _currentGameState.canRoll) {
 		showDicePopup(handleRollDice);
-		clearInterval(myTurnChecker);
+		stopMyTurnChecker();
 	}
 }
 
 function handleRollDice(e) {
 	e.preventDefault();
 
-	rollDiceFetch(_gameId, playerName).then(state => {
-		console.log(state);
-		defaultActions(state);
-		closePopup(e);
-		showRolledDicePopup(state.lastDiceRoll, closePopup);
-		myTurnChecker = setInterval(getCurrentGameState, _config.delay);
-	});
+	rollDiceFetch(_gameId, _playerName)
+		.then(state => {
+			console.log(state);
+			closePopup(e);
+			showRolledDicePopup(state.lastDiceRoll, event => {
+				closePopup(event);
+				startMyTurnChecker();
+			});
+		})
+		.catch(error => errorHandler(error));
 }
 
 function checkIfCanPurchase() {
-	const $buyBtn = document.querySelector('#buy');
-	let canPurchase = currentGameState.directSale ? true : false;
-	$buyBtn.classList.toggle('enabled', canPurchase);
-	$buyBtn.removeEventListener('click', handleBuyProperty);
-	$buyBtn.addEventListener('click', handleBuyProperty);
+	let canPurchase = _currentGameState.directSale && isMyTurn();
+	console.log('Can purchase: ', canPurchase);
+	stopMyTurnChecker();
+	removePopupByClass('.popup');
+	if (canPurchase) {
+		showDefaultPopup('Purchase', `Purchase: ${_currentGameState.directSale}`, 'Do you want to buy this property?', [
+			{
+				text     : 'Ignore property',
+				function : e => {
+					closePopup(e);
+					checkIfSkipProperty(e);
+				}
+			},
+			{
+				text     : 'Buy property',
+				function : e => {
+					handleBuyProperty(e);
+					closePopup(e);
+				}
+			}
+		]);
+	} else {
+		removePopupByClass('.popup');
+		startMyTurnChecker();
+	}
 }
 
-function handleBuyProperty() {
-	let propertyName = currentGameState.directSale;
+function handleBuyProperty(e) {
+	e.preventDefault();
+
+	let propertyName = _currentGameState.directSale;
 	if (propertyName != null) {
-		buyPropertyFetch(_gameId, playerName, propertyName).then(res => {
-			console.log(res);
-		});
+		buyPropertyFetch(_gameId, _playerName, propertyName)
+			.then(res => {
+				showDefaultPopup(
+					'Purchased!',
+					`Purchased ${res.property} !`,
+					`Congratulations! You just bought:\n\n${res.property} !`,
+					[
+						{
+							text     : 'Continue',
+							function : event => {
+								closePopup(event);
+								startMyTurnChecker();
+							}
+						}
+					]
+				);
+			})
+			.catch(error => errorHandler(error));
 	}
+}
+
+function checkIfSkipProperty(e) {
+	e.preventDefault();
+
+	showDefaultPopup('Skip buy property', 'Skip buy property', 'Do you really want to skip this property?', [
+		{
+			text     : 'Cancel',
+			function : event => {
+				checkIfCanPurchase();
+				closePopup(event);
+			}
+		},
+		{
+			text     : 'Yes! Skip property',
+			function : event => {
+				closePopup(event);
+				handleSkipProperty(event);
+				startMyTurnChecker();
+			}
+		}
+	]);
+}
+
+function handleSkipProperty(e) {
+	e.preventDefault();
+
+	let propertyName = _currentGameState.directSale;
+	skipPropertyFetch(_gameId, _playerName, propertyName).catch(error => errorHandler(error));
 }
 
 function getCurrentGameState() {
 	getGameFetch(_gameId).then(gameState => {
 		if (gameState.started) {
-			currentGameState = gameState;
-			defaultActions(currentGameState);
-			clearInterval(gameStartedChecker);
+			_currentGameState = gameState;
+			defaultActions(_currentGameState);
 		}
 	});
 }

@@ -61,5 +61,5 @@ function hideLoadingScreen() {
 }
 
 function bootGameBoardUi() {
-	window.location.href = 'game.html';
+	if (!window.location.href.includes('game.html')) window.location.href = 'game.html';
 }
