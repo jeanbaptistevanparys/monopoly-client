@@ -4,9 +4,8 @@ let _token = null;
 let _gameId = null;
 let _playerName = null;
 let _allTiles = null;
-let _currentGamestate = null;
-let _gameStartedChecker;
-let _myTurnChecker;
+let _currentGameState = null;
+let _myTurn = false;
 let _popupContainer;
 
 document.addEventListener('DOMContentLoaded', init);
@@ -17,16 +16,24 @@ function init() {
 	_token = loadFromStorage(_config.localStorageToken);
 	_gameId = loadFromStorage(_config.localStorageGameId);
 	_playerName = loadFromStorage(_config.localStoragePlayer);
-	_popupContainer = document.querySelector('body');
+	_popupContainer = qs('.popup-container');
 
 	checkIfInGame();
-	
-	getTiles()
+
+	getTilesFetch()
 		.then(tiles => {
 			_allTiles = tiles;
 			getCurrentGameState();
 		})
 		.catch(errorHandler);
 
-	_myTurnChecker = setInterval(getCurrentGameState, _config.delay);
+	setInterval(getCurrentGameState, _config.delay);
+}
+
+function stopMyTurnChecker() {
+	_myTurn = true;
+}
+
+function startMyTurnChecker() {
+	_myTurn = false;
 }

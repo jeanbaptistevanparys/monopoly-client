@@ -50,6 +50,17 @@
 	height: 70%;
 }
 
+.popup.error {
+	width: 50vw;
+}
+.popup.error .popup-content {
+	padding-left: 10vw;
+	background: url('../media/error.png') 2rem 2rem no-repeat, var(--light-gray-trans);
+	background-size: calc(10vw - 4rem);
+}
+.popup.error .popup-content h2 {
+	color: #fa0016;
+}
 /* ============================== Roll Dice ================================*/
 .roll-dice {
 	background-color: var(--light-gray-trans);
@@ -58,7 +69,6 @@
 	left: 35vw;
 	width: 30vw;
 	top: 35vh;
-	height: 40vh;
 	position: absolute;
 }
 

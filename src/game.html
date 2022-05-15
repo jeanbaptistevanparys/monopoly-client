@@ -15,15 +15,16 @@
     <link rel="stylesheet" href="assets/css/popups.css">
 
     <script src="assets/js/config.js"></script>
-
+    
+    <script src="assets/js/helpers.js"></script>
     <script src="assets/js/data-connector/error-handler.js"></script>
     <script src="assets/js/data-connector/api-communication-abstractor.js"></script>
     <script src="assets/js/data-connector/local-storage-abstractor.js"></script>
     <script src="assets/js/data-connector/api-wrapper.js"></script>
-    <script src="assets/js/helpers.js"></script>
 
     <script src="assets/js/actions.js"></script>
     <script src="assets/js/player-info.js"></script>
+    <script src="assets/js/game-matcher/load-game.js"></script>
     <script src="assets/js/game-matcher/game-matcher.js"></script>
 
     <script src="assets/js/initialiser.js"></script>
@@ -165,6 +166,34 @@
     </footer>
 
     <div class="popup-container"></div>
+
+    <section class="loading-screen hidden">
+        <img src="assets/media/Monopoly-logo.jpg" alt="Monopoly Logo">
+        <p>Waiting for players</p>
+        <h2>Players: <span class="player-count"></span></h2>
+        <div class="loading-bar">
+            <div class="loading-bar-piece hidden"></div>
+            <div class="loading-bar-piece hidden"></div>
+            <div class="loading-bar-piece hidden"></div>
+            <div class="loading-bar-piece hidden"></div>
+            <div class="loading-bar-piece hidden"></div>
+            <div class="loading-bar-piece hidden"></div>
+            <div class="loading-bar-piece hidden"></div>
+            <div class="loading-bar-piece hidden"></div>
+            <div class="loading-bar-piece hidden"></div>
+            <div class="loading-bar-piece hidden"></div>
+            <div class="loading-bar-piece hidden"></div>
+            <div class="loading-bar-piece hidden"></div>
+            <div class="loading-bar-piece hidden"></div>
+            <div class="loading-bar-piece hidden"></div>
+            <div class="loading-bar-piece hidden"></div>
+            <div class="loading-bar-piece hidden"></div>
+            <div class="loading-bar-piece hidden"></div>
+            <div class="loading-bar-piece hidden"></div>
+            <div class="loading-bar-piece hidden"></div>
+            <div class="loading-bar-piece hidden"></div>
+        </div>
+    </section>
 
     <template id="default">
         <article class="popup">

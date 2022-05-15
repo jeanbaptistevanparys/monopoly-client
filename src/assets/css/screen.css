@@ -604,3 +604,47 @@ aside {
 	grid-area: players;
 	display: flex;
 }
+
+/* ============================== Loading Screen ================================*/
+.loading-screen {
+	position: fixed;
+	inset: 0;
+	padding-bottom: 10vh;
+	background-color: black;
+	color: white;
+	z-index: 9999;
+	gap: 1rem;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+}
+.loading-screen img {
+	height: 25vh;
+	margin-bottom: 5vh;
+}
+.loading-screen .loading-bar {
+	width: 25%;
+	padding: 0.125rem;
+	border-radius: 0.25rem;
+	border: 0.125rem solid white;
+	height: 1.5rem;
+	gap: 0.125rem;
+	display: flex;
+	flex-direction: row;
+}
+.loading-screen .loading-bar-piece {
+	width: 5%;
+	height: 100%;
+	border-radius: 0.125rem;
+	background-color: #86d422;
+}
+.loading-screen .loading-bar-piece.hidden {
+	display: block;
+	opacity: 0;
+}
+
+/* ============================== HIDDEN ============================== */
+.hidden {
+	display: none;
+}
