@@ -20,7 +20,7 @@ function init() {
 
 	checkIfInGame();
 
-	getTiles()
+	getTilesFetch()
 		.then(tiles => {
 			_allTiles = tiles;
 			getCurrentGameState();

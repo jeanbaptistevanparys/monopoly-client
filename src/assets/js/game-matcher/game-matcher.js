@@ -8,54 +8,29 @@ function processConnectionForm(e) {
 }
 
 function gameExistChecker(amount, name) {
-	fetchFromServer(
-		`/games?prefix=${_config.gamePrefix}&numberOfPlayers=${amount}&started=false`,
-		'GET'
-	).then(games => {
+	getGamesFetch(false, amount, _config.gamePrefix).then(games => {
 		if (games.length === 0) {
 			console.log('new game');
 			createGame(name, amount);
 		} else {
-			const firstGame = games[0];
-			joinGame(firstGame.id, name);
+			showAvailableGames(games, name);
 		}
 	});
 }
 
 function createGame(name, amount) {
-	const bodyParams = {
-		prefix          : _config.gamePrefix,
-		numberOfPlayers : amount
-	};
-	fetchFromServer('/games', 'POST', bodyParams).then(game => {
+	createGameFetch(_config.gamePrefix, amount).then(game => {
 		joinGame(game.id, name);
 	});
 }
 
 function joinGame(_gameId, name) {
-	const requestBody = {
-		playerName : name
-	};
-	fetchFromServer(`/games/${_gameId}/players`, 'POST', requestBody).then(tokenFromServer => {
+	joinGameFetch(_gameId, name).then(tokenFromServer => {
 		_token = tokenFromServer;
 		saveToStorage(_config.localStorageToken, _token);
 		saveToStorage(_config.localStorageGameId, _gameId);
 		saveToStorage(_config.localStoragePlayer, name);
-		checkGameStarted();
+		startLoadingScreen();
+		checkGameStarted(_gameId);
 	});
-
-	function checkGameStarted() {
-		fetchFromServer(`/games/${_gameId}`, 'GET').then(gameState => {
-			if (gameState.started) {
-				bootGameBoardUi();
-			} else {
-				console.log('check');
-				setTimeout(() => checkGameStarted(), _config.delay);
-			}
-		});
-	}
-}
-
-function bootGameBoardUi() {
-	window.location.href = 'game.html';
 }

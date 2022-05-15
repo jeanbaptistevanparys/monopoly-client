@@ -1,14 +1,16 @@
 'use strict';
 
 function testConnection() {
-	fetchFromServer('/tiles', 'GET').then(_ => console.log('Status OK!')).catch(errorHandler);
-	fetchFromServer('/', 'GET').then(info => console.log(info)).catch(errorHandler);
+	getTilesFetch().then(_ => console.log('Status OK!')).catch(errorHandler);
+	getInfoFetch().then(info => console.log(info)).catch(errorHandler);
 }
 
 function checkIfInGame() {
-	if (!_token) {
+	if (!loadFromStorage(_config.localStorageToken)) {
 		window.location.href = 'index.html';
 	}
+	startLoadingScreen();
+	checkGameStarted(_gameId);
 }
 
 function defaultActions(gameState) {
@@ -104,7 +106,7 @@ function checkIfRollDice() {
 function handleRollDice(e) {
 	e.preventDefault();
 
-	rollDice(_gameId, _playerName)
+	rollDiceFetch(_gameId, _playerName)
 		.then(state => {
 			console.log(state);
 			closePopup(e);
@@ -122,7 +124,7 @@ function checkIfCanPurchase() {
 	stopMyTurnChecker();
 	removePopupByClass('.popup');
 	if (canPurchase) {
-		showDefaultPopup('Purchase', 'Purchase', 'Do you want to buy this property?', [
+		showDefaultPopup('Purchase', `Purchase: ${_currentGameState.directSale}`, 'Do you want to buy this property?', [
 			{
 				text     : 'Ignore property',
 				function : e => {
@@ -149,7 +151,7 @@ function handleBuyProperty(e) {
 
 	let propertyName = _currentGameState.directSale;
 	if (propertyName != null) {
-		buyProperty(_gameId, _playerName, propertyName)
+		buyPropertyFetch(_gameId, _playerName, propertyName)
 			.then(res => {
 				showDefaultPopup(
 					'Purchased!',
@@ -196,11 +198,11 @@ function handleSkipProperty(e) {
 	e.preventDefault();
 
 	let propertyName = _currentGameState.directSale;
-	skipProperty(_gameId, _playerName, propertyName).catch(error => errorHandler(error));
+	skipPropertyFetch(_gameId, _playerName, propertyName).catch(error => errorHandler(error));
 }
 
 function getCurrentGameState() {
-	getGame(_gameId).then(gameState => {
+	getGameFetch(_gameId).then(gameState => {
 		if (gameState.started) {
 			_currentGameState = gameState;
 			defaultActions(_currentGameState);

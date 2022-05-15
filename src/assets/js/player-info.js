@@ -55,7 +55,7 @@ function displayProperties(properties) {
 	qs('#player-info .properties').innerHTML = '';
 	for (const propertyIndex in properties) {
 		const $template = qs('#player-property').content.firstElementChild.cloneNode(true);
-		getTile(properties[propertyIndex].property).then(res => {
+		getTileFetch(properties[propertyIndex].property).then(res => {
 			const tile = res;
 			$template.querySelector('h3').innerText = tile.name;
 			$template.querySelector('p').innerHTML = `<span class="striketrough">M</span> ${tile.cost}`;

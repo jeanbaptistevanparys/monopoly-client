@@ -22,6 +22,7 @@
     <script src="assets/js/data-connector/api-wrapper.js"></script>
     <script src="assets/js/helpers.js"></script>
 
+    <script src="assets/js/game-matcher/load-game.js"></script>
     <script src="assets/js/game-matcher/game-matcher.js"></script>
     <script src="assets/js/actions.js"></script>
 
@@ -31,7 +32,7 @@
 <body>
 
     <main class="blue-bg">
-        <section class="popup">
+        <section class="popup start-game">
 
             <header>
                 <h2>Start Game</h2>
@@ -52,6 +53,51 @@
                     <input type="submit" value="Connect" class="outer-elem">
                 </form>
             </section>
+        </section>
+
+        <section class="popup game-list hidden">
+
+            <header>
+                <h2>Join a game</h2>
+                <div class="icons">
+                    <div class="inner-elem icon icon-min"></div>
+                    <div class="inner-elem icon icon-max"></div>
+                    <div class="inner-elem icon icon-close"></div>
+                </div>
+            </header>
+
+            <section class="popup-content">
+                <h2>Available games:</h2>
+                <ul></ul>
+            </section>
+        </section>
+
+        <section class="loading-screen hidden">
+            <img src="assets/media/Monopoly-logo.jpg" alt="Monopoly Logo">
+            <p>Waiting for players</p>
+            <h2>Players: <span class="player-count"></span></h2>
+            <div class="loading-bar">
+                <div class="loading-bar-piece hidden"></div>
+                <div class="loading-bar-piece hidden"></div>
+                <div class="loading-bar-piece hidden"></div>
+                <div class="loading-bar-piece hidden"></div>
+                <div class="loading-bar-piece hidden"></div>
+                <div class="loading-bar-piece hidden"></div>
+                <div class="loading-bar-piece hidden"></div>
+                <div class="loading-bar-piece hidden"></div>
+                <div class="loading-bar-piece hidden"></div>
+                <div class="loading-bar-piece hidden"></div>
+                <div class="loading-bar-piece hidden"></div>
+                <div class="loading-bar-piece hidden"></div>
+                <div class="loading-bar-piece hidden"></div>
+                <div class="loading-bar-piece hidden"></div>
+                <div class="loading-bar-piece hidden"></div>
+                <div class="loading-bar-piece hidden"></div>
+                <div class="loading-bar-piece hidden"></div>
+                <div class="loading-bar-piece hidden"></div>
+                <div class="loading-bar-piece hidden"></div>
+                <div class="loading-bar-piece hidden"></div>
+            </div>
         </section>
     </main>
 

@@ -1,102 +1,112 @@
 /* ============================== START GAME ============================== */
 .blue-bg {
-    height: 100vh;
-    background-color: var(--background-color);
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: space-around;
+	height: 100vh;
+	background-color: var(--background-color);
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: space-around;
 }
 
 /* ============================== Popups ================================*/
 .popup {
-    width: 40%;
-}
-
-.hidden {
-    display: none;
+	width: 40%;
 }
 
 .popup-content {
-    background-color: var(--light-gray);
-    padding: 2rem;
-    border: 0.25rem solid var(--bar-dark);
-    border-top: 0;
+	background-color: var(--light-gray);
+	padding: 2rem;
+	border: 0.25rem solid var(--bar-dark);
+	border-top: 0;
 }
 
 .popup-content h2 {
-    font-size: 2rem;
+	font-size: 2rem;
 }
 
 .popup-content,
 .popup-content form {
-    display: flex;
-    flex-direction: column;
+	display: flex;
+	flex-direction: column;
 }
 
-.popup-content form>label, .popup-content form p {
-    padding-top: 1.25rem;
-    padding-bottom: 0.25rem;
+.popup-content form > label,
+.popup-content form p {
+	padding-top: 1.25rem;
+	padding-bottom: 0.25rem;
 }
 
 .popup-content form input {
-    padding: 0.5rem;
-    border-radius: 0;
-    border: 0;
-    background-color: var(--light-gray);
+	padding: 0.5rem;
+	border-radius: 0;
+	border: 0;
+	background-color: var(--light-gray);
 }
 
 .popup-content form input[type='submit'] {
-    padding: 0.5rem 0;
-    width: 8rem;
-    margin: 1rem auto 1rem auto;
-    text-align: center;
-    background-color: var(--dark-gray);
-    cursor: pointer;
+	padding: 0.5rem 0;
+	width: 8rem;
+	margin: 1rem auto 1rem auto;
+	text-align: center;
+	background-color: var(--dark-gray);
+	cursor: pointer;
 }
 
 #games {
-    padding-right: 1rem;
-    height: 10rem;
-    overflow-y: scroll;
+	padding-right: 1rem;
+	height: 10rem;
+	overflow-y: scroll;
 }
 
 .game {
-    margin: 0.5rem 0;
+	margin: 0.5rem 0;
 }
 
-label, p {
-    font-size: 1.5rem;
+label,
+p {
+	font-size: 1.5rem;
 }
 
 #games label {
-    padding: 0.5rem;
-    display: block;
-    background-color: white;
+	padding: 0.5rem;
+	display: block;
+	background-color: white;
 }
 
 .popup-content input[type="radio"] {
-    display: none;
+	display: none;
 }
 
-/* #players input[type="radio"]:checked+label,
-#games input[type="radio"]:checked+label {
-    background-color: var(--dark-gray);
-} */
+.game-list ul {
+	height: 25vh;
+	padding-right: 1rem;
+	overflow-y: scroll;
+}
+.game-list li {
+	margin: 1rem 0;
+	padding: 0.5rem;
+	padding-left: 1rem;
+	font-family: 'W95FA';
+	font-weight: 600;
+	background: url('../media/Shortcut-0.png') no-repeat bottom left;
+	background-size: 2rem;
+	text-transform: capitalize;
+	cursor: pointer;
+}
 
 /* ============================== Players ================================*/
 #players {
-    padding-right: 1rem;
-    height: 10rem;
-    overflow-y: scroll;
+	padding-right: 1rem;
+	height: 10rem;
+	overflow-y: scroll;
 }
 
 #players label {
-    padding: 0.5rem;
-    display: block;
-    background-color: white;
+	padding: 0.5rem;
+	display: block;
+	background-color: white;
 }
 
-#player-info  {
-    background-color: red;
+#player-info {
+	background-color: red;
 }
