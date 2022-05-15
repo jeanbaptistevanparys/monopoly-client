@@ -1,30 +1,30 @@
 'use strict';
 
-function getInfo() {
+function getInfoFetch() {
 	return fetchFromServer('/', 'GET');
 }
 
-function getTiles() {
+function getTilesFetch() {
 	return fetchFromServer('/tiles', 'GET');
 }
 
-function getTile(tile) {
+function getTileFetch(tile) {
 	return fetchFromServer(`/tiles/${tile}`, 'GET');
 }
 
-function getChance() {
+function getChanceFetch() {
 	return fetchFromServer('/chance', 'GET');
 }
 
-function getCommunityChest() {
+function getCommunityChestFetch() {
 	return fetchFromServer('/community-chest', 'GET');
 }
 
-function getGames(started, numberOfPlayers, prefix) {
-	return fetchFromServer(`/games/started?${started}&numberOfPlayers${numberOfPlayers}&prefix${prefix}`, 'GET');
+function getGamesFetch(started, numberOfPlayers, prefix) {
+	return fetchFromServer(`/games?prefix=${prefix}&numberOfPlayers=${numberOfPlayers}&started=${started}`, 'GET');
 }
 
-function createGame(prefix, numberOfPlayers) {
+function createGameFetch(prefix, numberOfPlayers) {
 	const bodyParams = {
 		prefix          : prefix,
 		numberOfPlayers : numberOfPlayers
@@ -32,89 +32,89 @@ function createGame(prefix, numberOfPlayers) {
 	return fetchFromServer('/games', 'POST', bodyParams);
 }
 
-function joinGame(_gameId, playerName) {
+function joinGameFetch(_gameId, playerName) {
 	const bodyParams = {
 		playerName : playerName
 	};
 	return fetchFromServer(`/games/${_gameId}/players`, 'POST', bodyParams);
 }
 
-function getDummyGame() {
+function getDummyGameFetch() {
 	return fetchFromServer('/games/dummy', 'GET');
 }
 
-function getGame(_gameId) {
+function getGameFetch(_gameId) {
 	return fetchFromServer(`/games/${_gameId}`, 'GET');
 }
 
-function rollDice(_gameId, playerName) {
+function rollDiceFetch(_gameId, playerName) {
 	return fetchFromServer(`/games/${_gameId}/players/${playerName}/dice`, 'POST');
 }
 
-function declareBankrupty(_gameId, playerName) {
+function declareBankruptyFetch(_gameId, playerName) {
 	return fetchFromServer(`/games/${_gameId}/players/${playerName}/bankrupty`, 'POST');
 }
 
-function setTaxEstimate(_gameId, playerName) {
+function setTaxEstimateFetch(_gameId, playerName) {
 	return fetchFromServer(`/games/${_gameId}/players/${playerName}/tax/estimate`, 'POST');
 }
 
-function setTaxCompute(_gameId, playerName) {
+function setTaxComputeFetch(_gameId, playerName) {
 	return fetchFromServer(`/games/${_gameId}/players/${playerName}/tax/compute`, 'POST');
 }
 
-function buyProperty(_gameId, playerName, propertyName) {
+function buyPropertyFetch(_gameId, playerName, propertyName) {
 	return fetchFromServer(`/games/${_gameId}/players/${playerName}/properties/${propertyName}`, 'POST');
 }
 
-function skipProperty(_gameId, playerName, propertyName) {
+function skipPropertyFetch(_gameId, playerName, propertyName) {
 	return fetchFromServer(`/games/${_gameId}/players/${playerName}/properties/${propertyName}`, 'DELETE');
 }
 
-function buildHouse(_gameId, playerName, propertyName) {
+function buildHouseFetch(_gameId, playerName, propertyName) {
 	return fetchFromServer(`/games/${_gameId}/players/${playerName}/properties/${propertyName}/houses`, 'POST');
 }
 
-function sellHouse(_gameId, playerName, propertyName) {
+function sellHouseFetch(_gameId, playerName, propertyName) {
 	return fetchFromServer(`/games/${_gameId}/players/${playerName}/properties/${propertyName}/houses`, 'DELETE');
 }
 
-function buildHotel(_gameId, playerName, propertyName) {
+function buildHotelFetch(_gameId, playerName, propertyName) {
 	return fetchFromServer(`/games/${_gameId}/players/${playerName}/properties/${propertyName}/hotel`, 'POST');
 }
 
-function sellHotel(_gameId, playerName, propertyName) {
+function sellHotelFetch(_gameId, playerName, propertyName) {
 	return fetchFromServer(`/games/${_gameId}/players/${playerName}/properties/${propertyName}/hotel`, 'DELETE');
 }
 
-function takeMortgage(_gameId, playerName, propertyName) {
+function takeMortgageFetch(_gameId, playerName, propertyName) {
 	return fetchFromServer(`/games/${_gameId}/players/${playerName}/properties/${propertyName}/mortgage`, 'POST');
 }
 
-function settleMortgage(_gameId, playerName, propertyName) {
+function settleMortgageFetch(_gameId, playerName, propertyName) {
 	return fetchFromServer(`/games/${_gameId}/players/${playerName}/properties/${propertyName}/mortgage`, 'DELETE');
 }
 
-function collectDebt(_gameId, playerName, propertyName, debtorName) {
+function collectDebtFetch(_gameId, playerName, propertyName, debtorName) {
 	return fetchFromServer(
 		`/games/${_gameId}/players/${playerName}/properties/${propertyName}/visitors/${debtorName}/rent`,
 		'DELETE'
 	);
 }
 
-function jailPay(_gameId, playerName) {
+function jailPayFetch(_gameId, playerName) {
 	return fetchFromServer(`/games/${_gameId}/prison/${playerName}/fine`, 'POST');
 }
 
-function jailFree() {
+function jailFreeFetch() {
 	return fetchFromServer(`/games/${_gameId}/prison/${playerName}/free`, 'POST');
 }
 
-function getBankAuctions(_gameId) {
+function getBankAuctionsFetch(_gameId) {
 	return fetchFromServer(`/games/${_gameId}/bank/auctions`, 'GET');
 }
 
-function placeBankBid(_gameId, propertyName, bidder, amount) {
+function placeBankBidFetch(_gameId, propertyName, bidder, amount) {
 	const bodyParams = {
 		bidder : bidder,
 		amount : amount
@@ -122,11 +122,11 @@ function placeBankBid(_gameId, propertyName, bidder, amount) {
 	return fetchFromServer(`/games/${_gameId}/bank/auctions/${propertyName}/bid`, 'POST', bodyParams);
 }
 
-function getPlayerAuctions(_gameId, playerName) {
+function getPlayerAuctionsFetch(_gameId, playerName) {
 	return fetchFromServer(`/games/${_gameId}/players/${playerName}/auctions`, 'GET');
 }
 
-function startPlayerAuction(_gameId, playerName, propertyName, startBid, duration) {
+function startPlayerAuctionFetch(_gameId, playerName, propertyName, startBid, duration) {
 	const bodyParams = {
 		'start-bid' : startBid,
 		duration    : duration
@@ -134,7 +134,7 @@ function startPlayerAuction(_gameId, playerName, propertyName, startBid, duratio
 	return fetchFromServer(`/games/${_gameId}/players/${playerName}/auctions/${propertyName}`, 'POST', bodyParams);
 }
 
-function placePLayerBid(_gameId, playerName, propertyName, bidder, amount) {
+function placePLayerBidFetch(_gameId, playerName, propertyName, bidder, amount) {
 	const bodyParams = {
 		bidder : bidder,
 		amount : amount
@@ -142,7 +142,7 @@ function placePLayerBid(_gameId, playerName, propertyName, bidder, amount) {
 	return fetchFromServer(`/games/${_gameId}/players/${playerName}/auctions/${propertyName}/bid`, 'POST', bodyParams);
 }
 
-function offerTrade(_gameId, playerName, player, offerArray, requestArray) {
+function offerTradeFetch(_gameId, playerName, player, offerArray, requestArray) {
 	const bodyParams = {
 		player : player,
 		offer  : offerArray,

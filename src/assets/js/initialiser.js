@@ -20,8 +20,8 @@ function init() {
 	_popupContainer = document.querySelector('.popup-container');
 
 	checkIfInGame();
-	
-	getTiles()
+
+	getTilesFetch()
 		.then(tiles => {
 			_allTiles = tiles;
 			getCurrentGameState();
