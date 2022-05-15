@@ -1,5 +1,7 @@
 'use strict';
 
+let loading;
+
 function checkGameStarted(_gameId) {
 	getGameFetch(_gameId).then(gameState => {
 		if (gameState.started) {
@@ -26,7 +28,6 @@ function showAvailableGames(games, name) {
 	});
 }
 
-let loading;
 function startLoadingScreen() {
 	const $loadingPieces = qsa('.loading-bar-piece');
 	let start = 0;
