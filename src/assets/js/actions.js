@@ -23,8 +23,8 @@ function defaultActions(gameState) {
 
 		importCurrentTile(playerCurrentTileIndex);
 		importNextTwelveTiles(playerCurrentTileIndex);
-		importPlayers();
 		importPLayerInfo();
+		importPlayers();
 		markCurrentPlayer();
 		checkIfCanPurchase();
 		checkIfRollDice();
@@ -33,7 +33,6 @@ function defaultActions(gameState) {
 
 function importCurrentTile(currentTileIndex) {
 	let propertyCard = makePropertyCard(currentTileIndex);
-	document.querySelector('.property-card').innerHTML = '';
 	document.querySelector('.property-card').innerHTML = '';
 	document.querySelector('.property-card').insertAdjacentElement('beforeend', propertyCard);
 }
