@@ -46,3 +46,5 @@ function getIndexOfPlayer(playerObj) {
 function isMyTurn() {
 	return _currentGameState.currentPlayer == _playerName;
 }
+
+const isEqual = (...objects) => objects.every(obj => JSON.stringify(obj) === JSON.stringify(objects[0]));
