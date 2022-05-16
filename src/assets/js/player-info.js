@@ -12,9 +12,9 @@ function importPLayerInfo() {
 
 function getThisPlayer() {
 	let thisPlayer;
-	for (const playerIndex in currentGameState.players) {
-		if (currentGameState.players[playerIndex].name == _playerName) {
-			thisPlayer = currentGameState.players[playerIndex];
+	for (const playerIndex in _currentGameState.players) {
+		if (_currentGameState.players[playerIndex].name == _playerName) {
+			thisPlayer = _currentGameState.players[playerIndex];
 		}
 	}
 	return thisPlayer;
