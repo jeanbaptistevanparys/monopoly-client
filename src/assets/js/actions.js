@@ -225,3 +225,39 @@ function getCurrentGameState() {
 function anythingChanged(gameState) {
 	return !isEqual(_currentGameState, gameState);
 }
+
+function showSettings(e) {
+	e.preventDefault();
+
+	stopMyTurnChecker();
+	showSettingsPopup(checkBankruptcy);
+}
+
+function checkBankruptcy(e) {
+	e.preventDefault();
+
+	stopMyTurnChecker();
+	showDefaultPopup('Leave game', 'Leave game', 'Do you really want to leave this game?', [
+		{
+			text     : 'Cancel',
+			function : event => {
+				closePopup(event);
+				startMyTurnChecker();
+			}
+		},
+		{
+			text     : 'Yes! Leave game',
+			function : event => {
+				closePopup(event);
+				handleBankruptcy();
+			}
+		}
+	]);
+}
+
+function handleBankruptcy() {
+	declareBankruptyFetch(_gameId, _playerName).then(() => {
+		localStorage.clear();
+		window.location.href = 'index.html';
+	});
+}

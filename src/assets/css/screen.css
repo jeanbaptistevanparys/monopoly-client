@@ -160,6 +160,7 @@ h1 {
 	aspect-ratio: 1;
 	margin: 0 0.25rem;
 	background-size: cover;
+	cursor: pointer;
 }
 
 .icon-min {

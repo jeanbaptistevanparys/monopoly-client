@@ -27,6 +27,7 @@ function init() {
 		})
 		.catch(errorHandler);
 
+	setAllEventListeners();
 	setInterval(getCurrentGameState, _config.delay);
 }
 
@@ -36,4 +37,8 @@ function stopMyTurnChecker() {
 
 function startMyTurnChecker() {
 	_isPaused = false;
+}
+
+function setAllEventListeners() {
+	qs('#start').addEventListener('click', showSettings);
 }
