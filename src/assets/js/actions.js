@@ -24,6 +24,8 @@ function defaultActions(gameState) {
 		importCurrentTile(playerCurrentTileIndex);
 		importNextTwelveTiles(playerCurrentTileIndex);
 		importPlayers();
+		importPLayerInfo();
+		markCurrentPlayer();
 		checkIfCanPurchase();
 		checkIfRollDice();
 	}
@@ -31,6 +33,7 @@ function defaultActions(gameState) {
 
 function importCurrentTile(currentTileIndex) {
 	let propertyCard = makePropertyCard(currentTileIndex);
+	document.querySelector('.property-card').innerHTML = '';
 	document.querySelector('.property-card').innerHTML = '';
 	document.querySelector('.property-card').insertAdjacentElement('beforeend', propertyCard);
 }
@@ -62,6 +65,7 @@ function importPlayers() {
 
 function makePlayerCard(player) {
 	const $template = document.querySelector('#player-template').content.firstElementChild.cloneNode(true);
+	$template.setAttribute('data-player', player.name);
 	$template.querySelector('h2').innerText = player.name;
 	$template.querySelector('p').insertAdjacentHTML('beforeend', player.money);
 	$template.querySelector('a').addEventListener('click', () => showPlayerInfoPopup(player.name, player.properties));
@@ -199,6 +203,15 @@ function handleSkipProperty(e) {
 
 	let propertyName = _currentGameState.directSale;
 	skipPropertyFetch(_gameId, _playerName, propertyName).catch(error => errorHandler(error));
+}
+
+function markCurrentPlayer() {
+	const currentPlayer = _currentGameState.currentPlayer;
+
+	if (currentPlayer != null) {
+		const $currentPlayer = qs(`aside .player[data-player="${currentPlayer}"]`);
+		$currentPlayer.classList.add('playing');
+	}
 }
 
 function getCurrentGameState() {
