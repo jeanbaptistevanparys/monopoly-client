@@ -5,7 +5,7 @@ let _gameId = null;
 let _playerName = null;
 let _allTiles = null;
 let _currentGameState = null;
-let _myTurn = false;
+let _isPaused = false;
 let _$popupContainer;
 
 document.addEventListener('DOMContentLoaded', init);
@@ -31,9 +31,9 @@ function init() {
 }
 
 function stopMyTurnChecker() {
-	_myTurn = true;
+	_isPaused = true;
 }
 
 function startMyTurnChecker() {
-	_myTurn = false;
+	_isPaused = false;
 }

@@ -18,19 +18,20 @@ function checkIfInGame() {
 }
 
 function defaultActions(gameState) {
-	if (!_myTurn) {
+	if (!_isPaused) {
+		if (anythingChanged(gameState) || _currentGameState == null) {
+			_currentGameState = gameState;
+
+			let playerInfo = _currentGameState.players.find(player => player.name == _playerName);
+			let playerCurrentTileIndex = getIndexOfTileByName(playerInfo.currentTile);
+
+			importCurrentTile(playerCurrentTileIndex);
+			importNextTwelveTiles(playerCurrentTileIndex);
+			importPLayerInfo();
+			importPlayers();
+			markCurrentPlayer();
+		}
 		_currentGameState = gameState;
-		console.log(_currentGameState);
-
-		let playerInfo = gameState.players.find(
-			(player) => player.name == _playerName
-		);
-		let playerCurrentTileIndex = getIndexOfTileByName(playerInfo.currentTile);
-
-		importCurrentTile(playerCurrentTileIndex);
-		importNextTwelveTiles(playerCurrentTileIndex);
-		importPlayers();
-		importPLayerInfo();
 		checkIfCanPurchase();
 		checkIfRent();
 		checkIfRollDice();
@@ -75,9 +76,8 @@ function importPlayers() {
 }
 
 function makePlayerCard(player) {
-	const $template = document
-		.querySelector('#player-template')
-		.content.firstElementChild.cloneNode(true);
+	const $template = document.querySelector('#player-template').content.firstElementChild.cloneNode(true);
+	$template.setAttribute('data-player', player.name);
 	$template.querySelector('h2').innerText = player.name;
 	$template.querySelector('p').insertAdjacentHTML('beforeend', player.money);
 	$template
@@ -139,8 +139,7 @@ function handleRollDice(e) {
 	e.preventDefault();
 
 	rollDiceFetch(_gameId, _playerName)
-		.then((state) => {
-			console.log(state);
+		.then(state => {
 			closePopup(e);
 			showRolledDicePopup(state.lastDiceRoll, (event) => {
 				closePopup(event);
@@ -152,7 +151,6 @@ function handleRollDice(e) {
 
 function checkIfCanPurchase() {
 	let canPurchase = _currentGameState.directSale && isMyTurn();
-	console.log('Can purchase: ', canPurchase);
 	stopMyTurnChecker();
 	removePopupByClass('.popup');
 	if (canPurchase) {
@@ -245,11 +243,20 @@ function handleSkipProperty(e) {
 	);
 }
 
+function markCurrentPlayer() {
+	const currentPlayer = _currentGameState.currentPlayer;
+
+	if (currentPlayer != null) {
+		const $currentPlayer = qs(`aside .player[data-player="${currentPlayer}"]`);
+		$currentPlayer.classList.add('playing');
+	}
+}
+
 function getCurrentGameState() {
 	getGameFetch(_gameId).then((gameState) => {
 		if (gameState.started) {
-			_currentGameState = gameState;
-			defaultActions(_currentGameState);
+			defaultActions(gameState);
+			isMyTurn(gameState);
 		}
 	});
 }
@@ -278,4 +285,6 @@ function handleRent(tilename) {
 			}
 		});
 	});
+function anythingChanged(gameState) {
+	return !isEqual(_currentGameState, gameState);
 }

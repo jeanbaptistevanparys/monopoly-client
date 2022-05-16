@@ -10,7 +10,7 @@ function processConnectionForm(e) {
 function gameExistChecker(amount, name) {
 	getGamesFetch(false, amount, _config.gamePrefix).then(games => {
 		if (games.length === 0) {
-			console.log('new game');
+			console.log('New Game');
 			createGame(name, amount);
 		} else {
 			showAvailableGames(games, name);

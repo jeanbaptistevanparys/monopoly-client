@@ -1,46 +1,36 @@
 'use strict';
 
 function importPLayerInfo() {
-	const thisPlayer = getThisPlayer();
+	const thisPlayer = _currentGameState.players.find(player => player.name == _playerName);
 	const properties = thisPlayer.properties;
-	displayName();
+	displayName(thisPlayer);
 	displayMoney(thisPlayer);
 	displayerNumberOfHousesAndHotels(properties);
-	displayNumberOfProperties(properties);
+	displayNumberOfgetOutOfJailFreeCards(thisPlayer);
 	displayProperties(properties);
 }
 
-function getThisPlayer() {
-	let thisPlayer;
-	for (const playerIndex in _currentGameState.players) {
-		if (_currentGameState.players[playerIndex].name == _playerName) {
-			thisPlayer = _currentGameState.players[playerIndex];
-		}
-	}
-	return thisPlayer;
-}
-
-function displayName() {
-	qs('#player-info h2').innerText = _playerName;
+function displayName(player) {
+	qs('#player-info h2').innerText = player.name;
 }
 
 function displayerNumberOfHousesAndHotels(properties) {
 	let numberOfHouses = 0;
 	let numberOfHotels = 0;
-	for (const propertyIndex in properties) {
-		if (properties[propertyIndex].houseCount) {
-			numberOfHouses += properties[propertyIndex].houseCount;
+	properties.forEach(property => {
+		if (property.houseCount) {
+			numberOfHouses += property.houseCount;
 		}
-		if (properties[propertyIndex].hotelCount) {
-			numberOfHotels += properties[propertyIndex].hotelCount;
+		if (property.hotelCount) {
+			numberOfHotels += property.hotelCount;
 		}
-	}
+	});
 	qs('#player-info .info p:nth-of-type(1) em').innerText = numberOfHouses;
 	qs('#player-info .info p:nth-of-type(2) em').innerText = numberOfHotels;
 }
 
-function displayNumberOfProperties(properties) {
-	qs('#player-info .info p:nth-of-type(3) em').innerText = properties.length;
+function displayNumberOfgetOutOfJailFreeCards(player) {
+	qs('#player-info .info p:nth-of-type(3) em').innerText = player.getOutOfJailFreeCards;
 }
 
 function displayMoney(thisPlayer) {
@@ -53,9 +43,9 @@ function displayMoney(thisPlayer) {
 
 function displayProperties(properties) {
 	qs('#player-info .properties').innerHTML = '';
-	for (const propertyIndex in properties) {
+	properties.forEach(property => {
 		const $template = qs('#player-property').content.firstElementChild.cloneNode(true);
-		getTileFetch(properties[propertyIndex].property).then(res => {
+		getTileFetch(property.property).then(res => {
 			const tile = res;
 			$template.querySelector('h3').innerText = tile.name;
 			$template.querySelector('p').innerHTML = `<span class="striketrough">M</span> ${tile.cost}`;
@@ -63,5 +53,5 @@ function displayProperties(properties) {
 			$template.querySelector('h3').style.backgroundColor = tile.color;
 		});
 		qs('#player-info .properties').insertAdjacentElement('beforeend', $template);
-	}
+	});
 }

@@ -15,7 +15,6 @@ function showDefaultPopup(
 	$template.querySelector('.submit-btns input').remove();
 	buttons.forEach(btn => {
 		let $btn = $button.cloneNode();
-		console.log(btn);
 		$btn.setAttribute('value', btn.text);
 		$btn.addEventListener('click', btn.function);
 		$template.querySelector('.submit-btns').insertAdjacentElement('beforeend', $btn);

@@ -117,6 +117,7 @@ main {
 	--dark-gray-trans: rgba(0, 0, 0, 0.5);
 	--bar-title: white;
 	--background-color: #178080;
+	--active-color: 120;
 	--board-size: 16.5rem;
 	--board-mid-elems: 9;
 	--footer-height: 5rem;
@@ -342,6 +343,9 @@ main aside .player {
 	padding: 1rem;
 	background-color: white;
 }
+main aside .player.playing {
+	background-color: hsl(var(--active-color), 100%, 80%);
+}
 
 main aside .player div {
 	display: flex;
@@ -533,7 +537,7 @@ main aside .player a {
 	height: 22rem;
 	min-width: 12rem;
 	width: 14rem;
-	border: 0.25rem solid rgb(3, 213, 3);
+	border: 0.25rem solid hsl(var(--active-color), 97%, 42%);
 	animation: active 1s 0.5s linear infinite;
 	display: grid;
 	place-items: center;
@@ -541,11 +545,11 @@ main aside .player a {
 
 @keyframes active {
 	0% {
-		border: 0.25rem solid rgb(3, 213, 3);
+		border: 0.25rem solid hsl(var(--active-color), 97%, 42%);
 		padding: 0rem;
 	}
 	100% {
-		border: 0rem solid rgb(3, 213, 3);
+		border: 0rem solid hsl(var(--active-color), 97%, 42%);
 		padding: 0.25rem;
 	}
 }
@@ -601,7 +605,6 @@ main aside .player a {
 }
 
 aside {
-	grid-area: players;
 	display: flex;
 }
 
