@@ -22,7 +22,9 @@ function defaultActions(gameState) {
 		if (anythingChanged(gameState) || _currentGameState == null) {
 			_currentGameState = gameState;
 
-			let playerInfo = _currentGameState.players.find(player => player.name == _playerName);
+			let playerInfo = _currentGameState.players.find(
+				(player) => player.name == _playerName
+			);
 			let playerCurrentTileIndex = getIndexOfTileByName(playerInfo.currentTile);
 
 			importCurrentTile(playerCurrentTileIndex);
@@ -76,7 +78,9 @@ function importPlayers() {
 }
 
 function makePlayerCard(player) {
-	const $template = document.querySelector('#player-template').content.firstElementChild.cloneNode(true);
+	const $template = document
+		.querySelector('#player-template')
+		.content.firstElementChild.cloneNode(true);
 	$template.setAttribute('data-player', player.name);
 	$template.querySelector('h2').innerText = player.name;
 	$template.querySelector('p').insertAdjacentHTML('beforeend', player.money);
@@ -139,7 +143,7 @@ function handleRollDice(e) {
 	e.preventDefault();
 
 	rollDiceFetch(_gameId, _playerName)
-		.then(state => {
+		.then((state) => {
 			closePopup(e);
 			showRolledDicePopup(state.lastDiceRoll, (event) => {
 				closePopup(event);
@@ -263,28 +267,35 @@ function getCurrentGameState() {
 
 function checkIfRent() {
 	if (isMyTurn()) {
-		handleRent(getThisPlayer().currentTile);
+		let player = _currentGameState.players.find(
+			(player) => player.name == _playerName
+		);
+		handleRent(player.currentTile);
 	}
 }
 
-function handleRent(tilename) {		
+function handleRent(tilename) {
 	console.log('rent has been handeled');
 	_currentGameState.players.forEach((player) => {
 		player.properties.forEach((property) => {
-			if (property.name === tilename && player.name != _playerName) {
-				console.error("RENTEEEEEEEEEENNNNNN")
+			console.log(property.property,tilename,player.name,_playerName)
+			if (property.property === tilename && player.name != _playerName) {
+				console.error('RENTEEEEEEEEEENNNNNN');
 				stopMyTurnChecker();
 				collectDebtFetch(_gameId, _playerName, property.property, player.name);
-				showDefaultPopup('Rent', 'you payed rent', ' to ' + debtorName, [{
-					text:'Continue',
-					function: (e) => {
-						startMyTurnChecker();
-						closePopup(e);
-					}
-			}]);
+				showDefaultPopup('Rent', 'you payed rent', ' to ' + player.name, [
+					{
+						text: 'Continue',
+						function: (e) => {
+							startMyTurnChecker();
+							closePopup(e);
+						},
+					},
+				]);
 			}
 		});
 	});
+}
 function anythingChanged(gameState) {
 	return !isEqual(_currentGameState, gameState);
 }
