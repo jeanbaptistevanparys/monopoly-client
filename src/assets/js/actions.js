@@ -140,13 +140,14 @@ function checkIfChangeOrCommunity(state) {
 }
 
 function handleChanceOrCommunity(currentTileName) {
-	const playerMoves = _currentGameState.turns.find(turn => turn.player == _playerName).moves;
+	const playerTurns = _currentGameState.turns.filter(turn => turn.player == _playerName);
+	const playerMoves = playerTurns[playerTurns.length - 1].moves;
 	let moves = '';
 	playerMoves.forEach(move => {
-		moves += `-> ${move.description} `;
+		moves += `${move.tile}:\n\n ${move.description} \n\n\n`;
 	});
 
-	showDefaultPopup(currentTileName, currentTileName, moves, [
+	showDefaultPopup(currentTileName, 'Moves', moves, [
 		{
 			text     : 'Close',
 			function : e => {
