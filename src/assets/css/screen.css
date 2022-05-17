@@ -19,6 +19,10 @@ body {
 
 img {
 	display: block;
+	user-select: none;
+}
+html {
+	scroll-behavior: smooth;
 }
 
 h1,
