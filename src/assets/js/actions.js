@@ -67,12 +67,18 @@ function importPlayers() {
 
 function makePlayerCard(player) {
 	const $template = document.querySelector('#player-template').content.firstElementChild.cloneNode(true);
+
+	const playerIndex = getIndexOfPlayer(player);
+	$template.querySelector('.pawn').src = `./assets/media/pawns/pawn-${playerIndex}.png`;
+	$template.querySelector('.pawn').alt = player.name;
 	$template.setAttribute('data-player', player.name);
 	$template.querySelector('h2').innerText = player.name;
 	$template.querySelector('p').insertAdjacentHTML('beforeend', player.money);
 	$template.querySelector('a').addEventListener('click', () => showPlayerInfoPopup(player.name, player.properties));
 	return $template;
 }
+
+function getPawnBackground(player) {}
 
 function makePropertyCard(tileIndex, players = null) {
 	const tile = _allTiles[tileIndex];
