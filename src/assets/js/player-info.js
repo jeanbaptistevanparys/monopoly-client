@@ -1,7 +1,7 @@
 'use strict';
 
 function importPLayerInfo() {
-	const thisPlayer = _currentGameState.players.find(player => player.name == _playerName);
+	const thisPlayer = getPlayerInfo(_playerName);
 	const properties = thisPlayer.properties;
 	displayName(thisPlayer);
 	displayMoney(thisPlayer);

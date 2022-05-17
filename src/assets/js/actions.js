@@ -22,10 +22,8 @@ function defaultActions(gameState) {
 		if (anythingChanged(gameState) || _currentGameState == null) {
 			_currentGameState = gameState;
 
-			let playerInfo = _currentGameState.players.find(
-				(player) => player.name == _playerName
-			);
-			let playerCurrentTileIndex = getIndexOfTileByName(playerInfo.currentTile);
+			const playerInfo = getPlayerInfo(_playerName);
+			const playerCurrentTileIndex = getIndexOfTileByName(playerInfo.currentTile);
 
 			importCurrentTile(playerCurrentTileIndex);
 			importNextTwelveTiles(playerCurrentTileIndex);
@@ -160,10 +158,39 @@ function handleRollDice(e) {
 			closePopup(e);
 			showRolledDicePopup(state.lastDiceRoll, (event) => {
 				closePopup(event);
-				startMyTurnChecker();
+				checkIfChangeOrCommunity(state);
 			});
 		})
 		.catch((error) => errorHandler(error));
+}
+
+function checkIfChangeOrCommunity(state) {
+	const playerInfo = getPlayerInfo(_playerName, state);
+	if (playerInfo.currentTile.includes('Chance') || playerInfo.currentTile.includes('Chest')) {
+		stopMyTurnChecker();
+		handleChanceOrCommunity(playerInfo.currentTile);
+	} else {
+		startMyTurnChecker();
+	}
+}
+
+function handleChanceOrCommunity(currentTileName) {
+	const playerTurns = _currentGameState.turns.filter(turn => turn.player == _playerName);
+	const playerMoves = playerTurns[playerTurns.length - 1].moves;
+	let moves = '';
+	playerMoves.forEach(move => {
+		moves += `${move.tile}:\n\n ${move.description} \n\n\n`;
+	});
+
+	showDefaultPopup(currentTileName, 'Moves', moves, [
+		{
+			text     : 'Close',
+			function : e => {
+				closePopup(e);
+				startMyTurnChecker();
+			}
+		}
+	]);
 }
 
 function checkIfCanPurchase() {
@@ -299,9 +326,7 @@ function handleRent(propertyname, playername) {
 
 function isRent() {
 	let res = [];
-	let playerInfo = _currentGameState.players.find(
-		(player) => player.name == _playerName
-	);
+	let playerInfo = getPlayerInfo();
 	playerInfo.properties.forEach((playerproperty) => {
 		_currentGameState.players.forEach((player) => {
 			if (
