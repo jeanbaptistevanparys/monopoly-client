@@ -43,7 +43,7 @@ function getIndexOfPlayer(playerObj) {
 	return index;
 }
 
-function getPlayerInfo(playerName, gameState = _currentGameState) {
+function getPlayerInfo(playerName = _playerName, gameState = _currentGameState) {
 	return gameState.players.find(player => player.name == playerName);
 }
 
