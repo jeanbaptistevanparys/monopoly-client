@@ -34,6 +34,7 @@ function init() {
 function setAllEventListeners() {
 	qs('#start').addEventListener('click', showSettings);
 	qs('body header .icon-close').addEventListener('click', checkBankruptcy);
+	qs('#rent').addEventListener('click', rentChecker);
 }
 
 function stopMyTurnChecker() {

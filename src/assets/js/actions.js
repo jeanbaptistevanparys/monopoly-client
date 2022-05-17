@@ -32,6 +32,7 @@ function defaultActions(gameState) {
 			importPLayerInfo();
 			importPlayers();
 			markCurrentPlayer();
+			checkIfRent();
 		}
 		_currentGameState = gameState;
 		checkIfEnoughPlayers();
@@ -82,10 +83,14 @@ function importPlayers() {
 }
 
 function makePlayerCard(player) {
-	const $template = document.querySelector('#player-template').content.firstElementChild.cloneNode(true);
+	const $template = document
+		.querySelector('#player-template')
+		.content.firstElementChild.cloneNode(true);
 
 	const playerIndex = getIndexOfPlayer(player);
-	$template.querySelector('.pawn').src = `./assets/media/pawns/pawn-${playerIndex}.png`;
+	$template.querySelector(
+		'.pawn'
+	).src = `./assets/media/pawns/pawn-${playerIndex}.png`;
 	$template.querySelector('.pawn').alt = player.name;
 	$template.setAttribute('data-player', player.name);
 	$template.querySelector('h2').innerText = player.name;
@@ -273,42 +278,58 @@ function getCurrentGameState() {
 	});
 }
 
-function checkIfRent() {
-	let checker = false;
-	let checkCurrentGameState;
-	getGameFetch(_gameId).then((res) => {
-		checkCurrentGameState = res;
-		let playerInfo = checkCurrentGameState.players.find(
-			(player) => player.name == _playerName
-		);
-		console.log(playerInfo.money);
-		checkCurrentGameState.players.forEach((player) => {
-			player.properties.forEach((propertyOfPlayer) => {
-				if (
-					propertyOfPlayer.property === playerInfo.currentTile &&
-					player.name != _playerName
-				) {
-					handleRent(propertyOfPlayer.property, player.name);
-					checker = true;
-				}
-			});
-		});
-		return checker;
-	});
+function rentChecker() {
+	const player = isRent();
+	if (player) player.forEach(p => handleRent(p.currentTile, p.name));
 }
 
 function handleRent(propertyname, playername) {
-	collectDebtFetch(_gameId, playername, propertyname, _playerName);
-	console.log(_gameId, _playerName, propertyname, playername);
-	showDefaultPopup('Rent', 'you payed rent', ' to ' + playername, [
+	collectDebtFetch(propertyname, playername);
+	console.log('COLLECTED RENT', _gameId, _playerName, propertyname, playername);
+	stopMyTurnChecker();
+	showDefaultPopup('Rent', 'you collected rent from', playername, [
 		{
 			text: 'Continue',
 			function: (e) => {
 				closePopup(e);
-				startMyTurnChecker();
 			},
 		},
 	]);
+}
+
+function isRent() {
+	let res = [];
+	let playerInfo = _currentGameState.players.find(
+		(player) => player.name == _playerName
+	);
+	playerInfo.properties.forEach((playerproperty) => {
+		_currentGameState.players.forEach((player) => {
+			if (
+				player.currentTile === playerproperty.property &&
+				player.name != _playerName && isMyTurn()
+			) {
+				res.push(player);
+				rentButtonOff();
+			}
+		});
+	});
+	return res;
+}
+
+function checkIfRent() {
+	if (!isRent().length == 0) {
+		qs('#rent').classList.remove('inner-elem');
+		qs('#rent').classList.add('outer-elem');
+		qs('#rent').classList.add('lightgreen');
+	} else {
+		rentButtonOff();
+	}
+}
+
+function rentButtonOff() {
+	qs('#rent').classList.remove('lightgreen');
+	qs('#rent').classList.remove('outer-elem');
+	qs('#rent').classList.add('inner-elem');
 }
 
 function showSettings(e) {
@@ -322,22 +343,27 @@ function checkBankruptcy(e) {
 	e.preventDefault();
 
 	stopMyTurnChecker();
-	showDefaultPopup('Leave game', 'Leave game', 'Do you really want to leave this game?', [
-		{
-			text     : 'Cancel',
-			function : event => {
-				closePopup(event);
-				startMyTurnChecker();
-			}
-		},
-		{
-			text     : 'Yes! Leave game',
-			function : event => {
-				closePopup(event);
-				handleBankruptcy();
-			}
-		}
-	]);
+	showDefaultPopup(
+		'Leave game',
+		'Leave game',
+		'Do you really want to leave this game?',
+		[
+			{
+				text: 'Cancel',
+				function: (event) => {
+					closePopup(event);
+					startMyTurnChecker();
+				},
+			},
+			{
+				text: 'Yes! Leave game',
+				function: (event) => {
+					closePopup(event);
+					handleBankruptcy();
+				},
+			},
+		]
+	);
 }
 
 function handleBankruptcy() {
@@ -348,7 +374,9 @@ function handleBankruptcy() {
 }
 
 function checkIfEnoughPlayers() {
-	const notEnoughPlayersPlaying = _currentGameState.players.filter(player => player.bankrupt !== false).length < 2;
+	const notEnoughPlayersPlaying =
+		_currentGameState.players.filter((player) => player.bankrupt !== false)
+			.length < 2;
 	if (notEnoughPlayersPlaying) {
 		stopMyTurnChecker();
 		showDefaultPopup(
@@ -357,12 +385,12 @@ function checkIfEnoughPlayers() {
 			'There are not enough players to resume the game',
 			[
 				{
-					text     : 'OK',
-					function : event => {
+					text: 'OK',
+					function: (event) => {
 						closePopup(event);
 						handleBankruptcy();
-					}
-				}
+					},
+				},
 			]
 		);
 	}
