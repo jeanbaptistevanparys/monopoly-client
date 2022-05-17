@@ -19,6 +19,7 @@ function showDefaultPopup(
 		$btn.addEventListener('click', btn.function);
 		$template.querySelector('.submit-btns').insertAdjacentElement('beforeend', $btn);
 	});
+	$template.querySelector('.icon-close').addEventListener('click', closePopup);
 	if (error) $template.classList.add('error');
 	_$popupContainer.insertAdjacentElement('beforeend', $template);
 }
@@ -111,6 +112,19 @@ function showTradePopup(playername, gamestate) {
 		);
 	});
 	_$popupContainer.insertAdjacentElement('beforeend', $template);
+}
+
+function showSettingsPopup(func) {
+	const $template = document.querySelector('#settings').content.firstElementChild.cloneNode(true);
+	const $leaveGameBtn = qs('#leave', $template);
+	const $closeBtn = qs('#close', $template);
+
+	$closeBtn.addEventListener('click', closePopup);
+	$leaveGameBtn.addEventListener('click', e => {
+		func(e);
+		closePopup(e);
+	});
+	_popupContainer.insertAdjacentElement('beforeend', $template);
 }
 
 function loadOptions($container, gameState, playerName) {

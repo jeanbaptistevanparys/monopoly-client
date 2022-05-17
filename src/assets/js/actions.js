@@ -33,6 +33,8 @@ function defaultActions(gameState) {
 			importPlayers();
 			markCurrentPlayer();
 		}
+		_currentGameState = gameState;
+		checkIfEnoughPlayers();
 		checkIfCanPurchase();
 		checkIfRollDice();
 	}
@@ -80,9 +82,11 @@ function importPlayers() {
 }
 
 function makePlayerCard(player) {
-	const $template = document
-		.querySelector('#player-template')
-		.content.firstElementChild.cloneNode(true);
+	const $template = document.querySelector('#player-template').content.firstElementChild.cloneNode(true);
+
+	const playerIndex = getIndexOfPlayer(player);
+	$template.querySelector('.pawn').src = `./assets/media/pawns/pawn-${playerIndex}.png`;
+	$template.querySelector('.pawn').alt = player.name;
 	$template.setAttribute('data-player', player.name);
 	$template.querySelector('h2').innerText = player.name;
 	$template.querySelector('p').insertAdjacentHTML('beforeend', player.money);
@@ -93,6 +97,8 @@ function makePlayerCard(player) {
 		);
 	return $template;
 }
+
+function getPawnBackground(player) {}
 
 function makePropertyCard(tileIndex, players = null) {
 	const tile = _allTiles[tileIndex];
@@ -303,4 +309,61 @@ function handleRent(propertyname, playername) {
 			},
 		},
 	]);
+}
+
+function showSettings(e) {
+	e.preventDefault();
+
+	stopMyTurnChecker();
+	showSettingsPopup(checkBankruptcy);
+}
+
+function checkBankruptcy(e) {
+	e.preventDefault();
+
+	stopMyTurnChecker();
+	showDefaultPopup('Leave game', 'Leave game', 'Do you really want to leave this game?', [
+		{
+			text     : 'Cancel',
+			function : event => {
+				closePopup(event);
+				startMyTurnChecker();
+			}
+		},
+		{
+			text     : 'Yes! Leave game',
+			function : event => {
+				closePopup(event);
+				handleBankruptcy();
+			}
+		}
+	]);
+}
+
+function handleBankruptcy() {
+	declareBankruptyFetch(_gameId, _playerName).then(() => {
+		localStorage.clear();
+		window.location.href = 'index.html';
+	});
+}
+
+function checkIfEnoughPlayers() {
+	const notEnoughPlayersPlaying = _currentGameState.players.filter(player => player.bankrupt !== false).length < 2;
+	if (notEnoughPlayersPlaying) {
+		stopMyTurnChecker();
+		showDefaultPopup(
+			'Not enough players',
+			'Not enough players',
+			'There are not enough players to resume the game',
+			[
+				{
+					text     : 'OK',
+					function : event => {
+						closePopup(event);
+						handleBankruptcy();
+					}
+				}
+			]
+		);
+	}
 }

@@ -52,7 +52,7 @@ function rollDiceFetch(_gameId, playerName) {
 }
 
 function declareBankruptyFetch(_gameId, playerName) {
-	return fetchFromServer(`/games/${_gameId}/players/${playerName}/bankrupty`, 'POST');
+	return fetchFromServer(`/games/${_gameId}/players/${playerName}/bankruptcy`, 'POST');
 }
 
 function setTaxEstimateFetch(_gameId, playerName) {
