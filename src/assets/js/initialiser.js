@@ -27,7 +27,13 @@ function init() {
 		})
 		.catch(errorHandler);
 
+	setAllEventListeners();
 	setInterval(getCurrentGameState, _config.delay);
+}
+
+function setAllEventListeners() {
+	qs('#start').addEventListener('click', showSettings);
+	qs('body header .icon-close').addEventListener('click', checkBankruptcy);
 }
 
 function stopMyTurnChecker() {

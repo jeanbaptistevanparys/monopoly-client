@@ -156,12 +156,10 @@
     <footer>
         <ul>
             <li><a class="outer-elem" id="start" href="#">Start</a></li>
-            <li class="action"><a class="outer-elem" id="roll" href="#">Roll</a></li>
-            <li class="action"><a class="outer-elem" id="buy" href="#">Buy</a></li>
             <li class="action"><a class="outer-elem" id="build" href="#">Build</a></li>
             <li class="action"><a class="outer-elem" id="sell" href="#">Sell</a></li>
-            <li class="action"><a class="outer-elem" id="mort" href="#">Mort</a></li>
-            <li class="action"><a class="outer-elem" id="unmort" href="#">Unmort</a></li>
+            <li class="action"><a class="outer-elem" id="mort" href="#">Mortgage</a></li>
+            <li class="action"><a class="outer-elem" id="unmort" href="#">Unmortgage</a></li>
         </ul>
         <section class="inner-elem" id="time">
             <h2>4:20</h2>
@@ -357,6 +355,28 @@
             </div>
             <p></p>
         </section>
+    </template>
+
+    <template id="settings">
+        <article class="popup">
+            <header>
+                <h2>Settings</h2>
+                <div class="icons">
+                    <div class="inner-elem icon icon-min"></div>
+                    <div class="inner-elem icon icon-max"></div>
+                    <div class="inner-elem icon icon-close"></div>
+                </div>
+            </header>
+            <section class="popup-content">
+                <h2>Game Settings</h2>
+                <form>
+                    <div class="submit-btns">
+                        <input type="button" id="leave" class="outer-elem" value="Leave Game">
+                        <input type="submit" id="close" class="outer-elem" value="Close">
+                    </div>
+                </form>
+            </section>
+        </article>
     </template>
 
 </body>
