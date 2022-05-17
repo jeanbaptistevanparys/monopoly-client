@@ -347,11 +347,20 @@ main aside .player.playing {
 	background-color: hsl(var(--active-color), 100%, 80%);
 }
 
-main aside .player div {
+main aside .player .title {
 	display: flex;
 	justify-content: space-between;
 	margin-bottom: 0.5rem;
 	border-bottom: 0.125rem solid black;
+}
+main aside .player .content {
+	margin-bottom: 2rem;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+main aside .player div img {
+	height: 2.5rem;
 }
 
 main aside .player h2 {
@@ -368,7 +377,6 @@ main aside .player a {
 	background-color: var(--dark-gray);
 	padding: 0.5rem;
 	text-align: center;
-	margin: 0 auto 2rem auto;
 	width: 10rem;
 }
 /* ============================== Board ================================*/
