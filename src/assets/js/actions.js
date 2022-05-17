@@ -33,11 +33,13 @@ function defaultActions(gameState) {
 			importPlayers();
 			markCurrentPlayer();
 		}
-		_currentGameState = gameState;
 		checkIfCanPurchase();
-		checkIfRent();
 		checkIfRollDice();
 	}
+}
+
+function anythingChanged(gameState) {
+	return !isEqual(_currentGameState, gameState);
 }
 
 function importCurrentTile(currentTileIndex) {
@@ -266,36 +268,39 @@ function getCurrentGameState() {
 }
 
 function checkIfRent() {
-	if (isMyTurn()) {
-		let player = _currentGameState.players.find(
+	let checker = false;
+	let checkCurrentGameState;
+	getGameFetch(_gameId).then((res) => {
+		checkCurrentGameState = res;
+		let playerInfo = checkCurrentGameState.players.find(
 			(player) => player.name == _playerName
 		);
-		handleRent(player.currentTile);
-	}
-}
-
-function handleRent(tilename) {
-	console.log('rent has been handeled');
-	_currentGameState.players.forEach((player) => {
-		player.properties.forEach((property) => {
-			console.log(property.property,tilename,player.name,_playerName)
-			if (property.property === tilename && player.name != _playerName) {
-				console.error('RENTEEEEEEEEEENNNNNN');
-				stopMyTurnChecker();
-				collectDebtFetch(_gameId, _playerName, property.property, player.name);
-				showDefaultPopup('Rent', 'you payed rent', ' to ' + player.name, [
-					{
-						text: 'Continue',
-						function: (e) => {
-							startMyTurnChecker();
-							closePopup(e);
-						},
-					},
-				]);
-			}
+		console.log(playerInfo.money);
+		checkCurrentGameState.players.forEach((player) => {
+			player.properties.forEach((propertyOfPlayer) => {
+				if (
+					propertyOfPlayer.property === playerInfo.currentTile &&
+					player.name != _playerName
+				) {
+					handleRent(propertyOfPlayer.property, player.name);
+					checker = true;
+				}
+			});
 		});
+		return checker;
 	});
 }
-function anythingChanged(gameState) {
-	return !isEqual(_currentGameState, gameState);
+
+function handleRent(propertyname, playername) {
+	collectDebtFetch(_gameId, playername, propertyname, _playerName);
+	console.log(_gameId, _playerName, propertyname, playername);
+	showDefaultPopup('Rent', 'you payed rent', ' to ' + playername, [
+		{
+			text: 'Continue',
+			function: (e) => {
+				closePopup(e);
+				startMyTurnChecker();
+			},
+		},
+	]);
 }
