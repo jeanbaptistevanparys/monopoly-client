@@ -280,7 +280,7 @@ function getCurrentGameState() {
 
 function rentChecker() {
 	const player = isRent();
-	if (player) player.forEach(p => handleRent(p.currentTile, p.name));
+	player.forEach(p => handleRent(p.currentTile, p.name));
 }
 
 function handleRent(propertyname, playername) {
