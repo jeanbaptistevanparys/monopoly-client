@@ -31,14 +31,15 @@ function init() {
 	setInterval(getCurrentGameState, _config.delay);
 }
 
+function setAllEventListeners() {
+	qs('#start').addEventListener('click', showSettings);
+	qs('body header .icon-close').addEventListener('click', checkBankruptcy);
+}
+
 function stopMyTurnChecker() {
 	_isPaused = true;
 }
 
 function startMyTurnChecker() {
 	_isPaused = false;
-}
-
-function setAllEventListeners() {
-	qs('#start').addEventListener('click', showSettings);
 }

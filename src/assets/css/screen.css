@@ -283,7 +283,7 @@ footer ul li a {
 }
 
 #start {
-	background-image: url("/src/assets/media/dice.png");
+	background-image: url("../media/Start.png");
 	background-repeat: no-repeat;
 	background-position: 0.5rem center;
 	background-size: 2rem;
@@ -294,32 +294,24 @@ footer ul li a {
 	margin-left: 0.5rem;
 }
 
-#roll {
-	background-image: url("/src/assets/media/dice.png");
-}
-
-#buy {
-	background-image: url("/src/assets/media/dice.png");
-}
-
 #build {
-	background-image: url("/src/assets/media/dice.png");
+	background-image: url("../media/dice.png");
 }
 
 #sell {
-	background-image: url("/src/assets/media/dice.png");
+	background-image: url("../media/dice.png");
 }
 
 #mort {
-	background-image: url("/src/assets/media/dice.png");
+	background-image: url("../media/dice.png");
 }
 
 #unmort {
-	background-image: url("/src/assets/media/dice.png");
+	background-image: url("../media/dice.png");
 }
 
 #trade {
-	background-image: url("/src/assets/media/dice.png");
+	background-image: url("../media/dice.png");
 }
 
 #time {

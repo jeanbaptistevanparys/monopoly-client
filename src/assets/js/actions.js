@@ -28,6 +28,7 @@ function defaultActions(gameState) {
 			markCurrentPlayer();
 		}
 		_currentGameState = gameState;
+		checkIfEnoughPlayers();
 		checkIfCanPurchase();
 		checkIfRollDice();
 	}
@@ -260,4 +261,25 @@ function handleBankruptcy() {
 		localStorage.clear();
 		window.location.href = 'index.html';
 	});
+}
+
+function checkIfEnoughPlayers() {
+	const notEnoughPlayersPlaying = _currentGameState.players.filter(player => player.bankrupt !== false).length < 2;
+	if (notEnoughPlayersPlaying) {
+		stopMyTurnChecker();
+		showDefaultPopup(
+			'Not enough players',
+			'Not enough players',
+			'There are not enough players to resume the game',
+			[
+				{
+					text     : 'OK',
+					function : event => {
+						closePopup(event);
+						handleBankruptcy();
+					}
+				}
+			]
+		);
+	}
 }
