@@ -95,9 +95,9 @@ function settleMortgageFetch(_gameId, playerName, propertyName) {
 	return fetchFromServer(`/games/${_gameId}/players/${playerName}/properties/${propertyName}/mortgage`, 'DELETE');
 }
 
-function collectDebtFetch(_gameId, playerName, propertyName, debtorName) {
+function collectDebtFetch( propertyName, debtorName) {
 	return fetchFromServer(
-		`/games/${_gameId}/players/${playerName}/properties/${propertyName}/visitors/${debtorName}/rent`,
+		`/games/${_gameId}/players/${_playerName}/properties/${propertyName}/visitors/${debtorName}/rent`,
 		'DELETE'
 	);
 }

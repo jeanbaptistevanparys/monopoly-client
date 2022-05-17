@@ -26,12 +26,17 @@ function defaultActions(gameState) {
 			importPLayerInfo();
 			importPlayers();
 			markCurrentPlayer();
+			checkIfRent();
 		}
 		_currentGameState = gameState;
 		checkIfEnoughPlayers();
 		checkIfCanPurchase();
 		checkIfRollDice();
 	}
+}
+
+function anythingChanged(gameState) {
+	return !isEqual(_currentGameState, gameState);
 }
 
 function importCurrentTile(currentTileIndex) {
@@ -262,8 +267,53 @@ function getCurrentGameState() {
 	});
 }
 
-function anythingChanged(gameState) {
-	return !isEqual(_currentGameState, gameState);
+function rentChecker() {
+	const player = isRent();
+	player.forEach(p => handleRent(p.currentTile, p.name));
+}
+
+function handleRent(propertyname, playername) {
+	collectDebtFetch(propertyname, playername);
+	console.log('COLLECTED RENT', _gameId, _playerName, propertyname, playername);
+	stopMyTurnChecker();
+	showDefaultPopup('Rent', 'you collected rent from', playername, [
+		{
+			text     : 'Continue',
+			function : e => {
+				closePopup(e);
+			}
+		}
+	]);
+}
+
+function isRent() {
+	let res = [];
+	let playerInfo = getPlayerInfo();
+	playerInfo.properties.forEach(playerproperty => {
+		_currentGameState.players.forEach(player => {
+			if (player.currentTile === playerproperty.property && player.name != _playerName && isMyTurn()) {
+				res.push(player);
+				rentButtonOff();
+			}
+		});
+	});
+	return res;
+}
+
+function checkIfRent() {
+	if (!isRent().length == 0) {
+		qs('#rent').classList.remove('inner-elem');
+		qs('#rent').classList.add('outer-elem');
+		qs('#rent').classList.add('lightgreen');
+	} else {
+		rentButtonOff();
+	}
+}
+
+function rentButtonOff() {
+	qs('#rent').classList.remove('lightgreen');
+	qs('#rent').classList.remove('outer-elem');
+	qs('#rent').classList.add('inner-elem');
 }
 
 function showSettings(e) {

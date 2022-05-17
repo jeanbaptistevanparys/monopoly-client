@@ -21,13 +21,13 @@ function showDefaultPopup(
 	});
 	$template.querySelector('.icon-close').addEventListener('click', closePopup);
 	if (error) $template.classList.add('error');
-	_popupContainer.insertAdjacentElement('beforeend', $template);
+	_$popupContainer.insertAdjacentElement('beforeend', $template);
 }
 
 function showDicePopup(funct) {
 	const $template = document.querySelector('#dice').content.firstElementChild.cloneNode(true);
 	$template.querySelector("input[type='submit']").addEventListener('click', funct);
-	_popupContainer.insertAdjacentElement('beforeend', $template);
+	_$popupContainer.insertAdjacentElement('beforeend', $template);
 }
 
 function showRolledDicePopup(numbers, funct) {
@@ -36,7 +36,7 @@ function showRolledDicePopup(numbers, funct) {
 	$template.querySelector('.roll-dice section img').src = `assets/media/dice/${numbers[0]}.png`;
 	$template.querySelector('.roll-dice section img + img').src = `assets/media/dice/${numbers[1]}.png`;
 	$template.querySelector('.roll-dice form input').addEventListener('click', funct);
-	_popupContainer.insertAdjacentElement('beforeend', $template);
+	_$popupContainer.insertAdjacentElement('beforeend', $template);
 }
 
 function showPlayerInfoPopup(playername, properties) {
@@ -44,9 +44,9 @@ function showPlayerInfoPopup(playername, properties) {
 	$template.querySelector('.playerpopup header h2').innerText = playername;
 	$template.querySelector('.playerpopup-content h2').innerText = playername;
 	$template.querySelector('.playerpopup .properties section').remove();
-	properties.forEach(smallProperty => {
-		const tile = _allTiles.find(tile => tile.name == smallProperty.property);
-		const $card = makePropertyCard(tile.position);
+	properties.forEach(propertyInfo => {
+		const tileInfo = _allTiles.find(tile => tile.name == propertyInfo.property);
+		const $card = makePropertyCard(tileInfo.position);
 		$template.querySelector('.playerpopup .properties').insertAdjacentElement('beforeend', $card);
 	});
 	$template.querySelector('.icon-close').addEventListener('click', closePopup);
@@ -78,7 +78,7 @@ function showTitledeedPopup(streetname, properties) {
 			$template.querySelector('.titledeed-content .values').insertAdjacentElement('beforeend', p2);
 		}
 	});
-	_popupContainer.insertAdjacentElement('beforeend', $template);
+	_$popupContainer.insertAdjacentElement('beforeend', $template);
 }
 
 function showTradePopup(playername, gamestate) {
@@ -108,7 +108,7 @@ function showTradePopup(playername, gamestate) {
 			$template.querySelector('.trade-names select').value
 		);
 	});
-	_popupContainer.insertAdjacentElement('beforeend', $template);
+	_$popupContainer.insertAdjacentElement('beforeend', $template);
 }
 
 function showSettingsPopup(func) {
@@ -147,5 +147,5 @@ function closePopup(e) {
 }
 
 function removePopupByClass(selector) {
-	if (_popupContainer.querySelector(selector)) qs(selector, _popupContainer).remove();
+	if (_$popupContainer.querySelector(selector)) qs(selector, _$popupContainer).remove();
 }
