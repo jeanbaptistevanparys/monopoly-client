@@ -43,6 +43,10 @@ function getIndexOfPlayer(playerObj) {
 	return index;
 }
 
+function getPlayerInfo(playerName, gameState = _currentGameState) {
+	return gameState.players.find(player => player.name == playerName);
+}
+
 function isMyTurn() {
 	return _currentGameState.currentPlayer == _playerName;
 }
