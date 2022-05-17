@@ -576,7 +576,7 @@ main aside .player a {
 .nextTwelve {
 	width: 100%;
 	min-height: 10rem;
-	height: 14rem;
+	/* height: 14rem; */
 	grid-area: nextTwelve;
 	display: flex;
 	flex-direction: row;
@@ -584,8 +584,9 @@ main aside .player a {
 }
 .nextTwelve .property {
 	width: 8%;
-	height: 100%;
-	max-height: 12.5rem;
+	aspect-ratio: 2/3;
+	/* height: 100%; */
+	/* max-height: 12.5rem; */
 }
 .nextTwelve .property .player {
 	padding: 7% 5%;
