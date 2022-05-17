@@ -74,11 +74,15 @@ function makePlayerCard(player) {
 	$template.setAttribute('data-player', player.name);
 	$template.querySelector('h2').innerText = player.name;
 	$template.querySelector('p').insertAdjacentHTML('beforeend', player.money);
+	qs('.status', $template).classList.add('hidden');
 	$template.querySelector('a').addEventListener('click', () => showPlayerInfoPopup(player.name, player.properties));
+	if (player.name == _playerName) {
+		qs('a', $template).remove();
+		qs('h2', $template).style.fontWeight = 'bold';
+		qs('.status', $template).classList.remove('hidden');
+	}
 	return $template;
 }
-
-function getPawnBackground(player) {}
 
 function makePropertyCard(tileIndex, players = null) {
 	const tile = _allTiles[tileIndex];
@@ -104,7 +108,6 @@ function makePropertyCard(tileIndex, players = null) {
 			$template.querySelector('.player').insertAdjacentHTML('beforeend', playerImg);
 		});
 	}
-
 	return $template;
 }
 
@@ -245,7 +248,8 @@ function markCurrentPlayer() {
 
 	if (currentPlayer != null) {
 		const $currentPlayer = qs(`aside .player[data-player="${currentPlayer}"]`);
-		$currentPlayer.classList.add('playing');
+		$currentPlayer.classList.add('lightgreen');
+		qs('.status', $currentPlayer).innerHTML = 'Your turn!';
 	}
 }
 

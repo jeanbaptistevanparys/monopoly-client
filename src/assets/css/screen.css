@@ -340,9 +340,6 @@ main aside .player {
 	padding: 1rem;
 	background-color: white;
 }
-main aside .player.playing {
-	background-color: hsl(var(--active-color), 100%, 80%);
-}
 
 main aside .player .title {
 	display: flex;
@@ -368,7 +365,9 @@ main aside .player p {
 	font-size: 1.5rem;
 	min-width: fit-content;
 }
-
+main aside .player .status {
+	font-size: 1rem;
+}
 main aside .player a {
 	display: block;
 	background-color: var(--dark-gray);
@@ -655,4 +654,9 @@ aside {
 /* ============================== HIDDEN ============================== */
 .hidden {
 	display: none;
+}
+
+/* ============================== Active ============================== */
+.lightgreen {
+	background-color: hsl(var(--active-color), 100%, 80%) !important;
 }

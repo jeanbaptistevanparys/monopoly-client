@@ -43,16 +43,13 @@ function showPlayerInfoPopup(playername, properties) {
 	const $template = document.querySelector('#playerinfo').content.firstElementChild.cloneNode(true);
 	$template.querySelector('.playerpopup header h2').innerText = playername;
 	$template.querySelector('.playerpopup-content h2').innerText = playername;
-	$template.querySelectorAll('.playerpopup .icons div').forEach(e => e.addEventListener('click', closePopup));
-	const $prop = $template.querySelector('.playerpopup .properties section').cloneNode(true);
 	$template.querySelector('.playerpopup .properties section').remove();
-	properties.forEach(property => {
-		let $propcopy = $prop.cloneNode(true);
-		$propcopy.querySelector('h3').innerText = property.property;
-		$propcopy.querySelector('h3').style.color = 'black';
-		$propcopy.querySelector('p').insertAdjacentHTML('beforeend', '');
-		$template.querySelector('.playerpopup .properties').insertAdjacentElement('beforeend', $propcopy);
+	properties.forEach(smallProperty => {
+		const tile = _allTiles.find(tile => tile.name == smallProperty.property);
+		const $card = makePropertyCard(tile.position);
+		$template.querySelector('.playerpopup .properties').insertAdjacentElement('beforeend', $card);
 	});
+	$template.querySelector('.icon-close').addEventListener('click', closePopup);
 	_popupContainer.insertAdjacentElement('beforeend', $template);
 }
 

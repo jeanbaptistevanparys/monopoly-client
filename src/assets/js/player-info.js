@@ -44,14 +44,9 @@ function displayMoney(thisPlayer) {
 function displayProperties(properties) {
 	qs('#player-info .properties').innerHTML = '';
 	properties.forEach(property => {
-		const $template = qs('#player-property').content.firstElementChild.cloneNode(true);
-		getTileFetch(property.property).then(res => {
-			const tile = res;
-			$template.querySelector('h3').innerText = tile.name;
-			$template.querySelector('p').innerHTML = `<span class="striketrough">M</span> ${tile.cost}`;
-			$template.style.backgroundColor = 'WHITE';
-			$template.querySelector('h3').style.backgroundColor = tile.color;
+		getTileFetch(property.property).then(tile => {
+			const $template = makePropertyCard(tile.position);
+			qs('#player-info .properties').insertAdjacentElement('beforeend', $template);
 		});
-		qs('#player-info .properties').insertAdjacentElement('beforeend', $template);
 	});
 }
