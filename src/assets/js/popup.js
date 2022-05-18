@@ -20,7 +20,11 @@ function showDefaultPopup(
 		$btn.addEventListener('click', btn.function);
 		$template.querySelector('.submit-btns').insertAdjacentElement('beforeend', $btn);
 	});
-	if (closeByCross) $template.querySelector('.icon-close').addEventListener('click', closePopup);
+	if (closeByCross) {
+		$template.querySelector('.icon-close').addEventListener('click', closePopup);
+	} else {
+		$template.querySelector('.icon-close').remove();
+	}
 	if (error) $template.classList.add('error');
 	_$popupContainer.insertAdjacentElement('beforeend', $template);
 }

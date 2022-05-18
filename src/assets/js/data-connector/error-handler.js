@@ -20,6 +20,7 @@ function errorHandler(error) {
 				}
 			}
 		],
+		true,
 		'error'
 	);
 }

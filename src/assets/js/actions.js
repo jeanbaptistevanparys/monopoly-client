@@ -217,7 +217,8 @@ function handleBuyProperty(e) {
 								startMyTurnChecker();
 							}
 						}
-					]
+					],
+					false
 				);
 			})
 			.catch(error => errorHandler(error));
