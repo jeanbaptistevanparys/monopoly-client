@@ -32,14 +32,16 @@
 	margin-bottom: 1rem;
 }
 
-.popup-content form input {
+.popup-content form input,
+.titledeed-content form input {
 	padding: 0.5rem;
 	border-radius: 0;
 	border: 0;
 	background-color: var(--dark-gray);
 }
 
-.popup-content .submit-btns {
+.popup-content .submit-btns,
+.titledeed-content .submit-btns {
 	display: flex;
 	align-items: center;
 	justify-content: space-around;
@@ -175,20 +177,36 @@
 }
 
 .titledeed-content .values {
-	display: grid;
-	grid-template-columns: 5fr 3fr;
+	display: flex;
+	flex-direction: column;
 }
 
-.titledeed-content .values p {
+.titledeed-content .values .option {
+	padding: 0.5rem;
+	padding-left: 1rem;
+	margin: 0.5rem 0;
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	align-items: center;
+	width: 100%;
+	font-weight: 600;
+	background-size: 2rem;
+	text-transform: capitalize;
+}
+.titledeed-content .values .option p {
 	font-size: 1.5rem;
 }
 
-.titledeed-content .values p.left {
+.titledeed-content .values .option p.left {
 	text-align: left;
 }
 
-.titledeed-content .values p.right {
+.titledeed-content .values .option p.right {
 	text-align: right;
+}
+.titledeed-content form input {
+	margin: 0 auto;
 }
 /* ============================== trade ================================*/
 .trade {

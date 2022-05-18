@@ -43,9 +43,11 @@ function displayMoney(thisPlayer) {
 
 function displayProperties(properties) {
 	qs('#player-info .properties').innerHTML = '';
-	properties.forEach(property => {
-		getTileFetch(property.property).then(tile => {
+	properties.forEach(propertyInfo => {
+		getTileFetch(propertyInfo.property).then(tile => {
 			const $template = makePropertyCard(tile.position);
+			$template.setAttribute('title', 'Show info');
+			$template.addEventListener('click', () => handleShowTitledeed(propertyInfo.property));
 			qs('#player-info .properties').insertAdjacentElement('beforeend', $template);
 		});
 	});

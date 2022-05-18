@@ -5,6 +5,7 @@ function showDefaultPopup(
 	title,
 	message,
 	buttons = [ { text: 'continue', function: closePopup } ],
+	closeByCross = true,
 	error = false
 ) {
 	const $template = document.querySelector('#default').content.firstElementChild.cloneNode(true);
@@ -19,7 +20,7 @@ function showDefaultPopup(
 		$btn.addEventListener('click', btn.function);
 		$template.querySelector('.submit-btns').insertAdjacentElement('beforeend', $btn);
 	});
-	$template.querySelector('.icon-close').addEventListener('click', closePopup);
+	if (closeByCross) $template.querySelector('.icon-close').addEventListener('click', closePopup);
 	if (error) $template.classList.add('error');
 	_$popupContainer.insertAdjacentElement('beforeend', $template);
 }
@@ -45,39 +46,40 @@ function showPlayerInfoPopup(playername, properties) {
 	$template.querySelector('.playerpopup-content h2').innerText = playername;
 	$template.querySelector('.playerpopup .properties section').remove();
 	properties.forEach(propertyInfo => {
-		const tileInfo = _allTiles.find(tile => tile.name == propertyInfo.property);
+		const tileInfo = getTileByName(propertyInfo.property);
 		const $card = makePropertyCard(tileInfo.position);
 		$template.querySelector('.playerpopup .properties').insertAdjacentElement('beforeend', $card);
 	});
 	$template.querySelector('.icon-close').addEventListener('click', closePopup);
-	_popupContainer.insertAdjacentElement('beforeend', $template);
+	_$popupContainer.insertAdjacentElement('beforeend', $template);
 }
 
-function showTitledeedPopup(streetname, properties) {
+function showTitledeedPopup(streetname, property, optionsWithFunctions) {
 	const $template = document.querySelector('#titledeed').content.firstElementChild.cloneNode(true);
 	$template.querySelector('.titledeed header h2').innerText = 'Titledeed';
 	$template.querySelector('.titledeed-content h2').innerText = streetname;
 	$template.querySelectorAll('.titledeed .icons div').forEach(e => e.addEventListener('click', closePopup));
-	const $prop = $template.querySelectorAll('.titledeed-content .values p');
+	const $optionsContainer = $template.querySelector('.titledeed-content .values');
 	$template.querySelectorAll('.titledeed-content .values p').forEach(e => e.remove());
-	let keylist = [
-		'rentWithOneHouse',
-		'rentWithTwoHouses',
-		'rentWithThreeHouses',
-		'rentWithFourHouses',
-		'rentWithHotel',
-		'housePrice'
-	];
-	Object.keys(properties).forEach(key => {
-		if (keylist.includes(key)) {
-			let p1 = $prop[0].cloneNode(true);
-			p1.innerText = `-${key}`;
-			let p2 = $prop[1].cloneNode(true);
-			p2.innerHTML = `<span class="striketrough">M</span> ${prop[key]}`;
-			$template.querySelector('.titledeed-content .values').insertAdjacentElement('beforeend', p1);
-			$template.querySelector('.titledeed-content .values').insertAdjacentElement('beforeend', p2);
+
+	Object.keys(property).forEach(option => {
+		if (Object.keys(optionsWithFunctions).includes(option)) {
+			const $optionText = `<p class="left">${option}</p>`;
+			const $optionPrice = `<p class="right"><span class="striketrough">M</span> ${property[option]}</p>`;
+			const $optionItem = `<li class="option inner-elem" data-option="${option}">${$optionText}${$optionPrice}</li>`;
+			$optionsContainer.insertAdjacentHTML('beforeend', $optionItem);
+			qs(`[data-option="${option}"]`, $optionsContainer).addEventListener('click', optionsWithFunctions[option]);
 		}
 	});
+	$template.querySelectorAll('.icon-close, input[type="submit"]').forEach(closeBtn =>
+		closeBtn.addEventListener('click', e => {
+			closePopup(e);
+			checkIfCanBuild();
+			if (!isMyTurn()) {
+				startMyTurnChecker();
+			}
+		})
+	);
 	_$popupContainer.insertAdjacentElement('beforeend', $template);
 }
 
@@ -121,7 +123,7 @@ function showSettingsPopup(func) {
 		func(e);
 		closePopup(e);
 	});
-	_popupContainer.insertAdjacentElement('beforeend', $template);
+	_$popupContainer.insertAdjacentElement('beforeend', $template);
 }
 
 function loadOptions($container, gameState, playerName) {

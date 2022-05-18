@@ -34,7 +34,9 @@ function init() {
 function setAllEventListeners() {
 	qs('#start').addEventListener('click', showSettings);
 	qs('body header .icon-close').addEventListener('click', checkBankruptcy);
-	qs('#rent').addEventListener('click', rentChecker);
+	turnButtonOff('#sell', showSettings); // TODO: Make functions
+	turnButtonOff('#mort', showSettings); // TODO: Make functions
+	turnButtonOff('#unmort', showSettings); // TODO: Make functions
 }
 
 function stopMyTurnChecker() {
@@ -43,4 +45,13 @@ function stopMyTurnChecker() {
 
 function startMyTurnChecker() {
 	_isPaused = false;
+}
+
+function getCurrentGameState() {
+	getGameFetch(_gameId).then(gameState => {
+		if (gameState.started) {
+			defaultActions(gameState);
+			isMyTurn(gameState);
+		}
+	});
 }

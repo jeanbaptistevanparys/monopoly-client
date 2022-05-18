@@ -47,8 +47,24 @@ function getPlayerInfo(playerName = _playerName, gameState = _currentGameState) 
 	return gameState.players.find(player => player.name == playerName);
 }
 
+function getTileByName(tileName) {
+	return _allTiles.find(tile => tile.name == tileName);
+}
+
 function isMyTurn() {
 	return _currentGameState.currentPlayer == _playerName;
 }
 
 const isEqual = (...objects) => objects.every(obj => JSON.stringify(obj) === JSON.stringify(objects[0]));
+
+function turnButtonOff(selector, func) {
+	qs(selector).removeEventListener('click', func);
+	qs(selector).classList.remove('outer-elem', 'lightgreen');
+	qs(selector).classList.add('inner-elem');
+}
+
+function turnButtonOn(selector, func) {
+	qs(selector).addEventListener('click', func);
+	qs(selector).classList.remove('inner-elem');
+	qs(selector).classList.add('outer-elem', 'lightgreen');
+}
