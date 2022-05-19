@@ -1,7 +1,7 @@
 'use strict';
 
 function checkGameStarted(_gameId) {
-	getGameFetch(_gameId).then(gameState => {
+	getGameFetch(_gameId).then((gameState) => {
 		if (gameState.started) {
 			bootGameBoardUi();
 			hideLoadingScreen();
@@ -19,7 +19,7 @@ function showAvailableGames(games, name) {
 	$createGameForm.classList.add('hidden');
 	$gameListPopup.classList.remove('hidden');
 
-	games.forEach(game => {
+	games.forEach((game) => {
 		const $game = `<li class="game outer-elem" id="${game.id}">${game.id}</li>`;
 		$gameList.insertAdjacentHTML('beforeend', $game);
 		qs(`#${game.id}`).addEventListener('click', () => joinGame(game.id, name));
@@ -31,18 +31,26 @@ function startLoadingScreen() {
 	const $loadingPieces = qsa('.loading-bar-piece');
 	let start = 0;
 	loading = setInterval(() => {
-		$loadingPieces.forEach(piece => piece.classList.add('hidden'));
+		$loadingPieces.forEach((piece) => piece.classList.add('hidden'));
 
 		$loadingPieces[start].classList.remove('hidden');
-		$loadingPieces[(start + 1) % $loadingPieces.length].classList.remove('hidden');
-		$loadingPieces[(start + 2) % $loadingPieces.length].classList.remove('hidden');
+		$loadingPieces[(start + 1) % $loadingPieces.length].classList.remove(
+			'hidden'
+		);
+		$loadingPieces[(start + 2) % $loadingPieces.length].classList.remove(
+			'hidden'
+		);
 		start++;
-		if (start === $loadingPieces.length) start = 0;
+		if (start === $loadingPieces.length) {
+			start = 0;
+		}
 	}, 100);
 }
 
 function stopLoadingScreen() {
-	if (loading) clearInterval(loading);
+	if (loading) {
+		clearInterval(loading);
+	}
 }
 
 function showLoadingScreen(gameState) {
@@ -61,5 +69,7 @@ function hideLoadingScreen() {
 }
 
 function bootGameBoardUi() {
-	if (!window.location.href.includes('game.html')) window.location.href = 'game.html';
+	if (!window.location.href.includes('game.html')) {
+		window.location.href = 'game.html';
+	}
 }

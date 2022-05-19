@@ -11,57 +11,13 @@
 	pointer-events: none;
 }
 
-/* ============================== Popup ================================*/
-.popup {
-	position: absolute;
-	left: 30vw;
-	width: 40vw;
-	top: 30vh;
-	height: 40vh;
-}
-
-.popup-content {
-	background-color: var(--light-gray-trans);
-	padding: 2rem;
-	border: 0.25rem solid var(--bar-dark);
-	border-top: 0;
-}
-
-.popup-content h2 {
-	font-size: 2rem;
-	margin-bottom: 1rem;
-}
-
-.popup-content form input {
-	padding: 0.5rem;
-	border-radius: 0;
-	border: 0;
-	background-color: var(--dark-gray);
-}
-
-.popup-content .submit-btns {
-	display: flex;
-	align-items: center;
-	justify-content: space-around;
-	margin-top: 2rem;
-}
-
-.playerpopup-content .properties {
-	height: 70%;
-}
-
-.popup.error {
-	width: 50vw;
-}
-.popup.error .popup-content {
-	padding-left: 10vw;
-	background: url('../media/error.png') 2rem 2rem no-repeat, var(--light-gray-trans);
-	background-size: calc(10vw - 4rem);
-}
-.popup.error .popup-content h2 {
-	color: #fa0016;
-}
 /* ============================== Roll Dice ================================*/
+.roll-dice h2 {
+	font-size: 3rem;
+	margin-bottom: 2rem;
+	text-align: center;
+}
+
 .roll-dice {
 	background-color: var(--light-gray-trans);
 	padding: 2rem;
@@ -75,12 +31,6 @@
 .roll-dice section {
 	display: flex;
 	justify-content: space-evenly;
-}
-
-.roll-dice h2 {
-	font-size: 3rem;
-	margin-bottom: 2rem;
-	text-align: center;
 }
 
 .roll-dice img {
@@ -190,6 +140,58 @@
 .titledeed-content .values p.right {
 	text-align: right;
 }
+
+/* ============================== Popup ================================*/
+.popup {
+	position: absolute;
+	left: 30vw;
+	width: 40vw;
+	top: 30vh;
+	height: 40vh;
+}
+
+.popup-content {
+	background-color: var(--light-gray-trans);
+	padding: 2rem;
+	border: 0.25rem solid var(--bar-dark);
+	border-top: 0;
+}
+
+.popup-content h2 {
+	font-size: 2rem;
+	margin-bottom: 1rem;
+}
+
+.popup-content form input {
+	padding: 0.5rem;
+	border-radius: 0;
+	border: 0;
+	background-color: var(--dark-gray);
+}
+
+.popup-content .submit-btns {
+	display: flex;
+	align-items: center;
+	justify-content: space-around;
+	margin-top: 2rem;
+}
+
+.playerpopup-content .properties {
+	height: 70%;
+}
+
+.popup.error {
+	width: 50vw;
+}
+.popup.error .popup-content {
+	padding-left: 10vw;
+	background: url('../media/error.png') 2rem 2rem no-repeat, var(--light-gray-trans);
+	background-size: calc(10vw - 4rem);
+}
+.popup.error .popup-content h2 {
+	color: #fa0016;
+}
+
 /* ============================== trade ================================*/
 .trade {
 	position: absolute;
