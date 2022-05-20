@@ -140,6 +140,16 @@ function loadOptions($container, gameState, playerName) {
 	});
 }
 
+function showHtmlPopup(headertitle, title, html, func) {
+	const $template = document.querySelector('#popup-with-html').content.firstElementChild.cloneNode(true);
+	$template.querySelector('header h2').innerText = headertitle;
+	$template.querySelector('.popup-content h2').innerText = title;
+	$template.querySelector('.popup-content .html-content').innerHTML = html;
+	$template.querySelector('.popup-content .close-btn').addEventListener('click', func);
+	$template.querySelector('.icon-close').addEventListener('click', closePopup);
+	_$popupContainer.insertAdjacentElement('beforeend', $template);
+}
+
 function closePopup(e) {
 	e.preventDefault();
 	e.target.closest('article').remove();

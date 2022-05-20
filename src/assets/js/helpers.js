@@ -52,6 +52,10 @@ function getTileByName(tileName) {
 	return _allTiles.find(tile => tile.name == tileName);
 }
 
+function getPropertyInfo(playerInfo, propertyName) {
+	return playerInfo.properties.find(propertyInfo => propertyInfo.property == propertyName);
+}
+
 function isMyTurn() {
 	return _currentGameState.currentPlayer === _playerName;
 }

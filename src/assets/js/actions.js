@@ -144,31 +144,30 @@ function handleRollDice(e) {
 			closePopup(e);
 			showRolledDicePopup(state.lastDiceRoll, event => {
 				closePopup(event);
-				checkIfChangeOrCommunity(state);
+				checkIfChanceOrCommunity(state);
 			});
 		})
 		.catch(error => errorHandler(error));
 }
 
-function checkIfChangeOrCommunity(state) {
+function checkIfChanceOrCommunity(state) {
 	const playerInfo = getPlayerInfo(_playerName, state);
 	if (playerInfo.currentTile.includes('Chance') || playerInfo.currentTile.includes('Chest')) {
 		stopMyTurnChecker();
-		handleChanceOrCommunity(playerInfo.currentTile);
+		handleChanceOrCommunity(state, playerInfo.currentTile);
 	} else {
 		startMyTurnChecker();
 	}
 }
 
-function handleChanceOrCommunity(currentTileName) {
-	const playerTurns = _currentGameState.turns.filter(turn => turn.player === _playerName);
-	const playerMoves = playerTurns[playerTurns.length - 1].moves;
-	let moves = '';
-	playerMoves.forEach(move => {
-		moves += `${move.tile}:\n\n ${move.description} \n\n\n`;
-	});
+function handleChanceOrCommunity(state, currentTileName) {
+	const playerTurns = state.turns.filter(turn => turn.player === _playerName);
+	const playerMove = playerTurns[playerTurns.length - 1].find(
+		turn => turn.tile.includes('Chance') || turn.player.includes('Chest')
+	);
+	const move = `${playerMove.tile} \n ${playerMove.description}`;
 
-	showDefaultPopup(currentTileName, 'Moves', moves, [
+	showDefaultPopup(currentTileName, 'Moves', move, [
 		{
 			text     : 'Close',
 			function : e => {
@@ -280,7 +279,9 @@ function checkIfCanBuild() {
 	turnButtonOff('#build', handleBuild);
 	if (playerOwnsProperty) {
 		const tileInfo = getTileByName(playerInfo.currentTile);
-		const propertyCountOfStreet = playerInfo.properties.filter(property => property.color == tileInfo.color).length;
+		const propertyCountOfStreet = playerInfo.properties.filter(
+			propertyInfo => getTileByName(propertyInfo.property).color == tileInfo.color
+		).length;
 		const hasStreet = propertyCountOfStreet == tileInfo.groupSize;
 		if (hasStreet) {
 			turnButtonOn('#build', handleBuild);
@@ -290,23 +291,78 @@ function checkIfCanBuild() {
 
 function handleBuild(e) {
 	e.preventDefault();
-
 	stopMyTurnChecker();
+
 	e.target.removeEventListener('click', handleBuild);
 	const playerInfo = getPlayerInfo();
-	const tileInfo = getTileByName(playerInfo.currentTile);
-	const options = {
-		rentWithOneHouse    : handleOneHouse,
-		rentWithTwoHouses   : handleTwoHouses,
-		rentWithThreeHouses : handleThreeHouses,
-		rentWithFourHouses  : handleFourHouses,
-		rentWithHotel       : handleWithHotel,
-		housePrice          : housePrice
-	};
-	showTitledeedPopup(tileInfo.name, tileInfo, options);
-	qsa('li.option').forEach(listItemOption =>
-		listItemOption.addEventListener('click', options[listItemOption['data-option']])
-	);
+	const propertyInfo = getPropertyInfo(playerInfo, playerInfo.currentTile);
+	const $popupContent = `<ul class="build-options">
+		<li class="outer-elem buildHouse">Build house</li>
+		<li class="buildHotel">Build hotel</li>
+	</ul>`;
+	showHtmlPopup('Build', `Building on: ${propertyInfo.property}`, $popupContent, event => {
+		startMyTurnChecker();
+		closePopup(event);
+	});
+
+	checkForBuildOptions(propertyInfo);
+}
+
+function checkForBuildOptions(propertyInfo) {
+	turnButtonOn('.buildHouse', () => handleBuildHouse(propertyInfo));
+	turnButtonOn('.buildHotel', () => handleBuildHotel(propertyInfo));
+
+	if (propertyInfo.houseCount < 4) {
+		turnButtonOff('.buildHotel', () => handleBuildHotel(propertyInfo));
+	} else {
+		turnButtonOff('.buildHouse', () => handleBuildHouse(propertyInfo));
+	}
+	if (propertyInfo.hotelCount == 1) {
+		turnButtonOff('.buildHouse', () => handleBuildHouse(propertyInfo));
+		turnButtonOff('.buildHotel', () => handleBuildHotel(propertyInfo));
+	}
+}
+
+function handleBuildHouse(tileInfo) {
+	buildHouseFetch(_gameId, _playerName, tileInfo.property)
+		.then(res => {
+			console.log(res);
+			showDefaultPopup(
+				'House built!',
+				'House built!',
+				`Congratulations! You just built a house on ${tileInfo.property}!`,
+				[
+					{
+						text     : 'Wohoo! Continue!',
+						function : event => {
+							closePopup(event);
+						}
+					}
+				]
+			);
+		})
+		.catch(error => errorHandler(error));
+}
+
+function handleBuildHotel(tileInfo) {
+	buildHotelFetch(_gameId, _playerName, tileInfo.property)
+		.then(res => {
+			console.log(res);
+			showDefaultPopup(
+				'Hotel built!',
+				'Hotel built!',
+				`Congratulations! You just built a hotel on ${tileInfo.property}!`,
+				[
+					{
+						text     : 'Wohoo! Continue!',
+						function : event => {
+							closePopup(event);
+						}
+					}
+				]
+			);
+		})
+		.catch(error => errorHandler(error));
 }
 
 function handleShowTitledeed(propertyName) {
@@ -320,30 +376,6 @@ function handleShowTitledeed(propertyName) {
 		housePrice          : housePrice
 	};
 	showTitledeedPopup(tileInfo.name, tileInfo, options);
-}
-
-function handleOneHouse() {
-	console.log('House 1');
-}
-
-function handleTwoHouses() {
-	console.log('House 2');
-}
-
-function handleThreeHouses() {
-	console.log('House 3');
-}
-
-function handleFourHouses() {
-	console.log('House 4');
-}
-
-function handleWithHotel() {
-	console.log('Hotel');
-}
-
-function housePrice() {
-	console.log('House price');
 }
 
 function rentChecker() {

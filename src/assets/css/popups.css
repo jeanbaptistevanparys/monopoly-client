@@ -184,6 +184,14 @@
 	border: 0;
 	background-color: var(--dark-gray);
 }
+.popup-content .html-content li {
+	margin: 1rem 0;
+	padding: 0.5rem 1rem;
+	background: url('../media/Shortcut-0.png') no-repeat bottom left;
+	font-family: 'W95FA', 'Courier New', monospace;
+	font-weight: bold;
+	cursor: pointer;
+}
 
 .popup-content .submit-btns {
 	display: flex;
