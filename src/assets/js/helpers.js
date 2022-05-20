@@ -14,10 +14,11 @@ function qsa(selector, parent = document) {
 
 function getIndexOfTileByName(tileName) {
 	for (let i = 0; i < _allTiles.length; i++) {
-		if (_allTiles[i].name == tileName) {
+		if (_allTiles[i].name === tileName) {
 			return i;
 		}
 	}
+	return null;
 }
 
 function getPlayersPos(players) {
@@ -36,7 +37,7 @@ function getPlayersPos(players) {
 function getIndexOfPlayer(playerObj) {
 	let index;
 	for (let i = 0; i < _currentGameState.players.length; i++) {
-		if (_currentGameState.players[i].name == playerObj.name) {
+		if (_currentGameState.players[i].name === playerObj.name) {
 			index = i;
 		}
 	}
@@ -44,7 +45,7 @@ function getIndexOfPlayer(playerObj) {
 }
 
 function getPlayerInfo(playerName = _playerName, gameState = _currentGameState) {
-	return gameState.players.find(player => player.name == playerName);
+	return gameState.players.find(player => player.name === playerName);
 }
 
 function getTileByName(tileName) {
@@ -52,7 +53,7 @@ function getTileByName(tileName) {
 }
 
 function isMyTurn() {
-	return _currentGameState.currentPlayer == _playerName;
+	return _currentGameState.currentPlayer === _playerName;
 }
 
 const isEqual = (...objects) => objects.every(obj => JSON.stringify(obj) === JSON.stringify(objects[0]));

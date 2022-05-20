@@ -1,4 +1,5 @@
 'use strict';
+
 let _token = null;
 
 document.addEventListener('DOMContentLoaded', init);

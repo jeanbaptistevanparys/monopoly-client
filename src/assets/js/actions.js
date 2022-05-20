@@ -41,7 +41,7 @@ function anythingChanged(gameState) {
 }
 
 function importCurrentTile(currentTileIndex) {
-	let propertyCard = makePropertyCard(currentTileIndex);
+	const propertyCard = makePropertyCard(currentTileIndex);
 	document.querySelector('.property-card').innerHTML = '';
 	document.querySelector('.property-card').insertAdjacentElement('beforeend', propertyCard);
 }
@@ -57,7 +57,7 @@ function importNextTwelveTiles(currentTileIndex) {
 		if (playerPositions[i]) {
 			players = playerPositions[i];
 		}
-		let propertyCard = makePropertyCard(i % 40, players);
+		const propertyCard = makePropertyCard(i % 40, players);
 		document.querySelector('.nextTwelve').insertAdjacentElement('beforeend', propertyCard);
 	}
 }
@@ -92,11 +92,25 @@ function makePlayerCard(player) {
 
 function makePropertyCard(tileIndex, players = null) {
 	const tile = _allTiles[tileIndex];
-	const $template = document.querySelector('#property-template').content.firstElementChild.cloneNode(true);
-	const textColorBlack = !tile.color || tile.color == 'WHITE' || tile.color == 'YELLOW' || tile.type == 'railroad';
-	if (textColorBlack) {
+	let $template = document.querySelector('#property-template').content.firstElementChild.cloneNode(true);
+	if (checkTextColor(tile)) {
 		$template.querySelector('h3').style.color = 'BLACK';
 	}
+
+	$template = setOptions($template, tile);
+
+	if (players != null) {
+		players.forEach(player => {
+			const playerIndex = getIndexOfPlayer(player);
+			const playerImg = `<img src="./assets/media/pawns/pawn-${playerIndex}.png" alt="${player}">`;
+			$template.querySelector('.player').insertAdjacentHTML('beforeend', playerImg);
+		});
+	}
+
+	return $template;
+}
+
+function setOptions($template, tile) {
 	if (tile.housePrice) {
 		$template.querySelector('h3').innerText = tile.name;
 		$template.querySelector('h3').style.backgroundColor = tile.color;
@@ -106,17 +120,11 @@ function makePropertyCard(tileIndex, players = null) {
 		$template.classList.add('special');
 		$template.querySelector('h3').innerText = tile.name;
 	}
-
-	if (players != null) {
-		players.forEach(player => {
-			const playerIndex = getIndexOfPlayer(player);
-			let activePlayer = '';
-			if (player.name == _currentGameState.currentPlayer) activePlayer = 'class="lightgreen"';
-			const playerImg = `<img src="./assets/media/pawns/pawn-${playerIndex}.png" alt="${player.name}" title="${player.name}" ${activePlayer}>`;
-			$template.querySelector('.player').insertAdjacentHTML('beforeend', playerImg);
-		});
-	}
 	return $template;
+}
+
+function checkTextColor(tile) {
+	return !tile.color || tile.color === 'WHITE' || tile.color === 'YELLOW' || tile.type === 'railroad';
 }
 
 function checkIfRollDice() {
@@ -153,7 +161,7 @@ function checkIfChangeOrCommunity(state) {
 }
 
 function handleChanceOrCommunity(currentTileName) {
-	const playerTurns = _currentGameState.turns.filter(turn => turn.player == _playerName);
+	const playerTurns = _currentGameState.turns.filter(turn => turn.player === _playerName);
 	const playerMoves = playerTurns[playerTurns.length - 1].moves;
 	let moves = '';
 	playerMoves.forEach(move => {
@@ -172,7 +180,7 @@ function handleChanceOrCommunity(currentTileName) {
 }
 
 function checkIfCanPurchase() {
-	let canPurchase = _currentGameState.directSale && isMyTurn();
+	const canPurchase = _currentGameState.directSale && isMyTurn();
 	stopMyTurnChecker();
 	removePopupByClass('.popup');
 	if (canPurchase) {
@@ -201,7 +209,7 @@ function checkIfCanPurchase() {
 function handleBuyProperty(e) {
 	e.preventDefault();
 
-	let propertyName = _currentGameState.directSale;
+	const propertyName = _currentGameState.directSale;
 	if (propertyName != null) {
 		buyPropertyFetch(_gameId, _playerName, propertyName)
 			.then(res => {
@@ -250,7 +258,7 @@ function checkIfSkipProperty(e) {
 function handleSkipProperty(e) {
 	e.preventDefault();
 
-	let propertyName = _currentGameState.directSale;
+	const propertyName = _currentGameState.directSale;
 	skipPropertyFetch(_gameId, _playerName, propertyName).catch(error => errorHandler(error));
 }
 
@@ -352,7 +360,6 @@ function handleRent(player) {
 	stopMyTurnChecker();
 	collectDebtFetch(player.currentTile, player.name).then(res => {
 		saveToStorage('handledRent', true);
-		console.log(loadFromStorage('handledRent'));
 		getGameFetch(_gameId).then(gameState => {
 			const newPlayerInfo = getPlayerInfo(player.name, gameState);
 			const rentAmount = previousPlayerInfo.money - newPlayerInfo.money;

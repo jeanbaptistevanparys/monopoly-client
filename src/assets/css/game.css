@@ -8,6 +8,11 @@
 	justify-content: space-around;
 }
 
+label,
+p {
+	font-size: 1.5rem;
+}
+
 /* ============================== Popups ================================*/
 .popup {
 	width: 40%;
@@ -62,11 +67,6 @@
 	margin: 0.5rem 0;
 }
 
-label,
-p {
-	font-size: 1.5rem;
-}
-
 #games label {
 	padding: 0.5rem;
 	display: block;
@@ -86,7 +86,7 @@ p {
 	margin: 1rem 0;
 	padding: 0.5rem;
 	padding-left: 1rem;
-	font-family: 'W95FA';
+	font-family: 'W95FA', 'Courier New', monospace;
 	font-weight: 600;
 	background: url('../media/Shortcut-0.png') no-repeat bottom left;
 	background-size: 2rem;

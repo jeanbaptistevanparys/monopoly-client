@@ -15,7 +15,7 @@ function showDefaultPopup(
 	const $button = $template.querySelector('.submit-btns input').cloneNode();
 	$template.querySelector('.submit-btns input').remove();
 	buttons.forEach(btn => {
-		let $btn = $button.cloneNode();
+		const $btn = $button.cloneNode();
 		$btn.setAttribute('value', btn.text);
 		$btn.addEventListener('click', btn.function);
 		$template.querySelector('.submit-btns').insertAdjacentElement('beforeend', $btn);
@@ -88,31 +88,24 @@ function showTitledeedPopup(streetname, property, optionsWithFunctions) {
 }
 
 function showTradePopup(playername, gamestate) {
+	const selector = '.trade-names select';
 	const $template = document.querySelector('#trade').content.firstElementChild.cloneNode(true);
 	$template.querySelector('.trade-content .trade-names h2').innerText = playername;
 	$template.querySelectorAll('.trade .icons div').forEach(e => e.addEventListener('click', closePopup));
-	const $option = $template.querySelector('.trade-names select option').cloneNode(true);
-	$template.querySelector('.trade-names select option').remove();
+	const $option = $template.querySelector(selector + ' option').cloneNode(true);
+	$template.querySelector(selector + ' option').remove();
 	gamestate['players'].forEach(player => {
-		if (playername != player.name) {
-			let $opt = $option.cloneNode(true);
+		if (playername !== player.name) {
+			const $opt = $option.cloneNode(true);
 			$opt.innerText = player.name;
 			$opt.setAttribute('value', player.name);
-			$template.querySelector('.trade-names select').insertAdjacentElement('beforeend', $opt);
+			$template.querySelector(selector).insertAdjacentElement('beforeend', $opt);
 		}
 	});
-	loadOptions(
-		$template.querySelector('.tradables ul + ul'),
-		gamestate,
-		$template.querySelector('.trade-names select').value
-	);
+	loadOptions($template.querySelector('.tradables ul + ul'), gamestate, $template.querySelector(selector).value);
 	loadOptions($template.querySelector('.tradables ul'), gamestate, playername);
-	$template.querySelector('.trade-names select').addEventListener('change', () => {
-		loadOptions(
-			$template.querySelector('.tradables ul + ul'),
-			gamestate,
-			$template.querySelector('.trade-names select').value
-		);
+	$template.querySelector(selector).addEventListener('change', () => {
+		loadOptions($template.querySelector('.tradables ul + ul'), gamestate, $template.querySelector(selector).value);
 	});
 	_$popupContainer.insertAdjacentElement('beforeend', $template);
 }
@@ -132,12 +125,12 @@ function showSettingsPopup(func) {
 
 function loadOptions($container, gameState, playerName) {
 	const $template = document.querySelector('#trade').content.firstElementChild.cloneNode(true);
-	let $li = $template.querySelector('.tradables ul li').cloneNode(true);
+	const $li = $template.querySelector('.tradables ul li').cloneNode(true);
 	$container.querySelectorAll('.action').forEach(e => e.remove());
 	gameState['players'].forEach(player => {
-		if (player.name == playerName) {
+		if (player.name === playerName) {
 			player['properties'].forEach(propertie => {
-				let $copyli = $li.cloneNode(true);
+				const $copyli = $li.cloneNode(true);
 				$copyli.querySelector('input').setAttribute('id', propertie.property);
 				$copyli.querySelector('label').setAttribute('for', propertie.property);
 				$copyli.querySelector('label').innerText = propertie.property;
@@ -153,5 +146,7 @@ function closePopup(e) {
 }
 
 function removePopupByClass(selector) {
-	if (_$popupContainer.querySelector(selector)) qs(selector, _$popupContainer).remove();
+	if (_$popupContainer.querySelector(selector)) {
+		qs(selector, _$popupContainer).remove();
+	}
 }
