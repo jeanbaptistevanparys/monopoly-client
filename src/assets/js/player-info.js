@@ -5,7 +5,7 @@ function importPLayerInfo() {
 	const properties = thisPlayer.properties;
 	displayName(thisPlayer);
 	displayMoney(thisPlayer);
-	displayerNumberOfHousesAndHotels(properties);
+	displayerNumberOfHousesAndHotels();
 	displayNumberOfgetOutOfJailFreeCards(thisPlayer);
 	displayProperties(properties);
 }
@@ -14,19 +14,9 @@ function displayName(player) {
 	qs('#player-info h2').innerText = player.name;
 }
 
-function displayerNumberOfHousesAndHotels(properties) {
-	let numberOfHouses = 0;
-	let numberOfHotels = 0;
-	properties.forEach(property => {
-		if (property.houseCount) {
-			numberOfHouses += property.houseCount;
-		}
-		if (property.hotelCount) {
-			numberOfHotels += property.hotelCount;
-		}
-	});
-	qs('#player-info .info p:nth-of-type(1) em').innerText = numberOfHouses;
-	qs('#player-info .info p:nth-of-type(2) em').innerText = numberOfHotels;
+function displayerNumberOfHousesAndHotels() {
+	qs('#player-info .info p:nth-of-type(1) em').innerText = _currentGameState.availableHouses;
+	qs('#player-info .info p:nth-of-type(2) em').innerText = _currentGameState.availableHotels;
 }
 
 function displayNumberOfgetOutOfJailFreeCards(player) {
