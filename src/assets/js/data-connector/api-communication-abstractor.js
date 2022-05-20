@@ -18,7 +18,7 @@ function fetchFromServer(path, httpVerb, requestBody){
 }
 
 function constructOptions(httpVerb, requestBody){
-    const options= {};
+    const options = {};
     options.method = httpVerb;
 
     options.headers = {};

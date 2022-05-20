@@ -2,7 +2,7 @@
 
 function processConnectionForm(e) {
 	e.preventDefault();
-	let playerName = document.querySelector('#name').value;
+	const playerName = document.querySelector('#name').value;
 	const amount = parseInt(document.querySelector('#amount').value);
 	gameExistChecker(amount, playerName);
 }

@@ -23,7 +23,9 @@ function defaultActions(gameState) {
 			_currentGameState = gameState;
 
 			const playerInfo = getPlayerInfo(_playerName);
-			const playerCurrentTileIndex = getIndexOfTileByName(playerInfo.currentTile);
+			const playerCurrentTileIndex = getIndexOfTileByName(
+				playerInfo.currentTile
+			);
 
 			importCurrentTile(playerCurrentTileIndex);
 			importNextTwelveTiles(playerCurrentTileIndex);
@@ -44,7 +46,7 @@ function anythingChanged(gameState) {
 }
 
 function importCurrentTile(currentTileIndex) {
-	let propertyCard = makePropertyCard(currentTileIndex);
+	const propertyCard = makePropertyCard(currentTileIndex);
 	document.querySelector('.property-card').innerHTML = '';
 	document
 		.querySelector('.property-card')
@@ -62,7 +64,7 @@ function importNextTwelveTiles(currentTileIndex) {
 		if (playerPositions[i]) {
 			players = playerPositions[i];
 		}
-		let propertyCard = makePropertyCard(i % 40, players);
+		const propertyCard = makePropertyCard(i % 40, players);
 		document
 			.querySelector('.nextTwelve')
 			.insertAdjacentElement('beforeend', propertyCard);
@@ -101,21 +103,31 @@ function makePlayerCard(player) {
 	return $template;
 }
 
-function getPawnBackground(player) {}
-
 function makePropertyCard(tileIndex, players = null) {
 	const tile = _allTiles[tileIndex];
-	const $template = document
+	let $template = document
 		.querySelector('#property-template')
 		.content.firstElementChild.cloneNode(true);
-	const textColorBlack =
-		!tile.color ||
-		tile.color == 'WHITE' ||
-		tile.color == 'YELLOW' ||
-		tile.type == 'railroad';
-	if (textColorBlack) {
+	if (checkTextColor(tile)) {
 		$template.querySelector('h3').style.color = 'BLACK';
 	}
+
+	$template = setOptions($template, tile);
+
+	if (players != null) {
+		players.forEach((player) => {
+			const playerIndex = getIndexOfPlayer(player);
+			const playerImg = `<img src="./assets/media/pawns/pawn-${playerIndex}.png" alt="${player}">`;
+			$template
+				.querySelector('.player')
+				.insertAdjacentHTML('beforeend', playerImg);
+		});
+	}
+
+	return $template;
+}
+
+function setOptions($template, tile) {
 	if (tile.housePrice) {
 		$template.querySelector('h3').innerText = tile.name;
 		$template.querySelector('h3').style.backgroundColor = tile.color;
@@ -129,18 +141,16 @@ function makePropertyCard(tileIndex, players = null) {
 		$template.classList.add('special');
 		$template.querySelector('h3').innerText = tile.type;
 	}
-
-	if (players != null) {
-		players.forEach((player) => {
-			const playerIndex = getIndexOfPlayer(player);
-			const playerImg = `<img src="./assets/media/pawns/pawn-${playerIndex}.png" alt="${player}">`;
-			$template
-				.querySelector('.player')
-				.insertAdjacentHTML('beforeend', playerImg);
-		});
-	}
-
 	return $template;
+}
+
+function checkTextColor(tile) {
+	return (
+		!tile.color ||
+		tile.color === 'WHITE' ||
+		tile.color === 'YELLOW' ||
+		tile.type === 'railroad'
+	);
 }
 
 function checkIfRollDice() {
@@ -166,7 +176,10 @@ function handleRollDice(e) {
 
 function checkIfChangeOrCommunity(state) {
 	const playerInfo = getPlayerInfo(_playerName, state);
-	if (playerInfo.currentTile.includes('Chance') || playerInfo.currentTile.includes('Chest')) {
+	if (
+		playerInfo.currentTile.includes('Chance') ||
+		playerInfo.currentTile.includes('Chest')
+	) {
 		stopMyTurnChecker();
 		handleChanceOrCommunity(playerInfo.currentTile);
 	} else {
@@ -175,26 +188,28 @@ function checkIfChangeOrCommunity(state) {
 }
 
 function handleChanceOrCommunity(currentTileName) {
-	const playerTurns = _currentGameState.turns.filter(turn => turn.player == _playerName);
+	const playerTurns = _currentGameState.turns.filter(
+		(turn) => turn.player === _playerName
+	);
 	const playerMoves = playerTurns[playerTurns.length - 1].moves;
 	let moves = '';
-	playerMoves.forEach(move => {
+	playerMoves.forEach((move) => {
 		moves += `${move.tile}:\n\n ${move.description} \n\n\n`;
 	});
 
 	showDefaultPopup(currentTileName, 'Moves', moves, [
 		{
-			text     : 'Close',
-			function : e => {
+			text: 'Close',
+			function: (e) => {
 				closePopup(e);
 				startMyTurnChecker();
-			}
-		}
+			},
+		},
 	]);
 }
 
 function checkIfCanPurchase() {
-	let canPurchase = _currentGameState.directSale && isMyTurn();
+	const canPurchase = _currentGameState.directSale && isMyTurn();
 	stopMyTurnChecker();
 	removePopupByClass('.popup');
 	if (canPurchase) {
@@ -228,7 +243,7 @@ function checkIfCanPurchase() {
 function handleBuyProperty(e) {
 	e.preventDefault();
 
-	let propertyName = _currentGameState.directSale;
+	const propertyName = _currentGameState.directSale;
 	if (propertyName != null) {
 		buyPropertyFetch(_gameId, _playerName, propertyName)
 			.then((res) => {
@@ -281,7 +296,7 @@ function checkIfSkipProperty(e) {
 function handleSkipProperty(e) {
 	e.preventDefault();
 
-	let propertyName = _currentGameState.directSale;
+	const propertyName = _currentGameState.directSale;
 	skipPropertyFetch(_gameId, _playerName, propertyName).catch((error) =>
 		errorHandler(error)
 	);
@@ -307,7 +322,7 @@ function getCurrentGameState() {
 
 function rentChecker() {
 	const player = isRent();
-	player.forEach(p => handleRent(p.currentTile, p.name));
+	player.forEach((p) => handleRent(p.currentTile, p.name));
 }
 
 function handleRent(propertyname, playername) {
@@ -325,13 +340,14 @@ function handleRent(propertyname, playername) {
 }
 
 function isRent() {
-	let res = [];
-	let playerInfo = getPlayerInfo();
+	const res = [];
+	const playerInfo = getPlayerInfo();
 	playerInfo.properties.forEach((playerproperty) => {
 		_currentGameState.players.forEach((player) => {
 			if (
 				player.currentTile === playerproperty.property &&
-				player.name != _playerName && isMyTurn()
+				player.name !== _playerName &&
+				isMyTurn()
 			) {
 				res.push(player);
 				rentButtonOff();
@@ -342,7 +358,7 @@ function isRent() {
 }
 
 function checkIfRent() {
-	if (!isRent().length == 0) {
+	if (!isRent().length) {
 		qs('#rent').classList.remove('inner-elem');
 		qs('#rent').classList.add('outer-elem');
 		qs('#rent').classList.add('lightgreen');
