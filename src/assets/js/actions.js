@@ -162,8 +162,8 @@ function checkIfChanceOrCommunity(state) {
 
 function handleChanceOrCommunity(state, currentTileName) {
 	const playerTurns = state.turns.filter(turn => turn.player === _playerName);
-	const playerMove = playerTurns[playerTurns.length - 1].find(
-		turn => turn.tile.includes('Chance') || turn.player.includes('Chest')
+	const playerMove = playerTurns[playerTurns.length - 1].moves.find(
+		turn => turn.tile.includes('Chance') || turn.tile.includes('Chest')
 	);
 	const move = `${playerMove.tile} \n ${playerMove.description}`;
 
@@ -325,8 +325,7 @@ function checkForBuildOptions(propertyInfo) {
 
 function handleBuildHouse(tileInfo) {
 	buildHouseFetch(_gameId, _playerName, tileInfo.property)
-		.then(res => {
-			console.log(res);
+		.then(() => {
 			showDefaultPopup(
 				'House built!',
 				'House built!',
@@ -346,8 +345,7 @@ function handleBuildHouse(tileInfo) {
 
 function handleBuildHotel(tileInfo) {
 	buildHotelFetch(_gameId, _playerName, tileInfo.property)
-		.then(res => {
-			console.log(res);
+		.then(() => {
 			showDefaultPopup(
 				'Hotel built!',
 				'Hotel built!',
@@ -392,6 +390,7 @@ function handleRent(player) {
 	stopMyTurnChecker();
 	collectDebtFetch(player.currentTile, player.name).then(res => {
 		saveToStorage('handledRent', true);
+		console.log('True');
 		getGameFetch(_gameId).then(gameState => {
 			const newPlayerInfo = getPlayerInfo(player.name, gameState);
 			const rentAmount = previousPlayerInfo.money - newPlayerInfo.money;
@@ -426,6 +425,7 @@ function getPlayersOnYourProperty() {
 function checkIfRent() {
 	if (!isMyTurn()) {
 		saveToStorage('handledRent', false);
+		console.log('False');
 	}
 	if (!getPlayersOnYourProperty().length == 0 && !loadFromStorage('handledRent')) {
 		turnButtonOn('#rent', rentChecker);

@@ -48,7 +48,8 @@ p {
 	background-color: var(--light-gray);
 }
 
-.popup-content form input[type='submit'] {
+.popup-content form input[type='submit'],
+.leave-btn {
 	padding: 0.5rem 0;
 	width: 8rem;
 	margin: 1rem auto 1rem auto;
@@ -73,8 +74,31 @@ p {
 	background-color: white;
 }
 
+.choose-pawn {
+	margin-top: 1rem;
+	width: 100%;
+	display: flex;
+	flex-direction: column;
+}
+.pawns {
+	margin-top: 0.5rem;
+	width: 100%;
+	display: flex;
+	justify-content: space-between;
+}
 .popup-content input[type="radio"] {
 	display: none;
+}
+.pawn-img {
+	padding: 0.5rem;
+	width: 10%;
+	aspect-ratio: 1;
+}
+.pawn-img:checked {
+	background-color: hsl(var(--active-color), 100%, 80%);
+}
+.pawn-img img {
+	width: 100%;
 }
 
 .game-list ul {
