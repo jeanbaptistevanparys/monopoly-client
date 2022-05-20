@@ -339,19 +339,25 @@ function housePrice() {
 }
 
 function rentChecker() {
-	const player = isRent();
-	player.forEach(p => handleRent(p.currentTile, p.name));
+	const players = getPlayersOnYourProperty();
+	players.forEach(player => {
+		if (!loadFromStorage('handledRent')) {
+			handleRent(player);
+		}
+	});
 }
 
-function handleRent(propertyname, playername) {
-	const previousPlayerInfo = getPlayerInfo(playername);
+function handleRent(player) {
+	const previousPlayerInfo = getPlayerInfo(player.name);
 	stopMyTurnChecker();
-	collectDebtFetch(propertyname, playername).then(res => {
+	collectDebtFetch(player.currentTile, player.name).then(res => {
+		saveToStorage('handledRent', true);
+		console.log(loadFromStorage('handledRent'));
 		getGameFetch(_gameId).then(gameState => {
-			const newPlayerInfo = getPlayerInfo(playername, gameState);
+			const newPlayerInfo = getPlayerInfo(player.name, gameState);
 			const rentAmount = previousPlayerInfo.money - newPlayerInfo.money;
 			if (res.result) {
-				showDefaultPopup('Rent', `${playername} paid rent!`, `${playername} paid M${rentAmount} rent!`, [
+				showDefaultPopup('Rent', `${player.name} paid rent!`, `${player.name} paid M${rentAmount} rent!`, [
 					{
 						text     : 'Continue',
 						function : e => {
@@ -364,7 +370,7 @@ function handleRent(propertyname, playername) {
 	});
 }
 
-function isRent() {
+function getPlayersOnYourProperty() {
 	let res = [];
 	let playerInfo = getPlayerInfo();
 	playerInfo.properties.forEach(playerproperty => {
@@ -379,7 +385,10 @@ function isRent() {
 }
 
 function checkIfRent() {
-	if (!isRent().length == 0) {
+	if (!isMyTurn()) {
+		saveToStorage('handledRent', false);
+	}
+	if (!getPlayersOnYourProperty().length == 0 && !loadFromStorage('handledRent')) {
 		turnButtonOn('#rent', rentChecker);
 	} else {
 		turnButtonOff('#rent', rentChecker);
