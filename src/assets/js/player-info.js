@@ -30,7 +30,7 @@ function displayerNumberOfHousesAndHotels(properties) {
 }
 
 function displayNumberOfgetOutOfJailFreeCards(player) {
-	qs('#player-info .info p:nth-of-type(3) em').innerText = player.getOutOfJailFreeCards;
+	qs('#player-info .info p:nth-of-type(3) em').innerText = player.outOfJailFreeCards;
 }
 
 function displayMoney(thisPlayer) {

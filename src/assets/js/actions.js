@@ -104,7 +104,7 @@ function makePropertyCard(tileIndex, players = null) {
 	} else {
 		$template.querySelector('.player').classList.add(trimSpaces(tile.type).toLowerCase());
 		$template.classList.add('special');
-		$template.querySelector('h3').innerText = tile.type;
+		$template.querySelector('h3').innerText = tile.name;
 	}
 
 	if (players != null) {
