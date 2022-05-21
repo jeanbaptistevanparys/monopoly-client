@@ -183,10 +183,11 @@ function checkIfCanPurchase() {
 	stopMyTurnChecker();
 	removePopupByClass('.popup');
 	if (canPurchase) {
+		const propertyInfo = getTileByName(_currentGameState.directSale);
 		showDefaultPopup(
 			'Purchase',
 			`Purchase: ${_currentGameState.directSale}`,
-			'Do you want to buy this property?',
+			`Do you want to buy this property? \n Cost price: M${propertyInfo.cost}`,
 			[
 				{
 					text     : 'Ignore property',
