@@ -74,8 +74,8 @@ function importPlayers() {
 function makePlayerCard(player) {
 	const $template = document.querySelector('#player-template').content.firstElementChild.cloneNode(true);
 
-	const playerIndex = getIndexOfPlayer(player);
-	$template.querySelector('.pawn').src = `./assets/media/pawns/pawn-${playerIndex}.png`;
+	const pawnIndex = getPawnIndex(player);
+	$template.querySelector('.pawn').src = `./assets/media/pawns/pawn-${pawnIndex}.png`;
 	$template.querySelector('.pawn').alt = player.name;
 	$template.setAttribute('data-player', player.name);
 	$template.querySelector('h2').innerText = player.name;
@@ -101,8 +101,8 @@ function makePropertyCard(tileIndex, players = null) {
 
 	if (players != null) {
 		players.forEach(player => {
-			const playerIndex = getIndexOfPlayer(player);
-			const playerImg = `<img src="./assets/media/pawns/pawn-${playerIndex}.png" alt="${player}">`;
+			const pawnIndex = getPawnIndex(player);
+			const playerImg = `<img src="./assets/media/pawns/pawn-${pawnIndex}.png" alt="${player}">`;
 			$template.querySelector('.player').insertAdjacentHTML('beforeend', playerImg);
 		});
 	}
@@ -379,7 +379,7 @@ function handleShowTitledeed(propertyName) {
 function rentChecker() {
 	const players = getPlayersOnYourProperty();
 	players.forEach(player => {
-		if (!loadFromStorage('handledRent')) {
+		if (!loadFromStorage(_config.localStorageRent)) {
 			handleRent(player);
 		}
 	});
@@ -389,7 +389,7 @@ function handleRent(player) {
 	const previousPlayerInfo = getPlayerInfo(player.name);
 	stopMyTurnChecker();
 	collectDebtFetch(player.currentTile, player.name).then(res => {
-		saveToStorage('handledRent', true);
+		saveToStorage(_config.localStorageRent, true);
 		console.log('True');
 		getGameFetch(_gameId).then(gameState => {
 			const newPlayerInfo = getPlayerInfo(player.name, gameState);
@@ -424,10 +424,10 @@ function getPlayersOnYourProperty() {
 
 function checkIfRent() {
 	if (!isMyTurn()) {
-		saveToStorage('handledRent', false);
+		saveToStorage(_config.localStorageRent, false);
 		console.log('False');
 	}
-	if (!getPlayersOnYourProperty().length == 0 && !loadFromStorage('handledRent')) {
+	if (!getPlayersOnYourProperty().length == 0 && !loadFromStorage(_config.localStorageRent)) {
 		turnButtonOn('#rent', rentChecker);
 	} else {
 		turnButtonOff('#rent', rentChecker);

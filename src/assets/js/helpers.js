@@ -34,12 +34,17 @@ function getPlayersPos(players) {
 	return positions;
 }
 
-function getIndexOfPlayer(playerObj) {
-	let index;
-	for (let i = 0; i < _currentGameState.players.length; i++) {
-		if (_currentGameState.players[i].name === playerObj.name) {
-			index = i;
-		}
+// function getIndexOfPlayer(playerObj) {
+// 	return _currentGameState.players.findIndex(player => player === playerObj);
+// }
+
+function getPawnIndex(playerObj) {
+	if (playerObj.name === _playerName) {
+		return loadFromStorage(_config.localStoragePawnIndex);
+	}
+	const index = _currentGameState.players.findIndex(player => player === playerObj);
+	if (index === loadFromStorage(_config.localStoragePawnIndex)) {
+		return _currentGameState.players.findIndex(player => player.name === _playerName);
 	}
 	return index;
 }
