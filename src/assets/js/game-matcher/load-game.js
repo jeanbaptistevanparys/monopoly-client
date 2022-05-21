@@ -19,6 +19,7 @@ function showAvailableGames(games, name) {
 	$createGameForm.classList.add('hidden');
 	$gameListPopup.classList.remove('hidden');
 
+	$gameList.innerHTML = '';
 	games.forEach(game => {
 		const $game = `<li class="game outer-elem" id="${game.id}">${game.id}</li>`;
 		$gameList.insertAdjacentHTML('beforeend', $game);
@@ -71,7 +72,9 @@ function hideLoadingScreen() {
 	stopLoadingScreen();
 }
 
-function leaveGame() {
+function leaveGame(e) {
+	e.preventDefault();
+
 	localStorage.clear();
 	hideLoadingScreen();
 	showStartGameForm();

@@ -94,7 +94,7 @@ p {
 	width: 10%;
 	aspect-ratio: 1;
 }
-.pawn-img:checked {
+.popup-content input[type="radio"]:checked + .pawn-img {
 	background-color: hsl(var(--active-color), 100%, 80%);
 }
 .pawn-img img {
