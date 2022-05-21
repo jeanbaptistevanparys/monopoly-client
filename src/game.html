@@ -108,7 +108,7 @@
                     <p><em></em></p>
                     <h3>Available hotels:</h3>
                     <p><em></em></p>
-                    <h3>Get out of jail cards:</h3>
+                    <h3>Get out of repair cards:</h3>
                     <p><em></em></p>
                     <p class="money"></p>
                 </div>
@@ -137,6 +137,7 @@
             </div>
             <div class="content">
                 <a href="#" class="outer-elem">Show player info</a>
+                <p class="status">Wait for your turn</p>
                 <img src="" alt="" class="pawn">
             </div>
         </article> 
@@ -220,6 +221,29 @@
             </section>
         </article>
     </template>
+    <template id="popup-with-html">
+        <article class="popup">
+            <header>
+                <h2>Game 1</h2>
+                <div class="icons">
+                    <div class="inner-elem icon icon-min"></div>
+                    <div class="inner-elem icon icon-max"></div>
+                    <div class="inner-elem icon icon-close"></div>
+                </div>
+            </header>
+            <section class="popup-content">
+                <h2>Popup</h2>
+                <form>
+                    <div class="html-content">
+
+                    </div>
+                    <div class="submit-btns">
+                        <input type="submit" class="outer-elem close-btn" value="Continue">
+                    </div>
+                </form>
+            </section>
+        </article>
+    </template>
 
     <template id="dice">
         <article class="roll-dice">
@@ -284,10 +308,11 @@
             <section class="titledeed-content">
                 <h3>Title deed of</h3>
                 <h2>STREET NAME</h2>
-                <section class="values">
-                    <p class="left">-Rent</p>
-                    <p class="right"><span class="striketrough">M</span>12 </p>
-                </section>
+                <ul class="values">
+                </ul>
+                <form action="#" class="submit-btns">
+                    <input type="submit" class="outer-elem" value="Cancel">
+                </form>
             </section>
         </article>
     </template>
