@@ -1,6 +1,6 @@
 'use strict';
 
-let _token;
+let _token = null;
 let _gameId;
 let _playerName;
 let _allTiles;

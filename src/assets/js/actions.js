@@ -35,6 +35,7 @@ function defaultActions(gameState) {
 			checkIfRent();
 		}
 		_currentGameState = gameState;
+		checkIfJail();
 		checkIfEnoughPlayers();
 		checkIfCanPurchase();
 		checkIfRollDice();
@@ -181,16 +182,14 @@ function checkIfChangeOrCommunity(state) {
 		playerInfo.currentTile.includes('Chest')
 	) {
 		stopMyTurnChecker();
-		handleChanceOrCommunity(playerInfo.currentTile);
+		handleChanceOrCommunity(state, playerInfo.currentTile);
 	} else {
 		startMyTurnChecker();
 	}
 }
 
-function handleChanceOrCommunity(currentTileName) {
-	const playerTurns = _currentGameState.turns.filter(
-		(turn) => turn.player === _playerName
-	);
+function handleChanceOrCommunity(state, currentTileName) {
+	const playerTurns = state.turns.filter((turn) => turn.player === _playerName);
 	const playerMoves = playerTurns[playerTurns.length - 1].moves;
 	let moves = '';
 	playerMoves.forEach((move) => {
@@ -435,4 +434,49 @@ function checkIfEnoughPlayers() {
 			]
 		);
 	}
+}
+
+function checkIfJail() {
+	const playerInfo = getPlayerInfo();
+	if (playerInfo.jailed) {
+		stopMyTurnChecker();
+		jailHandler(playerInfo);
+	}
+}
+
+function jailHandler(playerInfo) {
+	const buttons = getJailButtons(playerInfo);
+	showDefaultPopup('JAIL', 'you are in jail', buttons, false);
+}
+
+function getJailButtons(playerInfo) {
+	const buttons = [];
+	if (playerInfo.getOutOfJailFreeCards > 0) {
+		buttons.push({
+			text: 'Use get out of jail card',
+			function: (event) => {
+				closePopup(event);
+				jailFreeFetch();
+				startMyTurnChecker();
+			},
+		});
+	}
+	buttons.push(
+		{
+			text: 'Pay x',
+			function: (event) => {
+				closePopup(event);
+				jailPayFetch();
+				startMyTurnChecker();
+			},
+		},
+		{
+			text: 'Stay in jail and roll a dice',
+			function: (event) => {
+				closePopup(event);
+				startMyTurnChecker();
+			},
+		}
+	);
+	return buttons;
 }
