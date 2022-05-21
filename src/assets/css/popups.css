@@ -19,7 +19,7 @@
 }
 
 .roll-dice {
-	background-color: var(--light-gray-trans);
+	background-color: var(--light-gray);
 	padding: 2rem;
 	border: 0.25rem solid black;
 	left: 35vw;
@@ -68,7 +68,7 @@
 }
 
 .playerpopup-content {
-	background-color: var(--light-gray-trans);
+	background-color: var(--light-gray);
 	padding: 2rem;
 	border: 0.25rem solid var(--bar-dark);
 	border-top: 0;
@@ -105,7 +105,7 @@
 }
 
 .titledeed-content {
-	background-color: var(--light-gray-trans);
+	background-color: var(--light-gray);
 	padding: 2rem;
 	border: 0.25rem solid var(--bar-dark);
 	border-top: 0;
@@ -167,7 +167,7 @@
 }
 
 .popup-content {
-	background-color: var(--light-gray-trans);
+	background-color: var(--light-gray);
 	padding: 2rem;
 	border: 0.25rem solid var(--bar-dark);
 	border-top: 0;
@@ -209,7 +209,7 @@
 }
 .popup.error .popup-content {
 	padding-left: 10vw;
-	background: url('../media/error.png') 2rem 2rem no-repeat, var(--light-gray-trans);
+	background: url('../media/error.png') 2rem 2rem no-repeat, var(--light-gray);
 	background-size: calc(10vw - 4rem);
 }
 .popup.error .popup-content h2 {
@@ -226,7 +226,7 @@
 }
 
 .trade-content {
-	background-color: var(--light-gray-trans);
+	background-color: var(--light-gray);
 	padding: 1rem;
 	border: 0.25rem solid var(--bar-dark);
 	border-top: 0;
@@ -254,7 +254,7 @@
 
 .trade-content .trade-names select {
 	font-size: 1.5rem;
-	background-color: var(--light-gray-trans);
+	background-color: var(--light-gray);
 	padding: 0.3rem;
 	box-sizing: border-box;
 	width: 25%;
