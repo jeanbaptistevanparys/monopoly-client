@@ -103,12 +103,12 @@
             </div>
             <article id="player-info">
                 <div class="info">
-                    <h2>Name</h2>
-                    <h3>Houses built:</h3>
+                    <h2>FIX JE CONNECTIE BRO</h2>
+                    <h3>Available houses:</h3>
                     <p><em></em></p>
-                    <h3>Hotels built:</h3>
+                    <h3>Available hotels:</h3>
                     <p><em></em></p>
-                    <h3>Get out of jail cards:</h3>
+                    <h3>Get out of repair cards:</h3>
                     <p><em></em></p>
                     <p class="money"></p>
                 </div>
@@ -137,6 +137,7 @@
             </div>
             <div class="content">
                 <a href="#" class="outer-elem">Show player info</a>
+                <p class="status">Wait for your turn</p>
                 <img src="" alt="" class="pawn">
             </div>
         </article> 
@@ -195,6 +196,9 @@
             <div class="loading-bar-piece hidden"></div>
             <div class="loading-bar-piece hidden"></div>
         </div>
+        <form action="#">
+            <input type="submit" value="Back" class="leave-btn outer-elem">
+        </form>
     </section>
 
     <template id="default">
@@ -215,6 +219,29 @@
                         Dolor, quaerat. Veritatis, ullam?</p>
                     <div class="submit-btns">
                         <input type="submit" class="outer-elem" value="Continue">
+                    </div>
+                </form>
+            </section>
+        </article>
+    </template>
+    <template id="popup-with-html">
+        <article class="popup">
+            <header>
+                <h2>Game 1</h2>
+                <div class="icons">
+                    <div class="inner-elem icon icon-min"></div>
+                    <div class="inner-elem icon icon-max"></div>
+                    <div class="inner-elem icon icon-close"></div>
+                </div>
+            </header>
+            <section class="popup-content">
+                <h2>Popup</h2>
+                <form>
+                    <div class="html-content">
+
+                    </div>
+                    <div class="submit-btns">
+                        <input type="submit" class="outer-elem close-btn" value="Continue">
                     </div>
                 </form>
             </section>
@@ -284,10 +311,11 @@
             <section class="titledeed-content">
                 <h3>Title deed of</h3>
                 <h2>STREET NAME</h2>
-                <section class="values">
-                    <p class="left">-Rent</p>
-                    <p class="right"><span class="striketrough">M</span>12 </p>
-                </section>
+                <ul class="values">
+                </ul>
+                <form action="#" class="submit-btns">
+                    <input type="submit" class="outer-elem" value="Cancel">
+                </form>
             </section>
         </article>
     </template>
@@ -373,6 +401,7 @@
                 <form>
                     <div class="submit-btns">
                         <input type="button" id="leave" class="outer-elem" value="Leave Game">
+                        <input type="button" id="bankrupt" class="outer-elem" value="Go Bankrupt">
                         <input type="submit" id="close" class="outer-elem" value="Close">
                     </div>
                 </form>

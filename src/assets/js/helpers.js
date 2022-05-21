@@ -9,7 +9,7 @@ function qs(selector, parent = document) {
 }
 
 function qsa(selector, parent = document) {
-	return [...parent.querySelectorAll(selector)];
+	return [ ...parent.querySelectorAll(selector) ];
 }
 
 function getIndexOfTileByName(tileName) {
@@ -23,10 +23,10 @@ function getIndexOfTileByName(tileName) {
 
 function getPlayersPos(players) {
 	const positions = {};
-	players.forEach((player) => {
+	players.forEach(player => {
 		const playerPosIndex = getIndexOfTileByName(player.currentTile);
 		if (!positions[playerPosIndex]) {
-			positions[playerPosIndex] = [player];
+			positions[playerPosIndex] = [ player ];
 		} else {
 			positions[playerPosIndex].push(player);
 		}
@@ -34,26 +34,47 @@ function getPlayersPos(players) {
 	return positions;
 }
 
-function getIndexOfPlayer(playerObj) {
-	let index;
-	for (let i = 0; i < _currentGameState.players.length; i++) {
-		if (_currentGameState.players[i].name === playerObj.name) {
-			index = i;
-		}
+function getPawnIndex(playerObj) {
+	if (playerObj.name === _playerName) {
+		return loadFromStorage(_config.localStoragePawnIndex);
+	}
+	const index = _currentGameState.players.findIndex(player => player === playerObj);
+	if (index === loadFromStorage(_config.localStoragePawnIndex)) {
+		return _currentGameState.players.findIndex(player => player.name === _playerName);
 	}
 	return index;
 }
 
-function getPlayerInfo(
-	playerName = _playerName,
-	gameState = _currentGameState
-) {
-	return gameState.players.find((player) => player.name === playerName);
+function getPlayerInfo(playerName = _playerName, gameState = _currentGameState) {
+	return gameState.players.find(player => player.name === playerName);
+}
+
+function getTileByName(tileName) {
+	return _allTiles.find(tile => tile.name == tileName);
+}
+
+function getPropertyInfo(playerInfo, propertyName) {
+	return playerInfo.properties.find(propertyInfo => propertyInfo.property == propertyName);
 }
 
 function isMyTurn() {
 	return _currentGameState.currentPlayer === _playerName;
 }
 
-const isEqual = (...objects) =>
-	objects.every((obj) => JSON.stringify(obj) === JSON.stringify(objects[0]));
+function isMortgaged(propertyName) {
+	return getPropertyInfo(getPlayerInfo(), propertyName).mortgage;
+}
+
+const isEqual = (...objects) => objects.every(obj => JSON.stringify(obj) === JSON.stringify(objects[0]));
+
+function turnButtonOff(selector, func) {
+	qs(selector).removeEventListener('click', func);
+	qs(selector).classList.remove('outer-elem', 'lightgreen');
+	qs(selector).classList.add('inner-elem');
+}
+
+function turnButtonOn(selector, func) {
+	qs(selector).addEventListener('click', func);
+	qs(selector).classList.remove('inner-elem');
+	qs(selector).classList.add('outer-elem', 'lightgreen');
+}

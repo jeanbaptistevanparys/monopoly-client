@@ -4,6 +4,8 @@ function processConnectionForm(e) {
 	e.preventDefault();
 	const playerName = document.querySelector('#name').value;
 	const amount = parseInt(document.querySelector('#amount').value);
+	const pawnIndex = parseInt(qs('input[name="choose-pawn"]:checked').value);
+	saveToStorage(_config.localStoragePawnIndex, pawnIndex);
 	gameExistChecker(amount, playerName);
 }
 

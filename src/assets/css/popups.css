@@ -19,7 +19,7 @@
 }
 
 .roll-dice {
-	background-color: var(--light-gray-trans);
+	background-color: var(--light-gray);
 	padding: 2rem;
 	border: 0.25rem solid black;
 	left: 35vw;
@@ -68,7 +68,7 @@
 }
 
 .playerpopup-content {
-	background-color: var(--light-gray-trans);
+	background-color: var(--light-gray);
 	padding: 2rem;
 	border: 0.25rem solid var(--bar-dark);
 	border-top: 0;
@@ -105,7 +105,7 @@
 }
 
 .titledeed-content {
-	background-color: var(--light-gray-trans);
+	background-color: var(--light-gray);
 	padding: 2rem;
 	border: 0.25rem solid var(--bar-dark);
 	border-top: 0;
@@ -125,20 +125,36 @@
 }
 
 .titledeed-content .values {
-	display: grid;
-	grid-template-columns: 5fr 3fr;
+	display: flex;
+	flex-direction: column;
 }
 
-.titledeed-content .values p {
+.titledeed-content .values .option {
+	padding: 0.5rem;
+	padding-left: 1rem;
+	margin: 0.5rem 0;
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	align-items: center;
+	width: 100%;
+	font-weight: 600;
+	background-size: 2rem;
+	text-transform: capitalize;
+}
+.titledeed-content .values .option p {
 	font-size: 1.5rem;
 }
 
-.titledeed-content .values p.left {
+.titledeed-content .values .option p.left {
 	text-align: left;
 }
 
-.titledeed-content .values p.right {
+.titledeed-content .values .option p.right {
 	text-align: right;
+}
+.titledeed-content form input {
+	margin: 0 auto;
 }
 
 /* ============================== Popup ================================*/
@@ -151,7 +167,7 @@
 }
 
 .popup-content {
-	background-color: var(--light-gray-trans);
+	background-color: var(--light-gray);
 	padding: 2rem;
 	border: 0.25rem solid var(--bar-dark);
 	border-top: 0;
@@ -161,19 +177,27 @@
 	font-size: 2rem;
 	margin-bottom: 1rem;
 }
-
-.popup-content form input {
-	padding: 0.5rem;
-	border-radius: 0;
-	border: 0;
-	background-color: var(--dark-gray);
+.popup-content .html-content li {
+	margin: 1rem 0;
+	padding: 0.5rem 1rem;
+	background: url('../media/Shortcut-0.png') no-repeat bottom left;
+	font-family: 'W95FA', 'Courier New', monospace;
+	font-weight: bold;
+	cursor: pointer;
 }
 
-.popup-content .submit-btns {
+.submit-btns {
+	width: 100%;
 	display: flex;
 	align-items: center;
 	justify-content: space-around;
 	margin-top: 2rem;
+}
+.submit-btns input {
+	padding: 0.5rem;
+	border-radius: 0;
+	border: 0;
+	background-color: var(--dark-gray);
 }
 
 .playerpopup-content .properties {
@@ -185,7 +209,7 @@
 }
 .popup.error .popup-content {
 	padding-left: 10vw;
-	background: url('../media/error.png') 2rem 2rem no-repeat, var(--light-gray-trans);
+	background: url('../media/error.png') 2rem 2rem no-repeat, var(--light-gray);
 	background-size: calc(10vw - 4rem);
 }
 .popup.error .popup-content h2 {
@@ -202,7 +226,7 @@
 }
 
 .trade-content {
-	background-color: var(--light-gray-trans);
+	background-color: var(--light-gray);
 	padding: 1rem;
 	border: 0.25rem solid var(--bar-dark);
 	border-top: 0;
@@ -230,7 +254,7 @@
 
 .trade-content .trade-names select {
 	font-size: 1.5rem;
-	background-color: var(--light-gray-trans);
+	background-color: var(--light-gray);
 	padding: 0.3rem;
 	box-sizing: border-box;
 	width: 25%;
