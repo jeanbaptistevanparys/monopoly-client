@@ -35,8 +35,6 @@ function setAllEventListeners() {
 	qs('#start').addEventListener('click', showSettings);
 	qs('body header .icon-close').addEventListener('click', checkBankruptcy);
 	turnButtonOff('#sell', showSettings); // TODO: Make functions
-	turnButtonOff('#mort', showSettings); // TODO: Make functions
-	turnButtonOff('#unmort', showSettings); // TODO: Make functions
 }
 
 function stopMyTurnChecker() {
