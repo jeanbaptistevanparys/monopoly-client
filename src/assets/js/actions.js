@@ -26,10 +26,9 @@ function defaultActions(gameState) {
 			importPLayerInfo();
 			importPlayers();
 			markCurrentPlayer();
-			checkIfRent();
 		}
 		_currentGameState = gameState;
-		checkIfEnoughPlayers();
+		checkIfRent();
 		checkIfCanPurchase();
 		checkIfRollDice();
 		checkIfCanBuild();
@@ -547,7 +546,6 @@ function getPlayersOnYourProperty() {
 function checkIfRent() {
 	if (!isMyTurn()) {
 		saveToStorage(_config.localStorageRent, false);
-		console.log('False');
 	}
 	if (!getPlayersOnYourProperty().length == 0 && !loadFromStorage(_config.localStorageRent)) {
 		turnButtonOn('#rent', rentChecker);
@@ -560,10 +558,10 @@ function showSettings(e) {
 	e.preventDefault();
 
 	stopMyTurnChecker();
-	showSettingsPopup(checkBankruptcy);
+	showSettingsPopup(checkLeaveGame, checkGoBankrupt);
 }
 
-function checkBankruptcy(e) {
+function checkLeaveGame(e) {
 	e.preventDefault();
 
 	stopMyTurnChecker();
@@ -579,6 +577,35 @@ function checkBankruptcy(e) {
 			text     : 'Yes! Leave game',
 			function : event => {
 				closePopup(event);
+				handleLeaveGame();
+			}
+		}
+	]);
+}
+
+function handleLeaveGame() {
+	declareBankruptyFetch(_gameId, _playerName).then(() => {
+		localStorage.clear();
+		window.location.href = 'index.html';
+	});
+}
+
+function checkGoBankrupt(e) {
+	e.preventDefault();
+
+	stopMyTurnChecker();
+	showDefaultPopup('Go Bankrupt', 'Go Bankrupt', 'Do you really want to go bankrupt?', [
+		{
+			text     : 'Cancel',
+			function : event => {
+				closePopup(event);
+				startMyTurnChecker();
+			}
+		},
+		{
+			text     : 'Yes! Go bankrupt',
+			function : event => {
+				closePopup(event);
 				handleBankruptcy();
 			}
 		}
@@ -587,28 +614,60 @@ function checkBankruptcy(e) {
 
 function handleBankruptcy() {
 	declareBankruptyFetch(_gameId, _playerName).then(() => {
-		localStorage.clear();
-		window.location.href = 'index.html';
+		showDefaultPopup('Bankruptcy', 'Bankruptcy', 'You are now bankrupt!', [
+			{
+				text     : 'Continue',
+				function : event => {
+					closePopup(event);
+				}
+			}
+		]);
 	});
 }
 
-function checkIfEnoughPlayers() {
-	const notEnoughPlayersPlaying = _currentGameState.players.filter(player => player.bankrupt !== false).length < 2;
-	if (notEnoughPlayersPlaying) {
-		stopMyTurnChecker();
-		showDefaultPopup(
-			'Not enough players',
-			'Not enough players',
-			'There are not enough players to resume the game',
-			[
-				{
-					text     : 'OK',
-					function : event => {
-						closePopup(event);
-						handleBankruptcy();
-					}
-				}
-			]
-		);
+function checkIfGameEnded(gameState) {
+	if (!gameState.ended) return;
+
+	stopMyTurnChecker();
+	if (gameState.winner === _playerName) {
+		handleWonGame();
+	} else {
+		handleLostGame();
 	}
+}
+
+function handleWonGame() {
+	showDefaultPopup(
+		'Game ended',
+		'Game ended',
+		`Congratulations! You won the game!`,
+		[
+			{
+				text     : 'Wohooo!',
+				function : event => {
+					closePopup(event);
+					handleLeaveGame();
+				}
+			}
+		],
+		false
+	);
+}
+
+function handleLostGame() {
+	showDefaultPopup(
+		'Game ended',
+		'Game ended',
+		`You lost the game...`,
+		[
+			{
+				text     : 'OK...',
+				function : event => {
+					closePopup(event);
+					handleLeaveGame();
+				}
+			}
+		],
+		false
+	);
 }

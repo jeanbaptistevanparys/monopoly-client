@@ -110,14 +110,19 @@ function showTradePopup(playername, gamestate) {
 	_$popupContainer.insertAdjacentElement('beforeend', $template);
 }
 
-function showSettingsPopup(func) {
+function showSettingsPopup(leaveFunc, bankruptcyFunc) {
 	const $template = document.querySelector('#settings').content.firstElementChild.cloneNode(true);
 	const $leaveGameBtn = qs('#leave', $template);
+	const $goBankruptBtn = qs('#bankrupt', $template);
 	const $closeBtn = qs('#close', $template);
 
 	$closeBtn.addEventListener('click', closePopup);
 	$leaveGameBtn.addEventListener('click', e => {
-		func(e);
+		leaveFunc(e);
+		closePopup(e);
+	});
+	$goBankruptBtn.addEventListener('click', e => {
+		bankruptcyFunc(e);
 		closePopup(e);
 	});
 	_$popupContainer.insertAdjacentElement('beforeend', $template);
