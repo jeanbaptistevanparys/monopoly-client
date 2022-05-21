@@ -75,8 +75,13 @@ function hideLoadingScreen() {
 function leaveGame(e) {
 	e.preventDefault();
 
-	localStorage.clear();
-	window.location.href = 'index.html';
+	declareBankruptyFetch(
+		loadFromStorage(_config.localStorageGameId),
+		loadFromStorage(_config.localStoragePlayer)
+	).then(() => {
+		localStorage.clear();
+		window.location.href = 'index.html';
+	});
 }
 
 function bootGameBoardUi() {

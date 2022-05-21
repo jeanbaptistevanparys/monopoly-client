@@ -61,6 +61,10 @@ function isMyTurn() {
 	return _currentGameState.currentPlayer === _playerName;
 }
 
+function isMortgaged(propertyName) {
+	return getPropertyInfo(getPlayerInfo(), propertyName).mortgage;
+}
+
 const isEqual = (...objects) => objects.every(obj => JSON.stringify(obj) === JSON.stringify(objects[0]));
 
 function turnButtonOff(selector, func) {

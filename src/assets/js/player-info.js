@@ -37,6 +37,9 @@ function displayProperties(properties) {
 		getTileFetch(propertyInfo.property).then(tile => {
 			const $template = makePropertyCard(tile.position);
 			$template.setAttribute('title', 'Show info');
+			if (propertyInfo.mortgage) {
+				$template.insertAdjacentHTML('beforeend', '<p>Mortgaged</p>');
+			}
 			$template.addEventListener('click', () => handleShowTitledeed(propertyInfo.property));
 			qs('#player-info .properties').insertAdjacentElement('beforeend', $template);
 		});

@@ -2,7 +2,7 @@
 
 const _config = {
 	delay                 : 1500,
-	groupnumber           : '12',
+	groupnumber           : '00',
 	gamePrefix            : 'group12',
 	localStorageToken     : 'playerToken',
 	localStorageGameId    : '_gameId',

@@ -189,7 +189,7 @@ h1 {
 	background-size: calc(var(--board-size) / 14);
 	background-repeat: no-repeat;
 	background-position: center center;
-	background-color: white;
+	background-color: transparent;
 }
 
 .board {
@@ -345,12 +345,18 @@ h1 {
 	width: 40%;
 }
 .properties {
+	width: 100%;
 	display: grid;
 	padding-right: 1%;
 	grid-template-columns: repeat(3, 1fr);
 	gap: 3%;
 	height: 100%;
 	overflow-y: scroll;
+}
+.properties:empty {
+	width: 100%;
+	background: url(../media/inventory.png) no-repeat center center;
+	background-size: 30%;
 }
 
 .property {
@@ -644,8 +650,9 @@ footer ul li a {
 	background-size: contain;
 }
 
-.property-card .property.special .player {
-	height: 100%;
+.property-card .property.special .player,
+.properties .property.special .player {
+	height: 60%;
 	background-size: 50%;
 }
 
@@ -671,6 +678,7 @@ footer ul li a {
 .nextTwelve .property.special .player {
 	padding: 20%;
 	height: 100%;
+	background-color: transparent;
 }
 
 .nextTwelve .player img {
