@@ -189,7 +189,7 @@ h1 {
 	background-size: calc(var(--board-size) / 14);
 	background-repeat: no-repeat;
 	background-position: center center;
-	background-color: white;
+	background-color: transparent;
 }
 
 .board {
@@ -644,7 +644,8 @@ footer ul li a {
 	background-size: contain;
 }
 
-.property-card .property.special .player {
+.property-card .property.special .player,
+.properties .property.special .player {
 	height: 100%;
 	background-size: 50%;
 }

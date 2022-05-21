@@ -22,8 +22,6 @@ function showDefaultPopup(
 	});
 	if (closeByCross) {
 		$template.querySelector('.icon-close').addEventListener('click', closePopup);
-	} else {
-		$template.querySelector('.icon-close').remove();
 	}
 	if (error) $template.classList.add('error');
 	_$popupContainer.insertAdjacentElement('beforeend', $template);
@@ -60,21 +58,31 @@ function showPlayerInfoPopup(playername, properties) {
 
 function showTitledeedPopup(streetname, property, optionsWithFunctions) {
 	const $template = document.querySelector('#titledeed').content.firstElementChild.cloneNode(true);
-	$template.querySelector('.titledeed header h2').innerText = 'Titledeed';
 	$template.querySelector('.titledeed-content h2').innerText = streetname;
 	$template.querySelectorAll('.titledeed .icons div').forEach(e => e.addEventListener('click', closePopup));
 	const $optionsContainer = $template.querySelector('.titledeed-content .values');
-	$template.querySelectorAll('.titledeed-content .values p').forEach(e => e.remove());
 
+	let hasOptions = false;
 	Object.keys(property).forEach(option => {
-		if (Object.keys(optionsWithFunctions).includes(option)) {
+		if (optionsWithFunctions.includes(option)) {
+			hasOptions = true;
 			const $optionText = `<p class="left">${option}</p>`;
 			const $optionPrice = `<p class="right"><span class="striketrough">M</span> ${property[option]}</p>`;
-			const $optionItem = `<li class="option inner-elem" data-option="${option}">${$optionText}${$optionPrice}</li>`;
+			const $optionItem = `<li class="option inner-elem">${$optionText}${$optionPrice}</li>`;
 			$optionsContainer.insertAdjacentHTML('beforeend', $optionItem);
-			qs(`[data-option="${option}"]`, $optionsContainer).addEventListener('click', optionsWithFunctions[option]);
 		}
 	});
+	if (!hasOptions) {
+		$optionsContainer.insertAdjacentHTML('beforeend', '<h2 class="left">No options available</h2>');
+	}
+	if (isMortgaged(property.name)) {
+		$optionsContainer.insertAdjacentHTML(
+			'beforeend',
+			`<li class="option inner-elem">
+				<p class="left">Mortgaged for:</p><p class="right"><span class="striketrough">M</span> ${property.mortgage}</p>
+			</li>`
+		);
+	}
 	$template.querySelectorAll('.icon-close, input[type="submit"]').forEach(closeBtn =>
 		closeBtn.addEventListener('click', e => {
 			closePopup(e);

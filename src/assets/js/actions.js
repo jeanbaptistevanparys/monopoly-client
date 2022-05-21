@@ -183,22 +183,28 @@ function checkIfCanPurchase() {
 	stopMyTurnChecker();
 	removePopupByClass('.popup');
 	if (canPurchase) {
-		showDefaultPopup('Purchase', `Purchase: ${_currentGameState.directSale}`, 'Do you want to buy this property?', [
-			{
-				text     : 'Ignore property',
-				function : e => {
-					closePopup(e);
-					checkIfSkipProperty(e);
+		showDefaultPopup(
+			'Purchase',
+			`Purchase: ${_currentGameState.directSale}`,
+			'Do you want to buy this property?',
+			[
+				{
+					text     : 'Ignore property',
+					function : e => {
+						closePopup(e);
+						checkIfSkipProperty(e);
+					}
+				},
+				{
+					text     : 'Buy property',
+					function : e => {
+						handleBuyProperty(e);
+						closePopup(e);
+					}
 				}
-			},
-			{
-				text     : 'Buy property',
-				function : e => {
-					handleBuyProperty(e);
-					closePopup(e);
-				}
-			}
-		]);
+			],
+			false
+		);
 	} else {
 		removePopupByClass('.popup');
 		startMyTurnChecker();
@@ -478,14 +484,14 @@ function handleUnmortgageProperty() {
 
 function handleShowTitledeed(propertyName) {
 	const tileInfo = getTileByName(propertyName);
-	const options = {
-		rentWithOneHouse    : handleOneHouse,
-		rentWithTwoHouses   : handleTwoHouses,
-		rentWithThreeHouses : handleThreeHouses,
-		rentWithFourHouses  : handleFourHouses,
-		rentWithHotel       : handleWithHotel,
-		housePrice          : housePrice
-	};
+	const options = [
+		'rentWithOneHouse',
+		'rentWithTwoHouses',
+		'rentWithThreeHouses',
+		'rentWithFourHouses',
+		'rentWithHotel',
+		'housePrice'
+	];
 	showTitledeedPopup(tileInfo.name, tileInfo, options);
 }
 

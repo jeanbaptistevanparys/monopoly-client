@@ -177,13 +177,6 @@
 	font-size: 2rem;
 	margin-bottom: 1rem;
 }
-
-.popup-content form input {
-	padding: 0.5rem;
-	border-radius: 0;
-	border: 0;
-	background-color: var(--dark-gray);
-}
 .popup-content .html-content li {
 	margin: 1rem 0;
 	padding: 0.5rem 1rem;
@@ -193,11 +186,18 @@
 	cursor: pointer;
 }
 
-.popup-content .submit-btns {
+.submit-btns {
+	width: 100%;
 	display: flex;
 	align-items: center;
 	justify-content: space-around;
 	margin-top: 2rem;
+}
+.submit-btns input {
+	padding: 0.5rem;
+	border-radius: 0;
+	border: 0;
+	background-color: var(--dark-gray);
 }
 
 .playerpopup-content .properties {
