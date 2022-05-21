@@ -671,6 +671,7 @@ footer ul li a {
 .nextTwelve .property.special .player {
 	padding: 20%;
 	height: 100%;
+	background-color: transparent;
 }
 
 .nextTwelve .player img {
