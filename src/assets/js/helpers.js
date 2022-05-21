@@ -34,10 +34,6 @@ function getPlayersPos(players) {
 	return positions;
 }
 
-// function getIndexOfPlayer(playerObj) {
-// 	return _currentGameState.players.findIndex(player => player === playerObj);
-// }
-
 function getPawnIndex(playerObj) {
 	if (playerObj.name === _playerName) {
 		return loadFromStorage(_config.localStoragePawnIndex);
