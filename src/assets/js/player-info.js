@@ -1,47 +1,44 @@
 'use strict';
 
 function importPLayerInfo() {
-    const thisPlayer = getPlayerInfo(_playerName);
-    const properties = thisPlayer.properties;
-    displayName(thisPlayer);
-    displayMoney(thisPlayer);
-    displayerNumberOfHousesAndHotels();
-    displayNumberOfgetOutOfJailFreeCards(thisPlayer);
-    displayProperties(properties);
+	const thisPlayer = getPlayerInfo(_playerName);
+	const properties = thisPlayer.properties;
+	displayName(thisPlayer);
+	displayMoney(thisPlayer);
+	displayerNumberOfHousesAndHotels();
+	displayNumberOfgetOutOfJailFreeCards(thisPlayer);
+	displayProperties(properties);
 }
 
 function displayName(player) {
-    qs('#player-info h2').innerText = player.name;
+	qs('#player-info h2').innerText = player.name;
 }
 
 function displayerNumberOfHousesAndHotels() {
-    qs('#player-info .info p:nth-of-type(1) em').innerText = _currentGameState.availableHouses;
-    qs('#player-info .info p:nth-of-type(2) em').innerText = _currentGameState.availableHotels;
+	qs('#player-info .info p:nth-of-type(1) em').innerText = _currentGameState.availableHouses;
+	qs('#player-info .info p:nth-of-type(2) em').innerText = _currentGameState.availableHotels;
 }
 
 function displayNumberOfgetOutOfJailFreeCards(player) {
-    qs('#player-info .info p:nth-of-type(3) em').innerText = player.getOutOfJailFreeCards;
+	qs('#player-info .info p:nth-of-type(3) em').innerText = player.outOfJailFreeCards;
 }
 
 function displayMoney(thisPlayer) {
-    qs('#player-info .info .money').innerText = '';
-    qs('#player-info .info .money').insertAdjacentHTML(
-        'beforeend',
-        `<span class="striketrough">M</span>${thisPlayer.money}`
-    );
+	qs('#player-info .info .money').innerText = '';
+	qs('#player-info .info .money').insertAdjacentHTML(
+		'beforeend',
+		`<span class="striketrough">M</span>${thisPlayer.money}`
+	);
 }
 
 function displayProperties(properties) {
-    qs('#player-info .properties').innerHTML = '';
-    properties.forEach(property => {
-        const $template = qs('#player-property').content.firstElementChild.cloneNode(true);
-        getTileFetch(property.property).then(res => {
-            const tile = res;
-            $template.querySelector('h3').innerText = tile.name;
-            $template.querySelector('p').innerHTML = `<span class="striketrough">M</span> ${tile.cost}`;
-            $template.style.backgroundColor = 'WHITE';
-            $template.querySelector('h3').style.backgroundColor = tile.color;
-        });
-        qs('#player-info .properties').insertAdjacentElement('beforeend', $template);
-    });
+	qs('#player-info .properties').innerHTML = '';
+	properties.forEach(propertyInfo => {
+		getTileFetch(propertyInfo.property).then(tile => {
+			const $template = makePropertyCard(tile.position);
+			$template.setAttribute('title', 'Show info');
+			$template.addEventListener('click', () => handleShowTitledeed(propertyInfo.property));
+			qs('#player-info .properties').insertAdjacentElement('beforeend', $template);
+		});
+	});
 }

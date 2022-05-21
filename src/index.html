@@ -47,9 +47,9 @@
                 <h2>Start Game</h2>
                 <form>
                     <label for="name">Nickname:</label>
-                    <input type="text" name="name" id="name" class="inner-elem">
+                    <input type="text" name="name" id="name" class="inner-elem" required>
                     <label for="amount">Amount of players:</label>
-                    <input type="number" name="amount" min="2" max="8" id="amount" class="inner-elem">
+                    <input type="number" name="amount" min="2" max="8" id="amount" class="inner-elem" required>
                     <input type="submit" value="Connect" class="outer-elem">
                 </form>
             </section>
@@ -69,6 +69,9 @@
             <section class="popup-content">
                 <h2>Available games:</h2>
                 <ul></ul>
+                <form action="#">
+                    <input type="submit" value="Back" class="back-btn outer-elem">
+                </form>
             </section>
         </section>
 
@@ -98,6 +101,9 @@
                 <div class="loading-bar-piece hidden"></div>
                 <div class="loading-bar-piece hidden"></div>
             </div>
+            <form action="#">
+                <input type="submit" value="Back" class="leave-btn outer-elem">
+            </form>
         </section>
     </main>
 

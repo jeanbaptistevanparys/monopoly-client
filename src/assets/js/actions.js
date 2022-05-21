@@ -1,12 +1,8 @@
 'use strict';
 
 function testConnection() {
-	getTilesFetch()
-		.then((_) => console.log('Status OK!'))
-		.catch(errorHandler);
-	getInfoFetch()
-		.then((info) => console.log(info))
-		.catch(errorHandler);
+	getTilesFetch().then(_ => console.log('Status OK!')).catch(errorHandler);
+	getInfoFetch().then(info => console.log(info)).catch(errorHandler);
 }
 
 function checkIfInGame() {
@@ -23,9 +19,7 @@ function defaultActions(gameState) {
 			_currentGameState = gameState;
 
 			const playerInfo = getPlayerInfo(_playerName);
-			const playerCurrentTileIndex = getIndexOfTileByName(
-				playerInfo.currentTile
-			);
+			const playerCurrentTileIndex = getIndexOfTileByName(playerInfo.currentTile);
 
 			importCurrentTile(playerCurrentTileIndex);
 			importNextTwelveTiles(playerCurrentTileIndex);
@@ -38,6 +32,7 @@ function defaultActions(gameState) {
 		checkIfEnoughPlayers();
 		checkIfCanPurchase();
 		checkIfRollDice();
+		checkIfCanBuild();
 	}
 }
 
@@ -48,9 +43,7 @@ function anythingChanged(gameState) {
 function importCurrentTile(currentTileIndex) {
 	const propertyCard = makePropertyCard(currentTileIndex);
 	document.querySelector('.property-card').innerHTML = '';
-	document
-		.querySelector('.property-card')
-		.insertAdjacentElement('beforeend', propertyCard);
+	document.querySelector('.property-card').insertAdjacentElement('beforeend', propertyCard);
 }
 
 function importNextTwelveTiles(currentTileIndex) {
@@ -65,49 +58,41 @@ function importNextTwelveTiles(currentTileIndex) {
 			players = playerPositions[i];
 		}
 		const propertyCard = makePropertyCard(i % 40, players);
-		document
-			.querySelector('.nextTwelve')
-			.insertAdjacentElement('beforeend', propertyCard);
+		document.querySelector('.nextTwelve').insertAdjacentElement('beforeend', propertyCard);
 	}
 }
 
 function importPlayers() {
 	document.querySelector('aside').innerHTML = '';
 	const players = _currentGameState.players;
-	players.forEach((player) => {
+	players.forEach(player => {
 		const playerCard = makePlayerCard(player);
-		document
-			.querySelector('aside')
-			.insertAdjacentElement('beforeend', playerCard);
+		document.querySelector('aside').insertAdjacentElement('beforeend', playerCard);
 	});
 }
 
 function makePlayerCard(player) {
-	const $template = document
-		.querySelector('#player-template')
-		.content.firstElementChild.cloneNode(true);
+	const $template = document.querySelector('#player-template').content.firstElementChild.cloneNode(true);
 
 	const playerIndex = getIndexOfPlayer(player);
-	$template.querySelector(
-		'.pawn'
-	).src = `./assets/media/pawns/pawn-${playerIndex}.png`;
+	$template.querySelector('.pawn').src = `./assets/media/pawns/pawn-${playerIndex}.png`;
 	$template.querySelector('.pawn').alt = player.name;
 	$template.setAttribute('data-player', player.name);
 	$template.querySelector('h2').innerText = player.name;
 	$template.querySelector('p').insertAdjacentHTML('beforeend', player.money);
-	$template
-		.querySelector('a')
-		.addEventListener('click', () =>
-			showPlayerInfoPopup(player.name, player.properties)
-		);
+	qs('.status', $template).classList.add('hidden');
+	$template.querySelector('a').addEventListener('click', () => showPlayerInfoPopup(player.name, player.properties));
+	if (player.name == _playerName) {
+		qs('a', $template).remove();
+		qs('h2', $template).style.fontWeight = 'bold';
+		qs('.status', $template).classList.remove('hidden');
+	}
 	return $template;
 }
 
 function makePropertyCard(tileIndex, players = null) {
 	const tile = _allTiles[tileIndex];
-	let $template = document
-		.querySelector('#property-template')
-		.content.firstElementChild.cloneNode(true);
+	let $template = document.querySelector('#property-template').content.firstElementChild.cloneNode(true);
 	if (checkTextColor(tile)) {
 		$template.querySelector('h3').style.color = 'BLACK';
 	}
@@ -115,12 +100,10 @@ function makePropertyCard(tileIndex, players = null) {
 	$template = setOptions($template, tile);
 
 	if (players != null) {
-		players.forEach((player) => {
+		players.forEach(player => {
 			const playerIndex = getIndexOfPlayer(player);
 			const playerImg = `<img src="./assets/media/pawns/pawn-${playerIndex}.png" alt="${player}">`;
-			$template
-				.querySelector('.player')
-				.insertAdjacentHTML('beforeend', playerImg);
+			$template.querySelector('.player').insertAdjacentHTML('beforeend', playerImg);
 		});
 	}
 
@@ -131,32 +114,25 @@ function setOptions($template, tile) {
 	if (tile.housePrice) {
 		$template.querySelector('h3').innerText = tile.name;
 		$template.querySelector('h3').style.backgroundColor = tile.color;
-		$template.querySelector(
-			'p'
-		).innerHTML = `<span class="striketrough">M</span> ${tile.cost}`;
+		$template.querySelector('p').innerHTML = `<span class="striketrough">M</span> ${tile.cost}`;
 	} else {
-		$template
-			.querySelector('.player')
-			.classList.add(trimSpaces(tile.type).toLowerCase());
+		$template.querySelector('.player').classList.add(trimSpaces(tile.type).toLowerCase());
 		$template.classList.add('special');
-		$template.querySelector('h3').innerText = tile.type;
+		$template.querySelector('h3').innerText = tile.name;
 	}
 	return $template;
 }
 
 function checkTextColor(tile) {
-	return (
-		!tile.color ||
-		tile.color === 'WHITE' ||
-		tile.color === 'YELLOW' ||
-		tile.type === 'railroad'
-	);
+	return !tile.color || tile.color === 'WHITE' || tile.color === 'YELLOW' || tile.type === 'railroad';
 }
 
 function checkIfRollDice() {
 	if (isMyTurn() && _currentGameState.canRoll) {
 		showDicePopup(handleRollDice);
 		stopMyTurnChecker();
+	} else {
+		if (qs('.roll-dice', _$popupContainer)) qs('.roll-dice', _$popupContainer).remove();
 	}
 }
 
@@ -164,47 +140,41 @@ function handleRollDice(e) {
 	e.preventDefault();
 
 	rollDiceFetch(_gameId, _playerName)
-		.then((state) => {
+		.then(state => {
 			closePopup(e);
-			showRolledDicePopup(state.lastDiceRoll, (event) => {
+			showRolledDicePopup(state.lastDiceRoll, event => {
 				closePopup(event);
-				checkIfChangeOrCommunity(state);
+				checkIfChanceOrCommunity(state);
 			});
 		})
-		.catch((error) => errorHandler(error));
+		.catch(error => errorHandler(error));
 }
 
-function checkIfChangeOrCommunity(state) {
+function checkIfChanceOrCommunity(state) {
 	const playerInfo = getPlayerInfo(_playerName, state);
-	if (
-		playerInfo.currentTile.includes('Chance') ||
-		playerInfo.currentTile.includes('Chest')
-	) {
+	if (playerInfo.currentTile.includes('Chance') || playerInfo.currentTile.includes('Chest')) {
 		stopMyTurnChecker();
-		handleChanceOrCommunity(playerInfo.currentTile);
+		handleChanceOrCommunity(state, playerInfo.currentTile);
 	} else {
 		startMyTurnChecker();
 	}
 }
 
-function handleChanceOrCommunity(currentTileName) {
-	const playerTurns = _currentGameState.turns.filter(
-		(turn) => turn.player === _playerName
+function handleChanceOrCommunity(state, currentTileName) {
+	const playerTurns = state.turns.filter(turn => turn.player === _playerName);
+	const playerMove = playerTurns[playerTurns.length - 1].moves.find(
+		turn => turn.tile.includes('Chance') || turn.tile.includes('Chest')
 	);
-	const playerMoves = playerTurns[playerTurns.length - 1].moves;
-	let moves = '';
-	playerMoves.forEach((move) => {
-		moves += `${move.tile}:\n\n ${move.description} \n\n\n`;
-	});
+	const move = `${playerMove.tile} \n ${playerMove.description}`;
 
-	showDefaultPopup(currentTileName, 'Moves', moves, [
+	showDefaultPopup(currentTileName, 'Moves', move, [
 		{
-			text: 'Close',
-			function: (e) => {
+			text     : 'Close',
+			function : e => {
 				closePopup(e);
 				startMyTurnChecker();
-			},
-		},
+			}
+		}
 	]);
 }
 
@@ -213,27 +183,22 @@ function checkIfCanPurchase() {
 	stopMyTurnChecker();
 	removePopupByClass('.popup');
 	if (canPurchase) {
-		showDefaultPopup(
-			'Purchase',
-			`Purchase: ${_currentGameState.directSale}`,
-			'Do you want to buy this property?',
-			[
-				{
-					text: 'Ignore property',
-					function: (e) => {
-						closePopup(e);
-						checkIfSkipProperty(e);
-					},
-				},
-				{
-					text: 'Buy property',
-					function: (e) => {
-						handleBuyProperty(e);
-						closePopup(e);
-					},
-				},
-			]
-		);
+		showDefaultPopup('Purchase', `Purchase: ${_currentGameState.directSale}`, 'Do you want to buy this property?', [
+			{
+				text     : 'Ignore property',
+				function : e => {
+					closePopup(e);
+					checkIfSkipProperty(e);
+				}
+			},
+			{
+				text     : 'Buy property',
+				function : e => {
+					handleBuyProperty(e);
+					closePopup(e);
+				}
+			}
+		]);
 	} else {
 		removePopupByClass('.popup');
 		startMyTurnChecker();
@@ -246,60 +211,54 @@ function handleBuyProperty(e) {
 	const propertyName = _currentGameState.directSale;
 	if (propertyName != null) {
 		buyPropertyFetch(_gameId, _playerName, propertyName)
-			.then((res) => {
+			.then(res => {
 				showDefaultPopup(
 					'Purchased!',
 					`Purchased ${res.property} !`,
 					`Congratulations! You just bought:\n\n${res.property} !`,
 					[
 						{
-							text: 'Continue',
-							function: (event) => {
+							text     : 'Continue',
+							function : event => {
 								closePopup(event);
 								startMyTurnChecker();
-							},
-						},
-					]
+							}
+						}
+					],
+					false
 				);
 			})
-			.catch((error) => errorHandler(error));
+			.catch(error => errorHandler(error));
 	}
 }
 
 function checkIfSkipProperty(e) {
 	e.preventDefault();
 
-	showDefaultPopup(
-		'Skip buy property',
-		'Skip buy property',
-		'Do you really want to skip this property?',
-		[
-			{
-				text: 'Cancel',
-				function: (event) => {
-					checkIfCanPurchase();
-					closePopup(event);
-				},
-			},
-			{
-				text: 'Yes! Skip property',
-				function: (event) => {
-					closePopup(event);
-					handleSkipProperty(event);
-					startMyTurnChecker();
-				},
-			},
-		]
-	);
+	showDefaultPopup('Skip buy property', 'Skip buy property', 'Do you really want to skip this property?', [
+		{
+			text     : 'Cancel',
+			function : event => {
+				checkIfCanPurchase();
+				closePopup(event);
+			}
+		},
+		{
+			text     : 'Yes! Skip property',
+			function : event => {
+				closePopup(event);
+				handleSkipProperty(event);
+				startMyTurnChecker();
+			}
+		}
+	]);
 }
 
 function handleSkipProperty(e) {
 	e.preventDefault();
 
 	const propertyName = _currentGameState.directSale;
-	skipPropertyFetch(_gameId, _playerName, propertyName).catch((error) =>
-		errorHandler(error)
-	);
+	skipPropertyFetch(_gameId, _playerName, propertyName).catch(error => errorHandler(error));
 }
 
 function markCurrentPlayer() {
@@ -307,50 +266,156 @@ function markCurrentPlayer() {
 
 	if (currentPlayer != null) {
 		const $currentPlayer = qs(`aside .player[data-player="${currentPlayer}"]`);
-		$currentPlayer.classList.add('playing');
+		$currentPlayer.classList.add('lightgreen');
+		qs('.status', $currentPlayer).innerHTML = 'Your turn!';
 	}
 }
 
-function getCurrentGameState() {
-	getGameFetch(_gameId).then((gameState) => {
-		if (gameState.started) {
-			defaultActions(gameState);
-			isMyTurn(gameState);
+function checkIfCanBuild() {
+	const playerInfo = getPlayerInfo();
+	const playerOwnsProperty = playerInfo.properties.find(
+		propertyInfo => propertyInfo.property == playerInfo.currentTile
+	);
+	turnButtonOff('#build', handleBuild);
+	if (playerOwnsProperty) {
+		const tileInfo = getTileByName(playerInfo.currentTile);
+		const propertyCountOfStreet = playerInfo.properties.filter(
+			propertyInfo => getTileByName(propertyInfo.property).color == tileInfo.color
+		).length;
+		const hasStreet = propertyCountOfStreet == tileInfo.groupSize;
+		if (hasStreet) {
+			turnButtonOn('#build', handleBuild);
+		}
+	}
+}
+
+function handleBuild(e) {
+	e.preventDefault();
+	stopMyTurnChecker();
+
+	e.target.removeEventListener('click', handleBuild);
+	const playerInfo = getPlayerInfo();
+	const propertyInfo = getPropertyInfo(playerInfo, playerInfo.currentTile);
+	const $popupContent = `<ul class="build-options">
+		<li class="outer-elem buildHouse">Build house</li>
+		<li class="buildHotel">Build hotel</li>
+	</ul>`;
+	showHtmlPopup('Build', `Building on: ${propertyInfo.property}`, $popupContent, event => {
+		startMyTurnChecker();
+		closePopup(event);
+	});
+
+	checkForBuildOptions(propertyInfo);
+}
+
+function checkForBuildOptions(propertyInfo) {
+	turnButtonOn('.buildHouse', () => handleBuildHouse(propertyInfo));
+	turnButtonOn('.buildHotel', () => handleBuildHotel(propertyInfo));
+
+	if (propertyInfo.houseCount < 4) {
+		turnButtonOff('.buildHotel', () => handleBuildHotel(propertyInfo));
+	} else {
+		turnButtonOff('.buildHouse', () => handleBuildHouse(propertyInfo));
+	}
+	if (propertyInfo.hotelCount == 1) {
+		turnButtonOff('.buildHouse', () => handleBuildHouse(propertyInfo));
+		turnButtonOff('.buildHotel', () => handleBuildHotel(propertyInfo));
+	}
+}
+
+function handleBuildHouse(tileInfo) {
+	buildHouseFetch(_gameId, _playerName, tileInfo.property)
+		.then(() => {
+			showDefaultPopup(
+				'House built!',
+				'House built!',
+				`Congratulations! You just built a house on ${tileInfo.property}!`,
+				[
+					{
+						text     : 'Wohoo! Continue!',
+						function : event => {
+							closePopup(event);
+						}
+					}
+				]
+			);
+		})
+		.catch(error => errorHandler(error));
+}
+
+function handleBuildHotel(tileInfo) {
+	buildHotelFetch(_gameId, _playerName, tileInfo.property)
+		.then(() => {
+			showDefaultPopup(
+				'Hotel built!',
+				'Hotel built!',
+				`Congratulations! You just built a hotel on ${tileInfo.property}!`,
+				[
+					{
+						text     : 'Wohoo! Continue!',
+						function : event => {
+							closePopup(event);
+						}
+					}
+				]
+			);
+		})
+		.catch(error => errorHandler(error));
+}
+
+function handleShowTitledeed(propertyName) {
+	const tileInfo = getTileByName(propertyName);
+	const options = {
+		rentWithOneHouse    : handleOneHouse,
+		rentWithTwoHouses   : handleTwoHouses,
+		rentWithThreeHouses : handleThreeHouses,
+		rentWithFourHouses  : handleFourHouses,
+		rentWithHotel       : handleWithHotel,
+		housePrice          : housePrice
+	};
+	showTitledeedPopup(tileInfo.name, tileInfo, options);
+}
+
+function rentChecker() {
+	const players = getPlayersOnYourProperty();
+	players.forEach(player => {
+		if (!loadFromStorage('handledRent')) {
+			handleRent(player);
 		}
 	});
 }
 
-function rentChecker() {
-	const player = isRent();
-	player.forEach((p) => handleRent(p.currentTile, p.name));
-}
-
-function handleRent(propertyname, playername) {
-	collectDebtFetch(propertyname, playername);
-	console.log('COLLECTED RENT', _gameId, _playerName, propertyname, playername);
+function handleRent(player) {
+	const previousPlayerInfo = getPlayerInfo(player.name);
 	stopMyTurnChecker();
-	showDefaultPopup('Rent', 'you collected rent from', playername, [
-		{
-			text: 'Continue',
-			function: (e) => {
-				closePopup(e);
-			},
-		},
-	]);
+	collectDebtFetch(player.currentTile, player.name).then(res => {
+		saveToStorage('handledRent', true);
+		console.log('True');
+		getGameFetch(_gameId).then(gameState => {
+			const newPlayerInfo = getPlayerInfo(player.name, gameState);
+			const rentAmount = previousPlayerInfo.money - newPlayerInfo.money;
+			if (res.result) {
+				showDefaultPopup('Rent', `${player.name} paid rent!`, `${player.name} paid M${rentAmount} rent!`, [
+					{
+						text     : 'Continue',
+						function : e => {
+							closePopup(e);
+						}
+					}
+				]);
+			}
+		});
+	});
 }
 
-function isRent() {
-	const res = [];
-	const playerInfo = getPlayerInfo();
-	playerInfo.properties.forEach((playerproperty) => {
-		_currentGameState.players.forEach((player) => {
-			if (
-				player.currentTile === playerproperty.property &&
-				player.name !== _playerName &&
-				isMyTurn()
-			) {
+function getPlayersOnYourProperty() {
+	let res = [];
+	let playerInfo = getPlayerInfo();
+	playerInfo.properties.forEach(playerproperty => {
+		_currentGameState.players.forEach(player => {
+			if (player.currentTile === playerproperty.property && player.name != _playerName && isMyTurn()) {
 				res.push(player);
-				rentButtonOff();
+				turnButtonOff('#rent', rentChecker);
 			}
 		});
 	});
@@ -358,19 +423,15 @@ function isRent() {
 }
 
 function checkIfRent() {
-	if (!isRent().length) {
-		qs('#rent').classList.remove('inner-elem');
-		qs('#rent').classList.add('outer-elem');
-		qs('#rent').classList.add('lightgreen');
-	} else {
-		rentButtonOff();
+	if (!isMyTurn()) {
+		saveToStorage('handledRent', false);
+		console.log('False');
 	}
-}
-
-function rentButtonOff() {
-	qs('#rent').classList.remove('lightgreen');
-	qs('#rent').classList.remove('outer-elem');
-	qs('#rent').classList.add('inner-elem');
+	if (!getPlayersOnYourProperty().length == 0 && !loadFromStorage('handledRent')) {
+		turnButtonOn('#rent', rentChecker);
+	} else {
+		turnButtonOff('#rent', rentChecker);
+	}
 }
 
 function showSettings(e) {
@@ -384,27 +445,22 @@ function checkBankruptcy(e) {
 	e.preventDefault();
 
 	stopMyTurnChecker();
-	showDefaultPopup(
-		'Leave game',
-		'Leave game',
-		'Do you really want to leave this game?',
-		[
-			{
-				text: 'Cancel',
-				function: (event) => {
-					closePopup(event);
-					startMyTurnChecker();
-				},
-			},
-			{
-				text: 'Yes! Leave game',
-				function: (event) => {
-					closePopup(event);
-					handleBankruptcy();
-				},
-			},
-		]
-	);
+	showDefaultPopup('Leave game', 'Leave game', 'Do you really want to leave this game?', [
+		{
+			text     : 'Cancel',
+			function : event => {
+				closePopup(event);
+				startMyTurnChecker();
+			}
+		},
+		{
+			text     : 'Yes! Leave game',
+			function : event => {
+				closePopup(event);
+				handleBankruptcy();
+			}
+		}
+	]);
 }
 
 function handleBankruptcy() {
@@ -415,9 +471,7 @@ function handleBankruptcy() {
 }
 
 function checkIfEnoughPlayers() {
-	const notEnoughPlayersPlaying =
-		_currentGameState.players.filter((player) => player.bankrupt !== false)
-			.length < 2;
+	const notEnoughPlayersPlaying = _currentGameState.players.filter(player => player.bankrupt !== false).length < 2;
 	if (notEnoughPlayersPlaying) {
 		stopMyTurnChecker();
 		showDefaultPopup(
@@ -426,12 +480,12 @@ function checkIfEnoughPlayers() {
 			'There are not enough players to resume the game',
 			[
 				{
-					text: 'OK',
-					function: (event) => {
+					text     : 'OK',
+					function : event => {
 						closePopup(event);
 						handleBankruptcy();
-					},
-				},
+					}
+				}
 			]
 		);
 	}
