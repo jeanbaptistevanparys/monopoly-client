@@ -102,12 +102,12 @@ function collectDebtFetch(propertyName, debtorName) {
 	);
 }
 
-function jailPayFetch(_gameId, playerName) {
-	return fetchFromServer(`/games/${_gameId}/prison/${playerName}/fine`, 'POST');
+function jailPayFetch() {
+	return fetchFromServer(`/games/${_gameId}/prison/${_playerName}/fine`, 'POST');
 }
 
 function jailFreeFetch() {
-	return fetchFromServer(`/games/${_gameId}/prison/${playerName}/free`, 'POST');
+	return fetchFromServer(`/games/${_gameId}/prison/${_playerName}/free`, 'POST');
 }
 
 function getBankAuctionsFetch(_gameId) {

@@ -28,7 +28,12 @@ function defaultActions(gameState) {
 			markCurrentPlayer();
 		}
 		_currentGameState = gameState;
+<<<<<<< HEAD
+		checkIfJail();
+		checkIfEnoughPlayers();
+=======
 		checkIfRent();
+>>>>>>> 52b8627a5bc3b0e0af0b1ffc1e63855cf8e17381
 		checkIfCanPurchase();
 		checkIfRollDice();
 		checkIfCanBuild();
@@ -161,11 +166,20 @@ function checkIfChanceOrCommunity(state) {
 }
 
 function handleChanceOrCommunity(state, currentTileName) {
+<<<<<<< HEAD
+	const playerTurns = state.turns.filter((turn) => turn.player === _playerName);
+	const playerMoves = playerTurns[playerTurns.length - 1].moves;
+	let moves = '';
+	playerMoves.forEach((move) => {
+		moves += `${move.tile}:\n\n ${move.description} \n\n\n`;
+	});
+=======
 	const playerTurns = state.turns.filter(turn => turn.player === _playerName);
 	const playerMove = playerTurns[playerTurns.length - 1].moves.find(
 		turn => turn.tile.includes('Chance') || turn.tile.includes('Chest')
 	);
 	const move = `${playerMove.tile} \n ${playerMove.description}`;
+>>>>>>> 52b8627a5bc3b0e0af0b1ffc1e63855cf8e17381
 
 	showDefaultPopup(currentTileName, 'Moves', move, [
 		{
@@ -641,6 +655,51 @@ function checkIfGameEnded(gameState) {
 	} else {
 		handleLostGame();
 	}
+}
+
+function checkIfJail() {
+	const playerInfo = getPlayerInfo();
+	if (playerInfo.jailed) {
+		stopMyTurnChecker();
+		jailHandler(playerInfo);
+	}
+}
+
+function jailHandler(playerInfo) {
+	const buttons = getJailButtons(playerInfo);
+	showDefaultPopup('JAIL', 'you are in jail', buttons, false);
+}
+
+function getJailButtons(playerInfo) {
+	const buttons = [];
+	if (playerInfo.getOutOfJailFreeCards > 0) {
+		buttons.push({
+			text: 'Use get out of jail card',
+			function: (event) => {
+				closePopup(event);
+				jailFreeFetch();
+				startMyTurnChecker();
+			},
+		});
+	}
+	buttons.push(
+		{
+			text: 'Pay x',
+			function: (event) => {
+				closePopup(event);
+				jailPayFetch();
+				startMyTurnChecker();
+			},
+		},
+		{
+			text: 'Stay in jail and roll a dice',
+			function: (event) => {
+				closePopup(event);
+				startMyTurnChecker();
+			},
+		}
+	);
+	return buttons;
 }
 
 function handleWonGame() {
