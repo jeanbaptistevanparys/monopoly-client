@@ -76,8 +76,7 @@ function leaveGame(e) {
 	e.preventDefault();
 
 	localStorage.clear();
-	hideLoadingScreen();
-	showStartGameForm();
+	window.location.href = 'index.html';
 }
 
 function bootGameBoardUi() {
