@@ -769,7 +769,11 @@ function checkIfJail() {
 
 function jailHandler(playerInfo) {
 	const buttons = getJailButtons(playerInfo);
+<<<<<<< HEAD
 	showDefaultPopup('JAIL', 'You are in jail', 'You are stuck in jail', buttons, false);
+=======
+	showDefaultPopup('JAIL', 'you are in jail','', buttons, false);
+>>>>>>> 6b37019c93f8ae25c2e387d08f22b36ac05e7cbb
 }
 
 function getJailButtons(playerInfo) {
