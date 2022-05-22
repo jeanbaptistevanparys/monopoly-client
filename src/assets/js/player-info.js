@@ -40,7 +40,7 @@ function displayProperties(properties) {
 			if (propertyInfo.mortgage) {
 				$template.insertAdjacentHTML('beforeend', '<p>Mortgaged</p>');
 			}
-			$template.addEventListener('click', () => handleShowTitledeed(propertyInfo.property));
+			$template.addEventListener('click', () => handleShowTitledeed(propertyInfo));
 			qs('#player-info .properties').insertAdjacentElement('beforeend', $template);
 		});
 	});

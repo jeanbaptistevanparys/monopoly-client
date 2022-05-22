@@ -42,17 +42,23 @@ function showRolledDicePopup(numbers, funct) {
 	_$popupContainer.insertAdjacentElement('beforeend', $template);
 }
 
-function showPlayerInfoPopup(playername, properties) {
+function showPlayerInfoPopup(title, message, playername, properties, func) {
 	const $template = document.querySelector('#playerinfo').content.firstElementChild.cloneNode(true);
-	$template.querySelector('.playerpopup header h2').innerText = playername;
+	$template.querySelector('.playerpopup header h2').innerText = title;
+	$template.querySelector('.playerpopup-content h3').innerText = message;
 	$template.querySelector('.playerpopup-content h2').innerText = playername;
 	$template.querySelector('.playerpopup .properties section').remove();
 	properties.forEach(propertyInfo => {
 		const tileInfo = getTileByName(propertyInfo.property);
 		const $card = makePropertyCard(tileInfo.position);
 		$template.querySelector('.playerpopup .properties').insertAdjacentElement('beforeend', $card);
+		$card.addEventListener('click', e => func(propertyInfo, e));
 	});
-	$template.querySelector('.icon-close').addEventListener('click', closePopup);
+	$template.querySelector('.icon-close').addEventListener('click', e => {
+		closePopup(e);
+		checkIfCanMortgage();
+		startMyTurnChecker();
+	});
 	_$popupContainer.insertAdjacentElement('beforeend', $template);
 }
 
@@ -63,11 +69,12 @@ function showTitledeedPopup(streetname, property, optionsWithFunctions) {
 	const $optionsContainer = $template.querySelector('.titledeed-content .values');
 
 	let hasOptions = false;
-	Object.keys(property).forEach(option => {
+	const propertyInfo = getTileByName(property.property);
+	Object.keys(propertyInfo).forEach(option => {
 		if (optionsWithFunctions.includes(option)) {
 			hasOptions = true;
 			const $optionText = `<p class="left">${option}</p>`;
-			const $optionPrice = `<p class="right"><span class="striketrough">M</span> ${property[option]}</p>`;
+			const $optionPrice = `<p class="right"><span class="striketrough">M</span> ${propertyInfo[option]}</p>`;
 			const $optionItem = `<li class="option inner-elem">${$optionText}${$optionPrice}</li>`;
 			$optionsContainer.insertAdjacentHTML('beforeend', $optionItem);
 		}
@@ -75,11 +82,11 @@ function showTitledeedPopup(streetname, property, optionsWithFunctions) {
 	if (!hasOptions) {
 		$optionsContainer.insertAdjacentHTML('beforeend', '<h2 class="left">No options available</h2>');
 	}
-	if (isMortgaged(property.name)) {
+	if (property.mortgage) {
 		$optionsContainer.insertAdjacentHTML(
 			'beforeend',
 			`<li class="option inner-elem">
-				<p class="left">Mortgaged for:</p><p class="right"><span class="striketrough">M</span> ${property.mortgage}</p>
+				<p class="left">Mortgaged for:</p><p class="right"><span class="striketrough">M</span> ${propertyInfo.mortgage}</p>
 			</li>`
 		);
 	}

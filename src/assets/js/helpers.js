@@ -73,8 +73,11 @@ function turnButtonOff(selector, func) {
 	qs(selector).classList.add('inner-elem');
 }
 
-function turnButtonOn(selector, func) {
+function turnButtonOn(selector, func, green = true) {
 	qs(selector).addEventListener('click', func);
 	qs(selector).classList.remove('inner-elem');
-	qs(selector).classList.add('outer-elem', 'lightgreen');
+	qs(selector).classList.add('outer-elem');
+	if (green) {
+		qs(selector).classList.add('lightgreen');
+	}
 }

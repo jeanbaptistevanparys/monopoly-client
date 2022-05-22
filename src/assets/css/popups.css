@@ -61,9 +61,10 @@
 /* ============================== Player info ================================*/
 .playerpopup {
 	position: absolute;
-	left: 35vw;
-	width: 30vw;
-	top: 20vh;
+	left: 50%;
+	top: 50%;
+	transform: translate(-50%, -50%);
+	width: 40%;
 	height: 60vh;
 }
 
@@ -98,10 +99,10 @@
 /* ============================== Tiltle deed ================================*/
 .titledeed {
 	position: absolute;
-	left: 30vw;
-	width: 40vw;
-	top: 20vh;
-	height: 60vh;
+	left: 50%;
+	top: 50%;
+	transform: translate(-50%, -50%);
+	width: 40%;
 }
 
 .titledeed-content {
