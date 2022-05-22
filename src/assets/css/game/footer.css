@@ -1,0 +1,76 @@
+/* ============================== Footer ================================*/
+footer {
+	position: fixed;
+	left: 0;
+	bottom: 0;
+	width: 100%;
+	height: var(--footer-height);
+	background-color: var(--light-gray);
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	z-index: 1;
+}
+
+footer ul {
+	display: flex;
+	align-items: center;
+	gap: 1rem;
+}
+
+footer ul li a {
+	text-decoration-line: none;
+	color: black;
+	width: 3rem;
+
+	background-repeat: no-repeat;
+	background-position: 0.5rem center;
+	background-size: 1.5rem;
+	height: 4rem;
+	padding: 0.5rem;
+	padding-left: 2.3rem;
+	font-size: 1.5rem;
+}
+
+#start {
+	background-image: url('../../media/Start.png');
+	background-repeat: no-repeat;
+	background-position: 0.5rem center;
+	background-size: 2rem;
+	height: 4rem;
+	padding: 1rem;
+	padding-left: 2.8rem;
+	font-size: 2rem;
+	margin-left: 0.5rem;
+}
+
+#build {
+	background-image: url('../../media/dice.png');
+}
+
+#sell {
+	background-image: url('../../media/dice.png');
+}
+
+#mort {
+	background-image: url('../../media/dice.png');
+}
+
+#unmort {
+	background-image: url('../../media/dice.png');
+}
+#rent {
+	background-image: url('../../media/dice.png');
+}
+
+#trade {
+	background-image: url('../../media/dice.png');
+}
+
+#time {
+	font-size: 2rem;
+	text-align: center;
+	color: black;
+	padding: 1rem;
+	margin-right: 1rem;
+}

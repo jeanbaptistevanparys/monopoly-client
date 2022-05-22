@@ -1,0 +1,148 @@
+/* ============================== Board ================================*/
+
+.big,
+.card,
+.player {
+	background-size: calc(var(--board-size) / 14);
+	background-repeat: no-repeat;
+	background-position: center center;
+	background-color: transparent;
+}
+
+.board {
+	width: var(--board-size);
+	height: var(--board-size);
+	margin-right: calc((var(--board-size) / 3) + 10%);
+	border: none;
+	display: grid;
+	grid-template-columns: repeat(11, 1fr);
+}
+
+.board .middle {
+	background: url(../../media/Monopoly-logo.jpg) no-repeat center center,
+		var(--background-color);
+	grid-row-start: 2;
+	grid-row-end: 11;
+	grid-column-start: 2;
+	grid-column-end: 11;
+}
+
+.board .card::after {
+	content: '';
+	position: absolute;
+	width: 100%;
+	height: 30%;
+	top: 0;
+	background-color: var(--color);
+}
+
+.board .card,
+.board .big {
+	position: relative;
+	height: calc((var(--board-size) / var(--board-mid-elems)) * 1.5);
+	width: calc(var(--board-size) / var(--board-mid-elems));
+	background-color: white;
+	border: 0.125rem solid black;
+}
+
+.board .big {
+	width: calc((var(--board-size) / var(--board-mid-elems)) * 1.5);
+	height: calc((var(--board-size) / var(--board-mid-elems)) * 1.5);
+}
+
+.board .side,
+#first-side {
+	width: calc((var(--board-size) / var(--board-mid-elems)) * 1.5);
+	height: calc(var(--board-size) / var(--board-mid-elems));
+}
+
+.board .side::after,
+.board .side.orange.first::after {
+	content: '';
+	position: absolute;
+	right: 0;
+	left: unset;
+	top: 0;
+	height: 100%;
+	width: 30%;
+}
+
+.board .side:nth-of-type(even)::after {
+	content: '';
+	position: absolute;
+	left: 0;
+	top: 0;
+	height: 100%;
+	width: 30%;
+}
+
+.card.red::after {
+	background-color: red;
+}
+
+.card.yellow::after {
+	background-color: yellow;
+}
+
+.card.orange::after {
+	background-color: orange;
+}
+
+.card.green::after {
+	background-color: green;
+}
+
+.card.purple::after {
+	background-color: purple;
+}
+
+.card.blue::after {
+	background-color: blue;
+}
+
+.card.lightblue::after {
+	background-color: lightblue;
+}
+
+.card.pink::after {
+	background-color: violet;
+}
+.card.black::after {
+	background-color: black;
+}
+
+.chance {
+	background-image: url(../../media/Chance.png);
+}
+
+.utility {
+	background-image: url(../../media/Lamp.png);
+}
+
+.railroad {
+	background-image: url(../../media/Train.png);
+}
+
+.communitychest {
+	background-image: url(../../media/Chest.png);
+}
+.taxincome {
+	position: relative;
+	background-image: url(../../media/TaxIncome.png);
+}
+
+.go {
+	background-image: url(../../media/Start.png);
+}
+
+.cop {
+	background-image: url(../../media/Police.png);
+}
+
+.jail {
+	background-image: url(../../media/Jail.png);
+}
+
+.freeparking {
+	background-image: url(../../media/Pause.png);
+}

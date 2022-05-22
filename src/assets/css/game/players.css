@@ -1,0 +1,58 @@
+/* ============================== Players ================================*/
+
+aside {
+	display: flex;
+}
+
+main aside {
+	transform: translateY(10%);
+	display: flex;
+	margin: 0 2rem;
+	justify-content: center;
+	gap: 2rem;
+}
+
+main aside .player {
+	width: 20rem;
+	padding: 1rem;
+	background-color: white;
+}
+
+main aside .player.playing {
+	background-color: hsl(var(--active-color), 100%, 80%);
+}
+
+main aside .player .title {
+	display: flex;
+	justify-content: space-between;
+	margin-bottom: 0.5rem;
+	border-bottom: 0.125rem solid black;
+}
+
+main aside .player .content {
+	margin-bottom: 2rem;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+
+main aside .player div img {
+	height: 2.5rem;
+}
+
+main aside .player h2 {
+	font-size: 2rem;
+}
+
+main aside .player p {
+	font-size: 1.5rem;
+	min-width: fit-content;
+}
+
+main aside .player a {
+	display: block;
+	background-color: var(--dark-gray);
+	padding: 0.5rem;
+	text-align: center;
+	width: 10rem;
+}

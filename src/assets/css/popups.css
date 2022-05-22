@@ -12,6 +12,7 @@
 }
 
 /* ============================== Roll Dice ================================*/
+
 .roll-dice h2 {
 	font-size: 3rem;
 	margin-bottom: 2rem;
@@ -59,6 +60,7 @@
 }
 
 /* ============================== Player info ================================*/
+
 .playerpopup {
 	position: absolute;
 	left: 50%;
@@ -96,7 +98,56 @@
 	background-color: white;
 }
 
+/* ============================== Popup ================================*/
+
+.popup {
+	position: absolute;
+	left: 30vw;
+	width: 40vw;
+	top: 30vh;
+	height: 40vh;
+}
+
+.popup-content {
+	background-color: var(--light-gray);
+	padding: 2rem;
+	border: 0.25rem solid var(--bar-dark);
+	border-top: 0;
+}
+
+.popup-content h2 {
+	font-size: 2rem;
+	margin-bottom: 1rem;
+}
+.popup-content .html-content li {
+	margin: 1rem 0;
+	padding: 0.5rem 1rem;
+	background: url('../media/Shortcut-0.png') no-repeat bottom left;
+	font-family: 'W95FA', 'Courier New', monospace;
+	font-weight: bold;
+	cursor: pointer;
+}
+
+.submit-btns {
+	width: 100%;
+	display: flex;
+	align-items: center;
+	justify-content: space-around;
+	margin-top: 2rem;
+}
+.submit-btns input {
+	padding: 0.5rem;
+	border-radius: 0;
+	border: 0;
+	background-color: var(--dark-gray);
+}
+
+.playerpopup-content .properties {
+	height: 70%;
+}
+
 /* ============================== Tiltle deed ================================*/
+
 .titledeed {
 	position: absolute;
 	left: 50%;
@@ -158,52 +209,7 @@
 	margin: 0 auto;
 }
 
-/* ============================== Popup ================================*/
-.popup {
-	position: absolute;
-	left: 30vw;
-	width: 40vw;
-	top: 30vh;
-	height: 40vh;
-}
-
-.popup-content {
-	background-color: var(--light-gray);
-	padding: 2rem;
-	border: 0.25rem solid var(--bar-dark);
-	border-top: 0;
-}
-
-.popup-content h2 {
-	font-size: 2rem;
-	margin-bottom: 1rem;
-}
-.popup-content .html-content li {
-	margin: 1rem 0;
-	padding: 0.5rem 1rem;
-	background: url('../media/Shortcut-0.png') no-repeat bottom left;
-	font-family: 'W95FA', 'Courier New', monospace;
-	font-weight: bold;
-	cursor: pointer;
-}
-
-.submit-btns {
-	width: 100%;
-	display: flex;
-	align-items: center;
-	justify-content: space-around;
-	margin-top: 2rem;
-}
-.submit-btns input {
-	padding: 0.5rem;
-	border-radius: 0;
-	border: 0;
-	background-color: var(--dark-gray);
-}
-
-.playerpopup-content .properties {
-	height: 70%;
-}
+/* ============================== Error ================================*/
 
 .popup.error {
 	width: 50vw;
@@ -215,98 +221,4 @@
 }
 .popup.error .popup-content h2 {
 	color: #fa0016;
-}
-
-/* ============================== trade ================================*/
-.trade {
-	position: absolute;
-	left: 25vw;
-	width: 50vw;
-	top: 20vh;
-	height: 60vh;
-}
-
-.trade-content {
-	background-color: var(--light-gray);
-	padding: 1rem;
-	border: 0.25rem solid var(--bar-dark);
-	border-top: 0;
-	height: 100%;
-}
-.trade-content > h3 {
-	font-size: 1.5rem;
-	margin-bottom: 1rem;
-	text-align: center;
-}
-
-.trade-content h2 {
-	font-size: 1.5rem;
-	text-align: center;
-	width: 25%;
-}
-
-.trade-content .trade-names {
-	display: flex;
-	align-items: center;
-	justify-content: space-evenly;
-	border-bottom: var(--dark-gray) 0.2rem solid;
-	padding-bottom: 1rem;
-}
-
-.trade-content .trade-names select {
-	font-size: 1.5rem;
-	background-color: var(--light-gray);
-	padding: 0.3rem;
-	box-sizing: border-box;
-	width: 25%;
-}
-
-.trade-content form div {
-	display: flex;
-	width: 100%;
-	margin-top: 1rem;
-}
-
-.trade-content .flex {
-	width: 100%;
-	height: 20rem;
-	overflow-y: scroll;
-}
-
-.trade-content .flex input {
-	height: 1rem;
-	margin: 1rem;
-}
-
-.trade-content .flex select {
-	height: 1rem;
-	margin: 1rem;
-}
-
-.trade-content form div.submit {
-	display: flex;
-	width: 100%;
-	margin-top: 1rem;
-	justify-content: space-around;
-}
-
-.trade-content form div.submit input {
-	width: 4rem;
-	height: 2rem;
-	padding: 0.5rem;
-	background-color: var(--light-gray);
-}
-
-.trade-content form div.submit label {
-	margin-left: 1rem;
-}
-
-.trade-content form div.submit input[type="submit"] {
-	width: 8rem;
-	margin-top: 1rem;
-}
-
-.trade-content form div.submit div {
-	align-items: center;
-	width: fit-content;
 }
