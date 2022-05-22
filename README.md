@@ -53,3 +53,73 @@ https://learncssgrid.com/
 
 And for your convenience, yet use with caution
 https://grid.layoutit.com/ 
+
+## Functionality table
+
+|PRIORITY  |ENDPOINT                                                                                                  |Client                | Client           |Server                       | Server                       |
+|--------|--------------------------------------------------------------------------------------------------------|----------------------|-----------------|-----------------------------|-----------------------------|
+|        |                                                                                                        |Visualize  ( HTML/CSS)|Consume API  (JS)|Process request  (API-Bridge)|Implement Game Rules  (logic)|
+|        |**General Game and API Info**                                                                               |100%                  |YES/NO           |YES/NO                       |100%                         |
+|        |GET /                                                                                                   |          0%          |     YES         |            YES              |         100%                |
+|MUSTHAVE|GET /tiles                                                                                              |        100%          |     YES         |            YES              |         100%                |
+|MUSTHAVE|GET /tiles /{tileId}                                                                                    |        100%          |     YES         |            YES              |         100%                |
+|        |GET /chance                                                                                             |          0%          |      NO         |            YES              |         100%                |
+|        |GET /community-chest                                                                                    |          0%          |      NO         |            YES              |         100%                |
+|        |                                                                                                        |                      |                 |                             |                             |
+|        |**Managing Games**                                                                                          |                      |                 |                             |                             |
+|        |DELETE /games                                                                                           |          0%          |      NO         |            YES              |         100%                |
+|MUSTHAVE|GET /games                                                                                              |        100%          |     YES         |            YES              |         100%                |
+|        |Additional requirement: with filters                                                                    |        100%          |     YES         |            YES              |         100%                |
+|MUSTHAVE|POST /games                                                                                             |        100%          |     YES         |            YES              |         100%                |
+|MUSTHAVE|POST /games /{gameId} /players                                                                          |        100%          |     YES         |            YES              |         100%                |
+|        |                                                                                                        |                      |                 |                             |                             |
+|        |Info                                                                                                    |                      |                 |                             |                             |
+|        |GET /games /dummy                                                                                       |          0%          |      NO         |            YES              |         100%                |
+|MUSTHAVE|GET /games /{gameId}                                                                                    |        100%          |     YES         |            YES              |         100%                |
+|        |                                                                                                        |                      |                 |                             |                             |
+|        |**Turn Management**                                                                                         |                      |                 |                             |                             |
+|MUSTHAVE|POST /games /{gameId} /players /{playerName} /dice                                                      |        100%          |     YES         |            YES              |         100%                |
+|        |With jail                                                                                               |         50%          |     YES         |            YES              |          75%                |
+|MUSTHAVE|POST /games /{gameId} /players /{playerName} /bankruptcy                                                |        100%          |     YES         |            YES              |         100%                |
+|        |Decent distribution of assets                                                                           |        100%          |     YES         |            YES              |         100%                |
+|        |                                                                                                        |                      |                 |                             |                             |
+|        |**Tax Management**                                                                                          |                      |                 |                             |                             |
+|        |POST /games /{gameId} /players /{playerName} /tax /estimate                                             |          0%          |      NO         |            YES              |         100%                |
+|        |POST /games /{gameId} /players /{playerName} /tax /compute                                              |          0%          |      NO         |            YES              |         100%                |
+|        |                                                                                                        |                      |                 |                             |                             |
+|        |**Buying property**                                                                                        |                      |                 |                             |                             |
+|MUSTHAVE|POST /games /{gameId} /players /{playerName} /properties /{propertyName}                                |        100%          |     YES         |            YES              |         100%                |
+|MUSTHAVE|DELETE /games /{gameId} /players /{playerName} /properties /{propertyName}                              |        100%          |     YES         |            YES              |         100%                |
+|        |With 1 bank auction                                                                                     |          0%          |      NO         |            YES              |         100%                |
+|        |                                                                                                        |                      |                 |                             |                             |
+|        |**Improving property**                                                                                      |                      |                 |                             |                             |
+|        |POST /games /{gameId} /players /{playerName} /properties /{propertyName} /houses                        |        100%          |     YES         |            YES              |         100%                |
+|        |DELETE /games /{gameId} /players /{playerName} /properties /{propertyName} /houses                      |        100%          |     YES         |            YES              |         100%                |
+|        |POST /games /{gameId} /players /{playerName} /properties /{propertyName} /hotel                         |        100%          |     YES         |            YES              |         100%                |
+|        |DELETE /games /{gameId} /players /{playerName} /properties /{propertyName} /hotel                       |        100%          |     YES         |            YES              |         100%                |
+|        |                                                                                                        |                      |                 |                             |                             |
+|        |**Mortgage**                                                                                                |                      |                 |                             |                             |
+|        |POST /games /{gameId} /players /{playerName} /properties /{propertyName} /mortgage                      |        100%          |     YES         |            YES              |         100%                |
+|        |DELETE /games /{gameId} /players /{playerName} /properties /{propertyName} /mortgage|        100%          |     YES         |            YES              |         100%                |
+|        |                                                                                                        |                      |                 |                             |                             |
+|        |**Interaction with another player**                                                                         |                      |                 |                             |                             |
+|MUSTHAVE|DELETE /games /{gameId} /players /{playerName} /properties /{propertyName} /visitors /{debtorName} /rent|        100%          |     YES         |            YES              |         100%                |
+|        |With potential debt    |        100%          |     YES         |            YES              |         100%                |
+|        |                                                                                                        |                      |                 |                             |                             |
+|        |**Prison**                                                                                                  |                      |                 |                             |                             |
+|        |POST /games /{gameId} /prison /{playerName} /fine                                                       |         50%          |     YES         |            YES              |         100%                |
+|        |POST /games /{gameId} /prison /{playerName} /free  |         50%          |     YES         |            YES              |         100%                |
+|        |                                                                                                        |                      |                 |                             |                             |
+|        |**Auctions**                                                                                                |                      |                 |                             |                             |
+|        |GET /games /{gameId} /bank /auctions                                                                    |          0%          |      NO         |            YES              |         100%                |
+|        |POST /games /{gameId} /bank /auctions /{propertyName} /bid                                              |          0%          |      NO         |            YES              |         100%                |
+
+## Known bugs
+
+| Bug behaviour  | How to reproduce  | Why it hasn't been fixed    |
+|---|---|---|
+|When landing on Go To Jail you should be able to see a popup giving you the options to stay in jail, pay the fine or use a get out of jail free card|Land on Go To Jail Tile|It has worked for a while and we haven't found the issue in time|
+|Being able the see collect rent when a when a bankrupt player's last tile is your property|Go bankrupt on a tile that is the property of an active player|We focused on other issues|
+
+## Token scheme 
+Not implemented
