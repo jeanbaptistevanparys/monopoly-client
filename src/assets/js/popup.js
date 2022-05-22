@@ -73,9 +73,12 @@ function showTitledeedPopup(streetname, property, optionsWithFunctions) {
 	Object.keys(propertyInfo).forEach(option => {
 		if (optionsWithFunctions.includes(option)) {
 			hasOptions = true;
+			const sameIndex =
+				optionsWithFunctions.findIndex(o => o.includes(option)) === property.houseCount + property.hotelCount;
+			const hasImprovementClass = sameIndex ? 'lightgreen' : '';
 			const $optionText = `<p class="left">${option}</p>`;
 			const $optionPrice = `<p class="right"><span class="striketrough">M</span> ${propertyInfo[option]}</p>`;
-			const $optionItem = `<li class="option inner-elem">${$optionText}${$optionPrice}</li>`;
+			const $optionItem = `<li class="option inner-elem ${hasImprovementClass}">${$optionText}${$optionPrice}</li>`;
 			$optionsContainer.insertAdjacentHTML('beforeend', $optionItem);
 		}
 	});

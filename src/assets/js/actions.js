@@ -417,25 +417,23 @@ function checkForSellOptions(propertyInfo) {
 	turnButtonOn('.sellHouse', () => handleSellHouse(propertyInfo));
 	turnButtonOn('.sellHotel', () => handleSellHotel(propertyInfo));
 
-	if (propertyInfo.houseCount < 4) {
-		turnButtonOff('.sellHotel', () => handleSellHotel(propertyInfo));
-	} else {
-		turnButtonOff('.sellHouse', () => handleSellHouse(propertyInfo));
+	if (propertyInfo.houseCount > 0) {
+		turnButtonOff('.sellHotel', () => handleSellHouse(propertyInfo));
 	}
-	if (propertyInfo.hotelCount == 1) {
-		turnButtonOff('.sellHouse', () => handleSellHouse(propertyInfo));
+	if (propertyInfo.hotelCount > 0) {
 		turnButtonOff('.sellHotel', () => handleSellHotel(propertyInfo));
 	}
 }
 
 function handleSellHouse(tileInfo) {
-	buildHouseFetch(_gameId, _playerName, tileInfo.property)
+	sellHouseFetch(_gameId, _playerName, tileInfo.property)
 		.then(() => {
 			showDefaultPopup('Sold house!', 'Sold house!', `You just sold a house on ${tileInfo.property}!`, [
 				{
 					text     : 'Continue',
 					function : event => {
 						closePopup(event);
+						startMyTurnChecker();
 					}
 				}
 			]);
@@ -444,16 +442,23 @@ function handleSellHouse(tileInfo) {
 }
 
 function handleSellHotel(tileInfo) {
-	buildHotelFetch(_gameId, _playerName, tileInfo.property)
+	sellHotelFetch(_gameId, _playerName, tileInfo.property)
 		.then(() => {
-			showDefaultPopup('Sold hotel!', 'Sold hotel!', `You just sold a hotel on ${tileInfo.property}!`, [
-				{
-					text     : 'Continue',
-					function : event => {
-						closePopup(event);
+			showDefaultPopup(
+				'Sold hotel!',
+				'Sold hotel!',
+				`You just sold a hotel on ${tileInfo.property}!`,
+				[
+					{
+						text     : 'Continue',
+						function : event => {
+							closePopup(event);
+							startMyTurnChecker();
+						}
 					}
-				}
-			]);
+				],
+				false
+			);
 		})
 		.catch(error => errorHandler(error));
 }
@@ -764,7 +769,7 @@ function checkIfJail() {
 
 function jailHandler(playerInfo) {
 	const buttons = getJailButtons(playerInfo);
-	showDefaultPopup('JAIL', 'you are in jail', buttons, false);
+	showDefaultPopup('JAIL', 'You are in jail', 'You are stuck in jail', buttons, false);
 }
 
 function getJailButtons(playerInfo) {
