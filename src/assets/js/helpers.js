@@ -45,6 +45,10 @@ function getPawnIndex(playerObj) {
 	return index;
 }
 
+function isLightBackground(tile) {
+	return !tile.color || tile.color === 'WHITE' || tile.color === 'YELLOW' || tile.type === 'railroad';
+}
+
 function getPlayerInfo(playerName = _playerName, gameState = _currentGameState) {
 	return gameState.players.find(player => player.name === playerName);
 }

@@ -7,7 +7,7 @@ function testConnection() {
 
 function checkIfInGame() {
 	if (!loadFromStorage(_config.localStorageToken)) {
-		window.location.href = 'index.html';
+		window.location.href = _config.joinGamePage;
 	}
 	startLoadingScreen();
 	checkGameStarted(_gameId);
@@ -88,7 +88,7 @@ function makePlayerCard(player) {
 		.addEventListener('click', () =>
 			showPlayerInfoPopup(player.name, 'Player info of:', player.name, player.properties, handleShowTitledeed)
 		);
-	if (player.name == _playerName) {
+	if (player.name === _playerName) {
 		qs('a', $template).remove();
 		qs('h2', $template).style.fontWeight = 'bold';
 		qs('.status', $template).classList.remove('hidden');
@@ -99,7 +99,7 @@ function makePlayerCard(player) {
 function makePropertyCard(tileIndex, players = null) {
 	const tile = _allTiles[tileIndex];
 	let $template = document.querySelector('#property-template').content.firstElementChild.cloneNode(true);
-	if (checkTextColor(tile)) {
+	if (isLightBackground(tile)) {
 		$template.querySelector('h3').style.color = 'BLACK';
 	}
 
@@ -129,16 +129,14 @@ function setOptions($template, tile) {
 	return $template;
 }
 
-function checkTextColor(tile) {
-	return !tile.color || tile.color === 'WHITE' || tile.color === 'YELLOW' || tile.type === 'railroad';
-}
-
 function checkIfRollDice() {
 	if (isMyTurn() && _currentGameState.canRoll) {
 		showDicePopup(handleRollDice);
 		stopMyTurnChecker();
 	} else {
-		if (qs('.roll-dice', _$popupContainer)) qs('.roll-dice', _$popupContainer).remove();
+		if (qs('.roll-dice', _$popupContainer)) {
+			qs('.roll-dice', _$popupContainer).remove();
+		}
 	}
 }
 
@@ -193,28 +191,32 @@ function checkIfCanPurchase() {
 			'Purchase',
 			`Purchase: ${_currentGameState.directSale}`,
 			`Do you want to buy this property? \n Cost price: M${propertyInfo.cost}`,
-			[
-				{
-					text     : 'Ignore property',
-					function : e => {
-						closePopup(e);
-						checkIfSkipProperty(e);
-					}
-				},
-				{
-					text     : 'Buy property',
-					function : e => {
-						handleBuyProperty(e);
-						closePopup(e);
-					}
-				}
-			],
+			getPurchaseBtns(),
 			false
 		);
 	} else {
 		removePopupByClass('.popup');
 		startMyTurnChecker();
 	}
+}
+
+function getPurchaseBtns() {
+	return [
+		{
+			text     : 'Ignore property',
+			function : e => {
+				closePopup(e);
+				checkIfSkipProperty(e);
+			}
+		},
+		{
+			text     : 'Buy property',
+			function : e => {
+				handleBuyProperty(e);
+				closePopup(e);
+			}
+		}
+	];
 }
 
 function handleBuyProperty(e) {
@@ -286,15 +288,15 @@ function markCurrentPlayer() {
 function checkIfCanBuild() {
 	const playerInfo = getPlayerInfo();
 	const playerOwnsProperty = playerInfo.properties.find(
-		propertyInfo => propertyInfo.property == playerInfo.currentTile
+		propertyInfo => propertyInfo.property === playerInfo.currentTile
 	);
 	turnButtonOff('#build', handleBuild);
 	if (playerOwnsProperty) {
 		const tileInfo = getTileByName(playerInfo.currentTile);
 		const propertyCountOfStreet = playerInfo.properties.filter(
-			propertyInfo => getTileByName(propertyInfo.property).color == tileInfo.color
+			propertyInfo => getTileByName(propertyInfo.property).color === tileInfo.color
 		).length;
-		const hasStreet = propertyCountOfStreet == tileInfo.groupSize;
+		const hasStreet = propertyCountOfStreet === tileInfo.groupSize;
 		if (hasStreet) {
 			turnButtonOn('#build', handleBuild);
 		}
@@ -321,17 +323,19 @@ function handleBuild(e) {
 }
 
 function checkForBuildOptions(propertyInfo) {
-	turnButtonOn('.buildHouse', () => handleBuildHouse(propertyInfo));
-	turnButtonOn('.buildHotel', () => handleBuildHotel(propertyInfo));
+	const classForBuildHouse = '.buildHouse';
+	const classForBuildHotel = '.buildHotel';
+	turnButtonOn(classForBuildHouse, () => handleBuildHouse(propertyInfo));
+	turnButtonOn(classForBuildHotel, () => handleBuildHotel(propertyInfo));
 
 	if (propertyInfo.houseCount < 4) {
-		turnButtonOff('.buildHotel', () => handleBuildHotel(propertyInfo));
+		turnButtonOff(classForBuildHotel, () => handleBuildHotel(propertyInfo));
 	} else {
-		turnButtonOff('.buildHouse', () => handleBuildHouse(propertyInfo));
+		turnButtonOff(classForBuildHouse, () => handleBuildHouse(propertyInfo));
 	}
-	if (propertyInfo.hotelCount == 1) {
-		turnButtonOff('.buildHouse', () => handleBuildHouse(propertyInfo));
-		turnButtonOff('.buildHotel', () => handleBuildHotel(propertyInfo));
+	if (propertyInfo.hotelCount === 1) {
+		turnButtonOff(classForBuildHouse, () => handleBuildHouse(propertyInfo));
+		turnButtonOff(classForBuildHotel, () => handleBuildHotel(propertyInfo));
 	}
 }
 
@@ -378,15 +382,15 @@ function handleBuildHotel(tileInfo) {
 function checkIfCanSell() {
 	const playerInfo = getPlayerInfo();
 	const playerOwnsProperty = playerInfo.properties.find(
-		propertyInfo => propertyInfo.property == playerInfo.currentTile
+		propertyInfo => propertyInfo.property === playerInfo.currentTile
 	);
 	turnButtonOff('#sell', handleSell);
 	if (playerOwnsProperty) {
 		const tileInfo = getTileByName(playerInfo.currentTile);
 		const propertyCountOfStreet = playerInfo.properties.filter(
-			property => getTileByName(property.property).color == tileInfo.color
+			property => getTileByName(property.property).color === tileInfo.color
 		).length;
-		const hasStreet = propertyCountOfStreet == tileInfo.groupSize;
+		const hasStreet = propertyCountOfStreet === tileInfo.groupSize;
 		const propertyInfo = getPropertyInfo(getPlayerInfo(), playerInfo.currentTile);
 		if (hasStreet && (propertyInfo.houseCount > 0 || propertyInfo.hotelCount > 0)) {
 			turnButtonOn('#sell', handleSell);
@@ -414,14 +418,16 @@ function handleSell(e) {
 }
 
 function checkForSellOptions(propertyInfo) {
-	turnButtonOn('.sellHouse', () => handleSellHouse(propertyInfo));
-	turnButtonOn('.sellHotel', () => handleSellHotel(propertyInfo));
+	const classForSellHouse = '.sellHouse';
+	const classForSellHotel = '.sellHotel';
+	turnButtonOn(classForSellHouse, () => handleSellHouse(propertyInfo));
+	turnButtonOn(classForSellHotel, () => handleSellHotel(propertyInfo));
 
 	if (propertyInfo.houseCount > 0) {
-		turnButtonOff('.sellHotel', () => handleSellHouse(propertyInfo));
+		turnButtonOff(classForSellHouse, () => handleSellHouse(propertyInfo));
 	}
 	if (propertyInfo.hotelCount > 0) {
-		turnButtonOff('.sellHotel', () => handleSellHotel(propertyInfo));
+		turnButtonOff(classForSellHotel, () => handleSellHotel(propertyInfo));
 	}
 }
 
@@ -505,46 +511,45 @@ function showUnmortgageSelector() {
 function handleMortgage(propertyInfo, e) {
 	stopMyTurnChecker();
 	showDefaultPopup(
-		'Mortgage property',
+		'Mortgage',
 		'Mortgage property',
 		'Do you really want to mortgage this property?',
-		[
-			{
-				text     : 'Cancel',
-				function : event => {
-					closePopup(event);
-				}
-			},
-			{
-				text     : 'Yes! Mortgage property',
-				function : event => {
-					closePopup(event);
-					handleMortgageProperty(e, propertyInfo);
-				}
-			}
-		],
+		getMortgageBtns(),
 		true
 	);
+}
+
+function getMortgageBtns() {
+	return [
+		{
+			text     : 'Cancel',
+			function : event => {
+				closePopup(event);
+			}
+		},
+		{
+			text     : 'Yes! Mortgage property',
+			function : event => {
+				closePopup(event);
+				handleMortgageProperty(e, propertyInfo);
+			}
+		}
+	];
 }
 
 function handleMortgageProperty(e, propertyInfo) {
 	const propertyName = propertyInfo.property;
 	takeMortgageFetch(_gameId, _playerName, propertyName)
 		.then(() => {
-			showDefaultPopup(
-				'Mortgage property',
-				'Mortgaged property',
-				`You just mortgaged the property: ${propertyName}`,
-				[
-					{
-						text     : 'Continue!',
-						function : event => {
-							closePopup(event);
-							e.path.find(elem => elem.className.includes('property')).remove();
-						}
+			showDefaultPopup('Mortgage', 'Mortgaged property', `You just mortgaged the property: ${propertyName}`, [
+				{
+					text     : 'Continue!',
+					function : event => {
+						closePopup(event);
+						e.path.find(elem => elem.className.includes('property')).remove();
 					}
-				]
-			);
+				}
+			]);
 		})
 		.catch(error => errorHandler(error));
 }
@@ -552,7 +557,7 @@ function handleMortgageProperty(e, propertyInfo) {
 function handleUnmortgage(propertyInfo, e) {
 	stopMyTurnChecker();
 	showDefaultPopup(
-		'Mortgage property',
+		'Unortgage',
 		'Unmortgage property',
 		'Do you really want to unmortgage this property?',
 		[
@@ -579,9 +584,9 @@ function handleUnmortgageProperty(e, propertyInfo) {
 	settleMortgageFetch(_gameId, _playerName, propertyName)
 		.then(() => {
 			showDefaultPopup(
+				'Unmortgage',
 				'Unmortgage property',
-				'Unmortgage property',
-				`You just Unmortgage the property: ${propertyName}`,
+				`You just unmortgaged the property: ${propertyName}`,
 				[
 					{
 						text     : 'Continue!',
@@ -612,69 +617,66 @@ function handleShowTitledeed(tileInfo, e = false) {
 	showTitledeedPopup(tileInfo.property, tileInfo, options);
 }
 
-function rentChecker() {
+function checkIfRent() {
+	if (!isMyTurn()) {
+		saveToStorage(_config.localStorageRent, false);
+	}
+	if (getPlayersOnYourProperty().length !== 0 && !loadFromStorage(_config.localStorageRent)) {
+		turnButtonOn('#rent', handleRentPerPlayer);
+	} else {
+		turnButtonOff('#rent', handleRentPerPlayer);
+	}
+}
+
+function handleRentPerPlayer() {
 	const players = getPlayersOnYourProperty();
-	players.forEach(player => {
-		if (!loadFromStorage(_config.localStorageRent)) {
+	if (!loadFromStorage(_config.localStorageRent)) {
+		players.forEach(player => {
 			handleRent(player);
-		}
-	});
+		});
+	}
 }
 
 function handleRent(player) {
-	const previousPlayerInfo = getPlayerInfo(player.name);
 	stopMyTurnChecker();
 	collectDebtFetch(player.currentTile, player.name)
-		.then(res => {
+		.then(() => {
 			saveToStorage(_config.localStorageRent, true);
 			getGameFetch(_gameId)
 				.then(gameState => {
-					const newPlayerInfo = getPlayerInfo(player.name, gameState);
-					const rentAmount = previousPlayerInfo.money - newPlayerInfo.money;
-					if (res.result) {
-						showDefaultPopup(
-							'Rent',
-							`${player.name} paid rent!`,
-							`${player.name} paid M${rentAmount} rent!`,
-							[
-								{
-									text     : 'Continue',
-									function : e => {
-										closePopup(e);
-									}
-								}
-							]
-						);
-					}
+					handleRentPopup(gameState);
 				})
 				.catch(error => errorHandler(error));
 		})
 		.catch(error => errorHandler(error));
 }
 
+function handleRentPopup(gameState) {
+	const previousPlayerInfo = getPlayerInfo(player.name);
+	const newPlayerInfo = getPlayerInfo(player.name, gameState);
+	const rentAmount = previousPlayerInfo.money - newPlayerInfo.money;
+	showDefaultPopup('Rent', `${player.name} paid rent!`, `${player.name} paid M${rentAmount} rent!`, [
+		{
+			text     : 'Continue',
+			function : e => {
+				closePopup(e);
+			}
+		}
+	]);
+}
+
 function getPlayersOnYourProperty() {
-	let res = [];
-	let playerInfo = getPlayerInfo();
+	const res = [];
+	const playerInfo = getPlayerInfo();
 	playerInfo.properties.forEach(playerproperty => {
 		_currentGameState.players.forEach(player => {
-			if (player.currentTile === playerproperty.property && player.name != _playerName && isMyTurn()) {
+			if (player.currentTile === playerproperty.property && player.name !== _playerName && isMyTurn()) {
 				res.push(player);
-				turnButtonOff('#rent', rentChecker);
+				turnButtonOff('#rent', handleRentPerPlayer);
 			}
 		});
 	});
 	return res;
-}
-
-function checkIfRent() {
-	if (!isMyTurn()) {
-		saveToStorage(_config.localStorageRent, false);
-	}
-	if (!getPlayersOnYourProperty().length == 0 && !loadFromStorage(_config.localStorageRent)) {
-		turnButtonOn('#rent', rentChecker);
-	} else {
-		turnButtonOff('#rent', rentChecker);
-	}
 }
 
 function showSettings(e) {
@@ -709,7 +711,7 @@ function checkLeaveGame(e) {
 function handleLeaveGame() {
 	declareBankruptyFetch(_gameId, _playerName).then(() => {
 		localStorage.clear();
-		window.location.href = 'index.html';
+		window.location.href = _config.joinGamePage;
 	});
 }
 
@@ -749,7 +751,9 @@ function handleBankruptcy() {
 }
 
 function checkIfGameEnded(gameState) {
-	if (!gameState.ended) return;
+	if (!gameState.ended) {
+		return;
+	}
 
 	stopMyTurnChecker();
 	if (gameState.winner === _playerName) {
@@ -784,7 +788,12 @@ function getJailButtons(playerInfo) {
 			}
 		});
 	}
-	buttons.push(
+	getJailButtonsStandard().forEach(button => buttons.push(button));
+	return buttons;
+}
+
+function getJailButtonsStandard() {
+	return [
 		{
 			text     : 'Pay x',
 			function : event => {
@@ -800,13 +809,12 @@ function getJailButtons(playerInfo) {
 				startMyTurnChecker();
 			}
 		}
-	);
-	return buttons;
+	];
 }
 
 function handleWonGame() {
 	showDefaultPopup(
-		'Game ended',
+		'Game Info',
 		'Game ended',
 		`Congratulations! You won the game!`,
 		[
@@ -814,7 +822,8 @@ function handleWonGame() {
 				text     : 'Wohooo!',
 				function : event => {
 					closePopup(event);
-					handleLeaveGame();
+					localStorage.clear();
+					window.location.href = _config.joinGamePage;
 				}
 			}
 		],
@@ -824,15 +833,16 @@ function handleWonGame() {
 
 function handleLostGame() {
 	showDefaultPopup(
-		'Game ended',
-		'Game ended',
+		'Game Info',
+		'Game has ended',
 		`You lost the game...`,
 		[
 			{
-				text     : 'OK...',
+				text     : 'OK',
 				function : event => {
 					closePopup(event);
-					handleLeaveGame();
+					localStorage.clear();
+					window.location.href = _config.joinGamePage;
 				}
 			}
 		],

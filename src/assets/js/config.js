@@ -4,6 +4,8 @@ const _config = {
 	delay                 : 1500,
 	groupnumber           : '12',
 	gamePrefix            : 'group12',
+	joinGamePage          : 'index.html',
+	gamePage              : 'game.html',
 	localStorageToken     : 'playerToken',
 	localStorageGameId    : '_gameId',
 	localStoragePlayer    : 'player',

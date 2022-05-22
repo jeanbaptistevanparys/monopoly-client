@@ -8,7 +8,6 @@ function init() {
 	testConnection();
 	document.querySelector('form').addEventListener('submit', processConnectionForm);
 	qs('.back-btn').addEventListener('click', showStartGameForm);
-	qs('.leave-btn').addEventListener('click', leaveGame);
 	checkIfPLayerIsLoggedIn();
 }
 
