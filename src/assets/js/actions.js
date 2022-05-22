@@ -514,12 +514,12 @@ function handleMortgage(propertyInfo, e) {
 		'Mortgage',
 		'Mortgage property',
 		'Do you really want to mortgage this property?',
-		getMortgageBtns(),
+		getMortgageBtns(propertyInfo, e),
 		true
 	);
 }
 
-function getMortgageBtns() {
+function getMortgageBtns(propertyInfo, e) {
 	return [
 		{
 			text     : 'Cancel',
