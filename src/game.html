@@ -11,8 +11,16 @@
 
 
     <link rel="stylesheet" href="assets/css/reset.css">
+    <link rel="stylesheet" href="assets/css/game/loadingscreen.css">
     <link rel="stylesheet" href="assets/css/screen.css">
+    <link rel="stylesheet" href="assets/css/game/header.css">
+    <link rel="stylesheet" href="assets/css/game/layout.css">
+    <link rel="stylesheet" href="assets/css/game/board.css">
+    <link rel="stylesheet" href="assets/css/game/playerinfo.css">
+    <link rel="stylesheet" href="assets/css/game/players.css">
+    <link rel="stylesheet" href="assets/css/game/footer.css">
     <link rel="stylesheet" href="assets/css/popups.css">
+
 
     <script src="assets/js/config.js"></script>
 
@@ -320,56 +328,7 @@
         </article>
     </template>
 
-    <template id="trade">
-        <article class="trade">
-            <header>
-                <h2>Trade</h2>
-                <div class="icons">
-                    <div class="inner-elem icon icon-min"></div>
-                    <div class="inner-elem icon icon-max"></div>
-                    <div class="inner-elem icon icon-close"></div>
-                </div>
-            </header>
-            <section class="trade-content">
-                <h3>Trade</h3>
-                <div class="trade-names">
-                    <h2>Name player 1</h2>
-                    <img src="/src/assets/media/tradearrow.png" alt="trade-arrow">
-                    <select class="outer-elem">
-                        <option value="Player" class="outer-elem">Player name</option>
-                    </select>
-                </div>
-                <div class="tradables">
-                    <form action="#">
-                        <div>
-                            <ul class="flex">
-                                <li>
-                                    <input type="checkbox" id="easy-street" class="inner-elem">
-                                    <label for="easy-street">Easy Street</label>
-                                </li>
-                            </ul>
-                            <ul class="flex">
-                                <li><input type="checkbox" id="easy-street3" class="inner-elem"><label
-                                        for="easy-street3">Easy Street</label></li>
-                            </ul>
-                        </div>
-                        <div class="submit">
-                            <div>
-                                <input type="number" min="0" id="price" value="0" class="inner-elem">
-                                <label for="price"><span class="striketrough">M</span></label>
-                            </div>
-                            <input type="submit" value="Offer Trade">
-                            <div>
-                                <input type="number" min="0" id="price2" value="0" class="inner-elem">
-                                <label for="price2"><span class="striketrough">M</span></label>
-                            </div>
-                        </div>
-                    </form>
-                </div>
-            </section>
-        </article>
-    </template>
-
+    
     <template id="player-property">
         <section class="property">
             <h3>JavaScript Avenue</h3>
