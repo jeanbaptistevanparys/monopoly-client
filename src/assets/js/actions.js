@@ -32,6 +32,7 @@ function defaultActions(gameState) {
 		checkIfCanPurchase();
 		checkIfRollDice();
 		checkIfCanBuild();
+		checkIfCanSell();
 		checkIfCanMortgage();
 	}
 }
@@ -81,7 +82,11 @@ function makePlayerCard(player) {
 	$template.querySelector('h2').innerText = player.name;
 	$template.querySelector('p').insertAdjacentHTML('beforeend', player.money);
 	qs('.status', $template).classList.add('hidden');
-	$template.querySelector('a').addEventListener('click', () => showPlayerInfoPopup(player.name, player.properties));
+	$template
+		.querySelector('a')
+		.addEventListener('click', () =>
+			showPlayerInfoPopup(player.name, 'Player info of:', player.name, player.properties, handleShowTitledeed)
+		);
 	if (player.name == _playerName) {
 		qs('a', $template).remove();
 		qs('h2', $template).style.fontWeight = 'bold';
@@ -165,9 +170,8 @@ function handleChanceOrCommunity(state, currentTileName) {
 	const playerMove = playerTurns[playerTurns.length - 1].moves.find(
 		turn => turn.tile.includes('Chance') || turn.tile.includes('Chest')
 	);
-	const move = `${playerMove.tile} \n ${playerMove.description}`;
 
-	showDefaultPopup(currentTileName, 'Moves', move, [
+	showDefaultPopup(currentTileName, playerMove.tile, playerMove.description, [
 		{
 			text     : 'Close',
 			function : e => {
@@ -307,7 +311,7 @@ function handleBuild(e) {
 		<li class="outer-elem buildHouse">Build house</li>
 		<li class="buildHotel">Build hotel</li>
 	</ul>`;
-	showHtmlPopup('Build', `Building on: ${propertyInfo.property}`, $popupContent, event => {
+	showHtmlPopup('Build house', `Building on: ${propertyInfo.property}`, $popupContent, event => {
 		startMyTurnChecker();
 		closePopup(event);
 	});
@@ -370,22 +374,129 @@ function handleBuildHotel(tileInfo) {
 		.catch(error => errorHandler(error));
 }
 
-function checkIfCanMortgage() {
-	const propertyInfo = getPropertyInfo(getPlayerInfo(), getPlayerInfo().currentTile);
-	const ownsProperty = propertyInfo ? true : false;
-	turnButtonOff('#mort', handleMortgage);
-	turnButtonOff('#unmort', handleUnmortgage);
-	if (!ownsProperty) return;
-	if (propertyInfo.mortgage) {
-		turnButtonOn('#unmort', handleUnmortgage);
-	} else {
-		turnButtonOn('#mort', handleMortgage);
+function checkIfCanSell() {
+	const playerInfo = getPlayerInfo();
+	const playerOwnsProperty = playerInfo.properties.find(
+		propertyInfo => propertyInfo.property == playerInfo.currentTile
+	);
+	turnButtonOff('#sell', handleSell);
+	if (playerOwnsProperty) {
+		const tileInfo = getTileByName(playerInfo.currentTile);
+		const propertyCountOfStreet = playerInfo.properties.filter(
+			property => getTileByName(property.property).color == tileInfo.color
+		).length;
+		const hasStreet = propertyCountOfStreet == tileInfo.groupSize;
+		const propertyInfo = getPropertyInfo(getPlayerInfo(), playerInfo.currentTile);
+		if (hasStreet && (propertyInfo.houseCount > 0 || propertyInfo.hotelCount > 0)) {
+			turnButtonOn('#sell', handleSell);
+		}
 	}
 }
 
-function handleMortgage(e) {
+function handleSell(e) {
 	e.preventDefault();
+	stopMyTurnChecker();
 
+	e.target.removeEventListener('click', handleSell);
+	const playerInfo = getPlayerInfo();
+	const propertyInfo = getPropertyInfo(playerInfo, playerInfo.currentTile);
+	const $popupContent = `<ul class="sell-options">
+		<li class="outer-elem sellHouse">Sell house</li>
+		<li class="sellHotel">Sell hotel</li>
+	</ul>`;
+	showHtmlPopup('Sell House', `Selling houses on: ${propertyInfo.property}`, $popupContent, event => {
+		startMyTurnChecker();
+		closePopup(event);
+	});
+
+	checkForSellOptions(propertyInfo);
+}
+
+function checkForSellOptions(propertyInfo) {
+	turnButtonOn('.sellHouse', () => handleSellHouse(propertyInfo));
+	turnButtonOn('.sellHotel', () => handleSellHotel(propertyInfo));
+
+	if (propertyInfo.houseCount < 4) {
+		turnButtonOff('.sellHotel', () => handleSellHotel(propertyInfo));
+	} else {
+		turnButtonOff('.sellHouse', () => handleSellHouse(propertyInfo));
+	}
+	if (propertyInfo.hotelCount == 1) {
+		turnButtonOff('.sellHouse', () => handleSellHouse(propertyInfo));
+		turnButtonOff('.sellHotel', () => handleSellHotel(propertyInfo));
+	}
+}
+
+function handleSellHouse(tileInfo) {
+	buildHouseFetch(_gameId, _playerName, tileInfo.property)
+		.then(() => {
+			showDefaultPopup('Sold house!', 'Sold house!', `You just sold a house on ${tileInfo.property}!`, [
+				{
+					text     : 'Continue',
+					function : event => {
+						closePopup(event);
+					}
+				}
+			]);
+		})
+		.catch(error => errorHandler(error));
+}
+
+function handleSellHotel(tileInfo) {
+	buildHotelFetch(_gameId, _playerName, tileInfo.property)
+		.then(() => {
+			showDefaultPopup('Sold hotel!', 'Sold hotel!', `You just sold a hotel on ${tileInfo.property}!`, [
+				{
+					text     : 'Continue',
+					function : event => {
+						closePopup(event);
+					}
+				}
+			]);
+		})
+		.catch(error => errorHandler(error));
+}
+
+function checkIfCanMortgage() {
+	turnButtonOff('#mort', showMortgageSelector);
+	turnButtonOff('#unmort', showUnmortgageSelector);
+	const hasUnmortgagedPropterty = getPlayerInfo().properties.filter(property => !property.mortgage).length > 0;
+	const hasMortgagedPropterty = getPlayerInfo().properties.filter(property => property.mortgage).length > 0;
+	if (hasUnmortgagedPropterty) {
+		turnButtonOn('#mort', showMortgageSelector, false);
+	}
+	if (hasMortgagedPropterty) {
+		turnButtonOn('#unmort', showUnmortgageSelector, false);
+	}
+}
+
+function showMortgageSelector() {
+	turnButtonOff('#mort', showMortgageSelector);
+	turnButtonOff('#unmort', showUnmortgageSelector);
+	stopMyTurnChecker();
+	const mortgageProperties = getPlayerInfo().properties.filter(property => {
+		const propertyInfo = getPropertyInfo(getPlayerInfo(), property.property);
+		const ownsProperty = propertyInfo ? true : false;
+		const hasNoImprovements = property.hotelCount + property.hotelCount === 0;
+		return ownsProperty && !property.mortgage && hasNoImprovements;
+	});
+	showPlayerInfoPopup('Mortgage', 'Mortgage properties', _playerName, mortgageProperties, handleMortgage);
+}
+
+function showUnmortgageSelector() {
+	turnButtonOff('#mort', showMortgageSelector);
+	turnButtonOff('#unmort', showUnmortgageSelector);
+	stopMyTurnChecker();
+	const unmortgageProperties = getPlayerInfo().properties.filter(property => {
+		const propertyInfo = getPropertyInfo(getPlayerInfo(), property.property);
+		const ownsProperty = propertyInfo ? true : false;
+		const hasNoImprovements = property.hotelCount + property.hotelCount === 0;
+		return ownsProperty && property.mortgage && hasNoImprovements;
+	});
+	showPlayerInfoPopup('Unmortgage', 'Unmortgage properties', _playerName, unmortgageProperties, handleUnmortgage);
+}
+
+function handleMortgage(propertyInfo, e) {
 	stopMyTurnChecker();
 	showDefaultPopup(
 		'Mortgage property',
@@ -396,14 +507,13 @@ function handleMortgage(e) {
 				text     : 'Cancel',
 				function : event => {
 					closePopup(event);
-					stopMyTurnChecker();
 				}
 			},
 			{
 				text     : 'Yes! Mortgage property',
 				function : event => {
 					closePopup(event);
-					handleMortgageProperty();
+					handleMortgageProperty(e, propertyInfo);
 				}
 			}
 		],
@@ -411,8 +521,8 @@ function handleMortgage(e) {
 	);
 }
 
-function handleMortgageProperty() {
-	const propertyName = getPlayerInfo().currentTile;
+function handleMortgageProperty(e, propertyInfo) {
+	const propertyName = propertyInfo.property;
 	takeMortgageFetch(_gameId, _playerName, propertyName)
 		.then(() => {
 			showDefaultPopup(
@@ -424,7 +534,7 @@ function handleMortgageProperty() {
 						text     : 'Continue!',
 						function : event => {
 							closePopup(event);
-							startMyTurnChecker();
+							e.path.find(elem => elem.className.includes('property')).remove();
 						}
 					}
 				]
@@ -433,9 +543,7 @@ function handleMortgageProperty() {
 		.catch(error => errorHandler(error));
 }
 
-function handleUnmortgage(e) {
-	e.preventDefault();
-
+function handleUnmortgage(propertyInfo, e) {
 	stopMyTurnChecker();
 	showDefaultPopup(
 		'Mortgage property',
@@ -446,14 +554,13 @@ function handleUnmortgage(e) {
 				text     : 'Cancel',
 				function : event => {
 					closePopup(event);
-					stopMyTurnChecker();
 				}
 			},
 			{
 				text     : 'Yes! Unmortgage property',
 				function : event => {
 					closePopup(event);
-					handleUnmortgageProperty();
+					handleUnmortgageProperty(e, propertyInfo);
 				}
 			}
 		],
@@ -461,8 +568,8 @@ function handleUnmortgage(e) {
 	);
 }
 
-function handleUnmortgageProperty() {
-	const propertyName = getPlayerInfo().currentTile;
+function handleUnmortgageProperty(e, propertyInfo) {
+	const propertyName = propertyInfo.property;
 	settleMortgageFetch(_gameId, _playerName, propertyName)
 		.then(() => {
 			showDefaultPopup(
@@ -474,7 +581,7 @@ function handleUnmortgageProperty() {
 						text     : 'Continue!',
 						function : event => {
 							closePopup(event);
-							startMyTurnChecker();
+							e.path.find(elem => elem.className.includes('property')).remove();
 						}
 					}
 				]
@@ -483,9 +590,12 @@ function handleUnmortgageProperty() {
 		.catch(error => errorHandler(error));
 }
 
-function handleShowTitledeed(propertyName) {
-	const tileInfo = getTileByName(propertyName);
+function handleShowTitledeed(tileInfo, e = false) {
+	if (e) {
+		e.preventDefault();
+	}
 	const options = [
+		'rent',
 		'rentWithOneHouse',
 		'rentWithTwoHouses',
 		'rentWithThreeHouses',
@@ -493,7 +603,7 @@ function handleShowTitledeed(propertyName) {
 		'rentWithHotel',
 		'housePrice'
 	];
-	showTitledeedPopup(tileInfo.name, tileInfo, options);
+	showTitledeedPopup(tileInfo.property, tileInfo, options);
 }
 
 function rentChecker() {

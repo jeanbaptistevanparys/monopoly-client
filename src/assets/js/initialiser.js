@@ -35,7 +35,6 @@ function setAllEventListeners() {
 	qs('.leave-btn').addEventListener('click', leaveGame);
 	qs('#start').addEventListener('click', showSettings);
 	qs('body header .icon-close').addEventListener('click', checkLeaveGame);
-	turnButtonOff('#sell', showSettings); // TODO: Make functions
 }
 
 function stopMyTurnChecker() {

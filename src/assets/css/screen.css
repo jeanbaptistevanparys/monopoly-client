@@ -352,6 +352,7 @@ h1 {
 	gap: 3%;
 	height: 100%;
 	overflow-y: scroll;
+	overflow-x: hidden;
 }
 .properties:empty {
 	width: 100%;
@@ -371,6 +372,7 @@ h1 {
 
 .properties .property {
 	aspect-ratio: 4/5;
+	cursor: pointer;
 }
 
 .property h3 {
