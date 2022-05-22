@@ -644,12 +644,13 @@ footer ul li a {
 }
 
 .nextTwelve .property .player {
+	width: 100%;
 	padding: 7% 5%;
 	margin: auto auto;
 	display: grid;
 	grid-template-columns: repeat(2, 1fr);
 	gap: 0.5rem;
-	background-size: contain;
+	background-size: 70%;
 }
 
 .property-card .property.special .player,

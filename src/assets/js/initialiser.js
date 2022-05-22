@@ -1,10 +1,10 @@
 'use strict';
 
 let _token = null;
-let _gameId = null;
-let _playerName = null;
-let _allTiles = null;
-let _currentGameState = null;
+let _gameId;
+let _playerName;
+let _allTiles;
+let _currentGameState;
 let _isPaused = false;
 let _$popupContainer;
 

@@ -28,6 +28,7 @@ function defaultActions(gameState) {
 			markCurrentPlayer();
 		}
 		_currentGameState = gameState;
+		checkIfJail();
 		checkIfRent();
 		checkIfCanPurchase();
 		checkIfRollDice();
@@ -751,6 +752,51 @@ function checkIfGameEnded(gameState) {
 	} else {
 		handleLostGame();
 	}
+}
+
+function checkIfJail() {
+	const playerInfo = getPlayerInfo();
+	if (playerInfo.jailed) {
+		stopMyTurnChecker();
+		jailHandler(playerInfo);
+	}
+}
+
+function jailHandler(playerInfo) {
+	const buttons = getJailButtons(playerInfo);
+	showDefaultPopup('JAIL', 'you are in jail', buttons, false);
+}
+
+function getJailButtons(playerInfo) {
+	const buttons = [];
+	if (playerInfo.getOutOfJailFreeCards > 0) {
+		buttons.push({
+			text     : 'Use get out of jail card',
+			function : event => {
+				closePopup(event);
+				jailFreeFetch();
+				startMyTurnChecker();
+			}
+		});
+	}
+	buttons.push(
+		{
+			text     : 'Pay x',
+			function : event => {
+				closePopup(event);
+				jailPayFetch();
+				startMyTurnChecker();
+			}
+		},
+		{
+			text     : 'Stay in jail and roll a dice',
+			function : event => {
+				closePopup(event);
+				startMyTurnChecker();
+			}
+		}
+	);
+	return buttons;
 }
 
 function handleWonGame() {
