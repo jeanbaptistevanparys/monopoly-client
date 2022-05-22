@@ -1,5 +1,8 @@
 'use strict';
 
+let loading;
+const loadingQuery = '.loading-screen';
+
 function checkGameStarted(_gameId) {
 	getGameFetch(_gameId).then(gameState => {
 		if (gameState.started) {
@@ -27,6 +30,22 @@ function showAvailableGames(games, name) {
 	});
 }
 
+function makeLoadingScreen() {
+	let $loadingScreen = `
+	<img src="assets/media/Monopoly-logo.jpg" alt="Monopoly Logo">
+			<p>Waiting for players</p>
+			<h2>Players: <span class="player-count"></span></h2>
+			<div class="loading-bar">`;
+	for (let i = 0; i < 20; i++) {
+		$loadingScreen += `<div class="loading-bar-piece hidden"></div>`;
+	}
+	$loadingScreen += `</div>
+						<form action="#">
+							<input type="submit" value="Back" class="leave-btn outer-elem">
+						</form>`;
+	return $loadingScreen;
+}
+
 function showStartGameForm(e) {
 	e.preventDefault();
 
@@ -34,8 +53,9 @@ function showStartGameForm(e) {
 	qs('.game-list').classList.add('hidden');
 }
 
-let loading;
 function startLoadingScreen() {
+	qs(loadingQuery).insertAdjacentHTML('beforeend', makeLoadingScreen());
+	qs('.leave-btn').addEventListener('click', leaveGame);
 	const $loadingPieces = qsa('.loading-bar-piece');
 	let start = 0;
 	loading = setInterval(() => {
@@ -58,7 +78,7 @@ function stopLoadingScreen() {
 }
 
 function showLoadingScreen(gameState) {
-	const $loadingScreen = qs('.loading-screen');
+	const $loadingScreen = qs(loadingQuery);
 	$loadingScreen.classList.remove('hidden');
 
 	const numberOfPlayers = gameState.players.length;
@@ -67,7 +87,7 @@ function showLoadingScreen(gameState) {
 }
 
 function hideLoadingScreen() {
-	const $loadingScreen = qs('.loading-screen');
+	const $loadingScreen = qs(loadingQuery);
 	$loadingScreen.classList.add('hidden');
 	stopLoadingScreen();
 }
@@ -80,7 +100,7 @@ function leaveGame(e) {
 		loadFromStorage(_config.localStoragePlayer)
 	).then(() => {
 		localStorage.clear();
-		window.location.href = 'index.html';
+		window.location.href = _config.joinGamePage;
 	});
 }
 

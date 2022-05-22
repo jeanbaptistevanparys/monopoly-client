@@ -45,16 +45,20 @@ function getPawnIndex(playerObj) {
 	return index;
 }
 
+function isLightBackground(tile) {
+	return !tile.color || tile.color === 'WHITE' || tile.color === 'YELLOW' || tile.type === 'railroad';
+}
+
 function getPlayerInfo(playerName = _playerName, gameState = _currentGameState) {
 	return gameState.players.find(player => player.name === playerName);
 }
 
 function getTileByName(tileName) {
-	return _allTiles.find(tile => tile.name == tileName);
+	return _allTiles.find(tile => tile.name === tileName);
 }
 
 function getPropertyInfo(playerInfo, propertyName) {
-	return playerInfo.properties.find(propertyInfo => propertyInfo.property == propertyName);
+	return playerInfo.properties.find(propertyInfo => propertyInfo.property === propertyName);
 }
 
 function isMyTurn() {
