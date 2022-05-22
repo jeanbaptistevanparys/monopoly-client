@@ -16,6 +16,10 @@ function gameExistChecker(amount, name) {
 			createGame(name, amount);
 		} else {
 			showAvailableGames(games, name);
+			qs('.create-game-btn').addEventListener('click', e => {
+				e.preventDefault();
+				createGame(name, amount);
+			});
 		}
 	});
 }

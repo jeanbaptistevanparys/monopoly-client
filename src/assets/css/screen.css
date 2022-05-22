@@ -719,3 +719,6 @@ footer ul li a {
 .action .lightgreen {
 	animation: availableAction 1s infinite alternate;
 }
+.option.lightgreen {
+	background-color: hsl(var(--active-color), 100%, 80%);
+}
