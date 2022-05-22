@@ -822,8 +822,7 @@ function handleWonGame() {
 				text     : 'Wohooo!',
 				function : event => {
 					closePopup(event);
-					localStorage.clear();
-					window.location.href = _config.joinGamePage;
+					goToJoinGamePage();
 				}
 			}
 		],
@@ -841,11 +840,15 @@ function handleLostGame() {
 				text     : 'OK',
 				function : event => {
 					closePopup(event);
-					localStorage.clear();
-					window.location.href = _config.joinGamePage;
+					goToJoinGamePage();
 				}
 			}
 		],
 		false
 	);
+}
+
+function goToJoinGamePage() {
+	localStorage.clear();
+	window.location.href = _config.joinGamePage;
 }

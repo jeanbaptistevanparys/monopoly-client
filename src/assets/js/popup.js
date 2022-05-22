@@ -1,5 +1,7 @@
 'use strict';
 
+const closeIconQuery = '.icon-close';
+
 function showDefaultPopup(
 	headertitle,
 	title,
@@ -21,9 +23,11 @@ function showDefaultPopup(
 		$template.querySelector('.submit-btns').insertAdjacentElement('beforeend', $btn);
 	});
 	if (closeByCross) {
-		$template.querySelector('.icon-close').addEventListener('click', closePopup);
+		$template.querySelector(closeIconQuery).addEventListener('click', closePopup);
 	}
-	if (error) $template.classList.add('error');
+	if (error) {
+		$template.classList.add('error');
+	}
 	_$popupContainer.insertAdjacentElement('beforeend', $template);
 }
 
@@ -54,7 +58,7 @@ function showPlayerInfoPopup(title, message, playername, properties, func) {
 		$template.querySelector('.playerpopup .properties').insertAdjacentElement('beforeend', $card);
 		$card.addEventListener('click', e => func(propertyInfo, e));
 	});
-	$template.querySelector('.icon-close').addEventListener('click', e => {
+	$template.querySelector(closeIconQuery).addEventListener('click', e => {
 		closePopup(e);
 		checkIfCanMortgage();
 		startMyTurnChecker();
@@ -169,7 +173,7 @@ function showHtmlPopup(headertitle, title, html, func) {
 	$template.querySelector('.popup-content h2').innerText = title;
 	$template.querySelector('.popup-content .html-content').innerHTML = html;
 	$template.querySelector('.popup-content .close-btn').addEventListener('click', func);
-	$template.querySelector('.icon-close').addEventListener('click', closePopup);
+	$template.querySelector(closeIconQuery).addEventListener('click', closePopup);
 	_$popupContainer.insertAdjacentElement('beforeend', $template);
 }
 
