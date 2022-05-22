@@ -1,6 +1,7 @@
 @font-face {
 	font-family: 'W95FA';
-	src: url('../fonts/W95FA/W95FA.otf') format('otf'), url('../fonts/W95FA/w95fa.woff') format('woff'),
+	src: url('../fonts/W95FA/W95FA.otf') format('otf'),
+		url('../fonts/W95FA/w95fa.woff') format('woff'),
 		url('../fonts/W95FA/w95fa.woff2') format('woff2');
 }
 
@@ -59,34 +60,46 @@ main {
 }
 
 .inner-elem {
-	-moz-box-shadow: inset 0.2rem 0.2rem 0 var(--dark-gray-trans), inset -0.2rem -0.2rem 0 rgba(255, 255, 255, 0.5);
-	-webkit-box-shadow: inset 0.2rem 0.2rem 0 var(--dark-gray-trans), inset -0.2rem -0.2rem 0 rgba(255, 255, 255, 0.5);
-	box-shadow: inset 0.2rem 0.2rem 0 var(--dark-gray-trans), inset -0.2rem -0.2rem 0 rgba(255, 255, 255, 0.5);
+	-moz-box-shadow: inset 0.2rem 0.2rem 0 var(--dark-gray-trans),
+		inset -0.2rem -0.2rem 0 rgba(255, 255, 255, 0.5);
+	-webkit-box-shadow: inset 0.2rem 0.2rem 0 var(--dark-gray-trans),
+		inset -0.2rem -0.2rem 0 rgba(255, 255, 255, 0.5);
+	box-shadow: inset 0.2rem 0.2rem 0 var(--dark-gray-trans),
+		inset -0.2rem -0.2rem 0 rgba(255, 255, 255, 0.5);
 }
 .action .inner-elem {
 	cursor: not-allowed;
 }
 
 .outer-elem {
-	-moz-box-shadow: inset -0.2rem -0.2rem 0 var(--dark-gray-trans), inset 0.2rem 0.2rem 0 rgba(255, 255, 255, 0.6);
-	-webkit-box-shadow: inset -0.2rem -0.2rem 0 var(--dark-gray-trans), inset 0.2rem 0.2rem 0 rgba(255, 255, 255, 0.6);
-	box-shadow: inset -0.2rem -0.2rem 0 var(--dark-gray-trans), inset 0.2rem 0.2rem 0 rgba(255, 255, 255, 0.6);
+	-moz-box-shadow: inset -0.2rem -0.2rem 0 var(--dark-gray-trans),
+		inset 0.2rem 0.2rem 0 rgba(255, 255, 255, 0.6);
+	-webkit-box-shadow: inset -0.2rem -0.2rem 0 var(--dark-gray-trans),
+		inset 0.2rem 0.2rem 0 rgba(255, 255, 255, 0.6);
+	box-shadow: inset -0.2rem -0.2rem 0 var(--dark-gray-trans),
+		inset 0.2rem 0.2rem 0 rgba(255, 255, 255, 0.6);
 }
 
 ::-webkit-scrollbar {
 	background-color: var(--dark-gray);
 	border: inset 0.125rem black;
-	-moz-box-shadow: inset -0.1rem -0.1rem 0 rgba(128, 128, 128, 0.5), inset 0.1rem 0.1rem 0 white;
-	-webkit-box-shadow: inset -0.1rem -0.1rem 0 rgba(128, 128, 128, 0.5), inset 0.1rem 0.1rem 0 white;
-	box-shadow: inset -0.1rem -0.1rem 0 rgba(128, 128, 128, 0.5), inset 0.1rem 0.1rem 0 white;
+	-moz-box-shadow: inset -0.1rem -0.1rem 0 rgba(128, 128, 128, 0.5),
+		inset 0.1rem 0.1rem 0 white;
+	-webkit-box-shadow: inset -0.1rem -0.1rem 0 rgba(128, 128, 128, 0.5),
+		inset 0.1rem 0.1rem 0 white;
+	box-shadow: inset -0.1rem -0.1rem 0 rgba(128, 128, 128, 0.5),
+		inset 0.1rem 0.1rem 0 white;
 }
 
 ::-webkit-scrollbar-thumb {
 	border: inset 0.125rem black;
 	background-color: var(--dark-gray);
-	-moz-box-shadow: inset -0.2rem -0.2rem 0 rgba(128, 128, 128, 0.5), inset 0.2rem 0.2rem 0 white;
-	-webkit-box-shadow: inset -0.2rem -0.2rem 0 var(--dark-gray-trans), inset 0.2rem 0.2rem 0 rgba(255, 255, 255, 0.5);
-	box-shadow: inset -0.2rem -0.2rem 0 var(--dark-gray-trans), inset 0.2rem 0.2rem 0 rgba(255, 255, 255, 0.5);
+	-moz-box-shadow: inset -0.2rem -0.2rem 0 rgba(128, 128, 128, 0.5),
+		inset 0.2rem 0.2rem 0 white;
+	-webkit-box-shadow: inset -0.2rem -0.2rem 0 var(--dark-gray-trans),
+		inset 0.2rem 0.2rem 0 rgba(255, 255, 255, 0.5);
+	box-shadow: inset -0.2rem -0.2rem 0 var(--dark-gray-trans),
+		inset 0.2rem 0.2rem 0 rgba(255, 255, 255, 0.5);
 }
 
 .box-shadow {
@@ -96,7 +109,8 @@ main {
 
 .outer-elem.active {
 	-moz-box-shadow: inset 0 0 0 var(--dark-gray-trans), 0 0 0 white;
-	-webkit-box-shadow: inset 0 0 0 var(--dark-gray-trans), inset 0.2rem 0.2rem 0 white;
+	-webkit-box-shadow: inset 0 0 0 var(--dark-gray-trans),
+		inset 0.2rem 0.2rem 0 white;
 	box-shadow: inset 0 0 0 var(--dark-gray-trans), inset 0 0 0 white;
 }
 
@@ -128,574 +142,6 @@ main {
 	--board-mid-elems: 9;
 	--footer-height: 5rem;
 }
-
-/* ============================== Header ================================*/
-header {
-	width: 100%;
-	padding: 0.5rem;
-	background: linear-gradient(90deg, var(--bar-dark) 0%, var(--bar-light) 100%);
-	border: 0.25rem solid var(--bar-dark);
-	display: flex;
-	align-items: center;
-	justify-content: space-between;
-}
-body > header {
-	min-width: 77rem;
-}
-
-header h2 {
-	color: var(--bar-title);
-	font-size: 1.2rem;
-	margin-left: 0.5rem;
-}
-
-h1 {
-	font-size: 1.5rem;
-	color: var(--bar-title);
-	padding-left: 2rem;
-	background: url(../media/Monopoly-logo.jpg) no-repeat center left;
-	background-size: contain;
-}
-
-.icons {
-	display: inherit;
-}
-
-.icon {
-	height: 1.5rem;
-	aspect-ratio: 1;
-	margin: 0 0.25rem;
-	background-size: cover;
-	cursor: pointer;
-}
-
-.icon-min {
-	background: url(../media/icon-min.svg) no-repeat center center;
-}
-
-.icon-max {
-	background: url(../media/icon-max.svg) no-repeat center center;
-}
-
-.icon-close {
-	background: url(../media/icon-close.svg) no-repeat center center;
-}
-
-/* ============================== Board ================================*/
-
-.big,
-.card,
-.player {
-	background-size: calc(var(--board-size) / 14);
-	background-repeat: no-repeat;
-	background-position: center center;
-	background-color: transparent;
-}
-
-.board {
-	width: var(--board-size);
-	height: var(--board-size);
-	margin-right: calc((var(--board-size) / 3) + 10%);
-	border: none;
-	display: grid;
-	grid-template-columns: repeat(11, 1fr);
-}
-
-.board .middle {
-	background: url(../media/Monopoly-logo.jpg) no-repeat center center, var(--background-color);
-	grid-row-start: 2;
-	grid-row-end: 11;
-	grid-column-start: 2;
-	grid-column-end: 11;
-}
-
-.board .card::after {
-	content: '';
-	position: absolute;
-	width: 100%;
-	height: 30%;
-	top: 0;
-	background-color: var(--color);
-}
-
-.board .card,
-.board .big {
-	position: relative;
-	height: calc((var(--board-size) / var(--board-mid-elems)) * 1.5);
-	width: calc(var(--board-size) / var(--board-mid-elems));
-	background-color: white;
-	border: 0.125rem solid black;
-}
-
-.board .big {
-	width: calc((var(--board-size) / var(--board-mid-elems)) * 1.5);
-	height: calc((var(--board-size) / var(--board-mid-elems)) * 1.5);
-}
-
-.board .side,
-#first-side {
-	width: calc((var(--board-size) / var(--board-mid-elems)) * 1.5);
-	height: calc(var(--board-size) / var(--board-mid-elems));
-}
-
-.board .side::after,
-.board .side.orange.first::after {
-	content: '';
-	position: absolute;
-	right: 0;
-	left: unset;
-	top: 0;
-	height: 100%;
-	width: 30%;
-}
-
-.board .side:nth-of-type(even)::after {
-	content: '';
-	position: absolute;
-	left: 0;
-	top: 0;
-	height: 100%;
-	width: 30%;
-}
-
-.card.red::after {
-	background-color: red;
-}
-
-.card.yellow::after {
-	background-color: yellow;
-}
-
-.card.orange::after {
-	background-color: orange;
-}
-
-.card.green::after {
-	background-color: green;
-}
-
-.card.purple::after {
-	background-color: purple;
-}
-
-.card.blue::after {
-	background-color: blue;
-}
-
-.card.lightblue::after {
-	background-color: lightblue;
-}
-
-.card.pink::after {
-	background-color: violet;
-}
-.card.black::after {
-	background-color: black;
-}
-
-.chance {
-	background-image: url(../media/Chance.png);
-}
-
-.utility {
-	background-image: url(../media/Lamp.png);
-}
-
-.railroad {
-	background-image: url(../media/Train.png);
-}
-
-.communitychest {
-	background-image: url(../media/Chest.png);
-}
-.taxincome {
-	position: relative;
-	background-image: url(../media/TaxIncome.png);
-}
-
-.go {
-	background-image: url(../media/Start.png);
-}
-
-.cop {
-	background-image: url(../media/Police.png);
-}
-
-.jail {
-	background-image: url(../media/Jail.png);
-}
-
-.freeparking {
-	background-image: url(../media/Pause.png);
-}
-
-/* ============================== Player Info ================================*/
-
-#player-info {
-	display: flex;
-	justify-content: space-between;
-	width: 50%;
-	height: 22rem;
-	padding: 1.5rem;
-	border: black solid;
-	background-color: white;
-}
-
-#player-info .info {
-	width: 40%;
-}
-.properties {
-	width: 100%;
-	display: grid;
-	padding-right: 1%;
-	grid-template-columns: repeat(3, 1fr);
-	gap: 3%;
-	height: 100%;
-	overflow-y: scroll;
-	overflow-x: hidden;
-}
-.properties:empty {
-	width: 100%;
-	background: url(../media/inventory.png) no-repeat center center;
-	background-size: 30%;
-}
-
-.property {
-	display: flex;
-	flex-direction: column;
-	justify-content: space-between;
-	min-width: 5rem;
-	border: solid black;
-	background-color: white;
-	padding-bottom: 0.5rem;
-}
-
-.properties .property {
-	aspect-ratio: 4/5;
-	cursor: pointer;
-}
-
-.property h3 {
-	text-align: center;
-	width: 100%;
-	padding: 0.5rem 0;
-	height: 3rem;
-	border-bottom: black solid;
-	color: white;
-}
-
-.property p {
-	text-align: center;
-}
-
-#player-info h2 {
-	font-size: 4rem;
-	border-bottom: black solid;
-	padding-right: 10rem;
-	margin-right: 2rem;
-}
-
-#player-info em {
-	color: #c84893;
-}
-
-#player-info > div > span {
-	font-size: 1.5rem;
-}
-
-#player-info > div > h3 {
-	font-size: 1rem;
-	margin-top: 1rem;
-	margin-bottom: 0.5rem;
-}
-
-#player-info .money {
-	margin-top: 2rem;
-}
-
-/* ============================== Players ================================*/
-aside {
-	display: flex;
-}
-
-main aside {
-	transform: translateY(10%);
-	display: flex;
-	margin: 0 2rem;
-	justify-content: center;
-	gap: 2rem;
-}
-
-main aside .player {
-	width: 20rem;
-	padding: 1rem;
-	background-color: white;
-}
-
-main aside .player.playing {
-	background-color: hsl(var(--active-color), 100%, 80%);
-}
-
-main aside .player .title {
-	display: flex;
-	justify-content: space-between;
-	margin-bottom: 0.5rem;
-	border-bottom: 0.125rem solid black;
-}
-
-main aside .player .content {
-	margin-bottom: 2rem;
-	display: flex;
-	justify-content: space-between;
-	align-items: center;
-}
-
-main aside .player div img {
-	height: 2.5rem;
-}
-
-main aside .player h2 {
-	font-size: 2rem;
-}
-
-main aside .player p {
-	font-size: 1.5rem;
-	min-width: fit-content;
-}
-
-main aside .player a {
-	display: block;
-	background-color: var(--dark-gray);
-	padding: 0.5rem;
-	text-align: center;
-	width: 10rem;
-}
-
-/* ============================== Footer ================================*/
-footer {
-	position: fixed;
-	left: 0;
-	bottom: 0;
-	width: 100%;
-	height: var(--footer-height);
-	background-color: var(--light-gray);
-	display: flex;
-	align-items: center;
-	justify-content: space-between;
-	z-index: 1;
-}
-
-footer ul {
-	display: flex;
-	align-items: center;
-	gap: 1rem;
-}
-
-footer ul li a {
-	text-decoration-line: none;
-	color: black;
-	width: 3rem;
-
-	background-repeat: no-repeat;
-	background-position: 0.5rem center;
-	background-size: 1.5rem;
-	height: 4rem;
-	padding: 0.5rem;
-	padding-left: 2.3rem;
-	font-size: 1.5rem;
-}
-
-#start {
-	background-image: url('../media/Start.png');
-	background-repeat: no-repeat;
-	background-position: 0.5rem center;
-	background-size: 2rem;
-	height: 4rem;
-	padding: 1rem;
-	padding-left: 2.8rem;
-	font-size: 2rem;
-	margin-left: 0.5rem;
-}
-
-#build {
-	background-image: url('../media/dice.png');
-}
-
-#sell {
-	background-image: url('../media/dice.png');
-}
-
-#mort {
-	background-image: url('../media/dice.png');
-}
-
-#unmort {
-	background-image: url('../media/dice.png');
-}
-#rent {
-	background-image: url('../media/dice.png');
-}
-
-#trade {
-	background-image: url('../media/dice.png');
-}
-
-#time {
-	font-size: 2rem;
-	text-align: center;
-	color: black;
-	padding: 1rem;
-	margin-right: 1rem;
-}
-
-/* ============================== Loading Screen ================================*/
-.loading-screen {
-	position: fixed;
-	inset: 0;
-	padding-bottom: 10vh;
-	background-color: black;
-	color: white;
-	z-index: 9999;
-	gap: 1rem;
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-	justify-content: center;
-}
-
-.loading-screen img {
-	height: 25vh;
-	margin-bottom: 5vh;
-}
-
-.loading-screen .loading-bar {
-	width: 25%;
-	padding: 0.125rem;
-	border-radius: 0.25rem;
-	border: 0.125rem solid white;
-	height: 1.5rem;
-	gap: 0.125rem;
-	display: flex;
-	flex-direction: row;
-}
-
-.loading-screen .loading-bar-piece {
-	width: 5%;
-	height: 100%;
-	border-radius: 0.125rem;
-	background-color: #86d422;
-}
-
-.loading-screen .loading-bar-piece.hidden {
-	display: block;
-	opacity: 0;
-}
-
-/* ============================== LAYOUT ================================*/
-
-.main-top {
-	display: flex;
-	flex-direction: row;
-	justify-content: space-between;
-}
-
-.main-top-left {
-	width: 50%;
-	gap: 0.5rem;
-	padding-right: 4%;
-	display: flex;
-	flex-direction: row;
-	justify-content: space-between;
-}
-
-.property-card {
-	height: 22rem;
-	min-width: 12rem;
-	width: 14rem;
-	border: 0.25rem solid hsl(var(--active-color), 97%, 42%);
-	animation: active 1s 0.5s linear infinite;
-	display: grid;
-	place-items: center;
-}
-
-@keyframes active {
-	0% {
-		border: 0.25rem solid hsl(var(--active-color), 97%, 42%);
-		padding: 0rem;
-	}
-	100% {
-		border: 0rem solid hsl(var(--active-color), 97%, 42%);
-		padding: 0.25rem;
-	}
-}
-
-.property-card .property {
-	height: calc(100% - 0.25rem);
-	width: calc(100% - 0.25rem);
-}
-
-.property-card .property h3 {
-	font-size: 2rem;
-	height: 6rem;
-}
-
-.property-card .property p {
-	font-size: 2rem;
-}
-
-.nextTwelve .property .player {
-	width: 100%;
-	padding: 7% 5%;
-	margin: auto auto;
-	display: grid;
-	grid-template-columns: repeat(2, 1fr);
-	gap: 0.5rem;
-	background-size: 70%;
-}
-
-.property-card .property.special .player,
-.properties .property.special .player {
-	height: 60%;
-	background-size: 50%;
-}
-
-.nextTwelve {
-	width: 100%;
-	min-height: 10rem;
-	grid-area: nextTwelve;
-	display: flex;
-	flex-direction: row;
-	justify-content: space-between;
-}
-
-.nextTwelve .property {
-	width: 8%;
-	aspect-ratio: 2/3;
-}
-.nextTwelve .property.special h3 {
-	text-transform: uppercase;
-	padding: 1rem;
-	border: none;
-}
-
-.nextTwelve .property.special .player {
-	padding: 20%;
-	height: 100%;
-	background-color: transparent;
-}
-
-.nextTwelve .player img {
-	width: 100%;
-	background-color: white;
-	border-radius: 0.5rem;
-	padding: 0.125rem;
-	border: 0.125rem solid black;
-}
-.nextTwelve .player img.lightgreen {
-	background-color: hsl(var(--active-color), 100%, 80%);
-}
-
-/* ============================== HIDDEN ============================== */
 
 .hidden {
 	display: none;

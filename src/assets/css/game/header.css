@@ -1,0 +1,52 @@
+/* ============================== Header ================================*/
+
+header {
+	width: 100%;
+	padding: 0.5rem;
+	background: linear-gradient(90deg, var(--bar-dark) 0%, var(--bar-light) 100%);
+	border: 0.25rem solid var(--bar-dark);
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+}
+body > header {
+	min-width: 77rem;
+}
+
+header h2 {
+	color: var(--bar-title);
+	font-size: 1.2rem;
+	margin-left: 0.5rem;
+}
+
+h1 {
+	font-size: 1.5rem;
+	color: var(--bar-title);
+	padding-left: 2rem;
+	background: url(../../media/Monopoly-logo.jpg) no-repeat center left;
+	background-size: contain;
+}
+
+.icons {
+	display: inherit;
+}
+
+.icon {
+	height: 1.5rem;
+	aspect-ratio: 1;
+	margin: 0 0.25rem;
+	background-size: cover;
+	cursor: pointer;
+}
+
+.icon-min {
+	background: url(../../media/icon-min.svg) no-repeat center center;
+}
+
+.icon-max {
+	background: url(../../media/icon-max.svg) no-repeat center center;
+}
+
+.icon-close {
+	background: url(../../media/icon-close.svg) no-repeat center center;
+}

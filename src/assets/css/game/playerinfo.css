@@ -1,0 +1,83 @@
+/* ============================== Player Info ================================*/
+
+#player-info {
+	display: flex;
+	justify-content: space-between;
+	width: 50%;
+	height: 22rem;
+	padding: 1.5rem;
+	border: black solid;
+	background-color: white;
+}
+
+#player-info .info {
+	width: 40%;
+}
+.properties {
+	width: 100%;
+	display: grid;
+	padding-right: 1%;
+	grid-template-columns: repeat(3, 1fr);
+	gap: 3%;
+	height: 100%;
+	overflow-y: scroll;
+	overflow-x: hidden;
+}
+.properties:empty {
+	width: 100%;
+	background: url(../../media/inventory.png) no-repeat center center;
+	background-size: 30%;
+}
+
+.property {
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	min-width: 5rem;
+	border: solid black;
+	background-color: white;
+	padding-bottom: 0.5rem;
+}
+
+.properties .property {
+	aspect-ratio: 4/5;
+	cursor: pointer;
+}
+
+.property h3 {
+	text-align: center;
+	width: 100%;
+	padding: 0.5rem 0;
+	height: 3rem;
+	border-bottom: black solid;
+	color: white;
+}
+
+.property p {
+	text-align: center;
+}
+
+#player-info h2 {
+	font-size: 4rem;
+	border-bottom: black solid;
+	padding-right: 10rem;
+	margin-right: 2rem;
+}
+
+#player-info em {
+	color: #c84893;
+}
+
+#player-info > div > span {
+	font-size: 1.5rem;
+}
+
+#player-info > div > h3 {
+	font-size: 1rem;
+	margin-top: 1rem;
+	margin-bottom: 0.5rem;
+}
+
+#player-info .money {
+	margin-top: 2rem;
+}
