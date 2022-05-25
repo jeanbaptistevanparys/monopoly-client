@@ -546,7 +546,11 @@ function handleMortgageProperty(e, propertyInfo) {
 					text     : 'Continue!',
 					function : event => {
 						closePopup(event);
-						e.path.find(elem => elem.className.includes('property')).remove();
+						if (e.path) {
+							e.path.find(elem => elem.className.includes('property')).remove();
+						}else{
+							e.target.remove();
+						}
 					}
 				}
 			]);
@@ -592,7 +596,12 @@ function handleUnmortgageProperty(e, propertyInfo) {
 						text     : 'Continue!',
 						function : event => {
 							closePopup(event);
-							e.path.find(elem => elem.className.includes('property')).remove();
+							console.log(e);
+							if (e.path) {
+								e.path.find(elem => elem.className.includes('property')).remove();
+							}else{
+								e.target.remove();
+							}
 						}
 					}
 				]
@@ -644,14 +653,14 @@ function handleRent(player) {
 			saveToStorage(_config.localStorageRent, true);
 			getGameFetch(_gameId)
 				.then(gameState => {
-					handleRentPopup(gameState);
+					handleRentPopup(player, gameState);
 				})
 				.catch(error => errorHandler(error));
 		})
 		.catch(error => errorHandler(error));
 }
 
-function handleRentPopup(gameState) {
+function handleRentPopup(player, gameState) {
 	const previousPlayerInfo = getPlayerInfo(player.name);
 	const newPlayerInfo = getPlayerInfo(player.name, gameState);
 	const rentAmount = previousPlayerInfo.money - newPlayerInfo.money;
